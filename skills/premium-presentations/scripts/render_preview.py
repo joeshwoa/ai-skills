@@ -114,10 +114,16 @@ def render(deck_spec_path: str, out_path: str):
         for i, s in enumerate(spec["slides"])
     )
 
+    glow = theme.get("glow", [theme["primary"], theme["primary"]])
+    grad_angle = theme.get("gradient_angle", 135)
+    grid_rgb_hex = theme["secondary"]
+    grid_alpha = theme.get("grid_alpha", 18) / 255
+
     css = f"""
     :root {{
       --bg: #{theme['bg']}; --bg-alt: #{theme['bg_alt']};
       --primary: #{theme['primary']}; --secondary: #{theme['secondary']};
+      --glow1: #{glow[0]}; --glow2: #{glow[-1]};
       --text: #{text_color};
       --heading-font: '{theme['heading_font']}', Georgia, serif;
       --body-font: '{theme['body_font']}', -apple-system, sans-serif;
@@ -127,9 +133,16 @@ def render(deck_spec_path: str, out_path: str):
     #deck {{ position:relative; width:100vw; height:100vh; overflow:hidden; }}
     .slide-wrap {{
       position:absolute; inset:0; display:flex; align-items:center; justify-content:flex-start;
-      background: var(--bg); color: var(--text);
+      color: var(--text); overflow:hidden;
       opacity:0; pointer-events:none; transition: {TRANSITIONS_CSS.get(transition,'opacity .6s ease')};
       transform: translateX(2%);
+      background:
+        radial-gradient(closest-side, color-mix(in srgb, var(--glow1) 55%, transparent), transparent 70%) 92% 8% / 55% 55% no-repeat,
+        radial-gradient(closest-side, color-mix(in srgb, var(--glow2) 35%, transparent), transparent 70%) 4% 96% / 45% 45% no-repeat,
+        repeating-linear-gradient(90deg, color-mix(in srgb, var(--secondary) {theme.get('grid_alpha',18)*100//255}%, transparent) 0 1px, transparent 1px 42px),
+        repeating-linear-gradient(0deg, color-mix(in srgb, var(--secondary) {theme.get('grid_alpha',18)*100//255}%, transparent) 0 1px, transparent 1px 42px),
+        linear-gradient({grad_angle}deg, var(--bg), var(--bg-alt));
+      background-blend-mode: screen, screen, normal, normal, normal;
     }}
     .slide-wrap.active {{ opacity:1; pointer-events:auto; transform:translateX(0); z-index:2; }}
     .slide {{ width:100%; padding: 6vw 7vw; animation: rise .7s ease both; }}

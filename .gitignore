@@ -3,3 +3,6 @@ __pycache__/
 .DS_Store
 /tmp/
 *.tmp
+
+# Local copies the desktop app saves from chat deliveries — not repo source
+Claude outputs/

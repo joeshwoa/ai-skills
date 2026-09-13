@@ -2,8 +2,9 @@
 <html><head><meta charset="utf-8"><title>Northwind Analytics — Q3 Board Update</title>
 <style>
     :root {
-      --bg: #12141C; --bg-alt: #1B1E2B;
+      --bg: #12141C; --bg-alt: #1E2233;
       --primary: #D4AF6A; --secondary: #8A93A8;
+      --glow1: #D4AF6A; --glow2: #6B5B3A;
       --text: #F5F1E8;
       --heading-font: 'Georgia', Georgia, serif;
       --body-font: 'Calibri', -apple-system, sans-serif;
@@ -13,9 +14,16 @@
     #deck { position:relative; width:100vw; height:100vh; overflow:hidden; }
     .slide-wrap {
       position:absolute; inset:0; display:flex; align-items:center; justify-content:flex-start;
-      background: var(--bg); color: var(--text);
+      color: var(--text); overflow:hidden;
       opacity:0; pointer-events:none; transition: opacity 0.6s ease;
       transform: translateX(2%);
+      background:
+        radial-gradient(closest-side, color-mix(in srgb, var(--glow1) 55%, transparent), transparent 70%) 92% 8% / 55% 55% no-repeat,
+        radial-gradient(closest-side, color-mix(in srgb, var(--glow2) 35%, transparent), transparent 70%) 4% 96% / 45% 45% no-repeat,
+        repeating-linear-gradient(90deg, color-mix(in srgb, var(--secondary) 8%, transparent) 0 1px, transparent 1px 42px),
+        repeating-linear-gradient(0deg, color-mix(in srgb, var(--secondary) 8%, transparent) 0 1px, transparent 1px 42px),
+        linear-gradient(135deg, var(--bg), var(--bg-alt));
+      background-blend-mode: screen, screen, normal, normal, normal;
     }
     .slide-wrap.active { opacity:1; pointer-events:auto; transform:translateX(0); z-index:2; }
     .slide { width:100%; padding: 6vw 7vw; animation: rise .7s ease both; }

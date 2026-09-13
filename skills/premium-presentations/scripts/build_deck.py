@@ -17,10 +17,11 @@ Deck spec schema: see ../references/deck_spec_schema.md
 """
 import json
 import sys
+import tempfile
 from pathlib import Path
 
 from pptx import Presentation
-from pptx.util import Inches, Pt
+from pptx.util import Inches, Pt, Emu
 from pptx.dml.color import RGBColor
 from pptx.enum.text import PP_ALIGN, MSO_AUTO_SIZE
 from pptx.enum.shapes import MSO_SHAPE
@@ -28,20 +29,37 @@ from pptx.oxml.ns import qn
 from lxml import etree
 
 sys.path.insert(0, str(Path(__file__).parent))
-from themes import get_theme
+from themes import get_theme, render_background_png
 
 SLIDE_W = Inches(13.333)  # 16:9
 SLIDE_H = Inches(7.5)
+
+# One background PNG per (theme, variant) is plenty to render every slide
+# in a deck sharply — generating 9 originals per deck instead of one per
+# slide would just waste build time for a pixel-identical result.
+_BG_CACHE = {}
 
 
 def rgb(hexstr):
     return RGBColor.from_string(hexstr)
 
 
-def set_background(slide, hex_color):
-    bg = slide.background
-    bg.fill.solid()
-    bg.fill.fore_color.rgb = rgb(hex_color)
+HERO_TYPES = {"title", "section", "closing"}
+
+
+def set_background(slide, theme, variant):
+    """Stamps the theme's generated gradient+grid+glow art as a full-bleed
+    picture behind the slide's content, instead of a flat solid fill —
+    flat fills are what make a deck look like a default template."""
+    key = (theme["id"], variant)
+    if key not in _BG_CACHE:
+        tmp_dir = Path(tempfile.gettempdir()) / "premium_presentations_bg"
+        tmp_dir.mkdir(parents=True, exist_ok=True)
+        path = tmp_dir / f"{theme['id']}_{variant}.png"
+        if not path.exists():
+            render_background_png(theme, variant, str(path))
+        _BG_CACHE[key] = str(path)
+    slide.shapes.add_picture(_BG_CACHE[key], 0, 0, width=SLIDE_W, height=SLIDE_H)
 
 
 def add_transition(slide, kind="fade", duration_ms=700):
@@ -112,7 +130,7 @@ def add_accent_bar(slide, theme, x=Inches(0.5), y=Inches(1.15), width=Inches(0.9
 
 def slide_title(prs, theme, spec):
     slide = prs.slides.add_slide(prs.slide_layouts[6])  # blank layout
-    set_background(slide, theme["bg"])
+    set_background(slide, theme, "hero")
     text_color = theme["text_on_dark"] if theme["style"] == "dark" else theme["text_on_light"]
 
     if spec.get("kicker"):
@@ -135,7 +153,7 @@ def slide_title(prs, theme, spec):
 
 def slide_section(prs, theme, spec):
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    set_background(slide, theme["bg_alt"])
+    set_background(slide, theme, "hero")
     text_color = theme["text_on_dark"] if theme["style"] == "dark" else theme["text_on_light"]
 
     _, tf = add_textbox(slide, Inches(0.9), Inches(2.6), Inches(3), Inches(1.5))
@@ -150,7 +168,7 @@ def slide_section(prs, theme, spec):
 
 def slide_bullets(prs, theme, spec):
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    set_background(slide, theme["bg"])
+    set_background(slide, theme, "content")
     text_color = theme["text_on_dark"] if theme["style"] == "dark" else theme["text_on_light"]
 
     _, tf = add_textbox(slide, Inches(0.7), Inches(0.5), Inches(11.9), Inches(0.9))
@@ -183,7 +201,7 @@ def slide_bullets(prs, theme, spec):
 def slide_stats(prs, theme, spec):
     """Row of big KPI numbers — common in investor / QBR decks."""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    set_background(slide, theme["bg"])
+    set_background(slide, theme, "content")
     text_color = theme["text_on_dark"] if theme["style"] == "dark" else theme["text_on_light"]
 
     _, tf = add_textbox(slide, Inches(0.7), Inches(0.5), Inches(11.9), Inches(0.9))
@@ -208,7 +226,7 @@ def slide_stats(prs, theme, spec):
 
 def slide_quote(prs, theme, spec):
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    set_background(slide, theme["bg_alt"])
+    set_background(slide, theme, "content")
     text_color = theme["text_on_dark"] if theme["style"] == "dark" else theme["text_on_light"]
 
     _, tf = add_textbox(slide, Inches(1.5), Inches(2.2), Inches(10.3), Inches(2.4))
@@ -224,7 +242,7 @@ def slide_quote(prs, theme, spec):
 
 def slide_table(prs, theme, spec):
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    set_background(slide, theme["bg"])
+    set_background(slide, theme, "content")
     text_color = theme["text_on_dark"] if theme["style"] == "dark" else theme["text_on_light"]
 
     _, tf = add_textbox(slide, Inches(0.7), Inches(0.5), Inches(11.9), Inches(0.9))
@@ -262,7 +280,7 @@ def slide_table(prs, theme, spec):
 
 def slide_closing(prs, theme, spec):
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    set_background(slide, theme["bg"])
+    set_background(slide, theme, "hero")
     text_color = theme["text_on_dark"] if theme["style"] == "dark" else theme["text_on_light"]
 
     _, tf = add_textbox(slide, Inches(0.9), Inches(2.9), Inches(11.5), Inches(1.2))

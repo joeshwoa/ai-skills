@@ -2,69 +2,246 @@
 <title>Presentation Themes</title>
 <style>
   body{margin:0;padding:32px;background:#0e0e12;font-family:system-ui,sans-serif;
-        display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;}
-  .card{border-radius:16px;padding:28px 24px;min-height:150px;
-         box-shadow:0 8px 24px rgba(0,0,0,.35);}
-  .swatches{display:flex;gap:8px;margin-bottom:14px;}
+        display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;}
+  .card{border-radius:16px;padding:28px 24px;min-height:170px;position:relative;overflow:hidden;
+         box-shadow:0 8px 24px rgba(0,0,0,.35);
+         background-size: 200% 200%, 200% 200%, 100% 100%;}
+  .card::before{content:"";position:absolute;inset:0;
+    background-image:
+      repeating-linear-gradient(90deg, rgba(255,255,255,.05) 0 1px, transparent 1px 28px),
+      repeating-linear-gradient(0deg, rgba(255,255,255,.05) 0 1px, transparent 1px 28px);
+    mask-image: linear-gradient(135deg, black, transparent 70%);
+  }
+  .swatches{display:flex;gap:8px;margin-bottom:14px;position:relative;}
   .swatches span{width:22px;height:22px;border-radius:50%;display:inline-block;
                    box-shadow:0 0 0 2px rgba(255,255,255,.15);}
-  h2{margin:0 0 6px;font-size:22px;}
-  p{margin:0 0 14px;font-size:14px;}
-  code{font-size:11px;}
+  h2{margin:0 0 6px;font-size:22px;position:relative;}
+  p{margin:0 0 14px;font-size:14px;position:relative;}
+  code{font-size:11px;position:relative;}
 </style></head><body>
 
-        <div class="card" style="background:linear-gradient(135deg,#12141C,#1B1E2B);">
+        <div class="card" style="
+          background:
+            radial-gradient(circle at 88% 10%, #D4AF6A55, transparent 45%),
+            radial-gradient(circle at 6% 95%, #6B5B3A33, transparent 40%),
+            linear-gradient(135deg, #12141C, #1E2233);
+        ">
           <div class="swatches">
             <span style="background:#D4AF6A"></span>
             <span style="background:#8A93A8"></span>
           </div>
           <h2 style="color:#F5F1E8;font-family:'Georgia',serif;">Onyx & Gold</h2>
-          <p style="color:#D4AF6A;font-family:'Calibri',sans-serif;">Dark, premium, executive — for board decks and investor pitches</p>
+          <p style="color:#D4AF6A;font-family:'Calibri',sans-serif;">Dark, premium, executive — board decks and investor pitches</p>
           <code style="color:#F5F1E8;opacity:.55">id: onyx-gold</code>
         </div>
-        <div class="card" style="background:linear-gradient(135deg,#FFFFFF,#F4F6F8);">
+        <div class="card" style="
+          background:
+            radial-gradient(circle at 88% 10%, #2F6FED55, transparent 45%),
+            radial-gradient(circle at 6% 95%, #8FB5FF33, transparent 40%),
+            linear-gradient(160deg, #FFFFFF, #E8EEF7);
+        ">
           <div class="swatches">
             <span style="background:#2F6FED"></span>
             <span style="background:#5B6472"></span>
           </div>
           <h2 style="color:#1B1E2B;font-family:'Helvetica',serif;">Arctic Minimal</h2>
-          <p style="color:#2F6FED;font-family:'Helvetica',sans-serif;">Clean white space, one accent color — for product & UX decks</p>
+          <p style="color:#2F6FED;font-family:'Helvetica',sans-serif;">Clean white space, one accent color — product & UX decks</p>
           <code style="color:#1B1E2B;opacity:.55">id: arctic-minimal</code>
         </div>
-        <div class="card" style="background:linear-gradient(135deg,#1A1030,#2A1745);">
+        <div class="card" style="
+          background:
+            radial-gradient(circle at 88% 10%, #FF6B5B55, transparent 45%),
+            radial-gradient(circle at 6% 95%, #FFC15E33, transparent 40%),
+            linear-gradient(120deg, #1A1030, #331B4D);
+        ">
           <div class="swatches">
             <span style="background:#FF6B5B"></span>
             <span style="background:#FFC15E"></span>
           </div>
           <h2 style="color:#FFF7ED;font-family:'Poppins',serif;">Sunset Startup</h2>
-          <p style="color:#FF6B5B;font-family:'Poppins',sans-serif;">Warm gradient energy — for pitch decks and launch announcements</p>
+          <p style="color:#FF6B5B;font-family:'Poppins',sans-serif;">Warm gradient energy — pitch decks and launch announcements</p>
           <code style="color:#FFF7ED;opacity:.55">id: sunset-startup</code>
         </div>
-        <div class="card" style="background:linear-gradient(135deg,#F6F5EF,#EAE7DA);">
+        <div class="card" style="
+          background:
+            radial-gradient(circle at 88% 10%, #4B6B5755, transparent 45%),
+            radial-gradient(circle at 6% 95%, #9CB89E33, transparent 40%),
+            linear-gradient(150deg, #F6F5EF, #E4E9DE);
+        ">
           <div class="swatches">
             <span style="background:#4B6B57"></span>
             <span style="background:#8A7F6A"></span>
           </div>
           <h2 style="color:#27362E;font-family:'Georgia',serif;">Sage Editorial</h2>
-          <p style="color:#4B6B57;font-family:'Calibri',sans-serif;">Soft, calm, magazine-style — for research & strategy decks</p>
+          <p style="color:#4B6B57;font-family:'Calibri',sans-serif;">Soft, calm, magazine-style — research & strategy decks</p>
           <code style="color:#27362E;opacity:.55">id: sage-editorial</code>
         </div>
-        <div class="card" style="background:linear-gradient(135deg,#0B1220,#121C33);">
+        <div class="card" style="
+          background:
+            radial-gradient(circle at 88% 10%, #4CC2FF55, transparent 45%),
+            radial-gradient(circle at 6% 95%, #2A5C9933, transparent 40%),
+            linear-gradient(110deg, #0B1220, #16233F);
+        ">
           <div class="swatches">
             <span style="background:#4CC2FF"></span>
             <span style="background:#7C8AA5"></span>
           </div>
           <h2 style="color:#E9F1FF;font-family:'Calibri',serif;">Cobalt Tech</h2>
-          <p style="color:#4CC2FF;font-family:'Calibri',sans-serif;">High-contrast, technical, confident — for engineering & product reviews</p>
+          <p style="color:#4CC2FF;font-family:'Calibri',sans-serif;">High-contrast, technical, confident — engineering & product reviews</p>
           <code style="color:#E9F1FF;opacity:.55">id: cobalt-tech</code>
         </div>
-        <div class="card" style="background:linear-gradient(135deg,#FBF9F4,#F0EBDD);">
+        <div class="card" style="
+          background:
+            radial-gradient(circle at 88% 10%, #9A7B4F55, transparent 45%),
+            radial-gradient(circle at 6% 95%, #D9C39A33, transparent 40%),
+            linear-gradient(140deg, #FBF9F4, #EFE6D2);
+        ">
           <div class="swatches">
             <span style="background:#9A7B4F"></span>
             <span style="background:#6B6255"></span>
           </div>
           <h2 style="color:#2A2620;font-family:'Georgia',serif;">Ivory Luxe</h2>
-          <p style="color:#9A7B4F;font-family:'Georgia',sans-serif;">Understated luxury, lots of air — for brand & agency decks</p>
+          <p style="color:#9A7B4F;font-family:'Georgia',sans-serif;">Understated luxury, lots of air — brand & agency decks</p>
           <code style="color:#2A2620;opacity:.55">id: ivory-luxe</code>
+        </div>
+        <div class="card" style="
+          background:
+            radial-gradient(circle at 88% 10%, #B27CFF55, transparent 45%),
+            radial-gradient(circle at 6% 95%, #FF7CD133, transparent 40%),
+            linear-gradient(125deg, #0D0B1E, #241A3F);
+        ">
+          <div class="swatches">
+            <span style="background:#B27CFF"></span>
+            <span style="background:#6E67A8"></span>
+          </div>
+          <h2 style="color:#F1ECFF;font-family:'Helvetica',serif;">Midnight Violet</h2>
+          <p style="color:#B27CFF;font-family:'Helvetica',sans-serif;">Futuristic, moody, high-end — AI/product launch decks</p>
+          <code style="color:#F1ECFF;opacity:.55">id: midnight-violet</code>
+        </div>
+        <div class="card" style="
+          background:
+            radial-gradient(circle at 88% 10%, #E6483C55, transparent 45%),
+            radial-gradient(circle at 6% 95%, #8A1F1A33, transparent 40%),
+            linear-gradient(100deg, #150707, #2B0E0E);
+        ">
+          <div class="swatches">
+            <span style="background:#E6483C"></span>
+            <span style="background:#AD9A93"></span>
+          </div>
+          <h2 style="color:#F7EDEA;font-family:'Georgia',serif;">Crimson Editorial</h2>
+          <p style="color:#E6483C;font-family:'Helvetica',sans-serif;">Bold, high-contrast, magazine energy — brand statements & keynotes</p>
+          <code style="color:#F7EDEA;opacity:.55">id: crimson-editorial</code>
+        </div>
+        <div class="card" style="
+          background:
+            radial-gradient(circle at 88% 10%, #18A99955, transparent 45%),
+            radial-gradient(circle at 6% 95%, #7BE0C933, transparent 40%),
+            linear-gradient(155deg, #F2FBF8, #D8F0E6);
+        ">
+          <div class="swatches">
+            <span style="background:#18A999"></span>
+            <span style="background:#5E7A74"></span>
+          </div>
+          <h2 style="color:#0E2E28;font-family:'Helvetica',serif;">Mint Fresh</h2>
+          <p style="color:#18A999;font-family:'Helvetica',sans-serif;">Light, clean, energizing — health, wellness & consumer decks</p>
+          <code style="color:#0E2E28;opacity:.55">id: mint-fresh</code>
+        </div>
+        <div class="card" style="
+          background:
+            radial-gradient(circle at 88% 10%, #E7E7EA55, transparent 45%),
+            radial-gradient(circle at 6% 95%, #5A5A6133, transparent 40%),
+            linear-gradient(135deg, #1B1B1D, #2C2C30);
+        ">
+          <div class="swatches">
+            <span style="background:#E7E7EA"></span>
+            <span style="background:#8C8C93"></span>
+          </div>
+          <h2 style="color:#F2F2F4;font-family:'Helvetica',serif;">Graphite Mono</h2>
+          <p style="color:#E7E7EA;font-family:'Helvetica',sans-serif;">Near-monochrome, restrained, corporate — internal & governance decks</p>
+          <code style="color:#F2F2F4;opacity:.55">id: graphite-mono</code>
+        </div>
+        <div class="card" style="
+          background:
+            radial-gradient(circle at 88% 10%, #B5686E55, transparent 45%),
+            radial-gradient(circle at 6% 95%, #E7B7AE33, transparent 40%),
+            linear-gradient(145deg, #FBF1F0, #F3DEDB);
+        ">
+          <div class="swatches">
+            <span style="background:#B5686E"></span>
+            <span style="background:#8C7268"></span>
+          </div>
+          <h2 style="color:#3A2223;font-family:'Georgia',serif;">Blush Luxury</h2>
+          <p style="color:#B5686E;font-family:'Georgia',sans-serif;">Soft rose-gold luxury — beauty, fashion & lifestyle brand decks</p>
+          <code style="color:#3A2223;opacity:.55">id: blush-luxury</code>
+        </div>
+        <div class="card" style="
+          background:
+            radial-gradient(circle at 88% 10%, #C9A24B55, transparent 45%),
+            radial-gradient(circle at 6% 95%, #2E5C4633, transparent 40%),
+            linear-gradient(130deg, #0B1F17, #153327);
+        ">
+          <div class="swatches">
+            <span style="background:#C9A24B"></span>
+            <span style="background:#7FA08E"></span>
+          </div>
+          <h2 style="color:#EFF5F0;font-family:'Georgia',serif;">Forest Corporate</h2>
+          <p style="color:#C9A24B;font-family:'Calibri',sans-serif;">Deep green + gold, grounded and trustworthy — ESG & sustainability decks</p>
+          <code style="color:#EFF5F0;opacity:.55">id: forest-corporate</code>
+        </div>
+        <div class="card" style="
+          background:
+            radial-gradient(circle at 88% 10%, #134A8C55, transparent 45%),
+            radial-gradient(circle at 6% 95%, #6FA0E033, transparent 40%),
+            linear-gradient(165deg, #F5F8FC, #DCE6F5);
+        ">
+          <div class="swatches">
+            <span style="background:#134A8C"></span>
+            <span style="background:#51677F"></span>
+          </div>
+          <h2 style="color:#0E2340;font-family:'Georgia',serif;">Azure Finance</h2>
+          <p style="color:#134A8C;font-family:'Calibri',sans-serif;">Conservative navy + azure — finance, banking & institutional decks</p>
+          <code style="color:#0E2340;opacity:.55">id: azure-finance</code>
+        </div>
+        <div class="card" style="
+          background:
+            radial-gradient(circle at 88% 10%, #C1631E55, transparent 45%),
+            radial-gradient(circle at 6% 95%, #F0A96833, transparent 40%),
+            linear-gradient(150deg, #FBF3E8, #F1DDBE);
+        ">
+          <div class="swatches">
+            <span style="background:#C1631E"></span>
+            <span style="background:#8A6A4E"></span>
+          </div>
+          <h2 style="color:#3A2510;font-family:'Georgia',serif;">Amber Warmth</h2>
+          <p style="color:#C1631E;font-family:'Georgia',sans-serif;">Warm cream + burnt orange — editorial, lifestyle & culture decks</p>
+          <code style="color:#3A2510;opacity:.55">id: amber-warmth</code>
+        </div>
+        <div class="card" style="
+          background:
+            radial-gradient(circle at 88% 10%, #39FF9E55, transparent 45%),
+            radial-gradient(circle at 6% 95%, #FF3EC933, transparent 40%),
+            linear-gradient(115deg, #07080D, #10131F);
+        ">
+          <div class="swatches">
+            <span style="background:#39FF9E"></span>
+            <span style="background:#6F76A8"></span>
+          </div>
+          <h2 style="color:#EAFBF2;font-family:'Helvetica',serif;">Neon Pulse</h2>
+          <p style="color:#39FF9E;font-family:'Helvetica',sans-serif;">Near-black with neon glow — creative, gaming & entertainment decks</p>
+          <code style="color:#EAFBF2;opacity:.55">id: neon-pulse</code>
+        </div>
+        <div class="card" style="
+          background:
+            radial-gradient(circle at 88% 10%, #4338CA55, transparent 45%),
+            radial-gradient(circle at 6% 95%, #9C97F033, transparent 40%),
+            linear-gradient(160deg, #F7F8FA, #E4E7EE);
+        ">
+          <div class="swatches">
+            <span style="background:#4338CA"></span>
+            <span style="background:#5B6472"></span>
+          </div>
+          <h2 style="color:#1E2130;font-family:'Helvetica',serif;">Slate Professional</h2>
+          <p style="color:#4338CA;font-family:'Helvetica',sans-serif;">Light slate + indigo — SaaS, enterprise & sales decks</p>
+          <code style="color:#1E2130;opacity:.55">id: slate-professional</code>
         </div>
 </body></html>
