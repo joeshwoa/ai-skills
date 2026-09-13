@@ -6,3 +6,7 @@ __pycache__/
 
 # Local copies the desktop app saves from chat deliveries — not repo source
 Claude outputs/
+
+# Generated demo exports and packaged .skill archives — build artifacts, not source
+/demo/
+*.skill
