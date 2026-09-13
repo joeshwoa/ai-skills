@@ -1,0 +1,63 @@
+# Deck spec schema
+
+A deck spec is one JSON file that both renderers (`build_deck.py` → editable
+`.pptx`, `render_preview.py` → animated `.html`) read, so the two outputs
+always match.
+
+```json
+{
+  "meta_title": "Q3 Board Update",
+  "theme": "onyx-gold",
+  "transition": "fade",
+  "footer": "Company Name · Confidential",
+  "slides": [ ... ]
+}
+```
+
+- `theme`: one of the ids in `scripts/themes.py` (`onyx-gold`, `arctic-minimal`,
+  `sunset-startup`, `sage-editorial`, `cobalt-tech`, `ivory-luxe`).
+- `transition`: `fade` | `push` | `wipe` | `cut`. Applied to every slide.
+
+## Slide types
+
+Each entry in `slides` is an object with a `type` plus type-specific fields.
+
+**title** — opening slide.
+`{"type":"title","kicker":"SERIES B","title":"Cominde","subtitle":"AI-native mobile apps, shipped in weeks not quarters"}`
+
+**section** — big number + short title, used as a chapter divider.
+`{"type":"section","number":"01","title":"The problem"}`
+
+**bullets** — a titled list. Each bullet can be a plain string, or
+`{"point": "...", "detail": "..."}` for a bold headline + smaller supporting
+line (use this for "so what" explanations, not just raw facts).
+`{"type":"bullets","title":"Why now","bullets":[{"point":"On-device models crossed the quality bar","detail":"Sub-1B models now match GPT-3.5-class output for narrow tasks"}]}`
+
+**stats** — a row of KPI numbers.
+`{"type":"stats","title":"Traction","stats":[{"value":"42%","label":"MoM revenue growth"},{"value":"180+","label":"Paying teams"}]}`
+
+**quote** — a pull-quote slide (customer testimonial, mission statement).
+`{"type":"quote","quote":"This cut our release cycle from 6 weeks to 4 days.","attribution":"Head of Product, Acme Co."}`
+
+**table** — a data table.
+`{"type":"table","title":"Pricing","headers":["Plan","Price","Seats"],"rows":[["Starter","$0","1"],["Team","$49/mo","10"]]}`
+
+**closing** — final slide (thank-you / contact).
+`{"type":"closing","title":"Let's talk","contact":"founders@cominde.dev"}`
+
+## Filling with real data, not placeholders
+
+The whole point of this skill is that a finished deck should never say
+"Lorem ipsum" or "Company X" unless the user explicitly asked for a blank
+template. Before writing the deck spec:
+
+1. Pull real numbers from whatever the user gave you (a doc, a spreadsheet,
+   a pasted email, prior conversation context) or from live research
+   (web search, a connected data source) if the task calls for current
+   facts you don't already have.
+2. If a number or fact genuinely isn't available, don't invent one — write
+   a bracketed placeholder like `[REVENUE FIGURE NEEDED]` so it's obviously
+   not a real value someone could mistake for data, and flag it to the user
+   instead of silently making something up.
+3. Only produce a deliberately generic/blank version when the user asks for
+   "just a template" — see SKILL.md.

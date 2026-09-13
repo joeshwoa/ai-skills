@@ -1,0 +1,71 @@
+{
+  "meta_title": "Northwind Analytics — Q3 Board Update",
+  "theme": "onyx-gold",
+  "transition": "fade",
+  "footer": "Northwind Analytics · Confidential — sample data for demo purposes",
+  "slides": [
+    {
+      "type": "title",
+      "kicker": "Board update",
+      "title": "Northwind Analytics",
+      "subtitle": "Q3 2026 results and the plan for Q4 — sample deck generated to demonstrate the premium-presentations skill"
+    },
+    {
+      "type": "section",
+      "number": "01",
+      "title": "Where we ended Q3"
+    },
+    {
+      "type": "stats",
+      "title": "Q3 at a glance",
+      "stats": [
+        {"value": "$1.24M", "label": "ARR, up from $0.91M in Q2"},
+        {"value": "37", "label": "Net-new paying teams"},
+        {"value": "4.6%", "label": "Monthly logo churn, down from 6.1%"}
+      ]
+    },
+    {
+      "type": "bullets",
+      "title": "What drove the quarter",
+      "bullets": [
+        {"point": "Self-serve signup shipped in July", "detail": "Cut average time-to-first-value from 9 days to 36 minutes"},
+        {"point": "Enterprise tier launched with SSO + audit logs", "detail": "Closed 4 deals >$40k ACV directly attributable to this tier"},
+        {"point": "Support response time down to 2h median", "detail": "New on-call rotation plus a triage bot for common questions"}
+      ]
+    },
+    {
+      "type": "table",
+      "title": "Revenue by segment",
+      "headers": ["Segment", "Q2 ARR", "Q3 ARR", "QoQ growth"],
+      "rows": [
+        ["Self-serve", "$210k", "$340k", "+62%"],
+        ["Team", "$480k", "$610k", "+27%"],
+        ["Enterprise", "$220k", "$290k", "+32%"]
+      ]
+    },
+    {
+      "type": "quote",
+      "quote": "We replaced three internal spreadsheets and a weekly manual export with Northwind in about an afternoon.",
+      "attribution": "VP Ops, Q3 enterprise customer"
+    },
+    {
+      "type": "section",
+      "number": "02",
+      "title": "The plan for Q4"
+    },
+    {
+      "type": "bullets",
+      "title": "Q4 priorities",
+      "bullets": [
+        {"point": "Ship usage-based billing", "detail": "Unblocks two enterprise deals currently stuck on pricing model"},
+        {"point": "Reduce churn below 4%", "detail": "Onboarding redesign + proactive check-ins for accounts below 40% feature adoption"},
+        {"point": "Hire 2 AEs", "detail": "Current pipeline exceeds what the founder-led sales motion can close"}
+      ]
+    },
+    {
+      "type": "closing",
+      "title": "Thank you",
+      "contact": "This is sample data — swap in your real numbers via deck_spec.json"
+    }
+  ]
+}

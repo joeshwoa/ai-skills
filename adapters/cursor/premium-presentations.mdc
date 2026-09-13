@@ -1,0 +1,21 @@
+---
+description: Build fully editable, professional/premium presentations (and to the same bar, documents/spreadsheets/PDFs) instead of generic template filler. Apply whenever the user asks for a deck, slides, pitch deck, or PowerPoint.
+globs:
+alwaysApply: false
+---
+# Premium Presentations
+
+This project has a full presentation-building skill at
+`skills/premium-presentations/SKILL.md` in this repo (or wherever you copied
+the `skills/premium-presentations/` folder). Read that file in full before
+building any deck — it covers the design-interview step, the deck-spec
+format, the two generator scripts (`build_deck.py` for the editable .pptx,
+`render_preview.py` for an animated HTML preview), and the real-data policy.
+
+Quick reference:
+- Don't guess the visual theme if the user didn't specify one — ask, and
+  show `skills/premium-presentations/assets/theme_gallery.html`.
+- Generate the .pptx natively with `build_deck.py` (python-pptx) — never by
+  converting HTML, which breaks editability.
+- Fill decks with real data pulled from the user's files/context or live
+  research; flag genuine gaps instead of inventing numbers.
