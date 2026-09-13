@@ -100,6 +100,111 @@ def render_slide_body(theme, spec):
           <div class="accent-bar"></div>{contact}
         </div>'''
 
+    if t == "agenda":
+        rows = "".join(
+            f'<div class="agenda-row"><span class="agenda-num">{i+1:02d}</span>'
+            f'<span class="agenda-item">{esc(item)}</span></div>'
+            for i, item in enumerate(spec.get("items", []))
+        )
+        return f'''<div class="slide">
+          <h2>{esc(spec.get("title","Agenda"))}</h2><div class="accent-bar small"></div>
+          <div class="agenda-list">{rows}</div>
+        </div>'''
+
+    if t == "two_column":
+        def col(heading, items):
+            h = f'<h3>{esc(heading)}</h3>' if heading else ""
+            lis = "".join(f'<li>{esc(i)}</li>' for i in items)
+            return f'<div class="col">{h}<ul class="dash-list">{lis}</ul></div>'
+        return f'''<div class="slide">
+          <h2>{esc(spec["title"])}</h2><div class="accent-bar small"></div>
+          <div class="two-col">{col(spec.get("left_heading",""), spec.get("left_items",[]))}
+          <div class="col-divider"></div>
+          {col(spec.get("right_heading",""), spec.get("right_items",[]))}</div>
+        </div>'''
+
+    if t == "comparison":
+        def card(label, points, cls):
+            lis = "".join(f'<li>{esc(p)}</li>' for p in points)
+            return f'<div class="cmp-card {cls}"><div class="cmp-head">{esc(label).upper()}</div><ul>{lis}</ul></div>'
+        return f'''<div class="slide">
+          <h2>{esc(spec["title"])}</h2><div class="accent-bar small"></div>
+          <div class="comparison">
+            {card(spec.get("left_label","Before"), spec.get("left_points",[]), "muted")}
+            {card(spec.get("right_label","After"), spec.get("right_points",[]), "accent")}
+          </div>
+        </div>'''
+
+    if t == "timeline":
+        n = len(spec.get("milestones", [])) or 1
+        def _inset_pct(i, n):
+            # Remap 0..100% into an 8..92% band so edge item boxes (which are
+            # centered on their point) can't overhang the slide's padding.
+            if n <= 1:
+                return 50.0
+            return 8 + (i / (n - 1)) * 84
+        dots = "".join(
+            f'<div class="tl-item" style="left:{_inset_pct(i, n):.2f}%">'
+            f'<div class="tl-label">{esc(m.get("label",""))}</div><div class="tl-dot"></div>'
+            f'<div class="tl-text">{esc(m.get("text",""))}</div></div>'
+            for i, m in enumerate(spec.get("milestones", []))
+        )
+        return f'''<div class="slide">
+          <h2>{esc(spec["title"])}</h2><div class="accent-bar small"></div>
+          <div class="timeline"><div class="tl-line"></div>{dots}</div>
+        </div>'''
+
+    if t == "process":
+        n = len(spec.get("steps", [])) or 1
+        def _inset_pct(i, n):
+            # Same edge-safe remap as the timeline: keeps centered item boxes
+            # from overhanging the slide at the first/last step.
+            if n <= 1:
+                return 50.0
+            return 8 + (i / (n - 1)) * 84
+        steps = "".join(
+            f'<div class="proc-item" style="left:{_inset_pct(i, n):.2f}%">'
+            f'<div class="proc-circle">{esc(s.get("number", i+1))}</div>'
+            f'<div class="proc-label">{esc(s.get("label",""))}</div>'
+            f'<div class="proc-detail">{esc(s.get("detail",""))}</div></div>'
+            for i, s in enumerate(spec.get("steps", []))
+        )
+        return f'''<div class="slide">
+          <h2>{esc(spec["title"])}</h2><div class="accent-bar small"></div>
+          <div class="process">{f'<div class="proc-line"></div>' if n > 1 else ''}{steps}</div>
+        </div>'''
+
+    if t == "big_statement":
+        support = f'<p class="support">{esc(spec["support"])}</p>' if spec.get("support") else ""
+        return f'''<div class="slide big-statement">
+          <h1 class="statement">{esc(spec["statement"])}</h1>{support}
+        </div>'''
+
+    if t == "team":
+        cards = "".join(
+            f'<div class="person"><div class="avatar">{esc("".join(w[0].upper() for w in str(p.get("name","?")).split()[:2]) or "?")}</div>'
+            f'<div class="person-name">{esc(p.get("name",""))}</div>'
+            f'<div class="person-role">{esc(p.get("role",""))}</div></div>'
+            for p in spec.get("people", [])
+        )
+        return f'''<div class="slide">
+          <h2>{esc(spec.get("title","Team"))}</h2><div class="accent-bar small"></div>
+          <div class="team-grid">{cards}</div>
+        </div>'''
+
+    if t == "feature":
+        desc = f'<p class="feature-desc">{esc(spec["description"])}</p>' if spec.get("description") else ""
+        bullets = "".join(f'<li>{esc(b)}</li>' for b in spec.get("bullets", []))
+        label = f'<div class="panel-label">{esc(spec["panel_label"]).upper()}</div>' if spec.get("panel_label") else ""
+        caption = f'<div class="panel-caption">{esc(spec["panel_caption"])}</div>' if spec.get("panel_caption") else ""
+        return f'''<div class="slide">
+          <h2>{esc(spec["title"])}</h2><div class="accent-bar small"></div>
+          <div class="feature-layout">
+            <div class="feature-text">{desc}<ul class="bullets">{bullets}</ul></div>
+            <div class="feature-panel">{label}<div class="panel-value">{esc(spec.get("panel_value",""))}</div>{caption}</div>
+          </div>
+        </div>'''
+
     return f'<div class="slide"><p>Unknown slide type: {esc(t)}</p></div>'
 
 
@@ -167,6 +272,65 @@ def render(deck_spec_path: str, out_path: str):
     th {{ background:var(--primary); color: var(--bg); }}
     .big-num {{ font-family:var(--heading-font); font-size:22vh; color:var(--primary); opacity:.9; line-height:1; }}
     .contact {{ color:var(--primary); font-size:18px; margin-top:16px; }}
+
+    .agenda-list {{ max-width:70ch; margin-top:1vh; }}
+    .agenda-row {{ display:flex; align-items:center; gap:24px; padding:16px 0; border-bottom:1px solid rgba(128,128,128,.25); }}
+    .agenda-num {{ font-family:var(--heading-font); font-weight:700; color:var(--primary); font-size:clamp(18px,2vw,26px); width:2.2ch; }}
+    .agenda-item {{ font-size:clamp(16px,1.8vw,22px); }}
+
+    .two-col {{ display:flex; gap:5vw; margin-top:1vh; }}
+    .col {{ flex:1; }}
+    .col h3 {{ font-family:var(--heading-font); color:var(--primary); font-size:clamp(16px,1.6vw,20px); margin:0 0 .6em; }}
+    .col-divider {{ width:1px; background:rgba(128,128,128,.35); }}
+    .dash-list {{ list-style:none; padding:0; margin:0; }}
+    .dash-list li {{ font-size:clamp(14px,1.4vw,17px); margin-bottom:14px; padding-left:1.6em; position:relative; }}
+    .dash-list li::before {{ content:"—"; position:absolute; left:0; opacity:.7; }}
+
+    .comparison {{ display:flex; gap:2.5vw; margin-top:1vh; }}
+    .cmp-card {{ flex:1; border-radius:16px; overflow:hidden; background:rgba(255,255,255,.05); border:1px solid rgba(128,128,128,.25); }}
+    .cmp-head {{ padding:16px 20px; font-weight:700; letter-spacing:.05em; font-size:14px; }}
+    .cmp-card.muted .cmp-head {{ background:var(--secondary); color:var(--bg); }}
+    .cmp-card.accent .cmp-head {{ background:var(--primary); color:var(--bg); }}
+    .cmp-card ul {{ list-style:none; margin:0; padding:18px 20px; }}
+    .cmp-card li {{ font-size:15px; margin-bottom:10px; padding-left:1.3em; position:relative; }}
+    .cmp-card li::before {{ content:"•"; color:var(--primary); position:absolute; left:0; }}
+
+    .timeline {{ position:relative; height:22vh; margin-top:6vh; }}
+    .tl-line {{ position:absolute; left:8%; right:8%; top:50%; height:2px; background:var(--primary); }}
+    .tl-item {{ position:absolute; top:50%; transform:translate(-50%,-50%); text-align:center; width:160px; }}
+    .tl-dot {{ width:16px; height:16px; border-radius:50%; background:var(--primary); margin:0 auto; }}
+    .tl-label {{ font-family:var(--heading-font); font-weight:700; color:var(--primary); font-size:15px; margin-bottom:8px; }}
+    .tl-text {{ font-size:13px; color:var(--text); margin-top:8px; }}
+
+    .process {{ position:relative; height:34vh; margin-top:4vh; }}
+    .proc-line {{ position:absolute; left:8%; right:8%; top:56px; height:2px; background:var(--secondary); opacity:.5; }}
+    .proc-item {{ position:absolute; top:0; transform:translateX(-50%); text-align:center; width:180px; }}
+    .proc-circle {{ width:80px; height:80px; border-radius:50%; background:var(--primary); color:var(--bg);
+                     display:flex; align-items:center; justify-content:center; font-family:var(--heading-font);
+                     font-weight:700; font-size:28px; margin:0 auto 14px; }}
+    .proc-label {{ font-family:var(--heading-font); font-weight:700; font-size:16px; margin-bottom:6px; }}
+    .proc-detail {{ font-size:13px; color:var(--secondary); }}
+
+    .big-statement {{ display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; height:100%; }}
+    .statement {{ max-width:16ch; margin:0 auto; }}
+    .support {{ color:var(--primary); font-size:clamp(14px,1.4vw,18px); margin-top:1.2em; }}
+
+    .team-grid {{ display:flex; flex-wrap:wrap; gap:4vw; margin-top:2vh; }}
+    .person {{ width:160px; text-align:center; }}
+    .avatar {{ width:80px; height:80px; border-radius:50%; background:var(--primary); color:var(--bg);
+               display:flex; align-items:center; justify-content:center; font-family:var(--heading-font);
+               font-weight:700; font-size:22px; margin:0 auto 12px; }}
+    .person-name {{ font-weight:700; font-size:15px; }}
+    .person-role {{ color:var(--secondary); font-size:12px; margin-top:4px; }}
+
+    .feature-layout {{ display:flex; gap:4vw; margin-top:1vh; align-items:flex-start; }}
+    .feature-text {{ flex:1.3; }}
+    .feature-desc {{ font-size:clamp(14px,1.4vw,17px); max-width:55ch; }}
+    .feature-panel {{ flex:1; background:rgba(255,255,255,.05); border:1px solid rgba(128,128,128,.25);
+                       border-radius:18px; padding:32px 24px; text-align:center; }}
+    .panel-label {{ font-size:12px; letter-spacing:.08em; color:var(--secondary); font-weight:700; margin-bottom:14px; }}
+    .panel-value {{ font-family:var(--heading-font); font-weight:700; color:var(--primary); font-size:clamp(32px,4vw,48px); }}
+    .panel-caption {{ font-size:13px; margin-top:14px; }}
     #nav {{ position:fixed; bottom:18px; right:24px; z-index:10; color:var(--secondary);
             font-family: var(--body-font); font-size:13px; background:rgba(0,0,0,.25);
             padding:6px 12px; border-radius:20px; backdrop-filter: blur(4px); }}

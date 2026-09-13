@@ -89,10 +89,20 @@ template." Before writing `deck_spec.json`:
   separate the headline claim from its supporting evidence — that split is
   what makes a slide read as "premium" instead of "bullet soup."
 
-Full schema and all 7 slide types (`title`, `section`, `bullets`, `stats`,
-`quote`, `table`, `closing`) are in `references/deck_spec_schema.md`, with
-a worked example at `examples/sample_deck_spec.json`. Read the schema file
-before writing your first deck spec.
+Full schema and all **15 slide types** (`title`, `section`, `bullets`,
+`stats`, `quote`, `table`, `closing`, `agenda`, `two_column`, `comparison`,
+`timeline`, `process`, `big_statement`, `team`, `feature`) are in
+`references/deck_spec_schema.md`, with worked examples at
+`examples/sample_deck_spec.json` and `examples/full_types_deck_spec.json`
+(the second one showcases all 15 types). Read the schema file before
+writing your first deck spec.
+
+Mix types deliberately. A deck that's all `bullets` slides reads as a
+template no matter how good the theme looks — real variety (a `stats` row
+here, a `timeline` there, one `big_statement` for the killer number, a
+`comparison` card for the competitive slide) is what makes it read as
+designed. Pick the type that matches what the content actually is, not
+whatever's fastest to write.
 
 ## Step 3: generate
 
@@ -115,11 +125,28 @@ the PDF if the user asked for one.
 
 ## Step 4: check it before you hand it over
 
-Open the generated file (or convert one slide to an image and look at it —
-`soffice --headless --convert-to pdf` then `pdftoppm -png` on 2-3 slides is
-a fast way to sanity-check layout) and check for:
+**Always run the validator — this is not optional.** Before delivering any
+.pptx, run:
 
-- Text overflowing its box, or a table wider than the slide.
+```bash
+python3 scripts/validate_deck.py output.pptx
+```
+
+It measures every text box against the font it'll actually be rendered
+with and flags two failure modes that are easy to miss just eyeballing a
+couple of slides: text overflowing its box (`vertical_overflow`,
+`word_too_wide`) and shapes overlapping each other (`overlap`). If it
+reports any issues, fix them (shorten the copy, enlarge the box, shrink
+the font, or move the overlapping shape) and re-run — don't hand over a
+deck the validator flagged. It exits non-zero when issues remain, so wire
+it into your own check rather than skimming the printed report. This is
+a heuristic check, not a substitute for looking at the deck, so also:
+
+- Convert a few slides to images and look at them —
+  `soffice --headless --convert-to pdf` then `pdftoppm -png` on 2-3 slides
+  (especially any slide type you haven't used before in this session) is a
+  fast way to sanity-check layout the validator can't judge, like whether
+  a design just *looks* good.
 - Enough contrast between text and background (the built-in themes are
   pre-checked, but if you add a custom theme, verify it).
 - The story arc makes sense slide-to-slide, not just each slide in
@@ -156,7 +183,10 @@ the file for the schema: bg/bg_alt/primary/secondary/fonts/style). New
 slide types go in `scripts/build_deck.py` (a `slide_x(prs, theme, spec)`
 function added to `SLIDE_BUILDERS`) **and** the matching branch in
 `scripts/render_preview.py`'s `render_slide_body()` — keep both renderers
-in sync or the preview and the deliverable will drift apart.
+in sync or the preview and the deliverable will drift apart. After adding
+either, run `scripts/validate_deck.py` on a deck that exercises the new
+theme/type before trusting it — new geometry is exactly what tends to
+introduce an overlap or overflow.
 
 ## Applying this to documents, sheets, and PDFs
 

@@ -1,0 +1,213 @@
+{
+  "meta_title": "Aurora Robotics — Series B",
+  "theme": "onyx-gold",
+  "transition": "fade",
+  "footer": "Aurora Robotics · Confidential",
+  "slides": [
+    {
+      "type": "title",
+      "kicker": "Series B",
+      "title": "Aurora Robotics",
+      "subtitle": "Autonomous inventory drones for mid-size warehouses"
+    },
+    {
+      "type": "agenda",
+      "title": "Agenda",
+      "items": [
+        "The problem",
+        "Our approach",
+        "Traction so far",
+        "Team",
+        "The ask"
+      ]
+    },
+    {
+      "type": "section",
+      "number": "01",
+      "title": "The problem"
+    },
+    {
+      "type": "bullets",
+      "title": "Why warehouses struggle today",
+      "bullets": [
+        {
+          "point": "Manual cycle counts take 3 days per site",
+          "detail": "Teams shut down aisles to count by hand"
+        },
+        {
+          "point": "Inventory accuracy sits around 63%",
+          "detail": "Industry average per our survey of 40 ops leads"
+        }
+      ]
+    },
+    {
+      "type": "two_column",
+      "title": "Old way vs new way",
+      "left_heading": "Manual counting",
+      "left_items": [
+        "3 days per cycle count",
+        "Aisles closed during counts",
+        "63% accuracy"
+      ],
+      "right_heading": "Aurora drones",
+      "right_items": [
+        "45 minutes per cycle count",
+        "Zero downtime",
+        "99.2% accuracy"
+      ]
+    },
+    {
+      "type": "comparison",
+      "title": "Aurora vs. legacy RFID",
+      "left_label": "Legacy RFID",
+      "left_points": [
+        "$180k hardware install",
+        "6 month deployment",
+        "Fixed read zones only"
+      ],
+      "right_label": "Aurora",
+      "right_points": [
+        "$0 hardware install",
+        "2 week deployment",
+        "Full warehouse coverage"
+      ]
+    },
+    {
+      "type": "stats",
+      "title": "Traction",
+      "stats": [
+        {
+          "value": "$1.24M",
+          "label": "ARR"
+        },
+        {
+          "value": "37",
+          "label": "Customers"
+        },
+        {
+          "value": "99.2%",
+          "label": "Count accuracy"
+        }
+      ]
+    },
+    {
+      "type": "big_statement",
+      "statement": "We cut inventory count time by 94%",
+      "support": "Measured across 12 pilot warehouses, Q2-Q3 2026"
+    },
+    {
+      "type": "timeline",
+      "title": "Roadmap",
+      "milestones": [
+        {
+          "label": "Q4 2026",
+          "text": "GA launch"
+        },
+        {
+          "label": "Q1 2027",
+          "text": "EU expansion"
+        },
+        {
+          "label": "Q2 2027",
+          "text": "Multi-site fleet mgmt"
+        },
+        {
+          "label": "Q3 2027",
+          "text": "Series C"
+        }
+      ]
+    },
+    {
+      "type": "process",
+      "title": "How it works",
+      "steps": [
+        {
+          "number": "1",
+          "label": "Deploy",
+          "detail": "Drones self-map the warehouse overnight"
+        },
+        {
+          "number": "2",
+          "label": "Scan",
+          "detail": "Autonomous nightly inventory flights"
+        },
+        {
+          "number": "3",
+          "label": "Sync",
+          "detail": "Discrepancies pushed to your WMS by 6am"
+        }
+      ]
+    },
+    {
+      "type": "feature",
+      "title": "Built for scale",
+      "description": "Aurora's fleet manager coordinates up to 200 drones across a single site with zero manual routing.",
+      "bullets": [
+        "Auto-charging dock network",
+        "Collision-avoidance mesh",
+        "Live fleet dashboard"
+      ],
+      "panel_label": "Fleet uptime",
+      "panel_value": "99.7%",
+      "panel_caption": "trailing 90 days, all pilot sites"
+    },
+    {
+      "type": "table",
+      "title": "Pricing",
+      "headers": [
+        "Plan",
+        "Price",
+        "Drones included"
+      ],
+      "rows": [
+        [
+          "Starter",
+          "$2,500/mo",
+          "5"
+        ],
+        [
+          "Growth",
+          "$8,000/mo",
+          "20"
+        ],
+        [
+          "Enterprise",
+          "Custom",
+          "Unlimited"
+        ]
+      ]
+    },
+    {
+      "type": "team",
+      "title": "Team",
+      "people": [
+        {
+          "name": "Dana Osei",
+          "role": "CEO, ex-Amazon Robotics"
+        },
+        {
+          "name": "Marcus Lin",
+          "role": "CTO, ex-Boston Dynamics"
+        },
+        {
+          "name": "Priya Nair",
+          "role": "Head of Ops"
+        },
+        {
+          "name": "Sam Torres",
+          "role": "Head of Sales"
+        }
+      ]
+    },
+    {
+      "type": "quote",
+      "quote": "Aurora paid for itself in the first quarter just from labor hours saved.",
+      "attribution": "VP Operations, pilot customer"
+    },
+    {
+      "type": "closing",
+      "title": "Let's talk",
+      "contact": "dana@aurora-robotics.example"
+    }
+  ]
+}
