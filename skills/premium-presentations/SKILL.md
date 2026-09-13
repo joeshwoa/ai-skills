@@ -11,7 +11,7 @@ description: >
   "just a rough draft"). If the user hasn't specified a visual style/theme,
   ALWAYS stop and ask them (see "Step 1: figure out the design" below)
   instead of guessing — a wrong visual direction is expensive to redo, a
-  quick question is not. Also use this skill's methodology (deck-spec ->
+  quick question is not. Also use this skill's methodology (deck-spec to
   native-format generation, ask-before-guessing on design, real data not
   placeholders) as the pattern for sibling skills that build documents or
   spreadsheets to the same premium bar.

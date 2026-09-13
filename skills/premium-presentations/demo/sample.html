@@ -1,0 +1,94 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Northwind Analytics — Q3 Board Update</title>
+<style>
+    :root {
+      --bg: #12141C; --bg-alt: #1B1E2B;
+      --primary: #D4AF6A; --secondary: #8A93A8;
+      --text: #F5F1E8;
+      --heading-font: 'Georgia', Georgia, serif;
+      --body-font: 'Calibri', -apple-system, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html,body { margin:0; height:100%; background:#111; font-family: var(--body-font); }
+    #deck { position:relative; width:100vw; height:100vh; overflow:hidden; }
+    .slide-wrap {
+      position:absolute; inset:0; display:flex; align-items:center; justify-content:flex-start;
+      background: var(--bg); color: var(--text);
+      opacity:0; pointer-events:none; transition: opacity 0.6s ease;
+      transform: translateX(2%);
+    }
+    .slide-wrap.active { opacity:1; pointer-events:auto; transform:translateX(0); z-index:2; }
+    .slide { width:100%; padding: 6vw 7vw; animation: rise .7s ease both; }
+    @keyframes rise { from { opacity:0; transform:translateY(16px);} to {opacity:1; transform:translateY(0);} }
+    h1 { font-family: var(--heading-font); font-size: clamp(32px,5vw,64px); margin:.2em 0; }
+    h2 { font-family: var(--heading-font); font-size: clamp(24px,3.2vw,40px); margin:0 0 .3em; }
+    .kicker { color: var(--primary); font-weight:700; letter-spacing:.12em; font-size:14px; }
+    .subtitle { color: var(--secondary); font-size: clamp(16px,1.6vw,22px); max-width:60ch; }
+    .accent-bar { width:90px; height:5px; background:var(--primary); margin:14px 0 22px; border-radius:3px; }
+    .accent-bar.small { width:60px; height:4px; margin:6px 0 26px; }
+    .bullets { list-style:none; padding:0; margin:0; max-width:70ch; }
+    .bullets li { font-size: clamp(16px,1.8vw,22px); margin-bottom:20px; padding-left:28px; position:relative; }
+    .bullets li::before { content:"●"; color:var(--primary); position:absolute; left:0; font-size:12px; top:.4em; }
+    .bullets .detail { color:var(--secondary); font-size:.75em; }
+    .stat-row { display:flex; gap:6vw; flex-wrap:wrap; margin-top:2vh; }
+    .stat-value { font-family:var(--heading-font); font-size: clamp(36px,5vw,56px); color:var(--primary); font-weight:700; }
+    .stat-label { color:var(--secondary); font-size:16px; max-width:22ch; }
+    .quote-slide blockquote { font-family:var(--heading-font); font-style:italic; font-size:clamp(22px,3vw,34px); max-width:75ch; margin:0; }
+    .attribution { color:var(--primary); margin-top:20px; }
+    table { border-collapse:collapse; width:100%; font-size:15px; }
+    th,td { padding:10px 14px; text-align:left; border-bottom:1px solid rgba(128,128,128,.25); }
+    th { background:var(--primary); color: var(--bg); }
+    .big-num { font-family:var(--heading-font); font-size:22vh; color:var(--primary); opacity:.9; line-height:1; }
+    .contact { color:var(--primary); font-size:18px; margin-top:16px; }
+    #nav { position:fixed; bottom:18px; right:24px; z-index:10; color:var(--secondary);
+            font-family: var(--body-font); font-size:13px; background:rgba(0,0,0,.25);
+            padding:6px 12px; border-radius:20px; backdrop-filter: blur(4px); }
+    </style></head>
+<body>
+<div id="deck"><section class="slide-wrap" data-index="0"><div class="slide title-slide">
+          <div class="kicker">BOARD UPDATE</div>
+          <h1>Northwind Analytics</h1>
+          <div class="accent-bar"></div>
+          <p class="subtitle">Q3 2026 results and the plan for Q4 — sample deck generated to demonstrate the premium-presentations skill</p>
+        </div></section><section class="slide-wrap" data-index="1"><div class="slide section-slide">
+          <div class="big-num">01</div>
+          <h1>Where we ended Q3</h1>
+        </div></section><section class="slide-wrap" data-index="2"><div class="slide">
+          <h2>Q3 at a glance</h2><div class="accent-bar small"></div>
+          <div class="stat-row"><div class="stat"><div class="stat-value">$1.24M</div><div class="stat-label">ARR, up from $0.91M in Q2</div></div><div class="stat"><div class="stat-value">37</div><div class="stat-label">Net-new paying teams</div></div><div class="stat"><div class="stat-value">4.6%</div><div class="stat-label">Monthly logo churn, down from 6.1%</div></div></div>
+        </div></section><section class="slide-wrap" data-index="3"><div class="slide">
+          <h2>What drove the quarter</h2><div class="accent-bar small"></div>
+          <ul class="bullets"><li><strong>Self-serve signup shipped in July</strong><br><span class="detail">Cut average time-to-first-value from 9 days to 36 minutes</span></li><li><strong>Enterprise tier launched with SSO + audit logs</strong><br><span class="detail">Closed 4 deals &gt;$40k ACV directly attributable to this tier</span></li><li><strong>Support response time down to 2h median</strong><br><span class="detail">New on-call rotation plus a triage bot for common questions</span></li></ul>
+        </div></section><section class="slide-wrap" data-index="4"><div class="slide">
+          <h2>Revenue by segment</h2><div class="accent-bar small"></div>
+          <table><thead><tr><th>Segment</th><th>Q2 ARR</th><th>Q3 ARR</th><th>QoQ growth</th></tr></thead><tbody><tr><td>Self-serve</td><td>$210k</td><td>$340k</td><td>+62%</td></tr><tr><td>Team</td><td>$480k</td><td>$610k</td><td>+27%</td></tr><tr><td>Enterprise</td><td>$220k</td><td>$290k</td><td>+32%</td></tr></tbody></table>
+        </div></section><section class="slide-wrap" data-index="5"><div class="slide quote-slide">
+          <blockquote>“We replaced three internal spreadsheets and a weekly manual export with Northwind in about an afternoon.”</blockquote><p class="attribution">— VP Ops, Q3 enterprise customer</p>
+        </div></section><section class="slide-wrap" data-index="6"><div class="slide section-slide">
+          <div class="big-num">02</div>
+          <h1>The plan for Q4</h1>
+        </div></section><section class="slide-wrap" data-index="7"><div class="slide">
+          <h2>Q4 priorities</h2><div class="accent-bar small"></div>
+          <ul class="bullets"><li><strong>Ship usage-based billing</strong><br><span class="detail">Unblocks two enterprise deals currently stuck on pricing model</span></li><li><strong>Reduce churn below 4%</strong><br><span class="detail">Onboarding redesign + proactive check-ins for accounts below 40% feature adoption</span></li><li><strong>Hire 2 AEs</strong><br><span class="detail">Current pipeline exceeds what the founder-led sales motion can close</span></li></ul>
+        </div></section><section class="slide-wrap" data-index="8"><div class="slide title-slide">
+          <h1>Thank you</h1>
+          <div class="accent-bar"></div><p class="contact">This is sample data — swap in your real numbers via deck_spec.json</p>
+        </div></section></div>
+<div id="nav">Space/→ next · ← back &nbsp;·&nbsp; <span id="counter"></span></div>
+<script>
+    let idx = 0;
+    const wraps = document.querySelectorAll('.slide-wrap');
+    const counter = document.getElementById('counter');
+    function show(i) {
+      idx = Math.max(0, Math.min(wraps.length - 1, i));
+      wraps.forEach((w,n) => w.classList.toggle('active', n === idx));
+      counter.textContent = (idx+1) + ' / ' + wraps.length;
+    }
+    document.addEventListener('keydown', e => {
+      if (['ArrowRight',' ','PageDown'].includes(e.key)) show(idx+1);
+      if (['ArrowLeft','PageUp'].includes(e.key)) show(idx-1);
+    });
+    document.getElementById('deck').addEventListener('click', () => show(idx+1));
+    show(0);
+    </script>
+</body></html>
