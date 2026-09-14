@@ -594,6 +594,206 @@ def slide_feature(prs, theme, spec):
     return slide
 
 
+def slide_icon_grid(prs, theme, spec):
+    """A grid of feature callouts — each item gets a colored glyph circle,
+    a bold label, and a short description. For "what we offer" / "key
+    capabilities" slides where `bullets` would read as too flat."""
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    set_background(slide, theme, "content")
+    text_color = theme["text_on_dark"] if theme["style"] == "dark" else theme["text_on_light"]
+    header(slide, theme, spec["title"], text_color)
+
+    items = spec.get("items", [])
+    n = max(len(items), 1)
+    cols = min(n, 3)
+    rows_n = math.ceil(n / cols)
+    gap = 0.4
+    col_w = (11.6 - gap * (cols - 1)) / cols
+    row_h = min(2.35, (6.85 - 1.85) / rows_n)
+    glyph_d = 0.6
+    circle_text_color = theme["bg"] if theme["style"] == "dark" else "FFFFFF"
+
+    for i, item in enumerate(items):
+        col, row = i % cols, i // cols
+        x = 0.85 + col * (col_w + gap)
+        top = 1.9 + row * row_h
+        glyph = str(item.get("glyph", "")) or str(i + 1)
+        add_circle(slide, Inches(x + glyph_d / 2), Inches(top + glyph_d / 2), Inches(glyph_d), theme["primary"])
+        _, tf_g = add_textbox(slide, Inches(x), Inches(top), Inches(glyph_d), Inches(glyph_d),
+                               align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
+        style_run(set_text(tf_g, glyph[:2].upper(), align=PP_ALIGN.CENTER), theme["heading_font"], 13,
+                  circle_text_color, bold=True)
+
+        _, tf_l = add_textbox(slide, Inches(x), Inches(top + glyph_d + 0.15), Inches(col_w), Inches(0.4))
+        style_run(set_text(tf_l, item.get("label", "")), theme["heading_font"], 16, theme["primary"], bold=True)
+
+        _, tf_d = add_textbox(slide, Inches(x), Inches(top + glyph_d + 0.6), Inches(col_w),
+                               Inches(row_h - glyph_d - 0.7))
+        style_run(set_text(tf_d, item.get("description", "")), theme["body_font"], 13, text_color)
+    return slide
+
+
+def slide_pricing(prs, theme, spec):
+    """2-4 pricing-tier cards side by side, one optionally highlighted as
+    the recommended plan."""
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    set_background(slide, theme, "content")
+    text_color = theme["text_on_dark"] if theme["style"] == "dark" else theme["text_on_light"]
+    header(slide, theme, spec["title"], text_color)
+
+    tiers = spec.get("tiers", [])
+    n = max(len(tiers), 1)
+    gap = 0.3
+    card_y, card_h = 1.95, 4.85
+    card_w = (11.6 - gap * (n - 1)) / n
+    header_on_primary = theme["bg"] if theme["style"] == "dark" else "FFFFFF"
+
+    for i, tier in enumerate(tiers):
+        x = 0.85 + i * (card_w + gap)
+        highlight = bool(tier.get("highlight"))
+        head_fill = theme["primary"] if highlight else theme["bg_alt"]
+        head_text = header_on_primary if highlight else theme["primary"]
+        add_panel(slide, Inches(x), Inches(card_y), Inches(card_w), Inches(card_h), theme["bg_alt"])
+        strip = add_panel(slide, Inches(x), Inches(card_y), Inches(card_w), Inches(1.15), head_fill)
+        _, tf_n = add_textbox(slide, Inches(x + 0.2), Inches(card_y + 0.12), Inches(card_w - 0.4), Inches(0.35),
+                               align=PP_ALIGN.CENTER)
+        style_run(set_text(tf_n, str(tier.get("name", "")).upper(), align=PP_ALIGN.CENTER), theme["body_font"], 13,
+                  head_text, bold=True)
+        _, tf_p = add_textbox(slide, Inches(x + 0.15), Inches(card_y + 0.45), Inches(card_w - 0.3), Inches(0.65),
+                               align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
+        price_line = str(tier.get("price", ""))
+        if tier.get("period"):
+            price_line += f" / {tier['period']}"
+        style_run(set_text(tf_p, price_line, align=PP_ALIGN.CENTER), theme["heading_font"], 22, head_text, bold=True)
+
+        _, tf_f = add_textbox(slide, Inches(x + 0.25), Inches(card_y + 1.35), Inches(card_w - 0.5),
+                               Inches(card_h - 1.55))
+        for j, feat in enumerate(tier.get("features", [])):
+            p = tf_f.paragraphs[0] if j == 0 else tf_f.add_paragraph()
+            p.alignment = PP_ALIGN.LEFT
+            p.space_after = Pt(9)
+            r = p.add_run()
+            r.text = f"✓  {feat}"
+            style_run(r, theme["body_font"], 13, text_color)
+    return slide
+
+
+def slide_faq(prs, theme, spec):
+    """A short Q&A list — each question bold, answer beneath it in a
+    quieter color. Keep to ~4 pairs; validate_deck.py will flag overflow
+    if the copy runs long."""
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    set_background(slide, theme, "content")
+    text_color = theme["text_on_dark"] if theme["style"] == "dark" else theme["text_on_light"]
+    header(slide, theme, spec.get("title", "FAQ"), text_color)
+
+    items = spec.get("items", [])
+    n = max(len(items), 1)
+    top, bottom = 1.9, 6.9
+    row_h = (bottom - top) / n
+    for i, item in enumerate(items):
+        y = top + i * row_h
+        _, tf_q = add_textbox(slide, Inches(0.9), Inches(y), Inches(10.8), Inches(row_h * 0.48))
+        style_run(set_text(tf_q, item.get("question", "")), theme["heading_font"], 16, theme["primary"], bold=True)
+        _, tf_a = add_textbox(slide, Inches(0.9), Inches(y + row_h * 0.46), Inches(10.8), Inches(row_h * 0.46))
+        style_run(set_text(tf_a, item.get("answer", "")), theme["body_font"], 13, text_color)
+        if i < n - 1:
+            add_line(slide, Inches(0.9), Inches(y + row_h - 0.08), Inches(10.8), Pt(0.75), theme["secondary"])
+    return slide
+
+
+def slide_chart_bar(prs, theme, spec):
+    """A real, native, editable bar chart drawn from rectangles (not a
+    picture) — every bar's height and label is an actual pptx shape you
+    can click and adjust."""
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    set_background(slide, theme, "content")
+    text_color = theme["text_on_dark"] if theme["style"] == "dark" else theme["text_on_light"]
+    header(slide, theme, spec["title"], text_color)
+
+    bars = spec.get("bars", [])
+    n = max(len(bars), 1)
+    x0, x1 = 1.2, 12.1
+    baseline_y, top_y = 6.3, 2.1
+    max_h = baseline_y - top_y
+    values = [float(b.get("value", 0)) for b in bars] or [0]
+    vmax = max(values) or 1
+
+    add_line(slide, Inches(x0), Inches(baseline_y), Inches(x1 - x0), Pt(1.5), theme["secondary"])
+    span = (x1 - x0) / n
+    bar_w = min(1.1, span * 0.5)
+    for i, b in enumerate(bars):
+        val = float(b.get("value", 0))
+        h = max(0.12, (val / vmax) * max_h)
+        cx = x0 + span * (i + 0.5)
+        add_panel(slide, Inches(cx - bar_w / 2), Inches(baseline_y - h), Inches(bar_w), Inches(h), theme["primary"])
+        _, tf_v = add_textbox(slide, Inches(cx - span / 2), Inches(baseline_y - h - 0.48), Inches(span), Inches(0.42),
+                               align=PP_ALIGN.CENTER)
+        style_run(set_text(tf_v, str(b.get("display", b.get("value", ""))), align=PP_ALIGN.CENTER),
+                  theme["heading_font"], 14, theme["primary"], bold=True)
+        _, tf_l = add_textbox(slide, Inches(cx - span / 2), Inches(baseline_y + 0.1), Inches(span), Inches(0.65),
+                               align=PP_ALIGN.CENTER)
+        style_run(set_text(tf_l, str(b.get("label", "")), align=PP_ALIGN.CENTER), theme["body_font"], 12, text_color)
+    return slide
+
+
+def slide_logo_wall(prs, theme, spec):
+    """A grid of partner/client names as styled text badges — this skill
+    never fabricates a company's actual logo artwork, so a clean
+    typographic badge stands in for a logo wall."""
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    set_background(slide, theme, "content")
+    text_color = theme["text_on_dark"] if theme["style"] == "dark" else theme["text_on_light"]
+    header(slide, theme, spec.get("title", "Trusted by"), text_color)
+
+    names = spec.get("logos", [])
+    n = max(len(names), 1)
+    cols = min(n, 4)
+    rows_n = math.ceil(n / cols)
+    gap = 0.35
+    badge_w = (11.6 - gap * (cols - 1)) / cols
+    badge_h = min(1.3, (6.7 - 1.9 - gap * (rows_n - 1)) / rows_n)
+
+    for i, name in enumerate(names):
+        col, row = i % cols, i // cols
+        x = 0.85 + col * (badge_w + gap)
+        y = 1.9 + row * (badge_h + gap)
+        add_panel(slide, Inches(x), Inches(y), Inches(badge_w), Inches(badge_h), theme["bg_alt"])
+        _, tf = add_textbox(slide, Inches(x + 0.15), Inches(y), Inches(badge_w - 0.3), Inches(badge_h),
+                             align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
+        style_run(set_text(tf, str(name), align=PP_ALIGN.CENTER), theme["heading_font"], 15, theme["primary"],
+                  bold=True)
+    return slide
+
+
+def slide_vertical_timeline(prs, theme, spec):
+    """A top-to-bottom milestone list — the variant to reach for when a
+    horizontal `timeline` would be too cramped (more than ~4 milestones,
+    or entries with real supporting detail rather than one short line)."""
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    set_background(slide, theme, "content")
+    text_color = theme["text_on_dark"] if theme["style"] == "dark" else theme["text_on_light"]
+    header(slide, theme, spec.get("title", "Timeline"), text_color)
+
+    milestones = spec.get("milestones", [])
+    n = max(len(milestones), 1)
+    top, bottom, line_x = 2.05, 6.85, 1.35
+    row_h = (bottom - top) / n
+    if n > 1:
+        add_line(slide, Inches(line_x - 0.01), Inches(top + row_h / 2), Pt(2),
+                 Inches(row_h * (n - 1)), theme["primary"])
+    for i, m in enumerate(milestones):
+        cy = top + row_h * (i + 0.5)
+        add_circle(slide, Inches(line_x), Inches(cy), Inches(0.22), theme["primary"])
+        _, tf_l = add_textbox(slide, Inches(1.75), Inches(cy - row_h / 2 + 0.05), Inches(2.2), Inches(row_h - 0.1),
+                               anchor=MSO_ANCHOR.MIDDLE)
+        style_run(set_text(tf_l, str(m.get("label", ""))), theme["heading_font"], 15, theme["primary"], bold=True)
+        _, tf_t = add_textbox(slide, Inches(4.1), Inches(cy - row_h / 2 + 0.05), Inches(8.3), Inches(row_h - 0.1),
+                               anchor=MSO_ANCHOR.MIDDLE)
+        style_run(set_text(tf_t, str(m.get("text", ""))), theme["body_font"], 14, text_color)
+    return slide
+
+
 SLIDE_BUILDERS = {
     "title": slide_title,
     "section": slide_section,
@@ -610,6 +810,12 @@ SLIDE_BUILDERS = {
     "big_statement": slide_big_statement,
     "team": slide_team,
     "feature": slide_feature,
+    "icon_grid": slide_icon_grid,
+    "pricing": slide_pricing,
+    "faq": slide_faq,
+    "chart_bar": slide_chart_bar,
+    "logo_wall": slide_logo_wall,
+    "vertical_timeline": slide_vertical_timeline,
 }
 
 

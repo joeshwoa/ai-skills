@@ -89,12 +89,13 @@ template." Before writing `deck_spec.json`:
   separate the headline claim from its supporting evidence — that split is
   what makes a slide read as "premium" instead of "bullet soup."
 
-Full schema and all **15 slide types** (`title`, `section`, `bullets`,
+Full schema and all **21 slide types** (`title`, `section`, `bullets`,
 `stats`, `quote`, `table`, `closing`, `agenda`, `two_column`, `comparison`,
-`timeline`, `process`, `big_statement`, `team`, `feature`) are in
+`timeline`, `process`, `big_statement`, `team`, `feature`, `icon_grid`,
+`pricing`, `faq`, `chart_bar`, `logo_wall`, `vertical_timeline`) are in
 `references/deck_spec_schema.md`, with worked examples at
 `examples/sample_deck_spec.json` and `examples/full_types_deck_spec.json`
-(the second one showcases all 15 types). Read the schema file before
+(the second one showcases all 21 types). Read the schema file before
 writing your first deck spec.
 
 Mix types deliberately. A deck that's all `bullets` slides reads as a

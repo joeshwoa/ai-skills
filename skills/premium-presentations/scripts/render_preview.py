@@ -205,6 +205,86 @@ def render_slide_body(theme, spec):
           </div>
         </div>'''
 
+    if t == "icon_grid":
+        items = "".join(
+            f'<div class="icon-item"><div class="icon-glyph">{esc((it.get("glyph") or str(i+1))[:2].upper())}</div>'
+            f'<div class="icon-label">{esc(it.get("label",""))}</div>'
+            f'<div class="icon-desc">{esc(it.get("description",""))}</div></div>'
+            for i, it in enumerate(spec.get("items", []))
+        )
+        return f'''<div class="slide">
+          <h2>{esc(spec["title"])}</h2><div class="accent-bar small"></div>
+          <div class="icon-grid">{items}</div>
+        </div>'''
+
+    if t == "pricing":
+        card_parts = []
+        for tier in spec.get("tiers", []):
+            price_line = esc(str(tier.get("price", "")))
+            if tier.get("period"):
+                price_line += f" / {esc(tier['period'])}"
+            features = "".join(f'<li>✓ {esc(f)}</li>' for f in tier.get("features", []))
+            css_cls = "price-card highlight" if tier.get("highlight") else "price-card"
+            card_parts.append(
+                f'<div class="{css_cls}">'
+                f'<div class="price-head"><div class="price-name">{esc(str(tier.get("name","")).upper())}</div>'
+                f'<div class="price-value">{price_line}</div></div>'
+                f'<ul class="price-features">{features}</ul>'
+                f'</div>'
+            )
+        return f'''<div class="slide">
+          <h2>{esc(spec["title"])}</h2><div class="accent-bar small"></div>
+          <div class="pricing">{"".join(card_parts)}</div>
+        </div>'''
+
+    if t == "faq":
+        items = "".join(
+            f'<div class="faq-row"><div class="faq-q">{esc(it.get("question",""))}</div>'
+            f'<div class="faq-a">{esc(it.get("answer",""))}</div></div>'
+            for it in spec.get("items", [])
+        )
+        return f'''<div class="slide">
+          <h2>{esc(spec.get("title","FAQ"))}</h2><div class="accent-bar small"></div>
+          <div class="faq-list">{items}</div>
+        </div>'''
+
+    if t == "chart_bar":
+        bars = spec.get("bars", [])
+        vmax = max((float(b.get("value", 0)) for b in bars), default=1) or 1
+        bar_els = "".join(
+            f'<div class="chart-bar-col"><div class="chart-bar-val">{esc(str(b.get("display", b.get("value",""))))}</div>'
+            f'<div class="chart-bar-rect" style="height:{max(4, float(b.get("value",0))/vmax*100):.1f}%"></div>'
+            f'<div class="chart-bar-label">{esc(str(b.get("label","")))}</div></div>'
+            for b in bars
+        )
+        return f'''<div class="slide">
+          <h2>{esc(spec["title"])}</h2><div class="accent-bar small"></div>
+          <div class="chart-bar">{bar_els}</div>
+        </div>'''
+
+    if t == "logo_wall":
+        badges = "".join(f'<div class="logo-badge">{esc(str(name))}</div>' for name in spec.get("logos", []))
+        return f'''<div class="slide">
+          <h2>{esc(spec.get("title","Trusted by"))}</h2><div class="accent-bar small"></div>
+          <div class="logo-wall">{badges}</div>
+        </div>'''
+
+    if t == "vertical_timeline":
+        n = len(spec.get("milestones", [])) or 1
+        row_parts = []
+        for i, m in enumerate(spec.get("milestones", [])):
+            connector = '<div class="vt-line"></div>' if i < n - 1 else ""
+            row_parts.append(
+                f'<div class="vt-row"><div class="vt-dot-col"><div class="vt-dot"></div>{connector}</div>'
+                f'<div class="vt-label">{esc(str(m.get("label","")))}</div>'
+                f'<div class="vt-text">{esc(str(m.get("text","")))}</div></div>'
+            )
+        rows = "".join(row_parts)
+        return f'''<div class="slide">
+          <h2>{esc(spec.get("title","Timeline"))}</h2><div class="accent-bar small"></div>
+          <div class="vertical-timeline">{rows}</div>
+        </div>'''
+
     return f'<div class="slide"><p>Unknown slide type: {esc(t)}</p></div>'
 
 
@@ -331,6 +411,51 @@ def render(deck_spec_path: str, out_path: str):
     .panel-label {{ font-size:12px; letter-spacing:.08em; color:var(--secondary); font-weight:700; margin-bottom:14px; }}
     .panel-value {{ font-family:var(--heading-font); font-weight:700; color:var(--primary); font-size:clamp(32px,4vw,48px); }}
     .panel-caption {{ font-size:13px; margin-top:14px; }}
+
+    .icon-grid {{ display:flex; flex-wrap:wrap; gap:4vh 3vw; margin-top:2vh; }}
+    .icon-item {{ width:28%; min-width:220px; }}
+    .icon-glyph {{ width:52px; height:52px; border-radius:50%; background:var(--primary); color:var(--bg);
+                   display:flex; align-items:center; justify-content:center; font-family:var(--heading-font);
+                   font-weight:700; font-size:18px; margin-bottom:14px; }}
+    .icon-label {{ font-family:var(--heading-font); font-weight:700; color:var(--primary); font-size:16px; margin-bottom:6px; }}
+    .icon-desc {{ font-size:13px; color:var(--text); }}
+
+    .pricing {{ display:flex; gap:2vw; margin-top:2vh; }}
+    .price-card {{ flex:1; border-radius:16px; overflow:hidden; background:rgba(255,255,255,.05);
+                    border:1px solid rgba(128,128,128,.25); }}
+    .price-card.highlight {{ border-color:var(--primary); transform:translateY(-6px); }}
+    .price-head {{ padding:20px; text-align:center; background:rgba(255,255,255,.04); }}
+    .price-card.highlight .price-head {{ background:var(--primary); color:var(--bg); }}
+    .price-name {{ font-size:13px; font-weight:700; letter-spacing:.06em; opacity:.85; }}
+    .price-value {{ font-family:var(--heading-font); font-weight:700; font-size:26px; margin-top:8px; }}
+    .price-features {{ list-style:none; margin:0; padding:18px 22px; }}
+    .price-features li {{ font-size:14px; margin-bottom:10px; }}
+
+    .faq-list {{ margin-top:1vh; max-width:80ch; }}
+    .faq-row {{ padding:14px 0; border-bottom:1px solid rgba(128,128,128,.25); }}
+    .faq-q {{ font-family:var(--heading-font); font-weight:700; color:var(--primary); font-size:16px; margin-bottom:6px; }}
+    .faq-a {{ font-size:14px; color:var(--text); }}
+
+    .chart-bar {{ display:flex; align-items:flex-end; gap:3vw; height:56vh; margin-top:2vh; padding:0 2vw;
+                   border-bottom:2px solid var(--secondary); }}
+    .chart-bar-col {{ flex:1; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:100%; }}
+    .chart-bar-val {{ font-family:var(--heading-font); font-weight:700; color:var(--primary); font-size:14px; margin-bottom:8px; }}
+    .chart-bar-rect {{ width:56%; background:var(--primary); border-radius:6px 6px 0 0; min-height:4px; }}
+    .chart-bar-label {{ font-size:13px; color:var(--text); margin-top:10px; }}
+
+    .logo-wall {{ display:flex; flex-wrap:wrap; gap:2vh 1.5vw; margin-top:2vh; }}
+    .logo-badge {{ flex:1 1 calc(25% - 1.5vw); min-width:160px; background:rgba(255,255,255,.05);
+                    border:1px solid rgba(128,128,128,.25); border-radius:12px; padding:22px 12px;
+                    text-align:center; font-family:var(--heading-font); font-weight:700; color:var(--primary); }}
+
+    .vertical-timeline {{ margin-top:2vh; max-width:90ch; }}
+    .vt-row {{ display:flex; gap:24px; min-height:80px; }}
+    .vt-dot-col {{ display:flex; flex-direction:column; align-items:center; width:16px; }}
+    .vt-dot {{ width:14px; height:14px; border-radius:50%; background:var(--primary); flex-shrink:0; }}
+    .vt-line {{ width:2px; flex:1; background:var(--primary); opacity:.5; }}
+    .vt-label {{ width:80px; flex-shrink:0; font-family:var(--heading-font); font-weight:700; color:var(--primary); font-size:15px; }}
+    .vt-text {{ font-size:14px; color:var(--text); padding-bottom:20px; }}
+
     #nav {{ position:fixed; bottom:18px; right:24px; z-index:10; color:var(--secondary);
             font-family: var(--body-font); font-size:13px; background:rgba(0,0,0,.25);
             padding:6px 12px; border-radius:20px; backdrop-filter: blur(4px); }}

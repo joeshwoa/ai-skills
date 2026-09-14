@@ -152,6 +152,154 @@
       "panel_caption": "trailing 90 days, all pilot sites"
     },
     {
+      "type": "icon_grid",
+      "title": "Platform capabilities",
+      "items": [
+        {
+          "glyph": "AM",
+          "label": "Auto-mapping",
+          "description": "Drones self-map new warehouse layouts on first flight, no manual setup."
+        },
+        {
+          "glyph": "CA",
+          "label": "Collision avoidance",
+          "description": "Onboard LIDAR mesh keeps fleets safe around racking and forklifts."
+        },
+        {
+          "glyph": "WM",
+          "label": "WMS sync",
+          "description": "Discrepancies push to your existing WMS automatically by 6am."
+        },
+        {
+          "glyph": "FL",
+          "label": "Fleet manager",
+          "description": "Coordinate up to 200 drones across a single site from one dashboard."
+        },
+        {
+          "glyph": "AC",
+          "label": "Auto-charging",
+          "description": "Dock network keeps the fleet flying with zero manual battery swaps."
+        },
+        {
+          "glyph": "AN",
+          "label": "Analytics",
+          "description": "Historical accuracy and shrinkage trends across every site."
+        }
+      ]
+    },
+    {
+      "type": "pricing",
+      "title": "Pricing",
+      "tiers": [
+        {
+          "name": "Pilot",
+          "price": "$0",
+          "period": "90 days",
+          "features": [
+            "1 site",
+            "Up to 10 drones",
+            "Email support"
+          ]
+        },
+        {
+          "name": "Growth",
+          "price": "$4,900",
+          "period": "mo",
+          "highlight": true,
+          "features": [
+            "Up to 5 sites",
+            "Unlimited drones",
+            "WMS integration",
+            "Priority support"
+          ]
+        },
+        {
+          "name": "Enterprise",
+          "price": "Custom",
+          "features": [
+            "Unlimited sites",
+            "Dedicated CSM",
+            "Custom SLAs",
+            "On-prem option"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "faq",
+      "title": "Questions investors ask",
+      "items": [
+        {
+          "question": "What happens if a drone loses connectivity mid-flight?",
+          "answer": "It completes a safe-return-to-dock routine and resumes the count on its next flight."
+        },
+        {
+          "question": "How long does onboarding a new warehouse take?",
+          "answer": "Under 2 weeks including auto-mapping, vs. 6 months for legacy RFID installs."
+        },
+        {
+          "question": "Do you require hardware changes to the warehouse?",
+          "answer": "No — Aurora ships with its own charging dock network, no rack retrofits needed."
+        }
+      ]
+    },
+    {
+      "type": "chart_bar",
+      "title": "ARR growth",
+      "bars": [
+        {
+          "label": "Q4 2025",
+          "value": 180,
+          "display": "$180k"
+        },
+        {
+          "label": "Q1 2026",
+          "value": 410,
+          "display": "$410k"
+        },
+        {
+          "label": "Q2 2026",
+          "value": 820,
+          "display": "$820k"
+        },
+        {
+          "label": "Q3 2026",
+          "value": 1240,
+          "display": "$1.24M"
+        }
+      ]
+    },
+    {
+      "type": "logo_wall",
+      "title": "Piloting with",
+      "logos": [
+        "Meridian Logistics",
+        "Coldpoint Storage",
+        "Harbor Fulfillment",
+        "Vantage Supply Co.",
+        "Ridgeline Distribution",
+        "BlueCrate"
+      ]
+    },
+    {
+      "type": "vertical_timeline",
+      "title": "How we got here",
+      "milestones": [
+        {
+          "label": "2024",
+          "text": "Two ex-warehouse-robotics engineers prototype the first auto-charging dock in a garage."
+        },
+        {
+          "label": "2025",
+          "text": "First paid pilot at Meridian Logistics; cut cycle-count time by 94%."
+        },
+        {
+          "label": "2026",
+          "text": "12 pilot sites live, Series B raised, EU expansion underway."
+        }
+      ]
+    },
+    {
       "type": "table",
       "title": "Pricing",
       "headers": [

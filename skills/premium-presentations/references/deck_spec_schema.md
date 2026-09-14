@@ -26,7 +26,7 @@ always match.
 ## Slide types
 
 Each entry in `slides` is an object with a `type` plus type-specific fields.
-There are **15 types** — mix several across one deck instead of leaning on
+There are **21 types** — mix several across one deck instead of leaning on
 just `bullets`/`title`/`closing`; real variety between slides is what makes a
 deck read as designed rather than templated.
 
@@ -85,6 +85,35 @@ right. Reach for this when a slide "needs an image": a real number in a
 styled panel reads as more premium than a stock photo, and this skill never
 fabricates a fake one.
 `{"type":"feature","title":"Built for scale","description":"Aurora's fleet manager coordinates up to 200 drones across a single site with zero manual routing.","bullets":["Auto-charging dock network","Collision-avoidance mesh"],"panel_label":"Fleet uptime","panel_value":"99.7%","panel_caption":"Trailing 90 days, all pilot sites"}`
+
+**icon_grid** — a grid (up to ~6) of feature callouts, each with a glyph
+circle, bold label, and short description. For "what we offer" / "key
+capabilities" — reads as far less flat than a `bullets` list.
+`{"type":"icon_grid","title":"Platform capabilities","items":[{"glyph":"AM","label":"Auto-mapping","description":"Drones self-map new warehouse layouts on first flight."}]}`
+
+**pricing** — 2-4 pricing-tier cards side by side, one optionally
+highlighted as the recommended plan (`"highlight": true`).
+`{"type":"pricing","title":"Pricing","tiers":[{"name":"Growth","price":"$4,900","period":"mo","highlight":true,"features":["Up to 5 sites","Unlimited drones","Priority support"]}]}`
+
+**faq** — a short Q&A list (keep to ~3-4 pairs so each answer has room to
+breathe; the validator will flag it if the copy runs long).
+`{"type":"faq","title":"Questions investors ask","items":[{"question":"What happens if a drone loses connectivity?","answer":"It completes a safe-return-to-dock routine and resumes on its next flight."}]}`
+
+**chart_bar** — a real, native, editable bar chart (rectangles, not a
+picture) for a small series of numbers — revenue, growth, a metric over
+time. `"display"` is optional formatted text shown above the bar (e.g.
+`"$410k"`); falls back to the raw `"value"` if omitted.
+`{"type":"chart_bar","title":"ARR growth","bars":[{"label":"Q4 2025","value":180,"display":"$180k"},{"label":"Q1 2026","value":410,"display":"$410k"}]}`
+
+**logo_wall** — a grid of partner/client names as styled text badges.
+This skill never fabricates a company's actual logo artwork, so use this
+for a "trusted by" slide instead of inventing logo images.
+`{"type":"logo_wall","title":"Piloting with","logos":["Meridian Logistics","Coldpoint Storage","Harbor Fulfillment"]}`
+
+**vertical_timeline** — a top-to-bottom milestone list. Reach for this
+instead of `timeline` when there are more than ~4 milestones, or each one
+needs a real supporting sentence rather than one short line.
+`{"type":"vertical_timeline","title":"How we got here","milestones":[{"label":"2024","text":"Two ex-warehouse-robotics engineers prototype the first auto-charging dock in a garage."}]}`
 
 ## Filling with real data, not placeholders
 
