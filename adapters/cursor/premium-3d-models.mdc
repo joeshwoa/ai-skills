@@ -1,0 +1,27 @@
+---
+description: Build real, parametric 3D models (.glb/.stl/.obj) via CSG for Flutter, web/React, Blender, or 3D printing. Apply whenever the user asks to model, 3D model, or make a 3D object/part/asset/prop.
+globs:
+alwaysApply: false
+---
+# Premium 3D Models
+
+This project has a full 3D-modeling skill at
+`skills/premium-3d-models/SKILL.md` in this repo (or wherever you copied
+the `skills/premium-3d-models/` folder). Read that file in full before
+building any model — it covers the persona-and-use-case step, the model-spec
+format, the four generator/QA scripts (`build_model.py`, `validate_model.py`,
+`render_preview.py`, `blender_import.py`), and integration guides for
+Flutter/web/Blender.
+
+Quick reference:
+- Ask (briefly) whether this is an "engineer" (precise, dimensioned,
+  mechanical) or "designer" (organic/sculptural) piece if it's not obvious
+  — see `skills/premium-3d-models/references/personas.md`.
+- Build via `build_model.py` (trimesh + manifold3d CSG) — real geometry,
+  not an AI mesh generator, and honest about not doing true fillets or
+  organic freeform sculpting.
+- Always run `validate_model.py` (watertight/manifold check) before
+  delivering — a broken mesh looks fine in a glance and fails silently in
+  a slicer, physics engine, or AR viewer.
+- Always render a preview (`render_preview.py --mode hero` or
+  `--mode multiview`) and look at it before handing the model over.

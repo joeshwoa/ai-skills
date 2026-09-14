@@ -1,0 +1,36 @@
+{
+  "meta_name": "Sensor mounting bracket",
+  "persona": "engineer",
+  "units": "mm",
+  "export": {"glb": true, "stl": true},
+  "parts": [
+    {"id": "plate", "type": "box", "params": {"size": [60, 30, 4]}},
+    {"id": "boss", "type": "cylinder", "params": {"radius": 8, "height": 10, "sections": 64},
+     "translate": [0, 0, 3]},
+    {"id": "base_raw", "type": "union", "parts": ["plate", "boss"]},
+
+    {"id": "corner_hole_1", "type": "cylinder", "params": {"radius": 1.7, "height": 10}, "translate": [-25, -11, 0]},
+    {"id": "corner_hole_2", "type": "cylinder", "params": {"radius": 1.7, "height": 10}, "translate": [25, -11, 0]},
+    {"id": "corner_hole_3", "type": "cylinder", "params": {"radius": 1.7, "height": 10}, "translate": [-25, 11, 0]},
+    {"id": "corner_hole_4", "type": "cylinder", "params": {"radius": 1.7, "height": 10}, "translate": [25, 11, 0]},
+
+    {"id": "boss_bore", "type": "cylinder", "params": {"radius": 4, "height": 20, "sections": 64},
+     "translate": [0, 0, 0]},
+
+    {
+      "id": "bracket",
+      "type": "difference",
+      "base": "base_raw",
+      "subtract": ["corner_hole_1", "corner_hole_2", "corner_hole_3", "corner_hole_4", "boss_bore"],
+      "material": {"color": "#B8BEC7", "metallic": 0.75, "roughness": 0.32}
+    }
+  ],
+  "output": ["bracket"],
+  "_notes": [
+    "Plate: 60x30x4mm with a 16mm-diameter raised boss carrying a sensor's mounting bore.",
+    "4x corner holes at r=1.7mm = 3.4mm diameter — a standard free-fit clearance hole for an M3 bolt.",
+    "Center bore r=4mm = 8mm diameter clearance through the boss for a sensor's own screw/cable.",
+    "No true fillet at the plate/boss junction (see model_spec_schema.md's limits section) — a sharp",
+    "seam there is correct for this pipeline; round it in Blender/CAD afterward if the design needs it."
+  ]
+}

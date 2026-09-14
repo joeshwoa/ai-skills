@@ -31,6 +31,14 @@ tools/install.sh     # drops the adapters into this machine's tool config dirs
   python-pptx, not flattened HTML), with a design-interview step, a themed
   visual gallery, real-data-not-placeholder content, and slide transitions.
   Also documents how to extend the same approach to docs/sheets/PDFs.
+- **[premium-3d-models](skills/premium-3d-models/SKILL.md)** — real,
+  parametric 3D models (.glb + optional .stl/.obj) via CSG (trimesh +
+  manifold3d booleans), for Flutter (model_viewer_plus), web/React
+  (model-viewer / react-three-fiber), Blender import (with a live-push
+  path when Blender's MCP is connected), or 3D printing. Two personas
+  (engineer: exact dimensioned mechanical parts; designer: organic/
+  sculptural form) and its own validator (watertight/manifold checks) and
+  preview renderer (orthographic multiview sheet or hero/turntable shot).
 
 More skills get added here over time, one folder per skill, following the
 same layout and the same standard: ask before guessing on anything

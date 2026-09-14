@@ -11,6 +11,10 @@ purpose, read that skill's `SKILL.md` in full and follow it.
   build fully editable, professional/premium presentations (and to the same
   bar, documents/spreadsheets/PDFs). Trigger: any request for a deck,
   slides, pitch deck, PowerPoint, or presentation.
+- **premium-3d-models** (`skills/premium-3d-models/SKILL.md`) — build
+  real parametric 3D models (.glb/.stl/.obj) for Flutter, web/React,
+  Blender, or 3D printing. Trigger: any request to "model," "3D model,"
+  or make a 3D object/part/asset/prop.
 
 This file follows the emerging `AGENTS.md` convention several agentic tools
 (Cursor, GitHub Copilot, OpenAI Codex CLI, and others) read automatically
