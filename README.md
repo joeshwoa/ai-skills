@@ -16,13 +16,22 @@ skills/<skill-name>/
   examples/          # worked examples / test fixtures
 
 adapters/
-  cursor/            # .mdc rule files for Cursor's Project Rules
-  antigravity/        # rule files for Antigravity
-  generic/AGENTS.md   # the emerging cross-tool convention several agents read automatically
+  cursor/            # .mdc rule files for Cursor's Project Rules (project-scoped only —
+                      # Cursor has no global rules file; see install.sh's printed text
+                      # block for the one-time global paste into Settings > Customize > Rules)
+  generic/AGENTS.md   # the emerging cross-tool convention several agents read automatically —
+                      # this is also literally what Antigravity reads, at a project's root
+                      # AND (installed globally by install.sh) at ~/.gemini/AGENTS.md
   chatgpt/            # text to paste into ChatGPT custom instructions (no file API exists)
 
 tools/install.sh     # drops the adapters into this machine's tool config dirs
 ```
+
+Note: an earlier version of this repo also had an `adapters/antigravity/` folder
+targeting `.antigravity/rules/` — verified against Antigravity's own docs that this
+is not a real discovery path (Antigravity reads `AGENTS.md`, project-level and
+globally at `~/.gemini/AGENTS.md`) and removed it rather than leave a dead/misleading
+adapter around.
 
 ## Skills
 

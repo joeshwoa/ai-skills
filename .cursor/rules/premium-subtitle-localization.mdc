@@ -1,0 +1,34 @@
+---
+description: Find or generate source subtitles, translate with real cultural/comedic adaptation (not literal translation), validate, and mux into a video without re-encoding. Apply whenever the user asks to subtitle, translate, or localize a video/movie into another language.
+globs:
+alwaysApply: false
+---
+# Premium Subtitle Localization
+
+This project has a full subtitle-localization skill at
+`skills/premium-subtitle-localization/SKILL.md` in this repo (or
+wherever you copied the `skills/premium-subtitle-localization/` folder).
+Read that file in full before subtitling anything — it covers the
+find-or-transcribe step, the four-pass translation workflow (literal
+draft, meaning-preserving rewrite, cultural adaptation, fluency/timing
+polish), the automated validator plus agentic QA review, and the
+no-re-encode video merge.
+
+Quick reference:
+- Step 0: get the video path, source/target language(s), genre/tone
+  (comedy vs. drama vs. documentary changes translation priorities), and
+  soft-sub vs. hardsub preference — ask briefly if unclear.
+- `scripts/find_subtitles.py` before `scripts/transcribe.py` — never
+  transcribe from audio if a usable subtitle file already exists.
+- Translation is done by the agent itself, in four passes per
+  `references/translation_workflow.md` — never delegate straight to a
+  translation library/API, that produces exactly the flat literal output
+  this skill exists to avoid.
+- Always run `scripts/validate_srt.py` (mechanical QA) AND the
+  `references/qa_review_checklist.md` review pass (meaning/quality QA)
+  before merging — they check different things, both are required.
+- `scripts/merge_subtitles.py` defaults to soft subtitles (`-c copy`, no
+  re-encode); only use `--burn-in` if the target platform genuinely
+  can't do subtitle tracks.
+- Always run `scripts/verify_output.py` on the final file before telling
+  the user it's ready.
