@@ -39,6 +39,15 @@ tools/install.sh     # drops the adapters into this machine's tool config dirs
   (engineer: exact dimensioned mechanical parts; designer: organic/
   sculptural form) and its own validator (watertight/manifold checks) and
   preview renderer (orthographic multiview sheet or hero/turntable shot).
+- **[premium-subtitle-localization](skills/premium-subtitle-localization/SKILL.md)**
+  — find or transcribe source-language subtitles (faster-whisper, fully
+  local), translate them through a four-pass "virtual expert team"
+  workflow (literal draft, meaning-preserving rewrite, cultural/comedic
+  adaptation, fluency & timing polish — never a flat mechanical
+  translation), validate formatting/timing with an automated checker plus
+  an agentic meaning/quality review pass, then mux into the video with
+  `ffmpeg` stream-copy (no re-encode unless burned-in subtitles are
+  specifically needed).
 
 More skills get added here over time, one folder per skill, following the
 same layout and the same standard: ask before guessing on anything

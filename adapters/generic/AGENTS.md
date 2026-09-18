@@ -15,6 +15,12 @@ purpose, read that skill's `SKILL.md` in full and follow it.
   real parametric 3D models (.glb/.stl/.obj) for Flutter, web/React,
   Blender, or 3D printing. Trigger: any request to "model," "3D model,"
   or make a 3D object/part/asset/prop.
+- **premium-subtitle-localization**
+  (`skills/premium-subtitle-localization/SKILL.md`) — find/transcribe
+  source subtitles, translate with real cultural/comedic adaptation
+  (never literal/mechanical translation), validate, and mux into a video
+  without re-encoding. Trigger: any request to subtitle, translate, or
+  localize a video/movie into another language.
 
 This file follows the emerging `AGENTS.md` convention several agentic tools
 (Cursor, GitHub Copilot, OpenAI Codex CLI, and others) read automatically

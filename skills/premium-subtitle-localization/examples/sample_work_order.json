@@ -1,0 +1,26 @@
+{
+  "cue_count": 3,
+  "batches": [
+    {
+      "batch_id": 0,
+      "context_before": [],
+      "translate": [
+        { "index": 1, "text": "مرحبا يا صاحبي\nازيك النهاردة؟", "duration_ms": 2500 },
+        { "index": 2, "text": "والله الدنيا حلوة", "duration_ms": 2200 }
+      ],
+      "context_after": [
+        { "index": 3, "text": "تعال نشرب شاي" }
+      ]
+    },
+    {
+      "batch_id": 1,
+      "context_before": [
+        { "index": 2, "text": "والله الدنيا حلوة" }
+      ],
+      "translate": [
+        { "index": 3, "text": "تعال نشرب شاي", "duration_ms": 2000 }
+      ],
+      "context_after": []
+    }
+  ]
+}

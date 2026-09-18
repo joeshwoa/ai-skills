@@ -1,0 +1,7 @@
+# Only needed for transcribe.py (Step 1 fallback: no existing subtitles
+# found, so generate a source-language SRT from the audio track).
+# find_subtitles.py, srt_utils.py, batch_for_translation.py,
+# apply_translation.py, validate_srt.py, merge_subtitles.py, and
+# verify_output.py are pure stdlib + ffmpeg/ffprobe (a system binary, not
+# a pip package) — nothing else to install for those.
+faster-whisper>=1.0

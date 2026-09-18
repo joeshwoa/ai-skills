@@ -48,8 +48,8 @@ if [ -n "$TARGET_PROJECT" ]; then
 fi
 
 echo ""
-echo "Claude Code: copy skills/premium-presentations to ~/.claude/skills/premium-presentations"
-echo "  mkdir -p ~/.claude/skills && cp -r \"$REPO_DIR/skills/premium-presentations\" ~/.claude/skills/"
+echo "Claude Code: copy every skill under skills/ to ~/.claude/skills/"
+echo "  mkdir -p ~/.claude/skills && cp -r \"$REPO_DIR\"/skills/*/ ~/.claude/skills/"
 echo ""
 echo "ChatGPT: no file-based install exists — paste adapters/chatgpt/custom_instructions.md"
 echo "  into Settings > Personalization > Custom instructions (or a custom GPT's instructions)."

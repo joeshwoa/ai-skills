@@ -1,0 +1,5 @@
+[
+  { "index": 1, "text": "Привет, дружище!\nКак сегодня дела?" },
+  { "index": 2, "text": "Жизнь прекрасна, чё уж там", "note": "literal 'والله الدنيا حلوة' is an oath-flavored 'I swear, life is sweet' — flattened the oath (no natural Russian equivalent in casual speech) and used a colloquial tag 'чё уж там' to keep the same relaxed, slightly boastful register instead" },
+  { "index": 3, "text": "Го чайку дернем", "note": "kept it casual/slangy ('го' + 'дернем') to match the friend-to-friend invitation tone rather than a neutral 'давай выпьем чаю'" }
+]
