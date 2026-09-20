@@ -1,0 +1,48 @@
+{
+  "generated_by": "skills/skill-router/scripts/build_manifest.py",
+  "skill_count": 6,
+  "skills": [
+    {
+      "name": "devuniverse",
+      "path": "skills/devuniverse",
+      "description": "Scaffold a production-grade Flutter + Supabase/Firebase/Node project via a 27-persona virtual engineering agency that debates the stack, generates a 3D deep-scroll spatial UI module, syncs Figma wireframes, runs a compliance/security audit, and drafts Terms/Privacy docs — by running the real devuniverse-mcp server as a one-shot local command, no MCP client registration required. Use for \"scaffold a new app\", \"start a Flutter project\", \"generate the 3D spatial canvas module\", or anything about the DevUniverse agency.",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "omnicinema",
+      "path": "skills/omnicinema",
+      "description": "Generate cinematic video (multi-scene screenplay + footage + Remotion render), design assets (logos, vector art, textures, UI mockups), voiceover, music, and SFX — by running the real omnicinema-mcp server as a one-shot local command, with no MCP client registration required. Use for \"make a video / short film / trailer\", \"generate a logo / design asset\", \"generate voiceover / music / sound effect\", or anything about the OmniCinema pipeline.",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "premium-3d-models",
+      "path": "skills/premium-3d-models",
+      "description": "Build real, parametric 3D models (.glb primarily, plus .stl/.obj on request) for any use case that ends up embedding, printing, or viewing 3D geometry — a Flutter app's model_viewer_plus screen, a React/web page with model-viewer or react-three-fiber, a part imported into Blender for further work, or a file ready for a 3D printer. Use this whenever the user asks to \"model,\" \"3D model,\" \"make a 3D object/part/ asset of,\" or describes a mechanical part, product shape, prop, or sculptural object that should exist as real geometry rather than a 2D image. Two working styles this skill switches between: an \"engineer\" persona (exact dimensions, holes, tolerances, mechanical parts) and a \"designer\" persona (organic/sculptural silhouettes, materials, product form). If the use case or style is not obvious from the request, ask briefly (see Step 1) instead of guessing a persona or output format.",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "premium-presentations",
+      "path": "skills/premium-presentations",
+      "description": "Build fully editable, professional/premium presentations (and the same quality bar for documents, spreadsheets, and PDFs) — not flat images, not generic template filler. Use this whenever the user asks for a presentation, slide deck, pitch deck, investor deck, PowerPoint, keynote, or any \"make me slides about X\" request, even if they don't say \"professional\" or \"premium\" explicitly — treat every deck request as wanting agency-quality output unless they clearly say otherwise (e.g. \"just a rough draft\"). If the user hasn't specified a visual style/theme, ALWAYS stop and ask them (see \"Step 1: figure out the design\" below) instead of guessing — a wrong visual direction is expensive to redo, a quick question is not. Also use this skill's methodology (deck-spec to native-format generation, ask-before-guessing on design, real data not placeholders) as the pattern for sibling skills that build documents or spreadsheets to the same premium bar.",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "premium-subtitle-localization",
+      "path": "skills/premium-subtitle-localization",
+      "description": "Add translated subtitles to a video — find or generate source-language subtitles, translate them with real cultural/comedic adaptation (never a flat literal translation), validate formatting and timing, and mux the result into the video without re-encoding. Use this whenever the user asks to subtitle, translate, localize, or dub (subtitle-only) a video/movie/show into another language, or gives a video file and a target language. Involves a \"virtual expert team\" of translation passes (literal draft, meaning-preserving rewrite, cultural adaptation, fluency/timing polish) plus automated QA and an agentic review pass — not a single mechanical translate-and-burn-in step.",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "skill-router",
+      "path": "skills/skill-router",
+      "description": "Read this FIRST, before any other skill, for any non-trivial request — it is the dispatcher for every skill in this repo. Checks skills/manifest.json and auto-selects a matching installed skill with no need to ask the user which one to use. If nothing installed matches, searches for or builds a new skill and installs it into this repo automatically (clone/build for the user's own MCP repos, or build from scratch via the skill-creator methodology), then tells the user what was added. Also covers keeping skills/manifest.json in sync as skills are added or changed.",
+      "has_scripts": true,
+      "has_references": true
+    }
+  ]
+}

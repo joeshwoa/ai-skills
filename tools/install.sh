@@ -29,6 +29,13 @@ TARGET_PROJECT="${1:-}"
 
 echo "Repo: $REPO_DIR"
 
+# Keep skills/manifest.json (the skill-router dispatcher's index) current.
+if command -v python3 >/dev/null 2>&1; then
+  python3 "$REPO_DIR/skills/skill-router/scripts/build_manifest.py" "$REPO_DIR"
+else
+  echo "• python3 not found — skipping skills/manifest.json refresh (skill-router needs this; install python3 and re-run)"
+fi
+
 install_project_rules() {
   local dir="$1"
   local label="$2"
@@ -79,7 +86,9 @@ echo ""
 echo "Cursor GLOBAL (applies in every project, not just this repo) — Cursor has no file for"
 echo "this, paste the block below into Cursor Settings -> Customize -> Rules -> User Rules, ONCE:"
 echo "-----------------------------------------------------------------------------------"
-echo "Before doing work that matches one of these, read the full SKILL.md first:"
+echo "Read skills/skill-router/SKILL.md FIRST, always — it auto-selects a matching"
+echo "installed skill from skills/manifest.json, and if nothing matches, searches for or"
+echo "builds a new one and installs it automatically. The list below is what it dispatches to:"
 echo "- Slide deck / presentation / pitch deck / PowerPoint request -> if this project has"
 echo "  a premium-presentations skill (skills/premium-presentations/SKILL.md) or an AGENTS.md"
 echo "  pointing at one, read it before building the deck."

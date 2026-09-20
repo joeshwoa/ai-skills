@@ -5,6 +5,17 @@ Any coding agent working in a project that includes this repo (or has this
 file copied into it) should, before doing work that matches a skill's
 purpose, read that skill's `SKILL.md` in full and follow it.
 
+## Read this first, every time
+
+**skill-router** (`skills/skill-router/SKILL.md`) — read this one FIRST,
+before any other skill, for any non-trivial request. It checks
+`skills/manifest.json` and auto-selects a matching installed skill (no
+need to be told which one to use), and — if nothing installed matches —
+searches for or builds a new skill and installs it into this repo
+automatically, following the same procedure used to build every skill
+below. This is the dispatcher; the rest of this list is what it
+dispatches to.
+
 ## Available skills
 
 - **premium-presentations** (`skills/premium-presentations/SKILL.md`) —
@@ -35,6 +46,10 @@ purpose, read that skill's `SKILL.md` in full and follow it.
   real `devuniverse-mcp` server the same one-shot way. Trigger: any
   request to scaffold a new app/project, start a Flutter project, or
   generate the 3D spatial canvas module.
+- **skill-router** (`skills/skill-router/SKILL.md`) — see "Read this
+  first, every time" above; also documents how to keep
+  `skills/manifest.json` in sync and the full search/build/install
+  procedure for adding a new skill.
 
 This file follows the emerging `AGENTS.md` convention several agentic tools
 (Cursor, GitHub Copilot, OpenAI Codex CLI, and others) read automatically

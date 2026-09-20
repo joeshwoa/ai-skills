@@ -61,3 +61,14 @@ Cursor, Antigravity, Claude Code) and, if useful, help me plan the exact
 `skills/omnicinema/references/tools.md` and
 `skills/devuniverse/references/tools.md` for the exact tool names and
 argument shapes rather than guessing them.
+
+There's also a `skill-router` skill meant to auto-pick and auto-install
+skills from `skills/manifest.json` — that's a file-system-driven
+mechanism (reading the repo, running scripts, committing/pushing) that
+plain ChatGPT chat can't do on its own either. If I paste you the
+contents of `skills/manifest.json`, you can still do the "auto-select"
+half yourself — match my request against the descriptions in it and
+tell me which skill fits, or if none do — but the "search and install a
+new one automatically" half needs a tool with real file/shell/git access
+(Claude, Cursor, Antigravity, Claude Code). Say so plainly rather than
+pretending to have installed something.

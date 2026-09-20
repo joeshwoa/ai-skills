@@ -1,0 +1,26 @@
+---
+description: Dispatcher for every skill in this repo — read first, always, before any other skill.
+globs:
+alwaysApply: true
+---
+# Skill Router
+
+Unlike the other `.mdc` rules in this repo (which apply only when their
+own description matches the request), this one is `alwaysApply: true` —
+Cursor loads it for every request in this project.
+
+Before doing any non-trivial task:
+
+1. Read `skills/manifest.json` (regenerate it first if it looks stale:
+   `python3 skills/skill-router/scripts/build_manifest.py`).
+2. If an installed skill's description matches the task, read its full
+   `SKILL.md` and follow it — no need to ask which skill to use.
+3. If nothing installed matches, read
+   `skills/skill-router/SKILL.md` in full — it covers searching for a
+   pre-made skill, converting one of the user's own MCP repos, or
+   building a new one from scratch, then installing it into this repo
+   (commit, push, sync the Cursor clone + symlink) — all pre-approved,
+   standing procedure, not something to ask permission for step by step.
+4. The one thing to flag rather than do silently: anything needing a new
+   credential/API key, or adopting a stranger's code with a real
+   licensing/safety concern.
