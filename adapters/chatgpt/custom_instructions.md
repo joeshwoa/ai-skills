@@ -72,3 +72,12 @@ tell me which skill fits, or if none do — but the "search and install a
 new one automatically" half needs a tool with real file/shell/git access
 (Claude, Cursor, Antigravity, Claude Code). Say so plainly rather than
 pretending to have installed something.
+
+Same limit applies to `skill-enhancer`: it reads usage reports from a
+local file (`~/.cache/ai-skills/reports/`) and edits/re-validates skill
+files on disk — plain ChatGPT chat can't log a report or read that
+folder either. If I paste you report contents or a skill's files
+directly, you can still do the judgment part (spot a recurring issue,
+suggest a fix), but say plainly that actually logging reports, editing
+the files, and shipping the fix needs a tool with real file/shell/git
+access.

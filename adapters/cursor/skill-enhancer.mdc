@@ -1,0 +1,30 @@
+---
+description: Audit and improve any skill using real usage reports (or a direct read-through) — fix recurring issues and missing coverage, re-validate, ship the update.
+globs:
+alwaysApply: false
+---
+# Skill Enhancer
+
+This project has the skill-enhancer skill at
+`skills/skill-enhancer/SKILL.md` in this repo (or wherever you copied
+the `skills/skill-enhancer/` folder). Read that file in full before
+auditing or improving a skill.
+
+Quick reference:
+- Reports accumulate locally at `~/.cache/ai-skills/reports/<skill>.jsonl`
+  (skill-router logs one after every skill use — see its own `.mdc`/
+  `SKILL.md`). Summarize with
+  `python3 skills/skill-enhancer/scripts/analyze_reports.py <skill-name>`
+  (or `--all`).
+- No reports yet isn't a failure — fall back to a direct read-through
+  audit of the skill's `SKILL.md`/scripts/references against the build
+  standard in `skills/skill-router/references/how_to_build_a_new_skill.md`.
+- Diagnose root cause before fixing — don't patch the visible symptom.
+- Re-verify with the same rigor the skill was originally built with
+  (self-tests, validators, skill-creator packaging check, end-to-end
+  re-test for anything that touches a tested path).
+- Log the change in that skill's own `references/changelog.md`, then
+  ship it (commit/push/sync — same checklist as adding a new skill).
+- Archive consumed reports with `--archive` so they aren't reprocessed.
+- Full procedure: `skills/skill-enhancer/references/
+  enhancement_checklist.md`.

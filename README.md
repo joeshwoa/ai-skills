@@ -15,6 +15,15 @@ sync to Cursor), the same way every skill below was built. See
 `skills/skill-router/SKILL.md` and its `references/` for the full
 procedure.
 
+**Self-improving:** every skill use ends with a one-line usage report
+(logged locally, no git needed — see `skills/skill-enhancer/`).
+`skills/skill-enhancer/SKILL.md` reads those reports back, finds
+recurring issues or missing coverage, fixes the skill, re-validates, and
+ships the update — or does a direct read-through audit when a skill has
+no reports yet. Ask to "enhance"/"audit"/"improve" a skill (there's no
+background process — it runs when asked, or when an agent notices a
+skill just failed and decides a pass is warranted).
+
 ## Layout
 
 ```
@@ -93,6 +102,11 @@ adapter around.
   for or builds a new skill and installs it automatically, following the
   same procedure that built every skill above. See "Adding a new skill"
   below — it's now just a pointer to this skill's own reference docs.
+- **[skill-enhancer](skills/skill-enhancer/SKILL.md)** — closes the
+  loop: reads the usage reports skill-router logs after every skill use
+  (or does a direct read-through audit when none exist yet), finds
+  recurring issues and missing coverage, fixes the skill, re-validates,
+  and ships the update.
 
 More skills get added here over time, one folder per skill, following the
 same layout and the same standard: ask before guessing on anything

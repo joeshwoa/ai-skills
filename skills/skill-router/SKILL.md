@@ -39,6 +39,18 @@ prompt — this documents the repeatable procedure).
 5. Multiple skills plausibly match (e.g. a task spans video generation
    *and* subtitling): it's fine to use more than one, in whatever order
    the task naturally needs them.
+6. **When the task is finished, log a usage report** (this is how
+   skill-enhancer gets real signal to work from instead of guessing):
+   ```bash
+   python3 skills/skill-enhancer/scripts/log_report.py <skill-name> <success|partial|failure> \
+     --tool <claude|cursor|antigravity|chatgpt> --task "one-line summary, no sensitive content" \
+     [--issue "specific problem hit"] [--missing "something the task needed that wasn't covered"] \
+     [--note "free text"]
+   ```
+   This is a local append, no git/network needed — do it every time, it
+   costs nothing. If more than one skill was used for the task, log one
+   report per skill. See `skills/skill-enhancer/references/
+   report_schema.md` if the outcome/fields are unclear for a given case.
 
 ## Part 2 — No installed skill matches: search, then build
 

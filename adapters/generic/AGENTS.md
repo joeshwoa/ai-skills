@@ -14,7 +14,9 @@ need to be told which one to use), and — if nothing installed matches —
 searches for or builds a new skill and installs it into this repo
 automatically, following the same procedure used to build every skill
 below. This is the dispatcher; the rest of this list is what it
-dispatches to.
+dispatches to. It also logs a short usage report after every skill use
+(`skills/skill-enhancer/scripts/log_report.py`) — see **skill-enhancer**
+below for what that feeds.
 
 ## Available skills
 
@@ -50,6 +52,12 @@ dispatches to.
   first, every time" above; also documents how to keep
   `skills/manifest.json` in sync and the full search/build/install
   procedure for adding a new skill.
+- **skill-enhancer** (`skills/skill-enhancer/SKILL.md`) — audits and
+  improves any skill using the usage reports skill-router logs (or a
+  direct read-through when none exist yet): finds recurring issues and
+  missing coverage, fixes them, re-validates, ships the update. Trigger:
+  a skill produced a bad/incomplete result, or any request to
+  enhance/improve/audit/review a skill's quality.
 
 This file follows the emerging `AGENTS.md` convention several agentic tools
 (Cursor, GitHub Copilot, OpenAI Codex CLI, and others) read automatically
