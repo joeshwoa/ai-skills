@@ -49,3 +49,15 @@ length). Prefer muxing subtitles as a toggleable track with the video
 and audio otherwise untouched (no re-encode) over burning them into the
 picture, unless I specifically need burned-in subtitles for a platform
 that requires them.
+
+The `omnicinema` and `devuniverse` skills in this repo run real local
+servers via shell scripts (`skills/omnicinema/scripts/call.sh`,
+`skills/devuniverse/scripts/call.sh`) — plain ChatGPT chat has no shell
+access, so it can't actually run those. If I ask for cinematic
+video/design-asset generation or a DevUniverse project scaffold here,
+tell me plainly that this needs a tool with local shell access (Claude,
+Cursor, Antigravity, Claude Code) and, if useful, help me plan the exact
+`call.sh <tool_name> '<json-args>'` command to run there — reference
+`skills/omnicinema/references/tools.md` and
+`skills/devuniverse/references/tools.md` for the exact tool names and
+argument shapes rather than guessing them.

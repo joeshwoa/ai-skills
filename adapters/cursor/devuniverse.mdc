@@ -1,0 +1,26 @@
+---
+description: Scaffold a production-grade Flutter + Supabase/Firebase/Node project via the real devuniverse-mcp server (27-persona agency debate, 3D spatial UI module, Figma sync, compliance audit), run as a one-shot local command (no MCP registration needed). Apply whenever the user asks to scaffold a new app/project, start a Flutter project, or generate the 3D spatial canvas module.
+globs:
+alwaysApply: false
+---
+# DevUniverse
+
+This project has the devuniverse skill at `skills/devuniverse/SKILL.md`
+in this repo (or wherever you copied the `skills/devuniverse/` folder).
+Read that file in full before using it.
+
+Quick reference:
+- First use: `bash skills/devuniverse/scripts/bootstrap.sh` (clones/builds
+  the real devuniverse-mcp server into a local cache — one-time, safe to
+  re-run; builds clean from a fresh clone).
+- Full tool catalog with exact JSON argument shapes:
+  `skills/devuniverse/references/tools.md`.
+- Call a tool: `bash skills/devuniverse/scripts/call.sh <tool_name> '<json-args>'`.
+- `init_dev_universe` is the real starting point for a new project — one
+  call runs the full agency debate, scaffold, Figma sync, compliance
+  audit, and asset watcher.
+- `provision_omnicinema` with `confirm:true` clones and runs code on the
+  user's machine — confirm with the user first, the tool itself can't
+  ask.
+- `generate_compliance_docs` output is a structured draft, not legal
+  advice — say so if you hand it to the user.
