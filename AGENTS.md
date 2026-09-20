@@ -21,6 +21,20 @@ purpose, read that skill's `SKILL.md` in full and follow it.
   (never literal/mechanical translation), validate, and mux into a video
   without re-encoding. Trigger: any request to subtitle, translate, or
   localize a video/movie into another language.
+- **omnicinema** (`skills/omnicinema/SKILL.md`) — cinematic video
+  generation (screenplay + footage + Remotion render), design assets
+  (logos, vector art, textures, UI mockups), voiceover, music, and SFX.
+  Runs the real `omnicinema-mcp` server as a one-shot local command — no
+  MCP client registration needed. Trigger: any request to make a video,
+  short film, trailer, logo/design asset, voiceover, music, or sound
+  effect via OmniCinema.
+- **devuniverse** (`skills/devuniverse/SKILL.md`) — scaffold a
+  production-grade Flutter + Supabase/Firebase/Node project via a
+  27-persona virtual engineering agency (stack debate, 3D spatial UI
+  module, Figma sync, compliance audit, Terms/Privacy drafts). Runs the
+  real `devuniverse-mcp` server the same one-shot way. Trigger: any
+  request to scaffold a new app/project, start a Flutter project, or
+  generate the 3D spatial canvas module.
 
 This file follows the emerging `AGENTS.md` convention several agentic tools
 (Cursor, GitHub Copilot, OpenAI Codex CLI, and others) read automatically
