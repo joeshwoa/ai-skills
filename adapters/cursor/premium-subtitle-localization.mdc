@@ -1,5 +1,5 @@
 ---
-description: Find or generate source subtitles, translate with real cultural/comedic adaptation (not literal translation), validate, and mux into a video without re-encoding. Apply whenever the user asks to subtitle, translate, or localize a video/movie into another language.
+description: Find or generate source subtitles, verify the transcript against the actual audio, translate with real cultural/comedic adaptation (not literal translation), validate, and mux into a video without re-encoding. Apply whenever the user asks to subtitle, translate, or localize a video/movie into another language.
 globs:
 alwaysApply: false
 ---
@@ -20,6 +20,23 @@ Quick reference:
   soft-sub vs. hardsub preference — ask briefly if unclear.
 - `scripts/find_subtitles.py` before `scripts/transcribe.py` — never
   transcribe from audio if a usable subtitle file already exists.
+- Transcribing colloquial/dialect speech: pass `--dialect` (e.g.
+  `egyptian`) and keep the default `--model large-v3`. A smaller model
+  on dialect film audio does not produce slightly worse subtitles, it
+  produces confident phonetic nonsense. Keep the audio (`--keep-wav`)
+  and keep a pristine copy of the raw ASR as `source.raw.srt`.
+- **Step 1.5 is required and is not optional polish.** Run
+  `scripts/asr_confidence.py`, resolve flagged cues with
+  `scripts/retranscribe_spans.py`, then prove the transcript with
+  `scripts/check_transcript_fidelity.py` (must exit 0) BEFORE any
+  translating. Everything downstream assumes the source is correct and
+  none of it can detect that it isn't.
+- **Never rewrite a garbled source cue from context.** Exactly three
+  moves are allowed: re-transcribe that span from audio, mark it
+  `[غير واضح]`/unclear, or ask the user. Inferring what a line
+  "probably" said is fabrication — it reads better than the truth, which
+  is precisely why it survives review. See
+  `references/asr_accuracy_guide.md`.
 - Translation is done by the agent itself, in four passes per
   `references/translation_workflow.md` — never delegate straight to a
   translation library/API, that produces exactly the flat literal output
@@ -32,3 +49,6 @@ Quick reference:
   can't do subtitle tracks.
 - Always run `scripts/verify_output.py` on the final file before telling
   the user it's ready.
+- Tell the user how many cues were re-transcribed from audio and how
+  many are still marked unclear. On hard dialect audio a handful of
+  unclear cues is the honest outcome; reporting zero is suspicious.

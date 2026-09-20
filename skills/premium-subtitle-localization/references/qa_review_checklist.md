@@ -12,6 +12,26 @@ reviews with no attachment to the previous phrasing choices. If you're a
 single agent, deliberately switch mindset: read as a skeptical editor
 checking someone else's work, not as the translator re-reading your own.
 
+## Before you start: the source is not automatically trustworthy
+
+This pass compares the translation against the source SRT. That is only
+meaningful if the source SRT is right. When the source was produced by
+automatic transcription, it can be confidently wrong in ways that read
+perfectly — see `asr_accuracy_guide.md`. A translation faithful to a
+wrong source looks exactly like a correct translation from here, so this
+checklist structurally cannot catch it.
+
+So first confirm Step 1.5 actually happened:
+
+- Does `source.srt.asr.json` exist, and did `check_transcript_fidelity.py`
+  exit 0 against `source.raw.srt`?
+- If cues are marked unclear (`[غير واضح]` or equivalent), they should
+  still be unclear here — a cue that was unclear in the source and is
+  fluent in the target means someone invented it. Flag that immediately;
+  it outranks every other finding in this checklist.
+- If the source was a found `.srt` rather than a transcript, spot-check
+  a handful of cues against the audio yourself before proceeding.
+
 ## What to check
 
 Work through the translated SRT (all of it for a short piece; a

@@ -33,7 +33,7 @@
     {
       "name": "premium-subtitle-localization",
       "path": "skills/premium-subtitle-localization",
-      "description": "Add translated subtitles to a video — find or generate source-language subtitles, translate them with real cultural/comedic adaptation (never a flat literal translation), validate formatting and timing, and mux the result into the video without re-encoding. Use this whenever the user asks to subtitle, translate, localize, or dub (subtitle-only) a video/movie/show into another language, or gives a video file and a target language. Involves a \"virtual expert team\" of translation passes (literal draft, meaning-preserving rewrite, cultural adaptation, fluency/timing polish) plus automated QA and an agentic review pass — not a single mechanical translate-and-burn-in step.",
+      "description": "Add translated subtitles to a video — find or generate source-language subtitles, translate them with real cultural/comedic adaptation (never a flat literal translation), validate formatting and timing, and mux the result into the video without re-encoding. Use this whenever the user asks to subtitle, translate, localize, or dub (subtitle-only) a video/movie/show into another language, or gives a video file and a target language. Involves a \"virtual expert team\" of translation passes (literal draft, meaning-preserving rewrite, cultural adaptation, fluency/timing polish) plus automated QA and an agentic review pass — not a single mechanical translate-and-burn-in step. Also verifies the source transcript against the actual audio before translating, so dialect/ASR errors are caught rather than silently rewritten into fluent invented dialogue.",
       "has_scripts": true,
       "has_references": true
     },

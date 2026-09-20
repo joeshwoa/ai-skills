@@ -1,7 +1,26 @@
-# Only needed for transcribe.py (Step 1 fallback: no existing subtitles
-# found, so generate a source-language SRT from the audio track).
+# Needed only for transcribe.py / retranscribe_spans.py (Step 1 fallback:
+# no existing subtitles found, so generate a source-language SRT from the
+# audio track, then verify it against that audio).
+#
+# Pick the backend that matches the machine — transcribe.py auto-detects:
+#
+#   Apple Silicon (M1/M2/M3/M4): mlx-whisper runs on the Metal GPU and is
+#   several times faster than CPU faster-whisper. On a feature-length film
+#   with large-v3 that is the difference between minutes and hours, which
+#   in practice is the difference between using large-v3 and settling for
+#   a small model that produces an unusable dialect transcript.
+#
+#       pip install --break-system-packages mlx-whisper
+#
+#   Everything else (Linux/Windows/Intel Mac, CPU or CUDA):
+#
+#       pip install --break-system-packages faster-whisper
+#
+# Installing both is fine; mlx is preferred when present and importable.
+#
 # find_subtitles.py, srt_utils.py, batch_for_translation.py,
-# apply_translation.py, validate_srt.py, merge_subtitles.py, and
-# verify_output.py are pure stdlib + ffmpeg/ffprobe (a system binary, not
-# a pip package) — nothing else to install for those.
-faster-whisper>=1.0
+# apply_translation.py, validate_srt.py, merge_subtitles.py,
+# verify_output.py, asr_confidence.py and check_transcript_fidelity.py are
+# pure stdlib + ffmpeg/ffprobe (a system binary, not a pip package).
+faster-whisper>=1.0 ; sys_platform != "darwin" or platform_machine != "arm64"
+mlx-whisper>=0.4 ; sys_platform == "darwin" and platform_machine == "arm64"

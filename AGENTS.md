@@ -30,10 +30,14 @@ below for what that feeds.
   or make a 3D object/part/asset/prop.
 - **premium-subtitle-localization**
   (`skills/premium-subtitle-localization/SKILL.md`) — find/transcribe
-  source subtitles, translate with real cultural/comedic adaptation
-  (never literal/mechanical translation), validate, and mux into a video
+  source subtitles, verify the transcript against the actual audio,
+  translate with real cultural/comedic adaptation (never
+  literal/mechanical translation), validate, and mux into a video
   without re-encoding. Trigger: any request to subtitle, translate, or
-  localize a video/movie into another language.
+  localize a video/movie into another language. Note its hard rule: a
+  garbled ASR cue may only be re-transcribed from audio, marked
+  unclear, or asked about — never guessed from context, however obvious
+  it looks.
 - **omnicinema** (`skills/omnicinema/SKILL.md`) — cinematic video
   generation (screenplay + footage + Remotion render), design assets
   (logos, vector art, textures, UI mockups), voiceover, music, and SFX.

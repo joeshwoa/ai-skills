@@ -10,7 +10,10 @@ description: >
   target language. Involves a "virtual expert team" of translation
   passes (literal draft, meaning-preserving rewrite, cultural adaptation,
   fluency/timing polish) plus automated QA and an agentic review pass —
-  not a single mechanical translate-and-burn-in step.
+  not a single mechanical translate-and-burn-in step. Also verifies the
+  source transcript against the actual audio before translating, so
+  dialect/ASR errors are caught rather than silently rewritten into
+  fluent invented dialogue.
 ---
 
 # Premium Subtitle Localization
@@ -25,6 +28,18 @@ tooling for the mechanical parts (extraction, timing, muxing,
 validation), and a structured, multi-pass **agentic** translation
 process for the part that actually requires judgment: making the target
 language line mean, and land, what the source line meant and landed.
+
+There is a second, less obvious failure this skill is built to prevent.
+Subtitles are judged by how they read, so every pressure in the pipeline
+pushes toward output that reads well. On hard audio — colloquial
+dialect, music under dialogue, overlapping speakers — automatic
+transcription returns garbled text, and the instinctive response is to
+tidy it into something fluent. That instinct is the single most damaging
+thing you can do here: invented dialogue reads *better* than real
+dialogue, so it passes every review by anyone without the audio open.
+Accuracy to what was actually said outranks fluency at every step, and
+Step 1.5 exists to enforce that mechanically rather than on good
+intentions.
 
 Be upfront if asked: this skill does not do voice dubbing (replacing the
 audio track with translated speech) — it produces subtitles only. It
@@ -65,21 +80,111 @@ python3 scripts/find_subtitles.py "/path/to/movie.mp4"
 ```
 
 If it finds a matching-language `.srt` already sitting next to the
-video, use that — skip transcription entirely. If it finds only other
+video, use that — skip transcription entirely. Note that a found file
+carries no confidence data, so Step 1.5's automated triage cannot run on
+it: spot-check a dozen cues spread across the film against the audio
+before trusting it, and treat it as suspect if it looks machine-made
+(uniform cue lengths, no punctuation, MSA phrasing over colloquial
+speech). If it finds only other
 formats (`.vtt`/`.ass`), convert with `ffmpeg -i in.vtt out.srt` first
 (ffmpeg handles that natively).
 
 If nothing usable exists, generate one from the audio:
 
 ```bash
-pip install --break-system-packages -r scripts/requirements.txt   # faster-whisper, if not already installed
-python3 scripts/transcribe.py "/path/to/movie.mp4" source.srt --lang ar --model small
+pip install --break-system-packages -r scripts/requirements.txt   # mlx-whisper or faster-whisper
+python3 scripts/transcribe.py "/path/to/movie.mp4" source.srt \
+    --lang ar --dialect egyptian --keep-wav work/audio.wav
 ```
 
-Skim the result before trusting it — ASR mishears names/slang/overlapping
-dialogue, and any mistake here propagates into every target language.
-Fix obvious transcription errors directly in `source.srt` before
-translating.
+Keep `source.srt` as the untouched raw ASR — copy it to `source.raw.srt`
+now. Step 1.5 needs the original to compare against, and `--keep-wav`
+preserves the audio the re-listening step needs. Deleting either forces
+every later fix to become a guess.
+
+**Defaults that matter, and are not negotiable on dialect content:**
+
+- `--model` defaults to `large-v3`. Smaller Whisper models do not degrade
+  gracefully on colloquial film audio — they emit confident, fluent,
+  phonetically-plausible nonsense. `small` here is not "faster with some
+  errors", it is a transcript that is wrong in a way no later step can
+  detect.
+- `--dialect` primes the model for how people actually talk. Whisper's
+  Arabic training is dominated by MSA/news, so without it the output
+  drifts toward formal Arabic nobody in the film said. Supported:
+  `egyptian`, `gulf`, `levantine`, `maghrebi` (see `transcribe.py` to add
+  more).
+- `--initial-prompt` with character names, place names and the film's
+  recurring domain nouns measurably raises recognition of exactly those
+  words. Use it whenever you know them.
+- On Apple Silicon the `mlx` backend is picked automatically and runs on
+  the GPU. That is what makes `large-v3` practical on a feature film
+  instead of an overnight job.
+
+## Step 1.5: verify the transcript against the audio — REQUIRED
+
+**Do not translate an unverified transcript.** Everything downstream —
+all four translation passes, the QA review, the final video — treats
+`source.srt` as ground truth. If it isn't, none of that work can detect
+the problem, because a translation faithful to a wrong source looks
+exactly like a correct translation.
+
+```bash
+python3 scripts/asr_confidence.py source.srt --queue work/review_queue.json
+```
+
+This reads the `source.srt.asr.json` sidecar `transcribe.py` wrote and
+flags every cue the model was unsure about. If more than ~25% of the
+film is flagged, stop and fix the *transcription* (wrong dialect? wrong
+model? missing prompt?) — re-running the whole film beats repairing
+hundreds of cues by hand.
+
+### The rule: a garbled cue has exactly three honest resolutions
+
+When you meet a cue that reads as nonsense, you may:
+
+1. **Re-transcribe that span from the audio** — the preferred move.
+2. **Mark it unclear** (`[غير واضح]` / the target-language equivalent)
+   and flag it for the user.
+3. **Ask the user what is said there.**
+
+You may **not** write what the line "probably" was, however obvious it
+seems from the surrounding dialogue. That is fabrication, and it is the
+single worst failure this skill can produce: invented dialogue comes out
+*more* fluent than real dialogue, so it survives every review by anyone
+who doesn't have the audio open. Reading well is not evidence.
+`references/asr_accuracy_guide.md` has the full reasoning and a real
+worked example of this going wrong.
+
+Resolve the queue against the audio:
+
+```bash
+python3 scripts/retranscribe_spans.py work/review_queue.json --out work/candidates.json
+# then set "chosen" per span (copy a candidate verbatim, or "" for unclear)
+python3 scripts/retranscribe_spans.py --finalize work/candidates.json source.srt \
+    --evidence work/evidence.json
+```
+
+Each span is re-decoded several times under different conditions. Where
+independent decodes agree, that's strong evidence. Where they scatter,
+the audio genuinely doesn't support a confident reading and the honest
+answer is "unclear" — not the nicest-sounding option. `--finalize`
+refuses any `chosen` value that no decode actually produced.
+
+Then prove the transcript still matches what was heard:
+
+```bash
+python3 scripts/check_transcript_fidelity.py source.raw.srt source.srt \
+    --evidence work/evidence.json --report work/drift.json
+```
+
+This must exit 0 before you translate anything. It fails on undocumented
+rewriting and on cues that silently vanished. If it fails, fix the
+transcript — do not raise the thresholds to make it pass.
+
+Tell the user, in the Step 5 summary, how many cues were re-transcribed
+and how many are marked unclear. Unclear cues are a normal, honest
+outcome on hard audio; hiding them is not.
 
 ## Step 2: translate — the virtual expert team
 
@@ -117,6 +222,15 @@ one whenever a line isn't a close literal translation, so the QA pass
 (Step 3) can tell "adapted on purpose" from "meaning drifted by
 accident."
 
+**Do not edit the source text during translation.** If a source cue
+still looks wrong at this stage, that is a Step 1.5 problem: send it
+back through `retranscribe_spans.py`, or mark it unclear. Quietly
+"fixing" the Arabic (or any source language) while writing the target
+line puts an unverified guess into the file at the one point where
+nothing is checking the source any more — this is exactly how a past run
+shipped a transcript with 81% of its cues altered away from what the
+audio contained.
+
 ```bash
 python3 scripts/apply_translation.py source.srt translations.json target.srt
 ```
@@ -149,6 +263,18 @@ the translation), otherwise switch mindset and do it yourself as a
 skeptical editor. Report the outcome to the user either way (what was
 checked, what if anything was flagged and fixed).
 
+**Transcript fidelity (the guard against silent source edits)** — cheap,
+and it catches the one failure the other two checks structurally cannot:
+
+```bash
+python3 scripts/check_transcript_fidelity.py source.raw.srt source.srt \
+    --evidence work/evidence.json
+```
+
+Run it again here even though Step 1.5 already did: Step 2's four passes
+are exactly where a source cue tends to get quietly "corrected" in
+passing. A non-zero exit means the source drifted after it was verified.
+
 Loop back to Step 2 for any flagged cue, then re-run `validate_srt.py`,
 before moving on.
 
@@ -176,9 +302,14 @@ silently truncated the file is a real, catchable failure mode).
 ## Step 5: hand it over
 
 Deliver the final video file and a short summary: how source subtitles
-were obtained (found vs. transcribed), how many cues, which cues (if
-any) got non-literal cultural adaptations worth mentioning, and the
-`validate_srt.py` / review-pass outcome. Don't dump the full dialogue
+were obtained (found vs. transcribed, and with which model/dialect), how
+many cues, **how many cues were re-transcribed from audio and how many
+remain marked unclear**, which cues (if any) got non-literal cultural
+adaptations worth mentioning, and the `validate_srt.py` /
+`check_transcript_fidelity.py` / review-pass outcomes. Report unclear
+cues plainly — on hard audio they are the honest result, and a run that
+claims none on difficult dialect audio is more suspicious than one that
+reports thirty. Don't dump the full dialogue
 into the chat — the summary is what's useful, the file speaks for
 itself.
 
