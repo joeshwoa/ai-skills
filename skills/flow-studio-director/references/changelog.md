@@ -1,5 +1,25 @@
 # Changelog — flow-studio-director
 
+## 2026-09-23 — v2 (client script to finished film)
+
+- Five gates (script → cast → storyboard → rough_cut → final) enforced by
+  `project_state.py` on keyframes, generation, takes and approvals; `--by`
+  required, approvals carry the user's words; reopening cascades;
+  `sync-plan` / `cast-remove` keep state in step with the plan.
+- Characters before scenes: a character is built only through `cast-set`
+  with real files (sheet, expressions, consistency test, Flow Character,
+  voice); silent on-screen characters are found and cast.
+- `script_breakdown.py`: docx/pdf/txt/fountain; scene headings with colons
+  and on two lines; timecodes, notes and clock times never become
+  characters; Arabic name-on-its-own-line cues; named V.O. keeps its
+  speaker; similar names are asked, never merged (`--alias` after the
+  answer).
+- `animatic.py` storyboard, `edit_clip.py` mechanical fixes, transitions
+  (post, in-camera, J/L sound cuts without double audio), `captions.py`
+  timed from measured speech in the real clips, `selftest.py`
+  (38 checks, incl. regressions for every bug found in two reviews).
+
+
 ## 2026-09-23 — v1
 
 Built from the user's "Flow Studio Director" Gemini Gem instructions, used

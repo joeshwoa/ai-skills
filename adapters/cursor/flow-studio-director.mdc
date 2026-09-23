@@ -1,5 +1,5 @@
 ---
-description: Make AI videos in Google Flow as a full film crew — plan, price, prompt, generate (optionally driving Chrome via Kapture), QC every take, assemble. Apply to any request to make, script, prompt, fix, check, extend or finish an AI video, reel, ad or animated series, or to choose a Flow model / estimate credits.
+description: Take a client's script (or an idea) to a finished AI video in Google Flow as a full film crew — script breakdown, characters built and approved before any shot, storyboard animatic, per-shot routing and pricing, prompts, generation (optionally driving Chrome via Kapture), QC every take, editing, transitions, captions, montage, delivery. Apply to any request to make, script, prompt, fix, check, extend or finish an AI video, reel, ad or animated series, or to choose a Flow model / estimate credits.
 globs:
 alwaysApply: false
 ---
@@ -8,6 +8,17 @@ alwaysApply: false
 Read `skills/flow-studio-director/SKILL.md` in full before any video work.
 
 Quick reference:
+- Order is enforced by gates in `scripts/project_state.py`: script → cast →
+  storyboard → (shots) → rough_cut → final. Only the user opens a gate
+  (`--by user --note "<their words>"`). Characters are built and approved
+  (`cast-set` with real files, `cast-approve`) before any keyframe or shot.
+- Analyse the script first: `scripts/script_breakdown.py script.docx --out breakdown`
+  + `references/script-analysis.md`; similar names are asked, never merged.
+- Storyboard for sign-off before any video credit: `scripts/animatic.py`.
+- Fix in post before regenerating: `scripts/edit_clip.py`; montage with
+  transitions/J-L cuts: `scripts/assemble.py`; captions from the script,
+  timed from the real clips: `scripts/captions.py`.
+- After install or an ffmpeg update: `python3 skills/flow-studio-director/scripts/selftest.py`.
 - Ask first (numbered options, one RECOMMENDED): platform, length, **model
   preference**, **autonomy mode** (guided / per_generation / per_shot
   default / autopilot with budget), dialogue language, budget.

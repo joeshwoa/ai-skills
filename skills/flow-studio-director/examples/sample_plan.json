@@ -15,9 +15,21 @@
       "mode": "frames_first",
       "resolution": "720p",
       "outputs": 1,
-      "keyframes": {"start": true, "end": false, "model": "nano-banana-2"},
+      "keyframes": {
+        "start": true,
+        "end": false,
+        "model": "nano-banana-2"
+      },
       "continuation": "first_shot",
-      "dialogue": []
+      "dialogue": [],
+      "cast": [
+        "HANA",
+        "OMAR"
+      ],
+      "transition_in": {
+        "type": "fade_black",
+        "duration": 0.6
+      }
     },
     {
       "id": "S02",
@@ -27,14 +39,37 @@
       "mode": "ingredients",
       "resolution": "720p",
       "outputs": 1,
-      "keyframes": {"start": false, "end": false},
-      "ingredients": ["HANA_REF", "HANA_VOICE", "STONE_ROOM_REF"],
+      "keyframes": {
+        "start": false,
+        "end": false
+      },
+      "ingredients": [
+        "HANA_REF",
+        "HANA_VOICE",
+        "STONE_ROOM_REF"
+      ],
       "characters_recurring": true,
       "continuation": "ingredients",
       "dialogue": [
-        {"character": "Hana", "text": "بص يا عمر، ظاهر إيه ع الشاشة؟", "start": 1.0, "end": 3.6},
-        {"character": "Hana", "text": "ليه درجة حرارة الأرض بتعلى؟", "start": 4.4, "end": 7.0}
-      ]
+        {
+          "character": "Hana",
+          "text": "بص يا عمر، ظاهر إيه ع الشاشة؟",
+          "start": 1.0,
+          "end": 3.6
+        },
+        {
+          "character": "Hana",
+          "text": "ليه درجة حرارة الأرض بتعلى؟",
+          "start": 4.4,
+          "end": 7.0
+        }
+      ],
+      "cast": [
+        "HANA"
+      ],
+      "transition_in": {
+        "type": "cut"
+      }
     },
     {
       "id": "S03",
@@ -44,10 +79,19 @@
       "mode": "frames_first_last",
       "resolution": "720p",
       "outputs": 1,
-      "keyframes": {"start": true, "end": true, "model": "nano-banana-pro"},
+      "keyframes": {
+        "start": true,
+        "end": true,
+        "model": "nano-banana-pro"
+      },
       "continuation": "keyframe_chain",
       "ends_on_stillness": true,
-      "dialogue": []
+      "dialogue": [],
+      "cast": [],
+      "transition_in": {
+        "type": "dissolve",
+        "duration": 0.5
+      }
     },
     {
       "id": "S04",
@@ -59,7 +103,29 @@
       "resolution": "720p",
       "outputs": 1,
       "continuation": "extend",
-      "dialogue": []
+      "dialogue": [],
+      "cast": [],
+      "transition_in": {
+        "type": "cut"
+      }
+    }
+  ],
+  "characters": [
+    {
+      "id": "HANA",
+      "name": "Hana",
+      "speaks": true,
+      "flow_character": "Hana",
+      "voice": "HANA_VOICE",
+      "sheet": "chars/hana_sheet.png"
+    },
+    {
+      "id": "OMAR",
+      "name": "Omar",
+      "speaks": true,
+      "flow_character": "Omar",
+      "voice": "OMAR_VOICE",
+      "sheet": "chars/omar_sheet.png"
     }
   ]
 }

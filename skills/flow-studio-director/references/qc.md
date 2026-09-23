@@ -83,3 +83,10 @@ Generate): `project_state.py log-take <shot> --file ... --verdict PASS|CHECK|FAI
 
 Always try the cheapest retry first: fix the prompt, test at 360p or 4 s,
 then pay for the full take.
+
+## Whole-film QC
+
+Clip QC is not film QC. Before delivery, run the final checklist in
+`client-workflow.md` on the assembled master: every line present and
+right, captions word-for-word, continuity across cuts, transitions as
+approved, brand, loudness, deliverables, rights.

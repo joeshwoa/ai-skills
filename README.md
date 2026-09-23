@@ -97,7 +97,10 @@ adapter around.
   server the same one-shot way — verified end-to-end against the real
   server (builds clean from a fresh clone).
 - **[flow-studio-director](skills/flow-studio-director/SKILL.md)** — a
-  full AI film crew for Google Flow: plans and prices every shot against
+  full AI film crew for Google Flow that takes a client's script to the
+  finished video through five signed gates (script → cast → storyboard →
+  rough cut → final): script breakdown, characters built before any shot,
+  animatic, editing/transitions/captions/montage; plans and prices every shot against
   the verified model/credit matrix, writes dense cinematic prompts, keeps
   character dialogue native to the video model (saved Flow voices, no
   dubbing), QCs every take automatically (`qc_clip.py`), assembles with

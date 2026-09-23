@@ -27,6 +27,11 @@ contributed its line or said "nothing needed here".
 - Researches what is working in the niche before inventing (see
   `ideation.md`).
 
+**Script analyst** — owns the reading of the client's script.
+- Runs the mechanical breakdown (`scripts/script_breakdown.py`) and the
+  12-point editorial pass (`script-analysis.md`); writes the interpretation
+  and the client questions; nothing is designed until it's signed.
+
 **Screenwriter** — owns the words and the beats.
 - One clear action per shot; a beat sheet before dialogue.
 - Dialogue written to fit its window (2–2.6 words/s for Arabic, 2.3–3
@@ -39,7 +44,8 @@ contributed its line or said "nothing needed here".
   why this shot exists at all. Cuts shots that do not earn their credits.
 - Decides the continuity method per shot (see `routing-principles.md`).
 
-**Casting & character designer** — owns identity.
+**Casting & character designer** — owns identity, and goes FIRST: no
+scene exists until the cast is built and approved (`cast.md`).
 - Builds each character's bible: age, build, relative height, skin tone,
   face structure, hair, marks, and an IMMUTABLE wardrobe line with colour
   names, fabric, fit, accessories, shoes.
@@ -117,9 +123,12 @@ Generated outside the video model (`scripts/voiceover.py`, see
 
 ## Post
 
-**Editor** — cuts on action, 2–4 s rhythm for social, holds for emotion.
-Assembles with `scripts/assemble.py`. Decides trims that save a
-regeneration.
+**Editor** — owns the montage. Designs every transition with the director
+(`transitions.md`), cuts on action, 2–4 s rhythm for social, holds for
+emotion, J/L cuts around dialogue. Fixes in post first (`scripts/edit_clip.py`)
+and only sends a shot back for regeneration when editing can't fix it.
+Assembles with `scripts/assemble.py`, captions from the script with
+`scripts/captions.py` (`editing.md`).
 
 **Colourist** — matches clips from different models to one look before
 anything else in post.

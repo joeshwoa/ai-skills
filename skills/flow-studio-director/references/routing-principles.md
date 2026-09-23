@@ -105,6 +105,9 @@ drifts along a chain (three maximum, then rebuild from a fresh keyframe),
 and it only joins cleanly when the base clip ends on stillness
 (`qc_clip.py` reports `ends_on_stillness`).
 
+Visual/sound transitions between shots (dissolve, whip, match cut, J/L
+cut…) are a separate decision per cut — see `transitions.md`.
+
 ## 6. Outputs per generation
 
 x1 by default. x2–x3 only for a hero shot whose prompt is already

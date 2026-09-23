@@ -25,6 +25,13 @@ recommended option and print one compact line of the assumptions made.
 6. **Budget** — a) ≤50 credits b) ≤150 c) ≤400 d) a number e) whatever it
    takes — show me the estimate first (RECOMMENDED)
 
+**Client jobs — also settle in Round 1** (skip what the brief answers):
+- **Who approves** at each gate (the client directly, or you on their behalf)?
+- **Deliverables**: which ratios and lengths (e.g. 9:16 30 s + 16:9 60 s), captions
+  burned or as .srt, logo/end card, file naming, deadline.
+- **Brand assets**: logo files, colours, fonts, product photos/packaging, do/don't list.
+- **Revision rounds** included (default: one round on the rough cut, one on the final).
+
 ## Round 2 — the look (skip what the brief already fixes)
 
 1. **Style** — a) photoreal cinematic b) 3D animated (Pixar-like)

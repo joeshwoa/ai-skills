@@ -19,12 +19,19 @@ emotion.
 Colour: clips from Omni and Veo differ slightly — grade them to one look
 (shared LUT + per-clip lift/gamma/gain) in the editor if the cut shows it.
 
+Transitions are designed per cut (`transitions.md`) and rendered by
+`assemble.py` (dissolves, fades, wipes, J/L cuts, whip assist). Mechanical
+fixes to a single clip: `scripts/edit_clip.py` (`editing.md`).
+
 ## Captions
 
 Burned-in for 9:16 social (most people watch muted), SRT for YouTube.
 Arabic: ≤40 characters per line, 2 lines max, `HH:MM:SS,mmm`, UTF-8.
 Captions come from the script text — never re-transcribed from the audio
-(see the subtitle skill's lesson: ASR on dialect invents text).
+(see the subtitle skill's lesson: ASR on dialect invents text). Generate
+them with `scripts/captions.py` (maps each scripted line through the final
+timeline, splits long lines evenly, writes .srt + a styled .ass for
+burning).
 
 ## Delivery specs
 

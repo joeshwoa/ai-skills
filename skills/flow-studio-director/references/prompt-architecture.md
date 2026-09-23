@@ -35,6 +35,14 @@ adjectives.
    paragraph.
 10. **If it will be extended, it ends on a hold**: "the final second is a
     still hold, no motion".
+11. **In-camera transitions go in both prompts.** A whip pan: the outgoing
+    shot's last 0.4 s whips hard to one side with motion blur; the incoming
+    shot opens mid-whip from the same side. A match cut: describe the
+    matching shape/position in the incoming start keyframe. A morph: frames
+    mode, start = previous last frame (`transitions.md`).
+12. **Only approved characters, by their lock.** Every person in a prompt
+    is an approved cast member pasted from their lock string, or an
+    anonymous background figure described generically.
 
 ## Arabic (and any dialect) on screen
 

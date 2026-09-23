@@ -15,6 +15,24 @@ Read by `scripts/shot_plan.py` (validation + pricing) and
 | `audio_mode` | `native` (default: dialogue + SFX from the video model) |
 | `voiceover` | `null`, or `{"provider": "gemini"|"elevenlabs"|"user", "voice": "Charon"}` |
 
+## Characters (required whenever any shot has people or dialogue)
+
+```json
+"characters": [
+  {"id": "HANA", "name": "Hana", "speaks": true, "flow_character": "Hana",
+   "voice": "HANA_VOICE", "sheet": "chars/hana_sheet.png"}
+]
+```
+| Field | Meaning |
+|---|---|
+| `id` | short upper-case id used in `cast` (names are accepted too) |
+| `name` | as written in the script — dialogue `character` must match it |
+| `speaks` | false for silent characters (no voice needed) |
+| `flow_character` / `voice` / `sheet` | the built assets; `project_state.py` tracks their approval |
+
+`voiceover_lines` (written by the breakdown) lists narration with its scene;
+narration is generated off-screen (`voiceover.py`), never inside a shot.
+
 ## Per shot
 
 | Field | Meaning | Checked by |
@@ -36,3 +54,8 @@ Read by `scripts/shot_plan.py` (validation + pricing) and
 | `characters_recurring` | `true` if a character who appears in other shots is in this one | warning on text-only routing (identity drift) |
 | `large_move` | `true` if the subject/camera travels far between first and last frame | warning on first+last (morphing risk) |
 | `draft_first` | `true` to price a 360p Omni test take before the real one | adds the draft cost |
+| `cast` | character ids/names visible in this shot | must exist in `characters`; `project_state.py` blocks the shot until each is approved |
+| `dialogue[].offscreen` | the speaker is heard but not seen (O.S.) | not required in `cast` |
+| `transition_in` | `{"type": ..., "duration": s, "audio_offset": s}` — see `transitions.md` | type known; post transitions ≤ half the shorter clip; first shot only cut/fade; dialogue under a transition warned; match_cut needs a start keyframe; morph needs frames mode |
+| `scene` | scene number from the breakdown | — |
+| `routing_reviewed` | `false` on skeleton shots until the director routes them | warning while false |

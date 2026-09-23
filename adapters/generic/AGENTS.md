@@ -53,11 +53,14 @@ below for what that feeds.
   request to scaffold a new app/project, start a Flutter project, or
   generate the 3D spatial canvas module.
 - **flow-studio-director** (`skills/flow-studio-director/SKILL.md`) — a
-  full AI film crew for Google Flow (Veo 3.1 + Omni Flash + Nano Banana):
-  ideation, script, character/voice bible, per-shot routing and credit
-  pricing, dense cinematic prompts, native in-clip dialogue, QC of every
-  take, assembly and delivery; can drive Flow in Chrome (Kapture) in four
-  autonomy modes. Trigger: any request to make, plan, prompt, fix, check,
+  full AI film crew for Google Flow (Veo 3.1 + Omni Flash + Nano Banana)
+  that takes a client's script to the finished video: script breakdown
+  and analysis, characters and voices built and approved before any shot,
+  storyboard animatic, per-shot routing and credit pricing, dense
+  cinematic prompts, native in-clip dialogue, QC of every take, editing
+  (fix in post first), transitions, captions from the script, montage and
+  delivery — order enforced by five gates the user signs; can drive Flow in
+  Chrome (Kapture) in four autonomy modes. Trigger: any request to make, plan, prompt, fix, check,
   extend or finish an AI video/reel/ad/short/animated series, or which Flow
   model to use / what it will cost.
 - **skill-router** (`skills/skill-router/SKILL.md`) — see "Read this

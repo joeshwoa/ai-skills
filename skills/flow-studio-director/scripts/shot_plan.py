@@ -67,6 +67,16 @@ MIN_LINE_WINDOW = 1.2          # seconds; shorter than this never sounds natural
 MAX_EXTEND_CHAIN = 3           # quality drifts along an extend chain
 DRAFT_RATIO_ESTIMATE = 7 / 15  # Omni 360p vs 720p at 10s — the only verified 360p point
 
+# Transitions. POST ones are made in the edit (assemble.py); IN_CAMERA ones
+# have to be designed into the generation (keyframes/prompts) — they cannot
+# be added afterwards; AUDIO ones shift sound across the cut.
+POST_TRANSITIONS = {"dissolve", "fade_black", "fade_white", "wipe_left", "wipe_right", "wipe_up",
+                    "wipe_down", "slide_left", "slide_right", "slide_up", "slide_down", "zoom_in",
+                    "circle_open", "circle_close", "whip", "pixelize", "radial"}
+IN_CAMERA_TRANSITIONS = {"match_cut", "morph", "whip_pan"}
+AUDIO_TRANSITIONS = {"j_cut", "l_cut"}
+ALL_TRANSITIONS = {"cut"} | POST_TRANSITIONS | IN_CAMERA_TRANSITIONS | AUDIO_TRANSITIONS | {"wipe", "slide"}
+
 
 def load_caps(path: str) -> dict:
     with open(path, encoding="utf-8") as f:
@@ -148,6 +158,24 @@ def validate(plan: dict, caps: dict) -> dict:
 
     by_id = {s.get("id"): s for s in shots}
     total = 0.0
+
+    # ---- cast: characters must exist (and be built) before shots use them
+    chars = plan.get("characters") or []
+    known = {}
+    for c in chars:
+        known[str(c.get("id")).lower()] = c
+        known[str(c.get("name", "")).strip().lower()] = c
+    uses_people = any(s.get("cast") or s.get("dialogue") for s in shots)
+    if uses_people and not chars:
+        errors.append("plan has shots with people/dialogue but no 'characters' section — the cast is "
+                      "built first (character sheet, Flow Character, voice), then the shots")
+    for c in chars:
+        if c.get("speaks", True) and not c.get("voice"):
+            warnings.append(f"character {c.get('id')} speaks but has no voice asset name")
+    unrouted = [s.get("id") for s in shots if s.get("routing_reviewed") is False]
+    if unrouted:
+        warnings.append(f"{len(unrouted)} shot(s) still carry skeleton defaults (routing_reviewed=false): "
+                        f"{unrouted[:8]}{'…' if len(unrouted) > 8 else ''} — route each one before generating")
     any_unverified = False
     extend_chain = 0
 
@@ -249,6 +277,55 @@ def validate(plan: dict, caps: dict) -> dict:
             W(f"{len(speakers)} speakers in one clip — models often swap voices; "
               f"keep to 1-2 speakers per shot")
 
+        # --- cast -------------------------------------------------------------
+        cast = [str(x).strip().lower() for x in (s.get("cast") or [])]
+        for x in cast:
+            if chars and x not in known:
+                E(f"cast member {x!r} is not in the plan's characters")
+        for ln in lines:
+            who = str(ln.get("character", "")).strip().lower()
+            if chars and who not in known:
+                E(f"speaker {ln.get('character')!r} is not a defined character")
+            elif chars and cast and not ln.get("offscreen"):
+                c = known.get(who)
+                if c and str(c.get("id")).lower() not in cast and str(c.get("name", "")).lower() not in cast:
+                    W(f"{ln.get('character')} speaks on-screen but is not in this shot's cast")
+
+        # --- transition into this shot -------------------------------------
+        tr = s.get("transition_in") or {}
+        ttype = (tr.get("type") or "cut") if isinstance(tr, dict) else str(tr)
+        tdur = float(tr.get("duration", 0.5)) if isinstance(tr, dict) else 0.5
+        if ttype not in ALL_TRANSITIONS:
+            E(f"unknown transition {ttype!r}")
+        elif idx == 0 and ttype not in ("cut", "fade_black", "fade_white"):
+            E(f"first shot can only open with cut / fade_black / fade_white, not {ttype}")
+        elif ttype in POST_TRANSITIONS or ttype in ("wipe", "slide"):
+            prev = shots[idx - 1] if idx > 0 else None
+            limit = min(dur or 0, (prev or {}).get("duration") or dur or 0) / 2 if prev else (dur or 0) / 2
+            if tdur > limit:
+                E(f"{ttype} of {tdur}s is longer than half the shorter clip ({limit:g}s)")
+            if lines and min(l.get("start", 99) for l in lines) < tdur:
+                W(f"dialogue starts under the {ttype} ({tdur}s) — viewers lose the first words")
+            if prev and prev.get("dialogue") and prev.get("duration"):
+                last_end = max(l.get("end", 0) for l in prev["dialogue"])
+                if last_end > prev["duration"] - tdur:
+                    W(f"{prev.get('id')}'s last line ends under the {ttype} into {sid}")
+        elif ttype == "match_cut":
+            if not (s.get("keyframes") or {}).get("start"):
+                E("match_cut needs a start keyframe composed to match the previous shot's last frame")
+        elif ttype == "morph":
+            if mode not in ("frames_first", "frames_first_last"):
+                E("morph needs frames mode: start frame = previous shot's last frame")
+            if s.get("continuation") != "keyframe_chain":
+                W("morph should be continuation=keyframe_chain")
+        elif ttype == "whip_pan":
+            W("whip_pan is in-camera: the previous shot's prompt must END in a fast whip, this one's "
+              "must START in one — check both prompts (assemble.py can add a blur assist)")
+        elif ttype in AUDIO_TRANSITIONS:
+            off = float(tr.get("audio_offset", 0.5)) if isinstance(tr, dict) else 0.5
+            if not 0.15 <= off <= 2.0:
+                W(f"{ttype} audio_offset {off}s is unusual (0.2–1.5s is typical)")
+
         # --- cost --------------------------------------------------------
         cost, verified = (None, False)
         if mode == "extend":
@@ -268,11 +345,29 @@ def validate(plan: dict, caps: dict) -> dict:
             total += cost + draft
         any_unverified |= not verified
         rows.append({
-            "id": sid, "beat": s.get("beat", ""), "model": model, "mode": mode,
+            "id": sid, "beat": s.get("beat", ""), "model": model, "mode": mode, "transition": ttype,
             "duration": dur, "resolution": res, "outputs": outs,
             "cost": cost, "draft_cost": draft or None, "verified": verified,
             "keyframes": kf, "alternative": cheapest_alternative(caps, s) if mode != "extend" else None,
         })
+
+    # runtime of the cut (on-screen time after trims and transition overlaps)
+    runtime = 0.0
+    for s in shots:
+        if s.get("mode") == "extend" and not s.get("onscreen_seconds"):
+            runtime += 4.0
+            continue
+        runtime += float(s.get("onscreen_seconds") or max(0.0, (s.get("duration") or 0) - 0.4))
+        tr = s.get("transition_in") or {}
+        if isinstance(tr, dict) and tr.get("type") not in (None, "cut", "j_cut", "l_cut", "match_cut", "morph"):
+            runtime -= float(tr.get("duration", 0.5)) if tr.get("type") != "fade_black" or s is not shots[0] else 0
+    target = plan.get("target_seconds")
+    if target:
+        if runtime > target * 1.1:
+            warnings.append(f"estimated cut runtime {runtime:.1f}s is over the {target:g}s target — "
+                            f"merge or drop shots, tighten lines (never speed up dialogue)")
+        elif runtime < target * 0.8:
+            warnings.append(f"estimated cut runtime {runtime:.1f}s is well under the {target:g}s target")
 
     budget = plan.get("budget_credits")
     over = budget is not None and total > budget
@@ -281,6 +376,7 @@ def validate(plan: dict, caps: dict) -> dict:
     return {
         "errors": errors, "warnings": warnings, "rows": rows,
         "total_credits": round(total, 1), "budget": budget, "over_budget": over,
+        "runtime_seconds": round(runtime, 1), "target_seconds": target,
         "has_estimates": any_unverified,
         "retake_reserve_suggested": round(total * 0.3, 1),
     }
@@ -290,7 +386,7 @@ def print_report(plan: dict, r: dict) -> None:
     print(f"PROJECT: {plan.get('project', '?')}  platform={plan.get('platform')}  "
           f"ratio={plan.get('aspect_ratio')}  language={plan.get('language')}")
     print()
-    hdr = f"{'SHOT':6} {'MODEL':16} {'MODE':18} {'DUR':>4} {'RES':5} {'xN':>3} {'CREDITS':>8}  NOTE"
+    hdr = f"{'SHOT':6} {'IN':10} {'MODEL':16} {'MODE':18} {'DUR':>4} {'RES':5} {'xN':>3} {'CREDITS':>8}  NOTE"
     print(hdr)
     print("-" * len(hdr))
     for row in r["rows"]:
@@ -300,7 +396,7 @@ def print_report(plan: dict, r: dict) -> None:
             cs += f"+{row['draft_cost']:g}d"
         note = row.get("alternative") or ""
         note = f"cheaper: {note}" if note else ""
-        print(f"{row['id']:6} {str(row.get('model')):16} {str(row.get('mode')):18} "
+        print(f"{row['id']:6} {str(row.get('transition', 'cut')):10} {str(row.get('model')):16} {str(row.get('mode')):18} "
               f"{str(row.get('duration')):>4} {str(row.get('resolution')):5} "
               f"{str(row.get('outputs')):>3} {cs:>8}  {note}")
     print("-" * len(hdr))
@@ -308,6 +404,8 @@ def print_report(plan: dict, r: dict) -> None:
     print(f"TOTAL: {r['total_credits']:g} credits"
           + (f" / budget {b}" if b is not None else "")
           + f"   (+ keep ~{r['retake_reserve_suggested']:g} for retakes)")
+    print(f"Estimated runtime of the cut: {r['runtime_seconds']:g}s"
+          + (f" (target {r['target_seconds']:g}s)" if r.get('target_seconds') else ""))
     print("Keyframe images on Nano Banana cost 0 credits on the verified plan.")
     if r["has_estimates"]:
         print("* = estimate or unverified combination. Read the live cost in Flow before generating.")

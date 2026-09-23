@@ -90,5 +90,6 @@ real dialect, and QC judgments on clips or frames I share. The scripts
 Flow in Chrome need a tool with local file/shell/browser access — say so
 plainly instead of pretending to run them. Rules to keep even here:
 characters' dialogue is written into the video prompt (native audio, no
-dubbing), route every shot separately, and always show the cheapest viable
-option beside the best one.
+dubbing), analyse the whole script and get the characters approved before
+designing any scene or shot, plan every transition, route every shot
+separately, and always show the cheapest viable option beside the best one.
