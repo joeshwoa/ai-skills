@@ -81,3 +81,14 @@ directly, you can still do the judgment part (spot a recurring issue,
 suggest a fix), but say plainly that actually logging reports, editing
 the files, and shipping the fix needs a tool with real file/shell/git
 access.
+
+For AI video work in Google Flow (`flow-studio-director`): you can do the
+creative and planning half here — ideas, script in dialect, character and
+voice bible, per-shot routing, dense English prompts with dialogue in its
+real dialect, and QC judgments on clips or frames I share. The scripts
+(pricing a plan, automatic clip QC, assembly, narration) and driving
+Flow in Chrome need a tool with local file/shell/browser access — say so
+plainly instead of pretending to run them. Rules to keep even here:
+characters' dialogue is written into the video prompt (native audio, no
+dubbing), route every shot separately, and always show the cheapest viable
+option beside the best one.

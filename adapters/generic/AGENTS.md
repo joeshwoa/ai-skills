@@ -52,6 +52,14 @@ below for what that feeds.
   real `devuniverse-mcp` server the same one-shot way. Trigger: any
   request to scaffold a new app/project, start a Flutter project, or
   generate the 3D spatial canvas module.
+- **flow-studio-director** (`skills/flow-studio-director/SKILL.md`) — a
+  full AI film crew for Google Flow (Veo 3.1 + Omni Flash + Nano Banana):
+  ideation, script, character/voice bible, per-shot routing and credit
+  pricing, dense cinematic prompts, native in-clip dialogue, QC of every
+  take, assembly and delivery; can drive Flow in Chrome (Kapture) in four
+  autonomy modes. Trigger: any request to make, plan, prompt, fix, check,
+  extend or finish an AI video/reel/ad/short/animated series, or which Flow
+  model to use / what it will cost.
 - **skill-router** (`skills/skill-router/SKILL.md`) — see "Read this
   first, every time" above; also documents how to keep
   `skills/manifest.json` in sync and the full search/build/install

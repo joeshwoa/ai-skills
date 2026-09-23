@@ -96,6 +96,15 @@ adapter around.
   real [devuniverse-mcp](https://github.com/joeshwoa/devuniverse-mcp)
   server the same one-shot way — verified end-to-end against the real
   server (builds clean from a fresh clone).
+- **[flow-studio-director](skills/flow-studio-director/SKILL.md)** — a
+  full AI film crew for Google Flow: plans and prices every shot against
+  the verified model/credit matrix, writes dense cinematic prompts, keeps
+  character dialogue native to the video model (saved Flow voices, no
+  dubbing), QCs every take automatically (`qc_clip.py`), assembles with
+  loudness normalisation, and can drive Flow in Chrome via Kapture in four
+  autonomy modes enforced by `project_state.py` (guided, per-generation,
+  per-shot, budgeted autopilot). Platform facts are isolated under
+  `references/platforms/` so other video platforms are a new folder.
 - **[skill-router](skills/skill-router/SKILL.md)** — the dispatcher: read
   first, always. Auto-selects an installed skill via
   `skills/manifest.json`, and when nothing installed matches, searches

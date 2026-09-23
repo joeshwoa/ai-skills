@@ -1,11 +1,18 @@
 {
   "generated_by": "skills/skill-router/scripts/build_manifest.py",
-  "skill_count": 7,
+  "skill_count": 8,
   "skills": [
     {
       "name": "devuniverse",
       "path": "skills/devuniverse",
       "description": "Scaffold a production-grade Flutter + Supabase/Firebase/Node project via a 27-persona virtual engineering agency that debates the stack, generates a 3D deep-scroll spatial UI module, syncs Figma wireframes, runs a compliance/security audit, and drafts Terms/Privacy docs — by running the real devuniverse-mcp server as a one-shot local command, no MCP client registration required. Use for \"scaffold a new app\", \"start a Flutter project\", \"generate the 3D spatial canvas module\", or anything about the DevUniverse agency.",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "flow-studio-director",
+      "path": "skills/flow-studio-director",
+      "description": "Full AI film crew for making videos in Google Flow (Veo 3.1 + Omni Flash + Nano Banana) from idea to delivered file — concepts, script, character and voice bible, per-shot routing (image or not, frames vs ingredients, model, length, resolution, credits), dense cinematic prompts, native in-clip dialogue and sound, automatic QC of every output, assembly, voice-over and export. Can drive Flow itself in Chrome (Kapture) in four autonomy modes, from \"I write, you click\" to budgeted autopilot. Use whenever the user wants to make, plan, script, prompt, fix, check, edit, extend or finish an AI video, reel, ad, short film, explainer or animated series — in Google Flow or when no platform is named — or asks which Flow model/mode to use or what a video will cost.",
       "has_scripts": true,
       "has_references": true
     },

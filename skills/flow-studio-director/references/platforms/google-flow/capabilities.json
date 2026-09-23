@@ -1,0 +1,235 @@
+{
+  "platform": "google-flow",
+  "verified_on": "2026-09-23",
+  "verified_plan": "Google AI Pro",
+  "verified_how": "Read live from the Flow settings panel (credit-cost label) with nothing generated, plus Google's 'Flow models & supported features' help page. Costs and options change: always read the live cost in Flow before generating and prefer it over this file.",
+  "credits_note": "Third-party trackers (Sep 2026) report ~1,000 monthly AI credits on Pro plus 50 daily; confirm in the account menu. Every figure below is per generation, per output (x2 roughly doubles it).",
+  "aspect_ratios": {
+    "video": [
+      "16:9",
+      "9:16"
+    ],
+    "image": [
+      "16:9",
+      "4:3",
+      "1:1",
+      "3:4",
+      "9:16"
+    ]
+  },
+  "outputs_per_generation": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "video_models": {
+    "omni-1.1-flash": {
+      "label_in_ui": "Omni 1.1 Flash",
+      "native_audio": true,
+      "modes": [
+        "text",
+        "frames_first",
+        "frames_first_last",
+        "ingredients",
+        "video_edit"
+      ],
+      "durations": [
+        4,
+        6,
+        8,
+        10
+      ],
+      "resolutions": [
+        "720p",
+        "360p"
+      ],
+      "extend": false,
+      "ingredients_durations": [
+        4,
+        6,
+        8,
+        10
+      ],
+      "voice_assets": "Flow voice assets (preset Gemini voices + custom voices) appear in the ingredient picker; confirm the model accepts them in the UI before relying on it",
+      "edit_max_seconds": 10,
+      "cost": {
+        "720p": {
+          "4": 7,
+          "6": 10,
+          "8": 12,
+          "10": 15
+        },
+        "360p": {
+          "10": 7
+        }
+      },
+      "cost_verified": {
+        "720p": [
+          4,
+          6,
+          8,
+          10
+        ],
+        "360p": [
+          10
+        ]
+      },
+      "strengths": "cheapest per second, 10s clips, video-to-video edits, ingredients at every length, best identity carry-over with reference images",
+      "weak_spots": "no extend yet; 360p only suitable for drafts"
+    },
+    "veo-3.1-lite": {
+      "label_in_ui": "Veo 3.1 - Lite",
+      "native_audio": true,
+      "modes": [
+        "text",
+        "frames_first",
+        "frames_first_last",
+        "ingredients"
+      ],
+      "durations": [
+        8
+      ],
+      "durations_note": "Google's help page lists 4/6/8s for text and frames; the live Pro UI on 2026-09-23 showed no duration picker (8s fixed) in both Frames and Ingredients modes. Read the panel.",
+      "resolutions": [
+        "720p"
+      ],
+      "extend": true,
+      "extend_note": "Extend works on 8s Veo clips and runs on Lite. Its price and whether Flow returns only the new seconds or the combined clip were NOT observed (no generation was run) — read the live cost and check the returned length on first use.",
+      "cost": {
+        "720p": {
+          "8": 10
+        }
+      },
+      "cost_verified": {
+        "720p": [
+          8
+        ]
+      },
+      "strengths": "cheap Veo motion, the only extend path",
+      "weak_spots": "lower fidelity than Fast/Quality",
+      "voice_assets": false,
+      "extend_cost_verified": false,
+      "voice_assets_note": "Not confirmed in the UI with this model selected — treated as unsupported until seen working."
+    },
+    "veo-3.1-fast": {
+      "label_in_ui": "Veo 3.1 - Fast",
+      "native_audio": true,
+      "modes": [
+        "text",
+        "frames_first",
+        "frames_first_last",
+        "ingredients"
+      ],
+      "durations": [
+        8
+      ],
+      "durations_note": "8s was the only option shown on Pro in Frames mode; read the panel.",
+      "resolutions": [
+        "720p"
+      ],
+      "extend": false,
+      "cost": {
+        "720p": {
+          "8": 20
+        }
+      },
+      "cost_verified": {
+        "720p": [
+          8
+        ]
+      },
+      "strengths": "production-quality motion and physics at moderate cost",
+      "weak_spots": "no extend, no video edit",
+      "voice_assets": false,
+      "voice_assets_note": "Not confirmed in the UI with this model selected — treated as unsupported until seen working."
+    },
+    "veo-3.1-quality": {
+      "label_in_ui": "Veo 3.1 - Quality",
+      "native_audio": true,
+      "modes": [
+        "text",
+        "frames_first",
+        "frames_first_last"
+      ],
+      "durations": [
+        8
+      ],
+      "resolutions": [
+        "720p"
+      ],
+      "extend": false,
+      "cost": {
+        "720p": {
+          "8": 100
+        }
+      },
+      "cost_verified": {
+        "720p": [
+          8
+        ]
+      },
+      "strengths": "highest fidelity; hero shots",
+      "weak_spots": "5x Fast's price, no ingredients, no extend, no edit",
+      "voice_assets": false,
+      "voice_assets_note": "Not confirmed in the UI with this model selected — treated as unsupported until seen working."
+    }
+  },
+  "image_models": {
+    "nano-banana-2": {
+      "label_in_ui": "Nano Banana 2",
+      "cost": 0,
+      "use": "default keyframes, character sheets, most edits"
+    },
+    "nano-banana-pro": {
+      "label_in_ui": "Nano Banana Pro",
+      "cost": 0,
+      "use": "hero keyframes, fine detail, any legible text in frame"
+    },
+    "nano-banana-2-lite": {
+      "label_in_ui": "Nano Banana 2 Lite",
+      "cost": 0,
+      "cost_verified": false,
+      "use": "fast drafts and mood exploration"
+    }
+  },
+  "image_cost_note": "Both Nano Banana 2 and Nano Banana Pro showed 0 credits on Pro on 2026-09-23. Keyframes are effectively free, which is why this skill locks composition and identity in images before spending on video.",
+  "voices": {
+    "source": "Flow asset picker > Voices. These are the Gemini TTS prebuilt voices, so Gemini TTS narration can reuse the exact voice a character has in Flow.",
+    "verified_in_ui": {
+      "Achernar": "Female, soft, high pitch",
+      "Achird": "Male, friendly, mid pitch",
+      "Algenib": "Male, gravelly, low pitch",
+      "Algieba": "Male, easy-going, mid-low pitch",
+      "Alnilam": "Male, firm, mid-low pitch",
+      "Aoede": "Female, breezy, mid pitch",
+      "Autonoe": "Female, bright, mid pitch",
+      "Callirrhoe": "Female, easy-going, mid pitch",
+      "Charon": "Male, informative, lower pitch",
+      "Despina": "Female, smooth, mid pitch",
+      "Enceladus": "Male, breathy, lower pitch",
+      "Erinome": "Female, clear, mid pitch",
+      "Fenrir": "Male, excitable, younger pitch"
+    },
+    "from_gemini_tts_docs": {
+      "Gacrux": "Mature",
+      "Iapetus": "Clear",
+      "Kore": "Firm",
+      "Laomedeia": "Upbeat",
+      "Leda": "Youthful",
+      "Orus": "Firm",
+      "Puck": "Upbeat",
+      "Pulcherrima": "Forward",
+      "Rasalgethi": "Informative",
+      "Sadachbia": "Lively",
+      "Sadaltager": "Knowledgeable",
+      "Schedar": "Even",
+      "Sulafat": "Warm",
+      "Umbriel": "Easy-going",
+      "Vindemiatrix": "Gentle",
+      "Zephyr": "Bright",
+      "Zubenelgenubi": "Casual"
+    },
+    "custom_voices": "Built in Flow from a base voice plus a 'performance customization' text (e.g. 'speaking Egyptian Arabic, warm, optimistic'). Custom voices carry a settings badge and a delete button in the picker."
+  }
+}

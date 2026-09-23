@@ -100,6 +100,8 @@ echo "- Cinematic video / design asset / voiceover / music / SFX via OmniCinema 
 echo "  skills/omnicinema/SKILL.md or its AGENTS.md pointer."
 echo "- Scaffold a new app / Flutter project / 3D spatial canvas module -> same, look for"
 echo "  skills/devuniverse/SKILL.md or its AGENTS.md pointer."
+echo "- Make / plan / prompt / fix / check an AI video, reel, ad or animated series, or"
+echo "  choose a Google Flow model / estimate credits -> skills/flow-studio-director/SKILL.md."
 echo "- A skill just failed, or a request to enhance/audit/improve a skill -> look for"
 echo "  skills/skill-enhancer/SKILL.md or its AGENTS.md pointer."
 echo "If none of these skill folders exist in the current project, proceed normally."

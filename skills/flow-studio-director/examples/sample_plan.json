@@ -1,0 +1,65 @@
+{
+  "project": "Hana & Omar — Why is the Earth heating up? (teaser)",
+  "platform": "google-flow",
+  "aspect_ratio": "9:16",
+  "language": "ar-EG",
+  "budget_credits": 120,
+  "audio_mode": "native",
+  "voiceover": null,
+  "shots": [
+    {
+      "id": "S01",
+      "beat": "Establishing: the three glowing portals in the ruined city",
+      "duration": 6,
+      "model": "omni-1.1-flash",
+      "mode": "frames_first",
+      "resolution": "720p",
+      "outputs": 1,
+      "keyframes": {"start": true, "end": false, "model": "nano-banana-2"},
+      "continuation": "first_shot",
+      "dialogue": []
+    },
+    {
+      "id": "S02",
+      "beat": "Hana spots the green screen and asks the question",
+      "duration": 8,
+      "model": "omni-1.1-flash",
+      "mode": "ingredients",
+      "resolution": "720p",
+      "outputs": 1,
+      "keyframes": {"start": false, "end": false},
+      "ingredients": ["HANA_REF", "HANA_VOICE", "STONE_ROOM_REF"],
+      "characters_recurring": true,
+      "continuation": "ingredients",
+      "dialogue": [
+        {"character": "Hana", "text": "بص يا عمر، ظاهر إيه ع الشاشة؟", "start": 1.0, "end": 3.6},
+        {"character": "Hana", "text": "ليه درجة حرارة الأرض بتعلى؟", "start": 4.4, "end": 7.0}
+      ]
+    },
+    {
+      "id": "S03",
+      "beat": "Push-in to the question on the screen, ends on a hold",
+      "duration": 8,
+      "model": "veo-3.1-fast",
+      "mode": "frames_first_last",
+      "resolution": "720p",
+      "outputs": 1,
+      "keyframes": {"start": true, "end": true, "model": "nano-banana-pro"},
+      "continuation": "keyframe_chain",
+      "ends_on_stillness": true,
+      "dialogue": []
+    },
+    {
+      "id": "S04",
+      "beat": "Hold on the question a little longer for the title card",
+      "duration": 8,
+      "model": "veo-3.1-lite",
+      "mode": "extend",
+      "extends": "S03",
+      "resolution": "720p",
+      "outputs": 1,
+      "continuation": "extend",
+      "dialogue": []
+    }
+  ]
+}

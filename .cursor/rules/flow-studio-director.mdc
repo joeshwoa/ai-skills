@@ -1,0 +1,26 @@
+---
+description: Make AI videos in Google Flow as a full film crew — plan, price, prompt, generate (optionally driving Chrome via Kapture), QC every take, assemble. Apply to any request to make, script, prompt, fix, check, extend or finish an AI video, reel, ad or animated series, or to choose a Flow model / estimate credits.
+globs:
+alwaysApply: false
+---
+# Flow Studio Director
+
+Read `skills/flow-studio-director/SKILL.md` in full before any video work.
+
+Quick reference:
+- Ask first (numbered options, one RECOMMENDED): platform, length, **model
+  preference**, **autonomy mode** (guided / per_generation / per_shot
+  default / autopilot with budget), dialogue language, budget.
+- Price the plan: `python3 skills/flow-studio-director/scripts/shot_plan.py plan.json`
+  (fix every ERROR). Read Flow's live cost before every generation.
+- Route every shot individually (image first or not, frames vs
+  ingredients, model, length) — `references/routing-principles.md`.
+- On-screen dialogue is native to the video model with saved Flow voices;
+  no dubbing. External TTS only for an off-screen narrator
+  (`scripts/voiceover.py`).
+- Before every Generate: `scripts/project_state.py can-generate <shot> --credits N`
+  must exit 0; right after it: `start-take`; after QC: `log-take`.
+- QC every take: `scripts/qc_clip.py` + look at the contact sheet +
+  `references/qc.md`. REGENERATE always comes with the corrected prompt.
+- Chrome automation: `references/platforms/google-flow/automation-kapture.md`
+  — never click delete, verify settings + live price before Generate.
