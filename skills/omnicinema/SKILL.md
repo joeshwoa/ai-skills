@@ -1,77 +1,118 @@
 ---
 name: omnicinema
-description: Generate cinematic video (multi-scene screenplay + footage + Remotion render), design assets (logos, vector art, textures, UI mockups), voiceover, music, and SFX — by running the real omnicinema-mcp server as a one-shot local command, with no MCP client registration required. Use for "make a video / short film / trailer", "generate a logo / design asset", "generate voiceover / music / sound effect", or anything about the OmniCinema pipeline.
+description: Make brand and media assets with the user's omnicinema-mcp engine — logos (with reversed + icon variants), vector illustrations, app/web UI mockups, background music in a genre (WAV + editable MIDI), sound effects, voiceover, and short videos from a one-line idea (screenplay → stock footage or storyboard animatic → narration, captions, soundtrack → rendered MP4). Works fully offline and free; stock footage and AI photos/voices/music use the user's own API keys. Use for "make me a logo", "design a mockup of my app screen", "I need background music / a beat / a sound effect", "turn this script into a voiceover", "make a quick promo/animatic/storyboard video", or anything about OmniCinema. For real AI-generated film shots in Google Flow use flow-studio-director instead.
 ---
 
-# OmniCinema (skill form)
+# OmniCinema
 
-This is the real `omnicinema-mcp` server (github.com/joeshwoa/omnicinema-mcp)
-— every capability, unmodified — reached without registering it as an MCP
-server anywhere. `scripts/mcp_cli.mjs` is a small generic MCP stdio client:
-it starts the real server fresh, does the MCP handshake, calls exactly one
-tool, prints the JSON result, and exits. No long-lived server process, no
-editing Claude/Cursor's MCP config — just a shell command, like any other
-skill script. Because it talks nothing but the protocol to the real,
-unmodified server code, there is no duplicated logic to drift out of sync.
+The user's own MCP server (github.com/joeshwoa/omnicinema-mcp), run as a
+one-shot command — no MCP registration. `scripts/mcp_cli.mjs` starts the real
+server, calls one tool, prints the result, exits.
 
-## Workflow
+## What it really makes
 
-1. **First use only — bootstrap it:**
-   ```bash
-   bash skills/omnicinema/scripts/bootstrap.sh
-   ```
-   Clones (or updates) `omnicinema-mcp` into `~/.cache/ai-skills/omnicinema-mcp`
-   and builds it. Safe to re-run any time to pick up upstream changes.
+| Asset | Offline (free, default) | With the user's keys |
+|---|---|---|
+| Logo / vector art / UI mockup | Professional flat SVG + PNG (logos also `-reversed` and `-icon`) | same — no key needed |
+| Photo / texture | a clearly labelled placeholder, **not a photo** | Replicate / Hugging Face image model (`generative: true`, costs quota) |
+| Soundtrack | composed + synthesized stereo WAV (~−14 LUFS) + multi-track MIDI — a good demo, not a studio recording | MusicGen on Replicate/HF |
+| Sound effect | 13 procedural recipes (whoosh, rain, thunder, wind, ocean, impact, riser, click, ding, beep, fire, footsteps, heartbeat) | real CC recordings from Freesound |
+| Voiceover | system TTS (macOS `say`, flite, espeak-ng) — intelligible, robotic | natural voice via `HF_TTS_MODEL` |
+| Video | screenplay + storyboard **animatic** (drawn frames, Ken Burns motion, captions, dissolves, VO, music) rendered to MP4 | real stock b-roll from Pexels/Pixabay/Unsplash (free keys); generative clips via Replicate/fal/HF |
 
-   > **Known upstream issue:** as of the last check, a fresh clone of
-   > omnicinema-mcp fails to build (`Cannot find module '../assets/...'`)
-   > because the repo's own `.gitignore` has a bare `assets/` rule that
-   > also swallows `src/assets/` real source files — they were never
-   > committed. `bootstrap.sh` detects this and prints the exact one-line
-   > fix (anchor the gitignore rule to `/assets/`, then `git add -f
-   > src/assets`) for the repo owner to push upstream. This is a bug in
-   > omnicinema-mcp itself, not in this skill — nothing here needs to
-   > change once it's fixed.
+Say which column the user is getting. Never call an animatic "footage" or a
+placeholder "a photo".
 
-2. **Read `references/tools.md`** for the full tool catalog (every tool's
-   exact name and JSON argument shape, extracted from the real
-   `src/server.ts` — nothing paraphrased or guessed).
+## Setup (once, and after upgrades)
 
-3. **Call a tool:**
-   ```bash
-   bash skills/omnicinema/scripts/call.sh <tool_name> '<json-args>'
-   ```
-   Examples:
-   ```bash
-   bash skills/omnicinema/scripts/call.sh list_providers '{}'
-   bash skills/omnicinema/scripts/call.sh consult_personas '{"assetKind":"logo","subject":"a fox reading a book","style":"minimalist"}'
-   bash skills/omnicinema/scripts/call.sh generate_image '{"assetKind":"logo","subject":"a fox reading a book"}'
-   bash skills/omnicinema/scripts/call.sh run_cinema_pipeline '{"prompt":"a lonely lighthouse keeper watches a storm roll in","style":"noir","sceneCount":4}'
-   ```
-   The result prints as JSON; the human-readable summary is in
-   `.content[0].text`.
+```bash
+bash skills/omnicinema/scripts/bootstrap.sh                 # clone/update + build (Node ≥ 18.17)
+bash skills/omnicinema/scripts/bootstrap.sh --with-render   # make sure the Remotion renderer is installed (usually already is; ffmpeg renders without it)
+bash skills/omnicinema/scripts/bootstrap.sh --check         # installed? which media tools exist?
+```
+Needs `ffmpeg` for audio/video; `rsvg-convert` (librsvg) for PNG exports;
+a TTS engine (`say` on macOS, or espeak-ng/flite) for voiceover.
+Outputs go to `$CINEMA_ROOT` (`assets/`, `projects/`, `output/`). First use
+picks `/Volumes/PortableSSD/omnicinema-mcp` when that drive is mounted, else
+`~/AI-Projects/omnicinema`, and remembers it in
+`~/.config/ai-skills/omnicinema.root` — quota counters and the IPC token
+live there too, so it must not flip between drives. Tell the user the exact
+file paths. Output files are named from the `subject`: a second call with
+the same subject OVERWRITES the first — copy/rename each result (e.g.
+`sofra_logo_emblem.svg`) before the next variation.
 
-4. **For anything that costs money or calls a real external API**
-   (`generative:true` on any generate_* tool, `install_dependencies` with
-   `consent:true`, `approve_suggestion` with `approve:true`), tell the
-   user exactly what will run/cost before passing that flag — these tools
-   are explicit-flag-gated by design specifically so no confirmation UI is
-   needed, but that means the confirming has to happen in conversation
-   instead.
+Paths below are relative to this skill's folder (the folder holding this
+SKILL.md — in this repo `skills/omnicinema/`; adjust if installed elsewhere).
 
-5. **Without any provider keys configured**, everything still works using
-   local placeholders and offline synthesis (vector art renders as real
-   SVG, music/voiceover/SFX synthesize locally) — good enough to preview
-   structure, timing, and layout before spending on generative APIs. See
-   `references/tools.md`'s last section for how to add keys.
+**API keys** (optional) go in `~/.cache/ai-skills/omnicinema-mcp/.env`
+(copy `.env.example` there; git-ignored). The user edits that file
+themselves — never ask them to paste keys into chat, never write keys
+anywhere else. `list_providers` shows what is configured.
 
-## Honesty
+## Calling tools
 
-- `discover_providers` / `approve_suggestion` never auto-integrate
-  anything; a new provider still needs a human-reviewed adapter.
-- Budget guards on generate_* tools are real — an over-quota call halts
-  with a cost breakdown rather than silently spending; only proceed past
-  that with the user's explicit go-ahead.
-- `ipc_start` only lives for the one-shot process here (see
-  `references/tools.md`) — it's not useful as a persistent local API
-  through this skill's call path.
+```bash
+bash skills/omnicinema/scripts/call.sh <tool> '<json>'     # readable result + file paths + next steps
+bash skills/omnicinema/scripts/call.sh <tool> @args.json    # args from a file (long scripts, quotes, Arabic)
+bash skills/omnicinema/scripts/call.sh --json <tool> ...     # raw MCP result
+bash skills/omnicinema/scripts/call.sh --list                # every tool + arguments
+```
+Full catalog: `references/tools.md`. Recipes and style vocabulary:
+`references/workflows.md`.
+
+## How to work
+
+1. **Pin down the request** (ask briefly, in the user's language, only what's
+   missing): what it's for and where it will be used (sizes/ratio: 9:16 reel,
+   16:9, 1:1), brand name/colours/mood, length (music/video), language of any
+   spoken text, and whether they want to spend API quota or stay free.
+2. **Write tool inputs in English** with the engine's vocabulary
+   (`references/workflows.md`): the rule-based designers and screenplay
+   engine read English keywords. Spoken text (`narration`, voiceover
+   `script`) can be any language the TTS engine speaks — but offline TTS
+   voices are English-first; for Arabic narration recommend the generative
+   voice, or flow-studio-director's voice pipeline, and say why.
+3. **Preview cheap first:** `consult_personas` for the design brief of a
+   logo/music/voice; `run_cinema_pipeline` with `"dry_run": true` for videos
+   (screenplay, shot list, providers, cost/network). Show it; adjust the
+   prompt until the plan is right; then produce.
+4. **Money gates:** `generative: true`, `approveOverBudget: true`,
+   `enrich: true` (one Anthropic API call to polish a screenplay),
+   `install_dependencies consent:true`, `approve_suggestion approve:true`
+   only after the user explicitly agrees in chat to that specific spend or
+   install. `check_limits` before a generative batch. Free stock APIs run
+   automatically when their keys exist — pass `"stock": false` to stay
+   fully offline.
+5. **Check every output before presenting it:**
+   `bash skills/omnicinema/scripts/check_media.sh <files…>` — then actually
+   LOOK at the PNG previews (`*.check.png`) and video contact sheets
+   (`*.contact.png`) with your image viewer. Fix and re-run anything that is
+   off (wrong colours, cut text, silence, clipping, wrong ratio) before
+   showing it. Read the tool's "Notes" too: an unmatched sound effect comes
+   back as a generic impact WITH a warning — don't hand that over as the
+   sound they asked for. Report real numbers (duration, LUFS, size).
+6. **Hand over:** the files (paths), what each is, which column of the table
+   above it came from, and the next improvement (e.g. "add a free Pexels key
+   for real footage").
+
+## Other jobs
+
+- **Re-cut a video:** edit `montage-order.json` or replace clip files in the
+  project folder, then `compile_montage`. For hands-on editing use
+  `workflow_mode: "interactive_montage"`.
+- **Serve assets to devuniverse / other local tools:**
+  `bash skills/omnicinema/scripts/ipc.sh start` (localhost only, bearer
+  token in `$CINEMA_ROOT/data`), `ipc.sh status`, `ipc.sh stop` when done.
+  Never print the token. (The MCP tools `ipc_start`/`ipc_stop` die with the
+  one-shot call — don't use them through `call.sh`.)
+- **Find new video/AI providers:** `discover_providers` only queues
+  candidates for review; nothing is installed or enabled automatically.
+
+## Rules
+
+- Offline first; spend only with explicit consent; say what is synthetic.
+- Rights: no real people's likeness or voice, no existing logos, characters or
+  songs — offer an original. Stock results carry attribution in
+  `attributions.txt`; keep it with the delivery.
+- Never present an output you haven't checked with `check_media.sh` and
+  looked at.

@@ -78,24 +78,21 @@ adapter around.
   an agentic meaning/quality review pass, then mux into the video with
   `ffmpeg` stream-copy (no re-encode unless burned-in subtitles are
   specifically needed).
-- **[omnicinema](skills/omnicinema/SKILL.md)** — cinematic video
-  generation (screenplay + footage + Remotion render), design assets
-  (logos, vector art, textures, UI mockups), voiceover, music, and SFX.
-  Runs the real [omnicinema-mcp](https://github.com/joeshwoa/omnicinema-mcp)
-  server as a one-shot local command via a small generic MCP stdio
-  client (`scripts/mcp_cli.mjs`) — no MCP client registration needed,
-  and zero duplicated logic since it talks to the real, unmodified
-  server. **Known issue:** omnicinema-mcp's own `.gitignore` currently
-  excludes real source files it needs to build (`src/assets/*`) — see
-  the skill's SKILL.md for the exact upstream fix.
-- **[devuniverse](skills/devuniverse/SKILL.md)** — scaffold a
-  production-grade Flutter + Supabase/Firebase/Node project via a
-  27-persona virtual engineering agency that debates the stack, builds a
-  3D deep-scroll spatial UI module, syncs Figma wireframes, runs a
-  compliance/security audit, and drafts Terms/Privacy docs. Runs the
-  real [devuniverse-mcp](https://github.com/joeshwoa/devuniverse-mcp)
-  server the same one-shot way — verified end-to-end against the real
-  server (builds clean from a fresh clone).
+- **[omnicinema](skills/omnicinema/SKILL.md)** — logos (with reversed
+  and icon variants), vector illustrations, UI mockups, genre music (WAV +
+  editable MIDI), sound effects, voiceover, and short promo/animatic videos,
+  via the real [omnicinema-mcp](https://github.com/joeshwoa/omnicinema-mcp)
+  server run as a one-shot command (`scripts/mcp_cli.mjs`, no MCP
+  registration). Offline and free by default; stock footage and AI media with
+  your own keys; `check_media.sh` verifies every output; `ipc.sh` serves
+  assets to other tools. (The upstream build bug is fixed.)
+- **[devuniverse](skills/devuniverse/SKILL.md)** — scaffold a Flutter app
+  (+ Supabase/Firebase, optional Fastify service, optional 3D deep-scroll
+  journey) from a plain-language brief via the persona agency in the real
+  [devuniverse-mcp](https://github.com/joeshwoa/devuniverse-mcp) server:
+  dry-run plan → generate → `verify_project.sh` (flutter analyze/test,
+  service tests, RLS check, compliance audit). Generated projects compile and
+  pass their own tests (verified on a 9-case matrix).
 - **[flow-studio-director](skills/flow-studio-director/SKILL.md)** — a
   full AI film crew for Google Flow that takes a client's script to the
   finished video through five signed gates (script → cast → storyboard →

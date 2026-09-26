@@ -1,29 +1,26 @@
 #!/usr/bin/env bash
-# Call one omnicinema-mcp tool, no MCP client/registration needed.
-# Usage: call.sh <tool_name> ['<json-args>']
-# Example: call.sh list_providers '{}'
-#          call.sh generate_image '{"assetKind":"logo","subject":"a fox reading a book"}'
+# Call one omnicinema-mcp tool — no MCP client or registration needed.
+#   call.sh <tool> ['<json-args>' | @args.json]     human-readable result
+#   call.sh --json <tool> [...]                      raw MCP result (structured data)
+#   call.sh --list                                   every tool + its arguments
+# Output location: $CINEMA_ROOT — see root.sh (default: /Volumes/PortableSSD/omnicinema-mcp when that drive is
+# mounted, else $HOME/AI-Projects/omnicinema). Set it to put work somewhere else.
 set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-CACHE_DIR="${AI_SKILLS_CACHE_DIR:-$HOME/.cache/ai-skills}/omnicinema-mcp"
+NAME="omnicinema-mcp"
+# shellcheck source=/dev/null
+. "$SCRIPT_DIR/root.sh"
+CACHE_DIR="${AI_SKILLS_CACHE_DIR:-$HOME/.cache/ai-skills}/$NAME"
 ENTRY="$CACHE_DIR/dist/index.js"
+[ -f "$ENTRY" ] || { echo "$NAME isn't installed yet. Run: bash $SCRIPT_DIR/bootstrap.sh" >&2; exit 2; }
 
-if [ ! -f "$ENTRY" ]; then
-  echo "omnicinema-mcp isn't installed yet. Run: bash $SCRIPT_DIR/bootstrap.sh" >&2
-  exit 2
-fi
-
-TOOL="${1:?Usage: call.sh <tool_name> ['<json-args>']}"
-# NOTE: deliberately not `${2:-{}}` — bash's brace matching inside a
-# parameter expansion's default value gets confused by a literal `{}`
-# there (it was appending a stray extra `}` when $2 was itself "{}",
-# producing invalid JSON). Spelling it out avoids that pitfall.
+FLAG=()
+if [ "${1-}" = "--json" ]; then FLAG=(--json); shift; fi
+TOOL="${1:?Usage: call.sh [--json] <tool_name> ['<json-args>'|@file] | --list}"
+# Spelled out rather than ${2:-{}} — bash brace matching appends a stray "}".
 ARGS="${2-}"
-if [ -z "$ARGS" ]; then
-  ARGS='{}'
-fi
+[ -n "$ARGS" ] || ARGS='{}'
+case "$ARGS" in @*) ARGS="@$(cd "$(dirname "${ARGS#@}")" && pwd)/$(basename "${ARGS#@}")";; esac
 
-# Run from the cache dir so the server's relative paths (tools-registry.json,
-# data/, .env) resolve the same way they do for a normal `npm start` there.
 cd "$CACHE_DIR"
-exec node "$SCRIPT_DIR/mcp_cli.mjs" node "$ENTRY" -- "$TOOL" "$ARGS"
+exec node "$SCRIPT_DIR/mcp_cli.mjs" ${FLAG[@]+"${FLAG[@]}"} node "$ENTRY" -- "$TOOL" "$ARGS"

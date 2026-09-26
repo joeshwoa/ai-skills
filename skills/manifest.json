@@ -5,7 +5,7 @@
     {
       "name": "devuniverse",
       "path": "skills/devuniverse",
-      "description": "Scaffold a production-grade Flutter + Supabase/Firebase/Node project via a 27-persona virtual engineering agency that debates the stack, generates a 3D deep-scroll spatial UI module, syncs Figma wireframes, runs a compliance/security audit, and drafts Terms/Privacy docs — by running the real devuniverse-mcp server as a one-shot local command, no MCP client registration required. Use for \"scaffold a new app\", \"start a Flutter project\", \"generate the 3D spatial canvas module\", or anything about the DevUniverse agency.",
+      "description": "Scaffold a new Flutter app (optionally with a Supabase/Firebase backend, a Fastify service and a 3D deep-scroll journey) from a plain-language brief using the user's devuniverse-mcp \"virtual agency\" — a rule-based persona bench debates the stack, then it writes a project that compiles and passes its own tests, with ADRs, wireframes, a Figma plugin, RLS migrations or Firebase rules, and draft privacy/terms docs. Use for \"start a new app\", \"scaffold a Flutter project\", \"set up an app with Supabase/Firebase\", \"add a 3D scroll journey to my app\", \"re-theme my app from these images\", \"audit my app before release\", \"generate privacy policy / terms for my app\", or anything about DevUniverse.",
       "has_scripts": true,
       "has_references": true
     },
@@ -19,7 +19,7 @@
     {
       "name": "omnicinema",
       "path": "skills/omnicinema",
-      "description": "Generate cinematic video (multi-scene screenplay + footage + Remotion render), design assets (logos, vector art, textures, UI mockups), voiceover, music, and SFX — by running the real omnicinema-mcp server as a one-shot local command, with no MCP client registration required. Use for \"make a video / short film / trailer\", \"generate a logo / design asset\", \"generate voiceover / music / sound effect\", or anything about the OmniCinema pipeline.",
+      "description": "Make brand and media assets with the user's omnicinema-mcp engine — logos (with reversed + icon variants), vector illustrations, app/web UI mockups, background music in a genre (WAV + editable MIDI), sound effects, voiceover, and short videos from a one-line idea (screenplay → stock footage or storyboard animatic → narration, captions, soundtrack → rendered MP4). Works fully offline and free; stock footage and AI photos/voices/music use the user's own API keys. Use for \"make me a logo\", \"design a mockup of my app screen\", \"I need background music / a beat / a sound effect\", \"turn this script into a voiceover\", \"make a quick promo/animatic/storyboard video\", or anything about OmniCinema. For real AI-generated film shots in Google Flow use flow-studio-director instead.",
       "has_scripts": true,
       "has_references": true
     },

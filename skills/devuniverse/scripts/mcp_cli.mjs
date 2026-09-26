@@ -1,148 +1,109 @@
 #!/usr/bin/env node
 /**
- * mcp_cli.mjs — a generic one-shot MCP (Model Context Protocol) stdio client.
+ * mcp_cli.mjs — generic one-shot MCP stdio client (shared by the devuniverse
+ * and omnicinema skills; identical copy in each).
  *
- * This MCP server (any MCP stdio server, e.g. devuniverse-mcp) is a normal MCP server (JSON-RPC 2.0 over
- * newline-delimited stdio, via @modelcontextprotocol/sdk). Normally you'd
- * need to register it in an MCP-capable client (Claude Desktop config,
- * Cursor's mcp.json, etc.) and keep a long-lived server process running.
- *
- * This script removes that step entirely: it spawns the server fresh, does
- * the minimal MCP handshake, calls exactly one tool, prints the result as
- * JSON to stdout, and exits. Any agent that can run a shell command — with
- * or without native MCP support — can use the server's full, real,
- * unmodified functionality this way. There is zero duplicated logic: this
- * file talks nothing but the protocol, so it can never drift from the
- * server's real behavior.
+ * Spawns an MCP stdio server, does the handshake, runs ONE request, prints
+ * the result and exits. No MCP client registration, no long-lived process,
+ * no duplicated logic — it only speaks the protocol to the real server.
  *
  * Usage:
- *   node mcp_cli.mjs <run-command...> -- <tool_name> '<json-args>'
+ *   node mcp_cli.mjs [--json] <run-command...> -- <tool_name> ['<json-args>' | @args.json]
+ *   node mcp_cli.mjs [--json] <run-command...> -- --list
  *
- * Example:
- *   node mcp_cli.mjs node /path/to/dist/index.js -- list_providers '{}'
+ *   --json   print the raw MCP result (content + structuredContent + isError).
+ *            Default prints the human-readable text content only.
+ *   @file    read the JSON arguments from a file (avoids shell-quoting trouble
+ *            with long briefs, quotes, Arabic text …).
+ *   --list   print every tool with its description and argument names.
  *
- * Exit code: 0 on success (tool returned isError:false or omitted),
- *            1 on a tool-level error, 2 on a transport/handshake error.
+ * Exit: 0 ok · 1 tool returned isError · 2 usage/transport/handshake error.
+ * Env:  MCP_CLI_TIMEOUT_MS (default 900000 = 15 min — renders can be slow).
  */
-
 import { spawn } from "node:child_process";
+import fs from "node:fs";
 import readline from "node:readline";
 
 function usageError(msg) {
   console.error(`mcp_cli.mjs: ${msg}`);
-  console.error("Usage: node mcp_cli.mjs <run-command...> -- <tool_name> '<json-args>'");
+  console.error("Usage: node mcp_cli.mjs [--json] <run-command...> -- <tool_name> ['<json-args>'|@file] | --list");
   process.exit(2);
 }
 
-const args = process.argv.slice(2);
+let args = process.argv.slice(2);
+let raw = false;
+if (args[0] === "--json") { raw = true; args = args.slice(1); }
 const sep = args.indexOf("--");
-if (sep === -1 || sep === 0 || sep === args.length - 1) {
-  usageError("expected: <run-command...> -- <tool_name> ['<json-args>']");
-}
+if (sep <= 0 || sep === args.length - 1) usageError("expected: <run-command...> -- <tool_name> ['<json-args>']");
 const runCommand = args.slice(0, sep);
 const toolName = args[sep + 1];
-const jsonArgsRaw = args[sep + 2] ?? "{}";
-
-let toolArgs;
-try {
-  toolArgs = JSON.parse(jsonArgsRaw);
-} catch (e) {
-  usageError(`the json-args argument is not valid JSON: ${e.message}`);
+const listMode = toolName === "--list";
+let jsonArgsRaw = args[sep + 2] ?? "{}";
+if (jsonArgsRaw.startsWith("@")) {
+  try { jsonArgsRaw = fs.readFileSync(jsonArgsRaw.slice(1), "utf8"); }
+  catch (e) { usageError(`cannot read args file ${jsonArgsRaw.slice(1)}: ${e.message}`); }
+}
+let toolArgs = {};
+if (!listMode) {
+  try { toolArgs = JSON.parse(jsonArgsRaw.trim() || "{}"); }
+  catch (e) { usageError(`the json-args argument is not valid JSON: ${e.message}`); }
 }
 
-const TIMEOUT_MS = Number(process.env.MCP_CLI_TIMEOUT_MS || 600000); // 10 min default
-
-const child = spawn(runCommand[0], runCommand.slice(1), {
-  stdio: ["pipe", "pipe", "pipe"],
-});
-
+const TIMEOUT_MS = Number(process.env.MCP_CLI_TIMEOUT_MS || 900000);
+const child = spawn(runCommand[0], runCommand.slice(1), { stdio: ["pipe", "pipe", "pipe"], env: process.env });
 let stderrBuf = "";
-child.stderr.on("data", (d) => {
-  stderrBuf += d.toString();
-});
-
+child.stderr.on("data", (d) => { stderrBuf += d.toString(); if (stderrBuf.length > 200000) stderrBuf = stderrBuf.slice(-100000); });
 const rl = readline.createInterface({ input: child.stdout, crlfDelay: Infinity });
-
 let nextId = 1;
 const pending = new Map();
-
-function send(obj) {
-  child.stdin.write(JSON.stringify(obj) + "\n");
-}
-
-function request(method, params) {
-  return new Promise((resolve, reject) => {
-    const id = nextId++;
-    pending.set(id, { resolve, reject });
-    send({ jsonrpc: "2.0", id, method, params });
-  });
-}
-
-function notify(method, params) {
-  send({ jsonrpc: "2.0", method, params });
-}
-
+const send = (o) => child.stdin.write(JSON.stringify(o) + "\n");
+const request = (method, params) => new Promise((resolve, reject) => {
+  const id = nextId++; pending.set(id, { resolve, reject }); send({ jsonrpc: "2.0", id, method, params });
+});
 rl.on("line", (line) => {
-  line = line.trim();
-  if (!line) return;
-  let msg;
-  try {
-    msg = JSON.parse(line);
-  } catch {
-    return; // ignore non-JSON stdout noise
-  }
+  line = line.trim(); if (!line) return;
+  let msg; try { msg = JSON.parse(line); } catch { return; }
   if (msg.id !== undefined && pending.has(msg.id)) {
-    const { resolve, reject } = pending.get(msg.id);
-    pending.delete(msg.id);
-    if (msg.error) reject(new Error(`${msg.error.message} (code ${msg.error.code})`));
-    else resolve(msg.result);
+    const { resolve, reject } = pending.get(msg.id); pending.delete(msg.id);
+    msg.error ? reject(new Error(`${msg.error.message} (code ${msg.error.code})`)) : resolve(msg.result);
   }
 });
-
 const timer = setTimeout(() => {
-  console.error(`mcp_cli.mjs: timed out after ${TIMEOUT_MS}ms waiting on the server.`);
-  child.kill("SIGKILL");
-  process.exit(2);
+  console.error(`mcp_cli.mjs: timed out after ${TIMEOUT_MS}ms (raise MCP_CLI_TIMEOUT_MS for long renders).`);
+  child.kill("SIGKILL"); process.exit(2);
 }, TIMEOUT_MS);
-timer.unref?.();
-
-child.on("error", (err) => {
-  console.error(`mcp_cli.mjs: failed to start server (${runCommand.join(" ")}): ${err.message}`);
-  process.exit(2);
-});
-
+child.on("error", (err) => { console.error(`mcp_cli.mjs: failed to start server (${runCommand.join(" ")}): ${err.message}`); process.exit(2); });
 child.on("exit", (code, signal) => {
   if (pending.size > 0) {
-    console.error(
-      `mcp_cli.mjs: server exited (code=${code} signal=${signal}) before responding.` +
-        (stderrBuf ? `\n--- server stderr ---\n${stderrBuf}` : ""),
-    );
+    console.error(`mcp_cli.mjs: server exited (code=${code} signal=${signal}) before responding.` + (stderrBuf ? `\n--- server stderr ---\n${stderrBuf}` : ""));
     process.exit(2);
   }
 });
 
+function finish(code) { clearTimeout(timer); child.stdin.end(); child.kill(); process.exit(code); }
+
 try {
-  await request("initialize", {
-    protocolVersion: "2024-11-05",
-    capabilities: {},
-    clientInfo: { name: "ai-skills-mcp-cli", version: "1.0.0" },
-  });
-  notify("notifications/initialized", {});
-
+  await request("initialize", { protocolVersion: "2024-11-05", capabilities: {}, clientInfo: { name: "ai-skills-mcp-cli", version: "2.0.0" } });
+  send({ jsonrpc: "2.0", method: "notifications/initialized", params: {} });
+  if (listMode) {
+    const r = await request("tools/list", {});
+    if (raw) console.log(JSON.stringify(r, null, 2));
+    else for (const t of r.tools) {
+      const props = Object.keys(t.inputSchema?.properties || {});
+      const req = new Set(t.inputSchema?.required || []);
+      console.log(`${t.name}(${props.map((p) => (req.has(p) ? p : p + "?")).join(", ")})\n  ${(t.description || "").split("\n")[0]}\n`);
+    }
+    finish(0);
+  }
   const result = await request("tools/call", { name: toolName, arguments: toolArgs });
-
-  clearTimeout(timer);
-  child.stdin.end();
-  child.kill();
-
-  // MCP tool results carry content: [{type:"text", text}, ...] plus optional
-  // structured fields and isError. Print the raw JSON result so a caller can
-  // pull out .content[].text (human-readable) or any structured data.
-  console.log(JSON.stringify(result, null, 2));
-  process.exit(result?.isError ? 1 : 0);
+  if (raw) console.log(JSON.stringify(result, null, 2));
+  else {
+    const text = (result?.content || []).filter((c) => c.type === "text").map((c) => c.text).join("\n");
+    console.log(text || JSON.stringify(result, null, 2));
+  }
+  finish(result?.isError ? 1 : 0);
 } catch (err) {
   clearTimeout(timer);
-  console.error(`mcp_cli.mjs: ${err.message}` + (stderrBuf ? `\n--- server stderr ---\n${stderrBuf}` : ""));
-  child.kill("SIGKILL");
-  process.exit(2);
+  console.error(`mcp_cli.mjs: ${err.message}` + (stderrBuf ? `\n--- server stderr ---\n${stderrBuf.slice(-4000)}` : ""));
+  child.kill("SIGKILL"); process.exit(2);
 }

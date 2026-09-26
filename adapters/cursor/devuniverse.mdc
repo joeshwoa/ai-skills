@@ -1,26 +1,22 @@
 ---
-description: Scaffold a production-grade Flutter + Supabase/Firebase/Node project via the real devuniverse-mcp server (27-persona agency debate, 3D spatial UI module, Figma sync, compliance audit), run as a one-shot local command (no MCP registration needed). Apply whenever the user asks to scaffold a new app/project, start a Flutter project, or generate the 3D spatial canvas module.
+description: Scaffold a new Flutter app (optionally Supabase/Firebase backend, Fastify service, 3D deep-scroll journey) from a plain-language brief with the user's devuniverse-mcp persona agency; the project compiles and passes its own tests. Apply when the user asks to start/scaffold a new app or Flutter project, add a 3D scroll journey, re-theme an app from images, audit an app before release, or draft privacy/terms docs.
 globs:
 alwaysApply: false
 ---
 # DevUniverse
 
-This project has the devuniverse skill at `skills/devuniverse/SKILL.md`
-in this repo (or wherever you copied the `skills/devuniverse/` folder).
-Read that file in full before using it.
+Read `skills/devuniverse/SKILL.md` in full before using it.
 
 Quick reference:
-- First use: `bash skills/devuniverse/scripts/bootstrap.sh` (clones/builds
-  the real devuniverse-mcp server into a local cache — one-time, safe to
-  re-run; builds clean from a fresh clone).
-- Full tool catalog with exact JSON argument shapes:
-  `skills/devuniverse/references/tools.md`.
-- Call a tool: `bash skills/devuniverse/scripts/call.sh <tool_name> '<json-args>'`.
-- `init_dev_universe` is the real starting point for a new project — one
-  call runs the full agency debate, scaffold, Figma sync, compliance
-  audit, and asset watcher.
-- `provision_omnicinema` with `confirm:true` clones and runs code on the
-  user's machine — confirm with the user first, the tool itself can't
-  ask.
-- `generate_compliance_docs` output is a structured draft, not legal
-  advice — say so if you hand it to the user.
+- Setup: `bash skills/devuniverse/scripts/bootstrap.sh` (`--check` shows toolchains).
+- Call: `bash skills/devuniverse/scripts/call.sh <tool> '<json>'` (or `@args.json`; `--list` for all tools).
+- New app: write the brief in ENGLISH with the trigger words from
+  `references/workflows.md` §1 → `init_dev_universe` with `"dry_run": true`
+  → show the rulings → generate → `scripts/verify_project.sh <project_dir>`.
+  Never say it compiles unless verify printed PASS.
+- Decisions the user already made go in as mandates, not brief words:
+  `"backend": "supabase"|"firebase"`, `"state_management": "riverpod"|"bloc"`,
+  `"service": true|false`.
+- Stubs to disclose: payments, offline-queue server sync, no golden/RLS-policy tests.
+- `provision_omnicinema confirm:true` runs code: only after an explicit yes.
+- Legal docs are drafts; audits are static scans.

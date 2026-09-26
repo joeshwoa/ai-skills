@@ -38,20 +38,19 @@ below for what that feeds.
   garbled ASR cue may only be re-transcribed from audio, marked
   unclear, or asked about — never guessed from context, however obvious
   it looks.
-- **omnicinema** (`skills/omnicinema/SKILL.md`) — cinematic video
-  generation (screenplay + footage + Remotion render), design assets
-  (logos, vector art, textures, UI mockups), voiceover, music, and SFX.
-  Runs the real `omnicinema-mcp` server as a one-shot local command — no
-  MCP client registration needed. Trigger: any request to make a video,
-  short film, trailer, logo/design asset, voiceover, music, or sound
-  effect via OmniCinema.
-- **devuniverse** (`skills/devuniverse/SKILL.md`) — scaffold a
-  production-grade Flutter + Supabase/Firebase/Node project via a
-  27-persona virtual engineering agency (stack debate, 3D spatial UI
-  module, Figma sync, compliance audit, Terms/Privacy drafts). Runs the
-  real `devuniverse-mcp` server the same one-shot way. Trigger: any
-  request to scaffold a new app/project, start a Flutter project, or
-  generate the 3D spatial canvas module.
+- **omnicinema** (`skills/omnicinema/SKILL.md`) — logos (+ reversed/icon),
+  vector illustrations, UI mockups, genre music (WAV + MIDI), sound effects,
+  voiceover and short promo/animatic videos from the user's omnicinema-mcp
+  engine; offline and free by default, stock/AI with the user's keys; every
+  output checked with `scripts/check_media.sh`. Runs the real server as a
+  one-shot local command. Trigger: logo, mockup, illustration, music, beat,
+  SFX, voiceover, quick promo/storyboard video.
+- **devuniverse** (`skills/devuniverse/SKILL.md`) — scaffold a Flutter app
+  (+ Supabase/Firebase, optional Fastify service, optional 3D journey) from
+  a brief via the user's devuniverse-mcp persona agency: dry-run plan →
+  generate → `scripts/verify_project.sh` (flutter analyze/test, service
+  tests, RLS, audit). Trigger: start/scaffold a new app, add a 3D journey,
+  re-theme from images, release audit, privacy/terms drafts.
 - **flow-studio-director** (`skills/flow-studio-director/SKILL.md`) — a
   full AI film crew for Google Flow (Veo 3.1 + Omni Flash + Nano Banana)
   that takes a client's script to the finished video: script breakdown

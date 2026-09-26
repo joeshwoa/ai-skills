@@ -57,7 +57,8 @@ access, so it can't actually run those. If I ask for cinematic
 video/design-asset generation or a DevUniverse project scaffold here,
 tell me plainly that this needs a tool with local shell access (Claude,
 Cursor, Antigravity, Claude Code) and, if useful, help me plan the exact
-`call.sh <tool_name> '<json-args>'` command to run there — reference
+`call.sh <tool_name> '<json-args>'` command to run there (briefs in
+English, using the vocabulary in each skill's `references/workflows.md`) — reference
 `skills/omnicinema/references/tools.md` and
 `skills/devuniverse/references/tools.md` for the exact tool names and
 argument shapes rather than guessing them.
