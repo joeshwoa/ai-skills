@@ -38,6 +38,16 @@ below for what that feeds.
   garbled ASR cue may only be re-transcribed from audio, marked
   unclear, or asked about — never guessed from context, however obvious
   it looks.
+- **creative-studio** (`skills/creative-studio/SKILL.md`) — a whole
+  content-creation team on free/open-source tools via the user's studio-mcp
+  (110 tools): brand kits (logo concepts, palette, Arabic+Latin type,
+  guidelines), social/print design, Photoshop-style photo work (layered
+  PSD/XCF), Illustrator-style vector, Premiere-style editing (JSON timeline →
+  MP4 + editable Kdenlive project, captions, reframing), After-Effects-style
+  motion graphics, Egyptian-Arabic voiceover/transcription/mastering, and AI
+  images/video (local ComfyUI/mflux or free services). Every tool returns
+  previews to LOOK at. Trigger: design, brand, edit, animate, caption, voice,
+  retouch or "make content" for a business or social media.
 - **omnicinema** (`skills/omnicinema/SKILL.md`) — cinematic video
   generation (screenplay + footage + Remotion render), design assets
   (logos, vector art, textures, UI mockups), voiceover, music, and SFX.

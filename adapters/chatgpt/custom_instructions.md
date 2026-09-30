@@ -63,6 +63,14 @@ English, using the vocabulary in each skill's `references/workflows.md`) — ref
 `skills/devuniverse/references/tools.md` for the exact tool names and
 argument shapes rather than guessing them.
 
+The `creative-studio` skill (my free content-creation team — branding,
+design, photo, vector, video editing, motion, audio, AI images) also runs
+locally (`skills/creative-studio/scripts/call.sh`). Here, help me with the
+creative thinking — brand brief, copy in Egyptian Arabic or English, shot
+lists, timeline JSON — and write the exact `call.sh <tool> '<json>'`
+commands using `skills/creative-studio/references/tools.md` and
+`references/workflows.md`, so I can run them in Claude/Cursor/Antigravity.
+
 There's also a `skill-router` skill meant to auto-pick and auto-install
 skills from `skills/manifest.json` — that's a file-system-driven
 mechanism (reading the repo, running scripts, committing/pushing) that

@@ -1,7 +1,14 @@
 {
   "generated_by": "skills/skill-router/scripts/build_manifest.py",
-  "skill_count": 8,
+  "skill_count": 9,
   "skills": [
+    {
+      "name": "creative-studio",
+      "path": "skills/creative-studio",
+      "description": "A whole content-creation team for the AI, built only on free/open-source tools the AI drives itself — branding (logo concepts, palette, Arabic+Latin type, guidelines PDF), graphic design (social posts, carousels, stories, thumbnails, posters, flyers, menus, business cards, print PDFs with bleed), Photoshop-style photo work (retouch, looks, background removal, upscaling, layered PSD/XCF masters), Illustrator-style vector (SVG compose, trace, outline, icon sets), Premiere-style video editing (JSON timeline → MP4 + editable Kdenlive project, transitions, captions, reframing, grading), After-Effects-style motion graphics (titles, lower thirds, logo reveals, kinetic type), audio (Egyptian-Arabic voiceover, transcription/captions, clean-up, mastering, music beds, SFX) and AI image/video generation (local ComfyUI/mflux or free services). Use for any request to design, brand, edit, animate, voice, caption, retouch, generate or \"make content\" for a business or social media — in Arabic or English — even when no tool is named, and whenever the user wants a result they can also open and edit in GIMP, Inkscape, Kdenlive, Audacity or Blender.",
+      "has_scripts": true,
+      "has_references": true
+    },
     {
       "name": "devuniverse",
       "path": "skills/devuniverse",

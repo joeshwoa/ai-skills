@@ -78,6 +78,17 @@ adapter around.
   an agentic meaning/quality review pass, then mux into the video with
   `ffmpeg` stream-copy (no re-encode unless burned-in subtitles are
   specifically needed).
+- **[creative-studio](skills/creative-studio/SKILL.md)** — a full content
+  creation team the AI drives itself, using only free tools, through the real
+  [studio-mcp](https://github.com/joeshwoa/studio-mcp) server (MCP or plain
+  CLI, 110 tools): branding (brief-driven logo concepts, palettes, Arabic +
+  Latin type, guidelines PDF), graphic design (posts, carousels, stories,
+  thumbnails, menus, print PDFs with bleed), photo editing with layered
+  PSD/XCF masters (GIMP), vector (Inkscape), video editing that also writes an
+  editable Kdenlive project, motion graphics, Egyptian-Arabic voiceover and
+  captions, audio clean-up/mastering/music/SFX, and AI image/video generation
+  (ComfyUI/mflux locally, Pollinations free; cinematic video → Flow). Installs
+  into a venv on the PortableSSD; `selftest.sh` proves it works.
 - **[omnicinema](skills/omnicinema/SKILL.md)** — logos (with reversed
   and icon variants), vector illustrations, UI mockups, genre music (WAV +
   editable MIDI), sound effects, voiceover, and short promo/animatic videos,
