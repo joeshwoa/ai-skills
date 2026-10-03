@@ -1,0 +1,158 @@
+{
+  "version": 1,
+  "template": "long_brand_documentary",
+  "brand": null,
+  "language": null,
+  "color_mode": "editor_talent",
+  "title": "{{TITLE}}",
+  "about": "Brand film / mini-documentary (2–10 min): real people, interview bites + observational footage, a story arc, minimal narration.",
+  "meta": [
+    [
+      "Format",
+      "Brand documentary"
+    ],
+    [
+      "Target Duration",
+      "{{3–6 min}}"
+    ],
+    [
+      "Location",
+      "{{…}}"
+    ]
+  ],
+  "brief": {
+    "content_type": "long_form",
+    "brand_name": "{{brand name as said/shown}}",
+    "platforms": [
+      "{{youtube|instagram_reels|tiktok|facebook_reels|linkedin|website|tv}}"
+    ],
+    "audience": "{{who exactly — role, age band, place, what they know}}",
+    "awareness_stage": "{{unaware|problem_aware|solution_aware|product_aware|most_aware}}",
+    "goal": "{{awareness|consideration|leads|conversions|…}}",
+    "funnel_stage": "{{top|middle|bottom}}",
+    "format": "brand_documentary",
+    "hook_type": "story",
+    "duration_sec": [
+      180,
+      360
+    ],
+    "cta": "{{one action}}",
+    "scope": "{{…}}",
+    "account_type": "{{creator|business}}",
+    "trend_refs": []
+  },
+  "sections": [
+    {
+      "heading": "CREATIVE IDEA",
+      "paragraphs": [
+        "{{the one feeling the viewer leaves with}}"
+      ]
+    },
+    {
+      "heading": "LOOK & SOUND",
+      "paragraphs": [
+        "{{camera, light, music, interview setup}}"
+      ]
+    }
+  ],
+  "scenes": [
+    {
+      "title": "SCENE 01 — OPENING IMAGE",
+      "duration_sec": 8,
+      "blocks": [
+        {
+          "type": "visual",
+          "lines": [
+            "{{…}}"
+          ]
+        },
+        {
+          "type": "voiceover",
+          "lines": [
+            "{{first line}}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 02 — THE WORLD",
+      "chapter": "{{…}}",
+      "blocks": [
+        {
+          "type": "broll",
+          "lines": [
+            "{{…}}"
+          ]
+        },
+        {
+          "type": "dialogue",
+          "speaker": "{{interviewee}}",
+          "lines": [
+            "{{…}}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 03 — THE CHALLENGE",
+      "chapter": "{{…}}",
+      "blocks": [
+        {
+          "type": "dialogue",
+          "speaker": "{{interviewee}}",
+          "lines": [
+            "{{…}}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 04 — THE TURN",
+      "chapter": "{{…}}",
+      "blocks": [
+        {
+          "type": "dialogue",
+          "speaker": "{{interviewee}}",
+          "lines": [
+            "{{…}}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 05 — WHAT'S NEXT",
+      "chapter": "{{…}}",
+      "blocks": [
+        {
+          "type": "voiceover",
+          "lines": [
+            "{{closing line}}"
+          ]
+        }
+      ]
+    }
+  ],
+  "end_frame": {
+    "lines": [
+      "{{brand}}"
+    ]
+  },
+  "posting": {
+    "title_options": [
+      "{{title 1 ≤ 60–70 chars, keyword first}}",
+      "{{title 2}}",
+      "{{title 3}}"
+    ],
+    "thumbnail_concepts": [
+      "{{face + 2–4 words + one visual idea}}",
+      "{{alt}}"
+    ],
+    "description": "{{2 lines that hook + links; chapters are added from the edit}}",
+    "tags": [
+      "{{search phrases}}"
+    ],
+    "hashtags": [
+      "{{≤3}}"
+    ]
+  }
+}

@@ -18,7 +18,7 @@
     "scope": "episode 1 of a 6-part series 'Barista in 30 seconds'"
   },
   "scenes": [
-    {"title": "SCENE 01 — HOOK", "duration_sec": 3, "blocks": [
+    {"title": "SCENE 01 — HOOK", "duration_sec": 4.5, "blocks": [
       {"type": "visual", "lines": ["Top-down: a sad, blobby heart in a cup. Hard cut to Mariam pointing at it."]},
       {"type": "onscreen_text", "lines": ["Your latte art fails because of THIS"]},
       {"type": "dialogue", "speaker": "Mariam", "lines": ["\"If your heart looks like a cloud — it's not your hands.\""]}

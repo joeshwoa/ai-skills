@@ -38,6 +38,10 @@ BLOCK_TYPES = {
     "camera": ("Camera", "editor"),
     "transition": ("Transition", "editor"),
     "note": ("Note", "editor"),
+    "super": ("Super", "editor"),            # legal line / disclaimer / price text burned on screen
+    "lower_third": ("Lower Third", "editor"),
+    "graphic": ("Graphic", "editor"),         # chart, diagram, screen insert, animation
+    "question": ("Question", "talent"),       # interviewer/host question (podcast, interview, vox pop)
     "dialogue": ("Dialogue", "talent"),
     "voiceover": ("Voice-over", "talent"),
     "direction": ("Direction", "talent"),
@@ -159,7 +163,7 @@ def spoken_lines(spec: dict):
         if not isinstance(scene, dict):
             continue
         for block in scene.get("blocks") or []:
-            if isinstance(block, dict) and block.get("type") in ("dialogue", "voiceover"):
+            if isinstance(block, dict) and block.get("type") in SPOKEN:
                 for kind, text in safe_lines(block):
                     if kind == "line":
                         yield si, block, text
@@ -182,8 +186,11 @@ def speech_seconds(text: str, lang: str, wps: float | None = None) -> float:
     return units / (wps or WORDS_PER_SEC.get(b, DEFAULT_WPS))
 
 
+SPOKEN = ("dialogue", "voiceover", "question")
+
+
 def scene_has_words(scene: dict) -> bool:
-    return any(isinstance(b, dict) and b.get("type") in ("dialogue", "voiceover", "onscreen_text") and b.get("lines")
+    return any(isinstance(b, dict) and b.get("type") in SPOKEN + ("onscreen_text", "super") and b.get("lines")
                for b in scene.get("blocks") or [])
 
 
@@ -195,11 +202,52 @@ def estimate_scene_seconds(scene: dict, lang: str, wps: float | None = None) -> 
         return float(scene["duration_sec"])
     total = 0.0
     for block in scene.get("blocks") or []:
-        if isinstance(block, dict) and block.get("type") in ("dialogue", "voiceover"):
+        if isinstance(block, dict) and block.get("type") in SPOKEN:
             for kind, text in safe_lines(block):
                 total += PAUSE_SEC if kind == "pause" else (speech_seconds(text, lang, wps) if kind == "line" else 0)
     printed = parse_duration(scene.get("duration"))
     return max(total, printed) if printed is not None else total
+
+
+CONTENT_TYPES = ("reel", "ad", "long_form")
+
+
+def content_type(spec: dict) -> str:
+    brief = spec.get("brief") if isinstance(spec.get("brief"), dict) else {}
+    ct = str(brief.get("content_type") or "reel").lower().replace("-", "_")
+    return {"short": "reel", "short_form": "reel", "reels": "reel", "commercial": "ad", "ads": "ad",
+            "long": "long_form", "longform": "long_form", "youtube": "long_form"}.get(ct, ct)
+
+
+def fmt_tc(sec: float) -> str:
+    sec = int(round(sec))
+    h, rem = divmod(sec, 3600)
+    m, s = divmod(rem, 60)
+    return f"{h}:{m:02d}:{s:02d}" if h else f"{m:02d}:{s:02d}"
+
+
+def scene_starts(spec: dict, lang: str, wps=None) -> list:
+    """Estimated start time (s) of every scene, in order."""
+    t, out = 0.0, []
+    for sc in as_list(spec.get("scenes")):
+        out.append(t)
+        t += estimate_scene_seconds(sc, lang, wps)
+    return out
+
+
+def cut_scene_indices(cut: dict, n_scenes: int) -> list:
+    """1-based scene numbers of a cutdown. Only whole numbers (not bools, strings or 1.9)."""
+    raw = as_list(cut.get("scenes"))
+    if not raw:
+        raise SpecError(f"cutdown '{cut.get('name')}' lists no scenes")
+    out = []
+    for n in raw:
+        if isinstance(n, bool) or not isinstance(n, (int, float)) or int(n) != n:
+            raise SpecError(f"cutdown '{cut.get('name')}': scene numbers must be whole numbers, got {n!r}")
+        if not 1 <= int(n) <= n_scenes:
+            raise SpecError(f"cutdown '{cut.get('name')}': scene {int(n)} doesn't exist (1–{n_scenes})")
+        out.append(int(n))
+    return out
 
 
 def target_range(spec: dict) -> tuple[float, float] | None:

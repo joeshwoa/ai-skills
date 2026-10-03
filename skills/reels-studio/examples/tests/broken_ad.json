@@ -1,0 +1,17 @@
+{
+  "language": "en-US",
+  "title": "BROKEN AD FIXTURE",
+  "brief": {"content_type": "ad", "brand_name": "Acme", "platforms": ["instagram_reels"], "audience": "x", "goal": "leads",
+            "duration_sec": 15, "cta": "none", "placements": ["youtube_bumper", "meta_reels"]},
+  "scenes": [
+    {"title": "S1", "duration_sec": 4, "blocks": [{"type": "dialogue", "speaker": "Host", "lines": ["Are you overweight? This changes everything."]}]},
+    {"title": "S2", "duration_sec": 10, "blocks": [{"type": "dialogue", "speaker": "Host", "lines": ["Our programme works for everyone."]}]},
+    {"title": "S3", "duration_sec": 6, "blocks": [{"type": "visual", "lines": ["Product shot"]}]}
+  ],
+  "cutdowns": [
+    {"name": "6s", "target_sec": 6, "scenes": [1, 2], "placement": "youtube_bumper"},
+    {"name": "10s", "target_sec": 10, "scenes": [9]},
+    {"name": "20s", "target_sec": 20, "scenes": [1], "placement": "youtube_bumper"}
+  ],
+  "posting": {"ad_copy": {"headline": "The absolutely best programme in the entire world for everyone, guaranteed"}}
+}

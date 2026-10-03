@@ -1,0 +1,11 @@
+{
+  "language": "en-US",
+  "title": "BROKEN LONG-FORM FIXTURE",
+  "brief": {"content_type": "long_form", "platforms": ["youtube"], "audience": "x", "goal": "consideration",
+            "duration_sec": [200, 260], "cta": "subscribe"},
+  "scenes": [
+    {"title": "INTRO", "duration_sec": 15, "blocks": [{"type": "visual", "lines": ["Logo sting"]}]},
+    {"title": "BODY", "chapter": "Everything", "duration_sec": 230, "blocks": [{"type": "dialogue", "speaker": "Host", "lines": ["Welcome back to the channel."]}]}
+  ],
+  "posting": {"title_options": ["This is a deliberately very long title that keeps going well beyond what YouTube allows for a title, which is one hundred characters"]}
+}

@@ -31,7 +31,8 @@ import tempfile
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from reelspec import (BLOCK_TYPES, FONTS_DIR, PAUSE_SEC, SpecError, as_list,  # noqa: E402
                       base_lang, direction_for, estimate_scene_seconds, has_rtl_chars, line_text,
-                      load_brand, load_json, meta_items, speech_seconds)
+                      load_brand, load_json, meta_items, speech_seconds, SPOKEN, content_type, fmt_tc,
+                      scene_starts, cut_scene_indices)
 from pathlib import Path  # noqa: E402
 
 
@@ -84,10 +85,17 @@ def build_paragraphs(spec: dict, brand: dict) -> list[Para]:
     if spec.get("sections") and spec.get("scenes"):
         out.append(Para(spec.get("script_heading") or labels["script"], "section", weight=500, space_before=22))
 
+    ctype = content_type(spec)
+    lang = spec.get("language") or "en"
+    wps = (spec.get("brief") or {}).get("words_per_sec") if isinstance(spec.get("brief"), dict) else None
+    show_tc = spec.get("show_timecodes", ctype == "long_form")
+    starts = scene_starts(spec, lang, wps) if show_tc else []
     for i, scene in enumerate(as_list(spec.get("scenes"))):
         if not isinstance(scene, dict):
             raise SpecError(f"scene {i + 1} must be an object with title and blocks")
         title = scene.get("title") or f"SCENE {i + 1:02d}"
+        if show_tc:
+            title = f"{title}  (≈ {fmt_tc(starts[i])})"
         out.append(Para(title, "scene", weight=500, space_before=40 if i or legend or spec.get("sections") else 26))
         if scene.get("duration"):
             out.append(Para(f"Duration: {scene['duration']}", "body"))
@@ -98,7 +106,7 @@ def build_paragraphs(spec: dict, brand: dict) -> list[Para]:
             if btype not in BLOCK_TYPES:
                 raise SpecError(f"scene '{title}': unknown block type '{btype}' (allowed: {', '.join(BLOCK_TYPES)})")
             default_label, audience = BLOCK_TYPES[btype]
-            if btype in ("dialogue", "voiceover"):
+            if btype in SPOKEN:
                 label = block.get("label") or block.get("speaker") or default_label
                 # In the house style the speaker label is black; the words are the talent's colour.
                 out.append(Para(f"{label}:", "label", "text" if not mono else "text", 500, space_before=6))
@@ -121,6 +129,22 @@ def build_paragraphs(spec: dict, brand: dict) -> list[Para]:
         for line in as_list(ef.get("notes")):
             out.append(Para(line, "body", tone_for("editor")))
 
+    cuts = as_list(spec.get("cutdowns"))
+    if cuts:
+        out.append(Para(labels.get("cutdowns", "CUTDOWNS"), "scene", tone_for("editor"), 500, space_before=40))
+        scenes = as_list(spec.get("scenes"))
+        for c in cuts:
+            if not isinstance(c, dict):
+                raise SpecError("each cutdown must be an object {name, target_sec, scenes, ...}")
+            idx = cut_scene_indices(c, len(scenes))
+            est = sum(estimate_scene_seconds(scenes[n - 1], lang, wps) for n in idx) + float(c.get("end_frame_sec") or 0)
+            head = f"{c.get('name', 'Cut')} — {c.get('target_sec', '?')} s target (≈ {est:.0f} s)"
+            extra = " · ".join(str(x) for x in (c.get("ratio"), c.get("placement")) if x)
+            out.append(Para(head + (f" · {extra}" if extra else ""), "label", "text", 500, space_before=6))
+            out.append(Para("Scenes: " + ", ".join(f"{n:02d}" for n in idx), "body", tone_for("editor")))
+            for n in as_list(c.get("notes")):
+                out.append(Para(n, "body", tone_for("editor")))
+
     if spec.get("editor_notes"):
         out.append(Para(labels["editor_notes"], "scene", tone_for("editor"), 500, space_before=40))
         for line in as_list(spec["editor_notes"]):
@@ -129,12 +153,51 @@ def build_paragraphs(spec: dict, brand: dict) -> list[Para]:
     posting = spec.get("posting")
     if isinstance(posting, dict) and posting and spec.get("render_posting_pack", True):
         out.append(Para(labels["posting"], "scene", weight=500, space_before=40))
-        for key, lab in (("cover_text", "Cover text"), ("title", "Title (YouTube Shorts)"), ("caption", "Caption"), ("first_comment", "First comment"),
+        for key, lab in (("cover_text", "Cover text"), ("title", "Title"), ("caption", "Caption"), ("first_comment", "First comment"),
                          ("best_time", "Best time to post")):
             if posting.get(key):
                 out.append(Para(f"{lab}:", "label", "text", 500, space_before=6))
                 for ln in str(posting[key]).split("\n"):
                     out.append(Para(ln, "body", tone_for("editor")))
+        if posting.get("title_options"):
+            out.append(Para("Title options:", "label", "text", 500, space_before=6))
+            for t in as_list(posting["title_options"]):
+                out.append(Para(t, "body", tone_for("editor")))
+        if posting.get("thumbnail_concepts"):
+            out.append(Para("Thumbnail concepts:", "label", "text", 500, space_before=6))
+            for t in as_list(posting["thumbnail_concepts"]):
+                out.append(Para(t, "body", tone_for("editor")))
+        if posting.get("description"):
+            out.append(Para("Description:", "label", "text", 500, space_before=6))
+            for ln in str(posting["description"]).split("\n"):
+                out.append(Para(ln, "body", tone_for("editor")))
+        chapters = [(starts[i] if starts else None, sc.get("chapter")) for i, sc in enumerate(as_list(spec.get("scenes")))
+                    if isinstance(sc, dict) and sc.get("chapter")]
+        if chapters and ctype == "long_form":
+            if not starts:
+                starts2 = scene_starts(spec, lang, wps)
+                chapters = [(starts2[i], sc.get("chapter")) for i, sc in enumerate(as_list(spec.get("scenes")))
+                            if isinstance(sc, dict) and sc.get("chapter")]
+            out.append(Para("Chapters (estimated — re-time from the edit):", "label", "text", 500, space_before=6))
+            # YouTube chapters must start at 00:00: a short cold open joins the first chapter,
+            # a long one becomes its own "Intro" chapter.
+            if chapters[0][0] > 40:
+                chapters.insert(0, (0.0, spec.get("intro_chapter_name") or "Intro"))
+            else:
+                chapters[0] = (0.0, chapters[0][1])
+            for t0, name in chapters:
+                out.append(Para(f"{fmt_tc(t0)} {name}", "body", tone_for("editor")))
+        if posting.get("tags"):
+            out.append(Para("Tags:", "label", "text", 500, space_before=6))
+            out.append(Para(", ".join(map(str, as_list(posting["tags"]))), "body", tone_for("editor")))
+        ad = posting.get("ad_copy")
+        if isinstance(ad, dict) and ad:
+            for key, lab in (("primary_text", "Primary text"), ("headline", "Headline"), ("description", "Ad description"),
+                             ("cta_button", "CTA button")):
+                if ad.get(key):
+                    out.append(Para(f"{lab}:", "label", "text", 500, space_before=6))
+                    for ln in str(ad[key]).split("\n"):
+                        out.append(Para(ln, "body", tone_for("editor")))
         if posting.get("hashtags"):
             out.append(Para("Hashtags:", "label", "text", 500, space_before=6))
             out.append(Para(" ".join(map(str, as_list(posting["hashtags"]))), "body", tone_for("editor")))
@@ -420,7 +483,7 @@ def teleprompter(spec: dict) -> str:
     for scene in as_list(spec.get("scenes")):
         lines = []
         for block in as_list(scene.get("blocks")):
-            if block.get("type") in ("dialogue", "voiceover"):
+            if block.get("type") in SPOKEN:
                 for item in as_list(block.get("lines")):
                     kind, text = line_text(item)
                     lines.append(f"[{text}]" if kind in ("pause", "direction") else text)
@@ -464,7 +527,7 @@ def srt(spec: dict) -> str:
     for scene in as_list(spec.get("scenes")):
         start_scene = t
         for block in as_list(scene.get("blocks")):
-            if block.get("type") not in ("dialogue", "voiceover"):
+            if block.get("type") not in SPOKEN:
                 continue
             for item in as_list(block.get("lines")):
                 kind, text = line_text(item)
@@ -493,7 +556,8 @@ def production_text(spec: dict) -> str:
         if isinstance(item, (list, tuple)) and len(item) == 2 and str(item[0]).lower() in ("talent", "cast"):
             talent = str(item[1]).split("/")[0].split(",")[0].strip()
     label_for = {"visual": "Visual", "camera": "Camera", "broll": "Visual", "sfx": "SFX", "music": "Music",
-                 "onscreen_text": "Text", "transition": "Note", "note": "Note"}
+                 "onscreen_text": "Text", "transition": "Note", "note": "Note", "super": "Text",
+                 "lower_third": "Text", "graphic": "Visual"}
     out = [f"Title: {spec['title']}"]
     brief = spec.get("brief") or {}
     for k, lab in (("platforms", "Platform"), ("audience", "Target"), ("duration_sec", "Duration"), ("format", "Format")):
@@ -507,6 +571,10 @@ def production_text(spec: dict) -> str:
     out.append(f"Note: language {spec.get('language')}")
     for n in as_list(spec.get("editor_notes")):  # editor notes belong to the whole piece → preamble
         out.append(f"Note: {n}")
+    for c in as_list(spec.get("cutdowns")):
+        if isinstance(c, dict):
+            out.append(f"Note: cutdown {c.get('name', '')} = scenes {', '.join(map(str, as_list(c.get('scenes'))))}"
+                       f" ({c.get('target_sec', '?')} s{', ' + str(c['ratio']) if c.get('ratio') else ''})")
     for i, scene in enumerate(as_list(spec.get("scenes")), 1):
         title = scene.get("title") or f"SCENE {i:02d}"
         if not re.match(r"(?i)^\s*(scene|sc\.?|مشهد|المشهد)\b", title):
@@ -519,13 +587,13 @@ def production_text(spec: dict) -> str:
             for item in as_list(block.get("lines")):
                 kind, text = line_text(item)
                 text = text.strip()
-                if t in ("dialogue", "voiceover"):
+                if t in SPOKEN:
                     if kind in ("pause", "direction"):
                         out.append(f"({text.rstrip('.')})")
                     elif t == "voiceover":
                         out.append(f"VO: {text.strip(chr(34) + '“”')}")
                     else:
-                        who = block.get("speaker") or talent or "Talent"
+                        who = block.get("speaker") or ("Host" if t == "question" else talent) or "Talent"
                         out.append(f"{who}: {text.strip(chr(34) + '“”')}")
                 elif t == "direction":
                     out.append(f"({text})")

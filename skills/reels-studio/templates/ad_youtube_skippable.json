@@ -1,0 +1,132 @@
+{
+  "version": 1,
+  "template": "ad_youtube_skippable",
+  "brand": null,
+  "language": null,
+  "color_mode": "editor_talent",
+  "title": "{{TITLE}}",
+  "about": "YouTube skippable in-stream: brand + hook inside the first 5 s (before the Skip button), then earn the rest.",
+  "meta": [
+    [
+      "Format",
+      "YouTube skippable in-stream"
+    ],
+    [
+      "Length",
+      "{{30–60 sec}}"
+    ],
+    [
+      "Ratio",
+      "16:9"
+    ]
+  ],
+  "brief": {
+    "content_type": "ad",
+    "brand_name": "{{brand name as said/shown}}",
+    "platforms": [
+      "{{youtube|instagram_reels|tiktok|facebook_reels|linkedin|website|tv}}"
+    ],
+    "audience": "{{who exactly — role, age band, place, what they know}}",
+    "awareness_stage": "{{unaware|problem_aware|solution_aware|product_aware|most_aware}}",
+    "goal": "{{awareness|consideration|leads|conversions|…}}",
+    "funnel_stage": "{{top|middle|bottom}}",
+    "format": "youtube_skippable",
+    "hook_type": "{{question|bold_statement}}",
+    "duration_sec": [
+      30,
+      60
+    ],
+    "cta": "{{one action}}",
+    "scope": "{{…}}",
+    "account_type": "{{creator|business}}",
+    "trend_refs": [],
+    "placements": [
+      "youtube_skippable"
+    ],
+    "ratios": [
+      "16:9"
+    ]
+  },
+  "scenes": [
+    {
+      "title": "SCENE 01 — FIRST 5 SECONDS (BRAND + HOOK)",
+      "duration_sec": 5,
+      "blocks": [
+        {
+          "type": "visual",
+          "lines": [
+            "{{brand/product visible}}"
+          ]
+        },
+        {
+          "type": "dialogue",
+          "speaker": "{{talent}}",
+          "lines": [
+            "{{hook that names the viewer's problem + brand}}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 02 — STORY / DEMO",
+      "blocks": [
+        {
+          "type": "broll",
+          "lines": [
+            "{{…}}"
+          ]
+        },
+        {
+          "type": "dialogue",
+          "speaker": "{{talent}}",
+          "lines": [
+            "{{…}}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 03 — PROOF",
+      "blocks": [
+        {
+          "type": "dialogue",
+          "speaker": "{{talent}}",
+          "lines": [
+            "{{…}}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 04 — CTA",
+      "blocks": [
+        {
+          "type": "dialogue",
+          "speaker": "{{talent}}",
+          "lines": [
+            "{{CTA}}"
+          ]
+        }
+      ]
+    }
+  ],
+  "end_frame": {
+    "lines": [
+      "{{CTA}}",
+      "{{brand}}"
+    ]
+  },
+  "posting": {
+    "ad_copy": {
+      "primary_text": "{{hook line + value + CTA, ≤125 chars visible}}",
+      "headline": "{{≤40 chars}}",
+      "description": "{{≤30 chars}}",
+      "cta_button": "{{Learn More|Sign Up|Shop Now|…}}"
+    },
+    "alt_hooks": [
+      "{{hook variant 1}}",
+      "{{hook variant 2}}",
+      "{{hook variant 3}}"
+    ]
+  }
+}

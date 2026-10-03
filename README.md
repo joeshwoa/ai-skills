@@ -78,9 +78,12 @@ adapter around.
   an agentic meaning/quality review pass, then mux into the video with
   `ffmpeg` stream-copy (no re-encode unless burned-in subtitles are
   specifically needed).
-- **[reels-studio](skills/reels-studio/SKILL.md)** — a short-form video
-  content team in one skill: scope and audience locked first, live dated trend
-  research, scored idea boards, 5–10 hook variants, then a shoot-ready reel
+- **[reels-studio](skills/reels-studio/SKILL.md)** — a video content team
+  for reels/TikTok/Shorts, **ads** (one master + cutdowns per placement, ratios,
+  ad copy, brand-in-5-s and ad-policy checks) and **long-form** (YouTube
+  explainers, course lessons, webinars, podcasts, brand films — chapters,
+  timecodes, title/thumbnail packaging). Every type: scope and audience locked first, live dated trend
+  research, scored idea boards, 5–10 hook variants, then a shoot-ready
   script written in the audience's real spoken language or dialect (Egyptian
   Arabic, Gulf, Levantine, Maghrebi, MSA, English or any other), checked by a
   validator (hook in 3 s, runtime vs target, MSA words in Egyptian scripts,

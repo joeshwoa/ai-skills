@@ -8,6 +8,9 @@ short). Escape hatch: "just go" / "كمّل" / "all recommended" → take every 
 print one compact line of assumptions.
 
 ## Round 1 — the job (always)
+0. **What are we making?** — a) reel / short (RECOMMENDED for organic reach) b) ad (paid — one master
+   + cutdowns) c) long-form (YouTube video, lesson, webinar, podcast, brand film) d) a mix (campaign)
+   → sets `brief.content_type`; ads continue with "Ads add" below, long-form with "Long-form adds".
 1. **Platform(s)** — a) Instagram Reels b) TikTok c) YouTube Shorts d) Facebook Reels
    e) LinkedIn f) Snapchat Spotlight g) all vertical (RECOMMENDED: write once, adapt the posting
    pack per platform)
@@ -31,6 +34,23 @@ print one compact line of assumptions.
 - **Brand rules**: tone words, banned words/visuals, logo/end-frame rules, reference creators.
 - **Account type**: creator or business (affects trending-audio rights).
 - **Deadline & posting date** (to match occasions and trend timing).
+
+## Ads add
+- **Placements** (Meta Reels/Feed/Stories, TikTok, YouTube skippable/non-skippable/bumper/Shorts,
+  Snapchat, LinkedIn, TV/CTV) and **ratios** — RECOMMENDED: 9:16 master + 4:5 + 16:9 from one shoot.
+- **Master length + cutdowns** — a) 30 s + 15 s + 6 s (RECOMMENDED) b) 15 s + 6 s c) 60 s + 30 s + 15 s.
+- **KPI** — hook rate, CTR, cost per lead/sale, ROAS, ad recall.
+- **Offer facts & legal lines** — exactly as approved; restricted category? (health, finance,
+  education claims, employment…).
+- **Variants** — how many hooks to test (RECOMMENDED 3–5).
+
+## Long-form adds
+- **Kind** — explainer, tutorial, course lesson, webinar, podcast/interview, brand film/documentary, vlog.
+- **Length** — a) 3–6 min b) 8–12 min (RECOMMENDED for YouTube explainers) c) 15–30 min d) 30 min+.
+- **Packaging** — title direction and thumbnail style (face? text? product?) — decided before the script.
+- **Lesson**: programme/module, 2–3 learning objectives, prerequisites. **Interview**: guest, angle,
+  topics to avoid, clip goals.
+- **Delivery** — memorised, teleprompter, bullet points, unscripted with a run-of-show.
 
 ## Persona card (write into brief.md and spec.brief.audience)
 ```

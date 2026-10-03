@@ -1,0 +1,164 @@
+{
+  "version": 1,
+  "template": "long_course_lesson",
+  "brand": null,
+  "language": null,
+  "color_mode": "editor_talent",
+  "title": "{{TITLE}}",
+  "about": "Recorded course lesson / training session: objective → concept → worked example → practice → recap. Built for learning, not reach.",
+  "meta": [
+    [
+      "Format",
+      "Course lesson"
+    ],
+    [
+      "Programme",
+      "{{programme · module · lesson}}"
+    ],
+    [
+      "Target Duration",
+      "{{8–15 min}}"
+    ],
+    [
+      "Instructor",
+      "{{…}}"
+    ]
+  ],
+  "brief": {
+    "content_type": "long_form",
+    "brand_name": "{{brand name as said/shown}}",
+    "platforms": [
+      "{{youtube|instagram_reels|tiktok|facebook_reels|linkedin|website|tv}}"
+    ],
+    "audience": "{{who exactly — role, age band, place, what they know}}",
+    "awareness_stage": "{{unaware|problem_aware|solution_aware|product_aware|most_aware}}",
+    "goal": "{{awareness|consideration|leads|conversions|…}}",
+    "funnel_stage": "{{top|middle|bottom}}",
+    "format": "course_lesson",
+    "hook_type": "question",
+    "duration_sec": [
+      480,
+      900
+    ],
+    "cta": "{{one action}}",
+    "scope": "{{…}}",
+    "account_type": "{{creator|business}}",
+    "trend_refs": [],
+    "learning_objectives": [
+      "{{By the end you can …}}"
+    ]
+  },
+  "scenes": [
+    {
+      "title": "SCENE 01 — HOOK: WHY THIS MATTERS",
+      "blocks": [
+        {
+          "type": "dialogue",
+          "speaker": "{{talent}}",
+          "lines": [
+            "{{a real problem this lesson solves}}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 02 — OBJECTIVES",
+      "chapter": "{{What you'll learn}}",
+      "blocks": [
+        {
+          "type": "graphic",
+          "lines": [
+            "{{2–3 objectives}}"
+          ]
+        },
+        {
+          "type": "dialogue",
+          "speaker": "{{talent}}",
+          "lines": [
+            "{{…}}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 03 — CONCEPT",
+      "chapter": "{{Concept}}",
+      "blocks": [
+        {
+          "type": "dialogue",
+          "speaker": "{{talent}}",
+          "lines": [
+            "{{…}}"
+          ]
+        },
+        {
+          "type": "graphic",
+          "lines": [
+            "{{diagram}}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 04 — WORKED EXAMPLE",
+      "chapter": "{{Example}}",
+      "blocks": [
+        {
+          "type": "broll",
+          "lines": [
+            "{{screen recording step by step}}"
+          ]
+        },
+        {
+          "type": "dialogue",
+          "speaker": "{{talent}}",
+          "lines": [
+            "{{…}}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 05 — YOUR TURN",
+      "chapter": "{{Practice}}",
+      "blocks": [
+        {
+          "type": "onscreen_text",
+          "lines": [
+            "{{exercise}}"
+          ]
+        },
+        {
+          "type": "dialogue",
+          "speaker": "{{talent}}",
+          "lines": [
+            "{{…}}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 06 — RECAP + NEXT",
+      "chapter": "{{Recap}}",
+      "blocks": [
+        {
+          "type": "dialogue",
+          "speaker": "{{talent}}",
+          "lines": [
+            "{{3-point recap}}",
+            "{{next lesson}}"
+          ]
+        }
+      ]
+    }
+  ],
+  "posting": {
+    "title_options": [
+      "{{lesson title}}"
+    ],
+    "thumbnail_concepts": [
+      "{{course card}}"
+    ],
+    "description": "{{objectives + resources}}"
+  }
+}

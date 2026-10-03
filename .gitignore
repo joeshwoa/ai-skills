@@ -10,3 +10,6 @@ Claude outputs/
 # Generated demo exports and packaged .skill archives — build artifacts, not source
 /demo/
 *.skill
+
+# fontconfig drops a .uuid into font folders it scans (reels-studio LibreOffice engine)
+.uuid

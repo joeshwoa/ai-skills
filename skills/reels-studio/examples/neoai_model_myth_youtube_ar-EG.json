@@ -1,0 +1,287 @@
+{
+  "version": 1,
+  "brand": "neoai",
+  "language": "ar-EG",
+  "color_mode": "editor_talent",
+  "title": "LONG-FORM — ليه مش محتاج أغلى Model؟ (YouTube explainer)",
+  "meta": [
+    [
+      "Format",
+      "YouTube explainer — talking head + screen demos"
+    ],
+    [
+      "Target Duration",
+      "3–4 min"
+    ],
+    [
+      "Talent",
+      "Dr. Joshua"
+    ],
+    [
+      "Tone",
+      "Clear • Honest • Practical • Confident"
+    ],
+    [
+      "Purpose",
+      "Search + trust → Advanced AI Diploma (end screen + description link)"
+    ]
+  ],
+  "brief": {
+    "content_type": "long_form",
+    "brand_name": "Neo AI",
+    "platforms": [
+      "youtube",
+      "facebook"
+    ],
+    "audience": "Egyptian professionals, students and creators who use ChatGPT-style tools weekly and wonder whether to pay for the newest model",
+    "awareness_stage": "problem_aware",
+    "goal": "consideration",
+    "funnel_stage": "middle",
+    "format": "explainer",
+    "hook_type": "myth_bust",
+    "duration_sec": [
+      180,
+      240
+    ],
+    "cta": "Watch the diploma overview / register — link in description + end screen",
+    "scope": "one long video; its reel version is examples/neoai_expensive_model_ar-EG.json"
+  },
+  "scenes": [
+    {
+      "title": "SCENE 01 — COLD OPEN",
+      "blocks": [
+        {
+          "type": "visual",
+          "lines": [
+            "Split screen: نفس الطلب في Model غالي وModel أرخص، والنتيجتين على الشاشة.",
+            "Dr. Joshua يدخل الكادر من الجنب."
+          ]
+        },
+        {
+          "type": "onscreen_text",
+          "lines": [
+            "أنهي واحدة من الـModel الغالي؟"
+          ]
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Dr. Joshua",
+          "lines": [
+            "\"بص على النتيجتين دول.",
+            "واحدة طلعت من أغلى Model في السوق، والتانية من Model أرخص بكتير.",
+            {
+              "pause": true
+            },
+            "لو مش عارف تفرّق… يبقى الفيديو ده معمول عشانك.\""
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 02 — THE PROMISE",
+      "chapter": "المقدمة",
+      "blocks": [
+        {
+          "type": "dialogue",
+          "speaker": "Dr. Joshua",
+          "lines": [
+            "\"في الدقايق الجاية هقولك ليه السعر مش هو اللي بيعمل الفرق،",
+            "إيه اللي بيعمله فعلاً،",
+            "وإمتى بجد تحتاج Model أكبر — لأن ساعات بتحتاجه.\""
+          ]
+        },
+        {
+          "type": "lower_third",
+          "lines": [
+            "Dr. Joshua — Neo AI"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 03 — WHY THE HYPE",
+      "chapter": "ليه كل Model جديد بيعمل ضجة؟",
+      "blocks": [
+        {
+          "type": "broll",
+          "lines": [
+            "لقطات شاشة لبوستات وريلز عن إطلاقات الموديلات (blurred usernames)."
+          ]
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Dr. Joshua",
+          "lines": [
+            "\"كل ما شركة تطلع Model جديد، السوشيال ميديا بتولّع.",
+            "وده طبيعي: فيه تطوير حقيقي، وفيه كمان تسويق شاطر.",
+            "بس الـBenchmarks اللي بتشوفها بتقيس مهام معينة… مش الشغل اللي إنت بتعمله كل يوم.",
+            "فالسؤال الصح مش 'مين الأقوى؟'… السؤال: 'إيه اللي محتاجه أنا؟'\""
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 04 — WHAT REALLY CHANGES THE OUTPUT",
+      "chapter": "إيه اللي بيفرق فعلاً؟",
+      "blocks": [
+        {
+          "type": "graphic",
+          "lines": [
+            "ثلاث نقط بتظهر واحدة واحدة: Context · الطلب نفسه · المراجعة"
+          ]
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Dr. Joshua",
+          "lines": [
+            "\"تلات حاجات بتفرق أكتر من سعر الـModel.",
+            "أولاً: الـContext. لو إديت الـModel المعلومات الصح عن شغلك، النتيجة بتتغير خالص.",
+            "تانيًا: الطلب نفسه. طلب واضح، فيه الهدف والجمهور وشكل النتيجة اللي عايزها، أحسن من عشر محاولات عشوائية.",
+            "تالتًا: المراجعة. إنك تقرا النتيجة، وتقول للـModel إيه اللي ناقص، وتحسنها خطوة بخطوة.",
+            {
+              "pause": true
+            },
+            "دي مهارات… مش اشتراك.\""
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 05 — DEMO: SAME TASK, TWO WAYS",
+      "chapter": "تجربة عملية: نفس المهمة بطريقتين",
+      "duration_sec": 55,
+      "blocks": [
+        {
+          "type": "broll",
+          "lines": [
+            "Screen recording كامل للطريقتين جنب بعض — الـcursor واضح، zoom على كل نتيجة."
+          ]
+        },
+        {
+          "type": "onscreen_text",
+          "lines": [
+            "الطريقة ١: طلب سريع",
+            "الطريقة ٢: Context + طلب واضح + مراجعة"
+          ]
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Dr. Joshua",
+          "lines": [
+            "\"خليني أوريك. المهمة: خطة محتوى لشهر لمطعم صغير في المعادي.",
+            "الطريقة الأولى: كتبت طلب سريع في أغلى Model… والنتيجة عامة، تنفع لأي مطعم في العالم.",
+            "الطريقة التانية: Model أرخص، بس إديته معلومات المطعم، والجمهور، والميزانية، وشكل الجدول اللي عايزه.",
+            {
+              "pause": true
+            },
+            "وبعدين راجعت معاه مرتين.",
+            "بص النتيجة… خطة على مقاس المطعم بالظبط، وبتكلفة أقل بكتير.\""
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 06 — TOOLS, CONNECTORS, SKILLS",
+      "chapter": "الـTools والـConnectors والـSkills",
+      "blocks": [
+        {
+          "type": "broll",
+          "lines": [
+            "Screen recording: Model متوصل بملفات وأدوات، بيعمل task كاملة من أولها لآخرها."
+          ]
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Dr. Joshua",
+          "lines": [
+            "\"وهنا الفرق الكبير.",
+            "الـModel لوحده بيكتب. لكن لما توصله بـTools وConnectors، بيقرا ملفاتك، ويشتغل على الأدوات اللي بتستخدمها، ويخلص الشغل بجد.",
+            "والـSkills بتعلّمه طريقتك إنت، فميبدأش من الصفر كل مرة.",
+            "Model متوسط متوصل صح… كتير بيغلب Model غالي شغال لوحده.\""
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 07 — WHEN YOU DO NEED A BIGGER MODEL",
+      "chapter": "إمتى تحتاج Model أكبر بجد؟",
+      "blocks": [
+        {
+          "type": "visual",
+          "lines": [
+            "Camera أقرب، نبرة صريحة."
+          ]
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Dr. Joshua",
+          "lines": [
+            "\"وعشان أكون صريح معاك: فيه شغل محتاج Model أكبر.",
+            "تحليل طويل ومعقد، أو كود كبير، أو مهمة فيها خطوات كتير ورا بعض.",
+            "الفكرة إنك تختار الـModel على قد المهمة… مش على قد التريند.\""
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 08 — RECAP + CTA",
+      "chapter": "الخلاصة",
+      "blocks": [
+        {
+          "type": "graphic",
+          "lines": [
+            "Recap card: Context · طلب واضح · مراجعة · Tools وConnectors · Model على قد المهمة"
+          ]
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Dr. Joshua",
+          "lines": [
+            "\"الخلاصة: النتيجة الحلوة بتيجي من طريقة تفكيرك وطريقة استخدامك للأدوات.",
+            "ودي بالظبط المهارات اللي بنبنيها في الـAdvanced AI Diploma في Neo AI.",
+            "التفاصيل في الوصف… ولو الفيديو فادك، ابعته لحد لسه بيدفع على أغلى Model.\""
+          ]
+        }
+      ]
+    }
+  ],
+  "end_frame": {
+    "lines": [
+      "Advanced AI Diploma",
+      "Neo AI"
+    ],
+    "notes": [
+      "YouTube end screen: subscribe + next video + diploma link (20 s)."
+    ]
+  },
+  "editor_notes": [
+    "Visual change كل 20–40 ثانية: angle، B-roll، graphic، screen demo.",
+    "Chapters في الوصف من الـtimecodes الحقيقية بعد المونتاج.",
+    "Captions عربي مصري مطابقة للكلام.",
+    "Music bed هادية تحت الكلام، تعلى بس في الانتقالات بين الـchapters."
+  ],
+  "posting": {
+    "title_options": [
+      "ليه مش محتاج أغلى Model في الـAI؟",
+      "Model رخيص ولا غالي؟ اللي بيفرق فعلاً في نتايج الـAI",
+      "بطّل تدفع على أغلى Model — اعمل ده بدل كده"
+    ],
+    "thumbnail_concepts": [
+      "Dr. Joshua بيشاور على نتيجتين متطابقتين، فوق واحدة '$$$' وفوق التانية '$' — نص: نفس النتيجة؟",
+      "Close-up مستغرب + نص كبير: 'متدفعش أكتر'"
+    ],
+    "description": "ليه أغلى Model مش دايمًا أحسن اختيار، وإيه اللي بيفرق فعلاً في نتايج الـAI.\nالـAdvanced AI Diploma من Neo AI: [link]",
+    "tags": [
+      "AI",
+      "الذكاء الاصطناعي",
+      "ChatGPT",
+      "prompting",
+      "Neo AI"
+    ],
+    "hashtags": [
+      "#AI",
+      "#NeoAI",
+      "#الذكاء_الاصطناعي"
+    ]
+  }
+}

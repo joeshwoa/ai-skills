@@ -1,0 +1,137 @@
+{
+  "version": 1,
+  "template": "ad_ugc",
+  "brand": null,
+  "language": null,
+  "color_mode": "editor_talent",
+  "title": "{{TITLE}}",
+  "about": "UGC-style ad: a real customer or creator on a phone, native look. Real person, real words, consent, paid-partnership label.",
+  "meta": [
+    [
+      "Format",
+      "UGC ad — selfie camera"
+    ],
+    [
+      "Creator",
+      "{{real person — consent + disclosure}}"
+    ],
+    [
+      "Length",
+      "{{20–35 sec}}"
+    ]
+  ],
+  "brief": {
+    "content_type": "ad",
+    "brand_name": "{{brand name as said/shown}}",
+    "platforms": [
+      "{{youtube|instagram_reels|tiktok|facebook_reels|linkedin|website|tv}}"
+    ],
+    "audience": "{{who exactly — role, age band, place, what they know}}",
+    "awareness_stage": "{{unaware|problem_aware|solution_aware|product_aware|most_aware}}",
+    "goal": "{{awareness|consideration|leads|conversions|…}}",
+    "funnel_stage": "{{top|middle|bottom}}",
+    "format": "ugc",
+    "hook_type": "{{result_first|story|pov}}",
+    "duration_sec": [
+      20,
+      35
+    ],
+    "cta": "{{one action}}",
+    "scope": "{{…}}",
+    "account_type": "{{creator|business}}",
+    "trend_refs": [],
+    "placements": [
+      "{{meta_reels|meta_feed|tiktok_infeed|youtube_skippable|youtube_bumper|youtube_non_skippable|…}}"
+    ],
+    "ratios": [
+      "{{9:16}}",
+      "{{4:5}}",
+      "{{16:9}}"
+    ]
+  },
+  "scenes": [
+    {
+      "title": "SCENE 01 — HOOK (RESULT FIRST)",
+      "duration_sec": 3,
+      "blocks": [
+        {
+          "type": "visual",
+          "lines": [
+            "Selfie framing, natural light, product in hand"
+          ]
+        },
+        {
+          "type": "dialogue",
+          "speaker": "{{creator}}",
+          "lines": [
+            "{{their real result in their words}}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 02 — BEFORE",
+      "blocks": [
+        {
+          "type": "dialogue",
+          "speaker": "{{creator}}",
+          "lines": [
+            "{{…}}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 03 — HOW IT HELPED",
+      "blocks": [
+        {
+          "type": "broll",
+          "lines": [
+            "{{over-the-shoulder use}}"
+          ]
+        },
+        {
+          "type": "dialogue",
+          "speaker": "{{creator}}",
+          "lines": [
+            "{{…}}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 04 — CTA",
+      "blocks": [
+        {
+          "type": "dialogue",
+          "speaker": "{{creator}}",
+          "lines": [
+            "{{CTA}}"
+          ]
+        },
+        {
+          "type": "super",
+          "lines": [
+            "{{Paid partnership / results vary if needed}}"
+          ]
+        }
+      ]
+    }
+  ],
+  "editor_notes": [
+    "Keep it raw: jump cuts, native captions, no heavy graphics."
+  ],
+  "posting": {
+    "ad_copy": {
+      "primary_text": "{{hook line + value + CTA, ≤125 chars visible}}",
+      "headline": "{{≤40 chars}}",
+      "description": "{{≤30 chars}}",
+      "cta_button": "{{Learn More|Sign Up|Shop Now|…}}"
+    },
+    "alt_hooks": [
+      "{{hook variant 1}}",
+      "{{hook variant 2}}",
+      "{{hook variant 3}}"
+    ]
+  }
+}

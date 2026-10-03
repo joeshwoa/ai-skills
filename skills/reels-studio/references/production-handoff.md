@@ -41,6 +41,19 @@ For a version in another language: re-run this skill's step 5 with the target di
 For subtitles on an already-finished video → **premium-subtitle-localization** (it verifies the
 source transcript against the audio, then adapts culturally).
 
+## D2. Ads — every ratio and cutdown
+Shoot (or generate) the master once, framed for all ratios (`brief.ratios`): action centred, safe
+headroom. Then in **creative-studio**: `video_edit` per cutdown (scene list from `cutdowns`),
+`video_reframe` for 9:16 / 4:5 / 1:1 / 16:9, `video_captions`, `motion_cta` / end card, loudness to
+the platform target. Name files `<campaign>_<cut>_<ratio>_<hook>.mp4` so the media buyer can map
+variants to results. AI-generated ads → flow-studio-director with the master's production file.
+
+## D3. Long-form
+Long shoots: teleprompter file for the talent, B-roll and screen-recording list from the blue lines,
+`video_edit` (creative-studio) with chapters re-timed from the cut, thumbnail via `design_create`
+(`thumbnail` template, 1280×720) from `thumbnail_concepts`, captions from the real audio, then 3–6
+vertical clips for reels mode.
+
 ## E. Something no skill covers
 (e.g. scheduling posts, pulling analytics from an account) — use skill-router Part 2: search for the
 user's own tool or a vetted skill, or build one, then add a line here linking it.

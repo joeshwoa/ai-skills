@@ -1,0 +1,103 @@
+{
+  "version": 1,
+  "brand": "neoai",
+  "language": "ar-EG",
+  "color_mode": "editor_talent",
+  "title": "AD — ADVANCED AI DIPLOMA | 30s MASTER + CUTDOWNS",
+  "meta": [
+    ["Format", "Performance ad — talent + screen B-roll"],
+    ["Master", "30 sec · cutdowns 15 sec / 6 sec"],
+    ["Talent", "Dr. Joshua"],
+    ["Ratios", "9:16 (master) · 4:5 · 16:9"],
+    ["Framework", "PAS — Problem · Agitate · Solution → Proof → CTA"]
+  ],
+  "brief": {
+    "content_type": "ad",
+    "brand_name": "Neo AI",
+    "platforms": ["instagram_reels", "facebook_reels", "tiktok", "youtube"],
+    "placements": ["meta_reels", "meta_feed", "tiktok_infeed", "youtube_skippable", "youtube_bumper"],
+    "ratios": ["9:16", "4:5", "16:9"],
+    "audience": "Egyptian professionals and marketers (24–40) already paying for AI subscriptions, problem-aware",
+    "awareness_stage": "problem_aware",
+    "goal": "leads",
+    "funnel_stage": "middle",
+    "format": "talent_plus_screens",
+    "hook_type": "contrarian",
+    "duration_sec": 30,
+    "cta": "Register for the Advanced AI Diploma (lead form)",
+    "account_type": "business",
+    "scope": "1 master + 2 cutdowns + 3 hook variants for testing"
+  },
+  "scenes": [
+    {
+      "title": "SCENE 01 — HOOK",
+      "duration": "3.5 sec",
+      "duration_sec": 3.5,
+      "blocks": [
+        {"type": "visual", "lines": ["Split screen: نفس الـprompt في Model غالي وModel أرخص — النتيجتين قريبين جدًا.", "Neo AI logo bug أعلى الشاشة من أول frame."]},
+        {"type": "onscreen_text", "lines": ["نفس الـprompt… تمن أقل"]},
+        {"type": "dialogue", "speaker": "Dr. Joshua", "lines": ["\"إنت بتدفع على الـAI أكتر من اللازم.\""]}
+      ]
+    },
+    {
+      "title": "SCENE 02 — PROBLEM + AGITATE",
+      "duration_sec": 5,
+      "blocks": [
+        {"type": "visual", "lines": ["Dr. Joshua، Medium Close-Up، direct eye contact."]},
+        {"type": "dialogue", "speaker": "Dr. Joshua", "lines": ["\"كل شهر Model جديد واشتراك أغلى… والنتيجة لسه عادية.\""]}
+      ]
+    },
+    {
+      "title": "SCENE 03 — SOLUTION",
+      "duration_sec": 7.5,
+      "blocks": [
+        {"type": "broll", "lines": ["Screen recording: workflow فيه Tools وConnectors شغالين مع بعض، والنتيجة بتظهر."]},
+        {"type": "dialogue", "speaker": "Dr. Joshua", "lines": ["\"في الـAdvanced AI Diploma من Neo AI، هتتعلم تفكر صح وتستخدم الـTools والـConnectors والـSkills.\""]}
+      ]
+    },
+    {
+      "title": "SCENE 04 — PROOF",
+      "duration_sec": 6,
+      "blocks": [
+        {"type": "visual", "lines": ["Cut سريع على مشاريع حقيقية من السيشنز."]},
+        {"type": "onscreen_text", "lines": ["٨ سيشنز عملية"]},
+        {"type": "dialogue", "speaker": "Dr. Joshua", "lines": ["\"وتطلع نتايج احترافية من أي Model… بتكلفة أقل.\""]}
+      ]
+    },
+    {
+      "title": "SCENE 05 — CTA",
+      "duration_sec": 4,
+      "blocks": [
+        {"type": "visual", "lines": ["Very subtle push-in، Dr. Joshua بيشاور على الـCTA button."]},
+        {"type": "dialogue", "speaker": "Dr. Joshua", "lines": ["\"سجّل دلوقتي من اللينك.\""]},
+        {"type": "super", "lines": ["Advanced AI Diploma — Neo AI"]}
+      ]
+    }
+  ],
+  "cutdowns": [
+    {"name": "15s", "target_sec": 15, "scenes": [1, 3, 5], "ratio": "9:16 + 4:5", "placement": "meta_reels",
+     "notes": ["نفس الـhook، وبعده الـsolution مباشرة، وبعدين الـCTA."]},
+    {"name": "6s bumper", "target_sec": 6, "scenes": [1], "end_frame_sec": 2, "ratio": "16:9", "placement": "youtube_bumper",
+     "notes": ["الـhook بس + end frame فيه اللوجو و'سجّل دلوقتي' (2 sec)."]}
+  ],
+  "end_frame": {"lines": ["Advanced AI Diploma", "سجّل دلوقتي", "Neo AI"], "notes": ["Deep navy + orange light — minimal animation."]},
+  "editor_notes": [
+    "Captions على كل الكلام، جوه الـsafe zone (بعيد عن آخر 35% من الشاشة في الـReels ads).",
+    "الـlogo bug موجود من أول frame في كل النسخ.",
+    "Music: commercial library، تحت الصوت بوضوح.",
+    "صدّر الـ3 نسب من نفس الـmaster: 9:16 (main)، 4:5 (feed)، 16:9 (YouTube)."
+  ],
+  "posting": {
+    "ad_copy": {
+      "primary_text": "مش محتاج أغلى Model عشان تطلع نتيجة قوية.\nاتعلم تستخدم الـAI صح في الـAdvanced AI Diploma من Neo AI.",
+      "headline": "Advanced AI Diploma",
+      "description": "سجّل دلوقتي",
+      "cta_button": "Sign Up"
+    },
+    "alt_hooks": [
+      "\"أغلى Model مش هو اللي هيطلعلك أحسن نتيجة.\"",
+      "\"نفس الـprompt… Model أرخص… ونفس الجودة تقريبًا.\"",
+      "\"قبل ما تجدد اشتراك الـAI… اتفرج على ده.\""
+    ]
+  }
+}

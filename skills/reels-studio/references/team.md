@@ -1,6 +1,6 @@
 # The team — who does what
 
-A real short-form content team, mapped to roles the AI plays (or runs as parallel sub-agents).
+A real video content team (reels, ads, long-form), mapped to roles the AI plays (or runs as parallel sub-agents).
 Each role has inputs, outputs and a "done when" check. Hand-offs are written, not implied:
 every role's output lands in the project folder or the spec.
 
@@ -95,6 +95,19 @@ account's own insights first, else general guidance), the 2–3 metrics to read 
 and what each result means for the next reel.
 **Done when:** there is a decision rule ("if 3-s hold < X, change the hook, keep the body").
 
+## 11b. Media buyer (ads)
+**Input:** brief, placements, budget, past ad results.
+**Produces:** placement list and ratios, the slot lengths to cut for, the testing matrix (hooks ×
+bodies × CTAs), KPIs (hook rate, hold rate, CTR, CPA/CPL, ROAS) and when to kill or scale a variant
+(`ads.md`).
+**Done when:** every cutdown maps to a placement and every variant has a reason to exist.
+
+## 11c. Researcher / fact-checker (long-form, ads with claims)
+**Input:** script draft.
+**Produces:** a source (link + date) for every fact, number, quote and product claim; guest research
+for interviews; flags anything unverifiable for removal.
+**Done when:** no line states something the team can't show a source for.
+
 ## 12. Brand & legal reviewer (independent)
 **Input:** spec, rendered PDF, brand file.
 **Produces:** `review.md` from `review-checklist.md` — truth of claims, consent, rights (music,
@@ -110,6 +123,6 @@ footage, logos, people), platform policy, brand voice, dialect naturalness, acce
 
 ## Running roles as sub-agents (when the tool supports it)
 Give each sub-agent: the brief, the persona, the relevant reference file, and an exact output
-format. Good parallel splits: (trend researcher ∥ audience analyst) → idea lead → (hook writer ∥
+format. Good parallel splits: (trend researcher ∥ audience analyst ∥ researcher for long-form) → idea lead → (hook writer ∥
 director's visual-hook options) → scriptwriter → (dialect specialist ∥ copywriter) → reviewer.
 The reviewer must not be the agent that wrote the script.

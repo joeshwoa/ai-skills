@@ -1,0 +1,168 @@
+{
+  "version": 1,
+  "template": "long_podcast_interview",
+  "brand": null,
+  "language": null,
+  "color_mode": "editor_talent",
+  "title": "{{TITLE}}",
+  "about": "Podcast / interview run-of-show: cold-open clip, intro, question blocks with follow-ups, segments, outro. Answers aren't scripted — questions and timing are.",
+  "meta": [
+    [
+      "Format",
+      "Podcast / interview"
+    ],
+    [
+      "Host",
+      "{{…}}"
+    ],
+    [
+      "Guest",
+      "{{name — role}}"
+    ],
+    [
+      "Target Duration",
+      "{{20–45 min}}"
+    ]
+  ],
+  "brief": {
+    "content_type": "long_form",
+    "brand_name": "{{brand name as said/shown}}",
+    "platforms": [
+      "{{youtube|instagram_reels|tiktok|facebook_reels|linkedin|website|tv}}"
+    ],
+    "audience": "{{who exactly — role, age band, place, what they know}}",
+    "awareness_stage": "{{unaware|problem_aware|solution_aware|product_aware|most_aware}}",
+    "goal": "{{awareness|consideration|leads|conversions|…}}",
+    "funnel_stage": "{{top|middle|bottom}}",
+    "format": "podcast_interview",
+    "hook_type": "story",
+    "duration_sec": [
+      1200,
+      2700
+    ],
+    "cta": "{{one action}}",
+    "scope": "{{…}}",
+    "account_type": "{{creator|business}}",
+    "trend_refs": []
+  },
+  "scenes": [
+    {
+      "title": "SCENE 01 — COLD OPEN (BEST CLIP)",
+      "duration_sec": 30,
+      "blocks": [
+        {
+          "type": "note",
+          "lines": [
+            "{{pick the strongest 20–30 s answer in the edit}}"
+          ]
+        },
+        {
+          "type": "onscreen_text",
+          "lines": [
+            "{{episode title}}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 02 — INTRO",
+      "chapter": "{{Intro}}",
+      "duration_sec": 60,
+      "blocks": [
+        {
+          "type": "dialogue",
+          "speaker": "{{host}}",
+          "lines": [
+            "{{who the guest is and why now}}"
+          ]
+        },
+        {
+          "type": "lower_third",
+          "lines": [
+            "{{guest — role}}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 03 — SEGMENT 1",
+      "chapter": "{{…}}",
+      "duration_sec": 480,
+      "blocks": [
+        {
+          "type": "question",
+          "speaker": "{{host}}",
+          "lines": [
+            "{{Q1}}",
+            "{{follow-up if…}}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 04 — SEGMENT 2",
+      "chapter": "{{…}}",
+      "duration_sec": 480,
+      "blocks": [
+        {
+          "type": "question",
+          "speaker": "{{host}}",
+          "lines": [
+            "{{Q2}}",
+            "{{Q3}}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 05 — RAPID FIRE",
+      "chapter": "{{Rapid fire}}",
+      "duration_sec": 180,
+      "blocks": [
+        {
+          "type": "question",
+          "speaker": "{{host}}",
+          "lines": [
+            "{{…}}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 06 — OUTRO + CTA",
+      "chapter": "{{Outro}}",
+      "duration_sec": 60,
+      "blocks": [
+        {
+          "type": "dialogue",
+          "speaker": "{{host}}",
+          "lines": [
+            "{{where to find the guest}}",
+            "{{CTA}}"
+          ]
+        }
+      ]
+    }
+  ],
+  "editor_notes": [
+    "{{clip 3–5 short reels from the episode — hand them to reels mode}}"
+  ],
+  "posting": {
+    "title_options": [
+      "{{title 1 ≤ 60–70 chars, keyword first}}",
+      "{{title 2}}",
+      "{{title 3}}"
+    ],
+    "thumbnail_concepts": [
+      "{{face + 2–4 words + one visual idea}}",
+      "{{alt}}"
+    ],
+    "description": "{{2 lines that hook + links; chapters are added from the edit}}",
+    "tags": [
+      "{{search phrases}}"
+    ],
+    "hashtags": [
+      "{{≤3}}"
+    ]
+  }
+}

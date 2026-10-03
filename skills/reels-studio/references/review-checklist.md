@@ -3,7 +3,7 @@
 Run after `validate_script.py` passes. Write findings to `<project>/review.md` as
 `[must-fix | should-fix | ok] finding → fix`. The writer fixes; the user accepts anything left.
 
-## 1. Does it work as a reel?
+## 1. Does it work as a video?
 - [ ] Would the persona stop at the first frame and the first line? (read it aloud, picture the feed)
 - [ ] One clear idea; every scene earns its seconds; nothing repeats without adding.
 - [ ] A payoff that matches the hook's promise (no bait-and-switch).
@@ -40,6 +40,23 @@ Run after `validate_script.py` passes. Write findings to `<project>/review.md` a
 - [ ] No engagement bait, no misleading thumbnails, no shock for shock's sake.
 - [ ] Nothing in the safe-zone danger areas; captions readable.
 - [ ] Sensitive topics (politics, religion, tragedies) avoided or handled with care per brand rules.
+
+## 5b. Ads only
+- [ ] Brand/product registers in the first 5 s; the CTA is said and shown; the end card matches the landing page.
+- [ ] No personal attributes asserted about the viewer (health, weight, finances, religion, ethnicity,
+      sexuality, age…); no "before/after" in restricted categories.
+- [ ] Every claim in the video, supers and ad copy is provable on the landing page; offer terms and
+      legal supers exact.
+- [ ] Restricted categories (health, finance, employment, housing, education outcomes, politics) handled
+      per current policy (special ad category, disclaimers) — or flagged to the user.
+- [ ] Each cutdown makes sense alone (own hook, own CTA) and fits its slot.
+- [ ] Creator/UGC ads disclosed as paid partnerships.
+
+## 5c. Long-form only
+- [ ] The first 30 s deliver what the title and thumbnail promise.
+- [ ] Every fact has a source in the researcher's notes; quotes are exact and attributed.
+- [ ] Chapters make sense as a table of contents; a re-hook opens each.
+- [ ] Guests/interviewees agreed to be recorded and published.
 
 ## 6. Brand
 - [ ] Voice matches the brand file (tone words, banned words/visuals).

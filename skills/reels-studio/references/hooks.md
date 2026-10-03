@@ -33,6 +33,15 @@ speak to one person ("you"/"إنت").
 | 17 | Bold statement (founder) | A short, certain sentence | "I've seen the future in other markets." | "شفت المستقبل في أسواق تانية… ومكنتش عايز مصر تستناه." |
 | 18 | Direct question to camera (event/offer) | "Who should attend X?" | "Who is NEXT_START for?" | "مين المفروض يحضر NEXT_START؟" |
 
+## Hooks by content type
+- **Reels**: everything above, ≤ 3 s.
+- **Ads**: same 3 s rule, but the brand/product must register in the first 5 s (logo bug, product in
+  frame, or the name said) — skippers should still know who it was. Lead with the viewer's problem or
+  the result, not the company. 3–5 hook variants recorded as separate openings for testing.
+- **Long-form**: a cold open (the most striking moment, ≤ 15 s) then the promise (what they'll get,
+  ≤ 45 s total). Confirm the title/thumbnail promise immediately. Never open with "welcome back",
+  channel intros or sponsor reads.
+
 ## Visual hook menu
 Push-in from wide to close in 1 s · whip pan · object drops into frame · talent mid-sentence as
 the cut starts · split screen A vs B · screen recording with the result already on screen ·

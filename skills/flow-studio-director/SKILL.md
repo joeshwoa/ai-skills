@@ -86,8 +86,8 @@ anything builds on it.
 ### 0. Detect the job
 - **CLIENT SCRIPT / MAKE** — a script, brief or idea to produce → steps 1–9
 - **IDEATE** — no concept yet → `references/ideation.md`, then steps 1–9.
-  For social reels where strategy, trends, hooks and a talent script matter
-  (Reels/TikTok/Shorts), run **reels-studio** first and bring its
+  For reels, ads (with cutdowns) or long-form videos where strategy, trends,
+  hooks and a talent script matter, run **reels-studio** first and bring its
   `*_for_production.txt` here as the client script.
 - **EDIT** — change existing footage → decide edit vs generative
   (`references/editing.md`): `scripts/edit_clip.py` for mechanical fixes,

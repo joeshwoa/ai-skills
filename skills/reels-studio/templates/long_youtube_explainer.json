@@ -1,0 +1,166 @@
+{
+  "version": 1,
+  "template": "long_youtube_explainer",
+  "brand": null,
+  "language": null,
+  "color_mode": "editor_talent",
+  "title": "{{TITLE}}",
+  "about": "YouTube explainer/essay (5–15 min): cold open → promise → chapters with re-hooks → payoff → CTA. Packaging (title + thumbnail) decided first.",
+  "meta": [
+    [
+      "Format",
+      "YouTube explainer"
+    ],
+    [
+      "Target Duration",
+      "{{6–10 min}}"
+    ],
+    [
+      "Talent",
+      "{{…}}"
+    ]
+  ],
+  "brief": {
+    "content_type": "long_form",
+    "brand_name": "{{brand name as said/shown}}",
+    "platforms": [
+      "{{youtube|instagram_reels|tiktok|facebook_reels|linkedin|website|tv}}"
+    ],
+    "audience": "{{who exactly — role, age band, place, what they know}}",
+    "awareness_stage": "{{unaware|problem_aware|solution_aware|product_aware|most_aware}}",
+    "goal": "{{awareness|consideration|leads|conversions|…}}",
+    "funnel_stage": "{{top|middle|bottom}}",
+    "format": "explainer",
+    "hook_type": "{{myth_bust|question|result_first}}",
+    "duration_sec": [
+      360,
+      600
+    ],
+    "cta": "{{one action}}",
+    "scope": "{{…}}",
+    "account_type": "{{creator|business}}",
+    "trend_refs": []
+  },
+  "scenes": [
+    {
+      "title": "SCENE 01 — COLD OPEN",
+      "blocks": [
+        {
+          "type": "visual",
+          "lines": [
+            "{{the most striking moment/result first}}"
+          ]
+        },
+        {
+          "type": "dialogue",
+          "speaker": "{{talent}}",
+          "lines": [
+            "{{hook within 10 s}}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 02 — THE PROMISE",
+      "chapter": "{{Intro}}",
+      "blocks": [
+        {
+          "type": "dialogue",
+          "speaker": "{{talent}}",
+          "lines": [
+            "{{what they'll get by the end}}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 03 — CHAPTER 1",
+      "chapter": "{{…}}",
+      "blocks": [
+        {
+          "type": "dialogue",
+          "speaker": "{{talent}}",
+          "lines": [
+            "{{…}}"
+          ]
+        },
+        {
+          "type": "graphic",
+          "lines": [
+            "{{…}}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 04 — CHAPTER 2",
+      "chapter": "{{…}}",
+      "blocks": [
+        {
+          "type": "dialogue",
+          "speaker": "{{talent}}",
+          "lines": [
+            "{{re-hook: 'but here's the part…'}}",
+            "{{…}}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 05 — CHAPTER 3 / DEMO",
+      "chapter": "{{…}}",
+      "blocks": [
+        {
+          "type": "broll",
+          "lines": [
+            "{{screen demo}}"
+          ]
+        },
+        {
+          "type": "dialogue",
+          "speaker": "{{talent}}",
+          "lines": [
+            "{{…}}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 06 — PAYOFF + CTA",
+      "chapter": "{{Summary}}",
+      "blocks": [
+        {
+          "type": "dialogue",
+          "speaker": "{{talent}}",
+          "lines": [
+            "{{payoff}}",
+            "{{CTA}}"
+          ]
+        }
+      ]
+    }
+  ],
+  "end_frame": {
+    "lines": [
+      "{{end screen: next video + subscribe}}"
+    ]
+  },
+  "posting": {
+    "title_options": [
+      "{{title 1 ≤ 60–70 chars, keyword first}}",
+      "{{title 2}}",
+      "{{title 3}}"
+    ],
+    "thumbnail_concepts": [
+      "{{face + 2–4 words + one visual idea}}",
+      "{{alt}}"
+    ],
+    "description": "{{2 lines that hook + links; chapters are added from the edit}}",
+    "tags": [
+      "{{search phrases}}"
+    ],
+    "hashtags": [
+      "{{≤3}}"
+    ]
+  }
+}

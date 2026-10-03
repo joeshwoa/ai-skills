@@ -55,6 +55,17 @@ from the right edge (like/comment/share column). Centre band ≈ y 250–1450 is
 ## Snapchat Spotlight
 - Vertical; length limits have changed several times (60 s historically — verify current); younger audience; trending sounds/Lenses; caption very short (≤ 160 chars).
 
+## YouTube long-form
+- 16:9 (1920×1080 or 4K), chapters (first at 00:00, ≥ 3, each ≥ 10 s), title ≤ 100 chars (keep the
+  key part in ~60), description 5,000 chars, custom thumbnail 1280×720 (< 2 MB), end screen 5–20 s,
+  cards, captions/subtitles uploaded as .srt.
+- Signals YouTube talks about: click-through on the thumbnail, average view duration and
+  percentage viewed, returning viewers, satisfaction surveys. A strong first 30 s protects the CTR you earned.
+- Vertical clips from the long video → Shorts (link back with "related video").
+
+## Ads
+Placement lengths, ratios, ad-copy limits and policies are in `ads.md`.
+
 ## Posting habits (general — the account's own Insights beat any rule)
 - Consistency beats volume: 3–5 reels/week for a growing account is common practice.
 - Post when the audience is on: in Egypt, evenings (after work, ~7–11 pm Cairo) are typical; in

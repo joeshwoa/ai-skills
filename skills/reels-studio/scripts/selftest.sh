@@ -37,6 +37,29 @@ if missing:
     print("    missing:", missing); sys.exit(1)
 PYEOF
 
+# 2b. ads and long-form rules
+"$PY" "$HERE/validate_script.py" "$SKILL/examples/tests/broken_ad.json" --today "$TODAY" --json >"$T/ba.json" 2>&1
+"$PY" - "$T/ba.json" <<'PYEOF' && ok "ad fixture: slot overrun, bumper limit, bad cutdowns, no CTA, late brand, personal attribute" || bad "ad fixture: a planted fault was missed"
+import json, sys
+r = json.load(open(sys.argv[1]))
+msgs = " | ".join(i["msg"] for i in r["errors"] + r["warnings"])
+need = ["ad slot is 15s", "runs ~14.0s for a 6s slot", "scene 9 doesn't exist", "no cutdown with placement 'youtube_bumper' fits", "youtube_bumper allows at most 6s",
+        "an ad needs a CTA", "isn't seen or heard in the first 5 s", "personal attribute", "cuts headlines around 40"]
+missing = [n for n in need if n not in msgs]
+if missing:
+    print("    missing:", missing); sys.exit(1)
+PYEOF
+"$PY" "$HERE/validate_script.py" "$SKILL/examples/tests/broken_long.json" --today "$TODAY" --json >"$T/bl.json" 2>&1
+"$PY" - "$T/bl.json" <<'PYEOF' && ok "long-form fixture: late hook, greeting, 230 s scene, <3 chapters, title >100" || bad "long-form fixture: a planted fault was missed"
+import json, sys
+r = json.load(open(sys.argv[1]))
+msgs = " | ".join(i["msg"] for i in r["errors"] + r["warnings"])
+need = ["first 10 s", "opens with a greeting", "one scene runs ~230s", "YouTube needs at least 3", "> YouTube's 100", "thumbnail"]
+missing = [n for n in need if n not in msgs]
+if missing:
+    print("    missing:", missing); sys.exit(1)
+PYEOF
+
 # 3. templates: every one renders, and every one is refused by the validator until filled
 for tp in "$SKILL"/templates/*.json; do
   n="$(basename "$tp" .json)"
@@ -74,6 +97,15 @@ if "$PY" "$HERE/render_script.py" "$EX" --out "$T/pdf" --formats pdf --name ex >
 else
   skp "no PDF engine on this machine — $(tail -1 "$T/pdf.log")"
 fi
+
+# 5b. long-form timecodes/chapters and ad cutdowns reach the document
+LF="$SKILL/examples/neoai_model_myth_youtube_ar-EG.json"; AD="$SKILL/examples/neoai_diploma_ad_ar-EG.json"
+"$PY" "$HERE/render_script.py" "$LF" --out "$T/lf" --formats html --name lf >/dev/null 2>&1 \
+  && grep -q "00:00 المقدمة" "$T/lf/lf.html" && grep -q "(≈ 01:" "$T/lf/lf.html" \
+  && ok "long-form: scene timecodes + YouTube chapters starting 00:00" || bad "long-form timecodes/chapters missing"
+"$PY" "$HERE/render_script.py" "$AD" --out "$T/ad" --formats html,production --name ad >/dev/null 2>&1 \
+  && grep -q "CUTDOWNS" "$T/ad/ad.html" && grep -q "6s bumper — 6 s target" "$T/ad/ad.html" && grep -q "Note: cutdown 15s = scenes 1, 3, 5" "$T/ad/ad_for_production.txt" \
+  && ok "ad: cutdowns in the script and the production file" || bad "ad cutdowns missing"
 
 # 6. loose spec shapes, awkward paths, malformed input, stale output
 E="$SKILL/examples/tests/edge_spec.json"; OD="$T/out dir #1"

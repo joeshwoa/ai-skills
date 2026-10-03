@@ -63,7 +63,7 @@ English, using the vocabulary in each skill's `references/workflows.md`) — ref
 `skills/devuniverse/references/tools.md` for the exact tool names and
 argument shapes rather than guessing them.
 
-The `reels-studio` skill is my short-form video content team. In ChatGPT,
+The `reels-studio` skill is my video content team (reels, ads with cutdowns, and long-form YouTube/lesson/podcast scripts). In ChatGPT,
 follow its method by hand: ask me the scope/audience questions first
 (`skills/reels-studio/references/intake-scope-audience.md`), say clearly when
 you can't check today's trends live, give me scored ideas and 5–10 hooks

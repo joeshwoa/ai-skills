@@ -1,5 +1,5 @@
 ---
-description: Short-form video content team — scope & audience first, live dated trends, scored ideas, hook variants, and shoot-ready Reels/TikTok/Shorts scripts in any language or dialect (Egyptian Arabic as spoken, Gulf, Levantine, MSA, English…), rendered as PDF + DOCX in the house script style (Neo AI built in) with teleprompter, draft SRT, posting pack and a production hand-off file. Apply when the user asks to write, plan, brainstorm or fix a reel/TikTok/Short script, hooks, trends or a reels content calendar.
+description: Video content team for reels/TikTok/Shorts, ads (master + cutdowns per placement, ad copy, policy checks) and long-form (YouTube explainers, course lessons, webinars, podcasts, brand films) — scope & audience first, live dated trends, scored ideas, hook variants, shoot-ready scripts in any language or dialect (Egyptian Arabic as spoken, Gulf, Levantine, MSA, English…), rendered as PDF + DOCX in the house script style (Neo AI built in) with teleprompter, draft SRT, posting pack and a production hand-off file. Apply when the user asks to write, plan, brainstorm or fix a reel, ad/commercial, YouTube video, lesson, webinar or podcast script, hooks, trends or a content calendar.
 globs:
 alwaysApply: false
 ---
@@ -11,5 +11,6 @@ Quick reference:
 - Setup once: `bash skills/reels-studio/scripts/setup.sh` (`--fonts` to install Cairo); prove it: `bash skills/reels-studio/scripts/selftest.sh`.
 - Gates: brief (scope + audience confirmed) → live trend scan (dated) → idea board (`rs.sh score`) → hooks → spec (`rs.sh new --template …`) → `rs.sh validate` (0 errors; `--strict` before delivery) → reviewer checklist → `rs.sh render --formats pdf,docx,teleprompter,production,srt` → look at the PDF → user review → hand-off.
 - Write how the audience speaks: `references/languages-dialects.md` (Egyptian: ده/مش/إزاي/هـ, English terms with الـ).
+- Content types (`brief.content_type`): `reel` (hook ≤ 3 s), `ad` (`references/ads.md` — placements, ratios, `cutdowns`, `posting.ad_copy`), `long_form` (`references/long-form.md` — `chapter` on scenes, title options + thumbnails). Templates: `rs.sh new --list`.
 - House style: `brand: neoai` — blue = editor, dark red = talent; `color_mode: mono` = all-blue variant.
 - Production: AI video → flow-studio-director (`*_for_production.txt`); shoot/edit/voice/captions → creative-studio; other languages → transcreate here, subtitles → premium-subtitle-localization.
