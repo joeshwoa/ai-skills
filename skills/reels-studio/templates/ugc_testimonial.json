@@ -1,0 +1,114 @@
+{
+  "version": 1,
+  "template": "ugc_testimonial",
+  "brand": null,
+  "language": null,
+  "color_mode": "editor_talent",
+  "title": "{{REEL — TITLE}}",
+  "about": "A real customer/student on phone-style footage. Only real people, real words, written consent — never invented testimonials.",
+  "meta": [
+    [
+      "Target Duration",
+      "{{25–40 sec}}"
+    ],
+    [
+      "Talent",
+      "{{real customer name — consent on file}}"
+    ]
+  ],
+  "brief": {
+    "platforms": [
+      "{{instagram_reels|tiktok|youtube_shorts|facebook_reels|linkedin}}"
+    ],
+    "audience": "{{who exactly — role, age band, city/country, what they already know}}",
+    "awareness_stage": "{{unaware|problem_aware|solution_aware|product_aware|most_aware}}",
+    "goal": "{{awareness|engagement|followers|consideration|leads|conversions|retention}}",
+    "funnel_stage": "{{top|middle|bottom}}",
+    "format": "ugc_testimonial",
+    "hook_type": "{{result_first|story}}",
+    "duration_sec": [
+      25,
+      40
+    ],
+    "cta": "{{one action, or none}}",
+    "scope": "{{single reel | series ep N/M | campaign}}",
+    "account_type": "{{creator|business}}",
+    "trend_refs": []
+  },
+  "scenes": [
+    {
+      "title": "SCENE 01 — RESULT FIRST",
+      "duration_sec": 3,
+      "blocks": [
+        {
+          "type": "visual",
+          "lines": [
+            "Selfie framing, natural light, handheld"
+          ]
+        },
+        {
+          "type": "dialogue",
+          "speaker": "{{customer}}",
+          "lines": [
+            "{{their real result, their words}}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 02 — BEFORE",
+      "blocks": [
+        {
+          "type": "dialogue",
+          "speaker": "{{customer}}",
+          "lines": [
+            "{{…}}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 03 — WHAT CHANGED",
+      "blocks": [
+        {
+          "type": "broll",
+          "lines": [
+            "{{proof footage}}"
+          ]
+        },
+        {
+          "type": "dialogue",
+          "speaker": "{{customer}}",
+          "lines": [
+            "{{…}}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 04 — CTA",
+      "blocks": [
+        {
+          "type": "onscreen_text",
+          "lines": [
+            "{{CTA}}"
+          ]
+        }
+      ]
+    }
+  ],
+  "editor_notes": [
+    "Keep it raw — light colour, captions, no heavy graphics.",
+    "Interview prompts, not a script, if the person isn't an actor."
+  ],
+  "posting": {
+    "cover_text": "{{…}}",
+    "caption": "{{…}}",
+    "hashtags": [
+      "{{…}}"
+    ],
+    "alt_hooks": [
+      "{{…}}"
+    ]
+  }
+}

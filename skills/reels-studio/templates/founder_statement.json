@@ -1,0 +1,206 @@
+{
+  "version": 1,
+  "template": "founder_statement",
+  "brand": null,
+  "language": null,
+  "color_mode": "editor_talent",
+  "title": "{{REEL — TITLE}}",
+  "about": "Founder/executive cinematic statement with a full production brief before the script (the HERO REEL — Mr. Wael shape).",
+  "meta": [
+    [
+      "Format",
+      "Founder-led cinematic reel"
+    ],
+    [
+      "Duration",
+      "{{40–50 seconds}}"
+    ],
+    [
+      "Language",
+      "{{English}}"
+    ],
+    [
+      "Location",
+      "{{premium real place}}"
+    ],
+    [
+      "Camera",
+      "{{50mm lens + Gimbal}}"
+    ],
+    [
+      "Style",
+      "Premium, minimal, authentic, cinematic"
+    ],
+    [
+      "Tone",
+      "{{Professional, confident, visionary}}"
+    ]
+  ],
+  "brief": {
+    "platforms": [
+      "{{instagram_reels|tiktok|youtube_shorts|facebook_reels|linkedin}}"
+    ],
+    "audience": "{{who exactly — role, age band, city/country, what they already know}}",
+    "awareness_stage": "{{unaware|problem_aware|solution_aware|product_aware|most_aware}}",
+    "goal": "{{awareness|engagement|followers|consideration|leads|conversions|retention}}",
+    "funnel_stage": "{{top|middle|bottom}}",
+    "format": "founder_statement",
+    "hook_type": "{{bold_statement|story}}",
+    "duration_sec": [
+      40,
+      50
+    ],
+    "cta": "{{one action, or none}}",
+    "scope": "{{single reel | series ep N/M | campaign}}",
+    "account_type": "{{creator|business}}",
+    "trend_refs": []
+  },
+  "sections": [
+    {
+      "heading": "{{الفكرة الإبداعية / CREATIVE IDEA}}",
+      "paragraphs": [
+        "{{what the viewer must feel; the message is / is not}}"
+      ]
+    },
+    {
+      "heading": "VISUAL DIRECTION",
+      "paragraphs": [
+        "{{location, time of day, light}}"
+      ],
+      "bullets": [
+        "{{background elements}}"
+      ]
+    },
+    {
+      "heading": "CAMERA & MOVEMENT",
+      "paragraphs": [
+        "{{main shot, lens, height, movement rules}}"
+      ]
+    },
+    {
+      "heading": "PERFORMANCE & BODY LANGUAGE",
+      "paragraphs": [
+        "{{posture, gestures, memorise the flow not the words}}"
+      ]
+    },
+    {
+      "heading": "WARDROBE",
+      "bullets": [
+        "{{option A}}",
+        "{{option B}}"
+      ]
+    },
+    {
+      "heading": "MUSIC & SOUND",
+      "paragraphs": [
+        "{{bed, build, Voice > Music > Environment}}"
+      ]
+    },
+    {
+      "heading": "EDITING STYLE",
+      "paragraphs": [
+        "{{number of main shots, cut only on idea change}}"
+      ],
+      "bullets": [
+        "{{things NOT to do}}"
+      ]
+    }
+  ],
+  "scenes": [
+    {
+      "title": "SCENE 01 — THE HOOK",
+      "blocks": [
+        {
+          "type": "visual",
+          "lines": [
+            "{{…}}"
+          ]
+        },
+        {
+          "type": "dialogue",
+          "label": "Dialogue",
+          "lines": [
+            "{{…}}",
+            {
+              "pause": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 02 — THE EXPERIENCE",
+      "blocks": [
+        {
+          "type": "visual",
+          "lines": [
+            "{{…}}"
+          ]
+        },
+        {
+          "type": "dialogue",
+          "label": "Dialogue",
+          "lines": [
+            "{{…}}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 03 — THE REALIZATION",
+      "blocks": [
+        {
+          "type": "visual",
+          "lines": [
+            "{{…}}"
+          ]
+        },
+        {
+          "type": "dialogue",
+          "label": "Dialogue",
+          "lines": [
+            "{{…}}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 04 — THE VISION / CTA",
+      "blocks": [
+        {
+          "type": "visual",
+          "lines": [
+            "{{…}}"
+          ]
+        },
+        {
+          "type": "dialogue",
+          "label": "Dialogue",
+          "lines": [
+            "{{…}}"
+          ]
+        }
+      ]
+    }
+  ],
+  "end_frame": {
+    "lines": [
+      "{{logo}}",
+      "{{campaign line}}",
+      "{{date}}"
+    ],
+    "notes": [
+      "{{end-card animation}}"
+    ]
+  },
+  "posting": {
+    "cover_text": "{{…}}",
+    "caption": "{{…}}",
+    "hashtags": [
+      "{{…}}"
+    ],
+    "alt_hooks": [
+      "{{…}}"
+    ]
+  }
+}

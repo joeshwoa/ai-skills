@@ -38,6 +38,18 @@ below for what that feeds.
   garbled ASR cue may only be re-transcribed from audio, marked
   unclear, or asked about — never guessed from context, however obvious
   it looks.
+- **reels-studio** (`skills/reels-studio/SKILL.md`) — a full short-form
+  content team (strategist, audience analyst, trend researcher, idea lead,
+  hook writer, scriptwriter + dialect specialist, director, editor,
+  copywriter, growth analyst, brand/legal reviewer): locks scope and audience
+  first, researches live dated trends, scores ideas, writes hook variants,
+  then a scene-by-scene reel script in any language or dialect (Egyptian
+  Arabic as people speak it, Gulf, Levantine, Maghrebi, MSA, English…),
+  validated and rendered as PDF + DOCX in the house script style (Neo AI
+  style built in) plus teleprompter, draft SRT and a production file
+  flow-studio-director reads. Trigger: write/plan/brainstorm/fix a Reel,
+  TikTok, Short or any short vertical video script, hooks, trends, or a
+  reels content calendar — before any production skill.
 - **creative-studio** (`skills/creative-studio/SKILL.md`) — a whole
   content-creation team on free/open-source tools via the user's studio-mcp
   (110 tools): brand kits (logo concepts, palette, Arabic+Latin type,
@@ -48,26 +60,28 @@ below for what that feeds.
   images/video (local ComfyUI/mflux or free services). Every tool returns
   previews to LOOK at. Trigger: design, brand, edit, animate, caption, voice,
   retouch or "make content" for a business or social media.
-- **omnicinema** (`skills/omnicinema/SKILL.md`) — cinematic video
-  generation (screenplay + footage + Remotion render), design assets
-  (logos, vector art, textures, UI mockups), voiceover, music, and SFX.
-  Runs the real `omnicinema-mcp` server as a one-shot local command — no
-  MCP client registration needed. Trigger: any request to make a video,
-  short film, trailer, logo/design asset, voiceover, music, or sound
-  effect via OmniCinema.
-- **devuniverse** (`skills/devuniverse/SKILL.md`) — scaffold a
-  production-grade Flutter + Supabase/Firebase/Node project via a
-  27-persona virtual engineering agency (stack debate, 3D spatial UI
-  module, Figma sync, compliance audit, Terms/Privacy drafts). Runs the
-  real `devuniverse-mcp` server the same one-shot way. Trigger: any
-  request to scaffold a new app/project, start a Flutter project, or
-  generate the 3D spatial canvas module.
+- **omnicinema** (`skills/omnicinema/SKILL.md`) — logos (+ reversed/icon),
+  vector illustrations, UI mockups, genre music (WAV + MIDI), sound effects,
+  voiceover and short promo/animatic videos from the user's omnicinema-mcp
+  engine; offline and free by default, stock/AI with the user's keys; every
+  output checked with `scripts/check_media.sh`. Runs the real server as a
+  one-shot local command. Trigger: logo, mockup, illustration, music, beat,
+  SFX, voiceover, quick promo/storyboard video.
+- **devuniverse** (`skills/devuniverse/SKILL.md`) — scaffold a Flutter app
+  (+ Supabase/Firebase, optional Fastify service, optional 3D journey) from
+  a brief via the user's devuniverse-mcp persona agency: dry-run plan →
+  generate → `scripts/verify_project.sh` (flutter analyze/test, service
+  tests, RLS, audit). Trigger: start/scaffold a new app, add a 3D journey,
+  re-theme from images, release audit, privacy/terms drafts.
 - **flow-studio-director** (`skills/flow-studio-director/SKILL.md`) — a
-  full AI film crew for Google Flow (Veo 3.1 + Omni Flash + Nano Banana):
-  ideation, script, character/voice bible, per-shot routing and credit
-  pricing, dense cinematic prompts, native in-clip dialogue, QC of every
-  take, assembly and delivery; can drive Flow in Chrome (Kapture) in four
-  autonomy modes. Trigger: any request to make, plan, prompt, fix, check,
+  full AI film crew for Google Flow (Veo 3.1 + Omni Flash + Nano Banana)
+  that takes a client's script to the finished video: script breakdown
+  and analysis, characters and voices built and approved before any shot,
+  storyboard animatic, per-shot routing and credit pricing, dense
+  cinematic prompts, native in-clip dialogue, QC of every take, editing
+  (fix in post first), transitions, captions from the script, montage and
+  delivery — order enforced by five gates the user signs; can drive Flow in
+  Chrome (Kapture) in four autonomy modes. Trigger: any request to make, plan, prompt, fix, check,
   extend or finish an AI video/reel/ad/short/animated series, or which Flow
   model to use / what it will cost.
 - **skill-router** (`skills/skill-router/SKILL.md`) — see "Read this

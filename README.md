@@ -78,6 +78,17 @@ adapter around.
   an agentic meaning/quality review pass, then mux into the video with
   `ffmpeg` stream-copy (no re-encode unless burned-in subtitles are
   specifically needed).
+- **[reels-studio](skills/reels-studio/SKILL.md)** — a short-form video
+  content team in one skill: scope and audience locked first, live dated trend
+  research, scored idea boards, 5–10 hook variants, then a shoot-ready reel
+  script written in the audience's real spoken language or dialect (Egyptian
+  Arabic, Gulf, Levantine, Maghrebi, MSA, English or any other), checked by a
+  validator (hook in 3 s, runtime vs target, MSA words in Egyptian scripts,
+  claims, engagement bait, stale trends, platform limits) and rendered as
+  PDF + DOCX in the house script style — Cairo, right-to-left, black headers,
+  blue for the editor, dark red for the talent (Neo AI's format built in) —
+  plus teleprompter text, a draft SRT, a posting pack and a production file
+  that hands straight to flow-studio-director / creative-studio.
 - **[creative-studio](skills/creative-studio/SKILL.md)** — a full content
   creation team the AI drives itself, using only free tools, through the real
   [studio-mcp](https://github.com/joeshwoa/studio-mcp) server (MCP or plain

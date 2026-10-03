@@ -1,0 +1,31 @@
+{
+  "name": "Default",
+  "about": "Neutral production-script look. Every brand file is merged over this one, so a brand only lists what it changes.",
+  "page": {"size": "A4", "margin_mm": 12},
+  "font": {
+    "family": "Cairo",
+    "medium": "Cairo Medium",
+    "fallbacks": ["Noto Sans", "Noto Sans Arabic", "Segoe UI", "Helvetica Neue", "Arial", "sans-serif"],
+    "files": ["Cairo-Regular.ttf", "Cairo-Medium.ttf", "Cairo-SemiBold.ttf", "Cairo-Bold.ttf"]
+  },
+  "colors": {
+    "text": "000000",
+    "editor": "1D55A3",
+    "talent": "8A1538",
+    "mono": "1F68B0"
+  },
+  "sizes_pt": {"title": 24, "meta": 19, "section": 20, "scene": 14, "label": 14, "body": 14, "legend": 13},
+  "color_mode": "editor_talent",
+  "legend": true,
+  "labels": {
+    "legend_editor": "FOR EDITOR",
+    "legend_talent": "FOR TALENT",
+    "end_frame": "END FRAME",
+    "editor_notes": "EDITOR NOTES",
+    "posting": "POSTING PACK",
+    "script": "SCRIPT"
+  },
+  "end_frame_default": [],
+  "talents": {},
+  "signatures": {}
+}

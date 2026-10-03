@@ -1,0 +1,16 @@
+{
+  "brand": null,
+  "language": "arz",
+  "title": "EDGE FIXTURE — loose shapes must still render",
+  "meta": {"Talent": "Host", "Duration": "15 sec"},
+  "brief": {"platforms": "tiktok", "audience": "test", "goal": "engagement", "duration_sec": 15, "cta": "none",
+            "trend_refs": ["just a string"]},
+  "sections": [{"heading": "NOTE", "paragraphs": "one paragraph as a string"}],
+  "scenes": [
+    {"title": "Opening shot", "duration": "6 sec", "blocks": [{"type": "visual", "lines": "a single string line"}]},
+    {"title": "SCENE 02", "blocks": [{"type": "dialogue", "lines": ["إزيك عامل إيه؟", {"pause": true}]}]}
+  ],
+  "end_frame": ["Brand", "Date"],
+  "editor_notes": "a single note",
+  "posting": {"hashtags": "#a #b", "alt_hooks": "one hook"}
+}

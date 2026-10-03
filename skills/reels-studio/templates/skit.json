@@ -1,0 +1,119 @@
+{
+  "version": 1,
+  "template": "skit",
+  "brand": null,
+  "language": null,
+  "color_mode": "editor_talent",
+  "title": "{{REEL — TITLE}}",
+  "about": "Two or more characters, a relatable situation, the brand as the punchline or the fix.",
+  "meta": [
+    [
+      "Target Duration",
+      "{{20–35 sec}}"
+    ],
+    [
+      "Cast",
+      "{{A — role / B — role}}"
+    ],
+    [
+      "Tone",
+      "{{funny, relatable}}"
+    ]
+  ],
+  "brief": {
+    "platforms": [
+      "{{instagram_reels|tiktok|youtube_shorts|facebook_reels|linkedin}}"
+    ],
+    "audience": "{{who exactly — role, age band, city/country, what they already know}}",
+    "awareness_stage": "{{unaware|problem_aware|solution_aware|product_aware|most_aware}}",
+    "goal": "{{awareness|engagement|followers|consideration|leads|conversions|retention}}",
+    "funnel_stage": "{{top|middle|bottom}}",
+    "format": "skit",
+    "hook_type": "{{relatable_pain|pov}}",
+    "duration_sec": [
+      20,
+      35
+    ],
+    "cta": "{{one action, or none}}",
+    "scope": "{{single reel | series ep N/M | campaign}}",
+    "account_type": "{{creator|business}}",
+    "trend_refs": []
+  },
+  "scenes": [
+    {
+      "title": "SCENE 01 — THE SETUP",
+      "duration_sec": 3,
+      "blocks": [
+        {
+          "type": "visual",
+          "lines": [
+            "{{situation everyone recognises}}"
+          ]
+        },
+        {
+          "type": "onscreen_text",
+          "lines": [
+            "{{POV: …}}"
+          ]
+        },
+        {
+          "type": "dialogue",
+          "speaker": "{{A}}",
+          "lines": [
+            "{{…}}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 02 — ESCALATION",
+      "blocks": [
+        {
+          "type": "dialogue",
+          "speaker": "{{B}}",
+          "lines": [
+            "{{…}}"
+          ]
+        },
+        {
+          "type": "dialogue",
+          "speaker": "{{A}}",
+          "lines": [
+            "{{…}}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 03 — TWIST / PUNCHLINE + CTA",
+      "blocks": [
+        {
+          "type": "visual",
+          "lines": [
+            "{{…}}"
+          ]
+        },
+        {
+          "type": "dialogue",
+          "speaker": "{{B}}",
+          "lines": [
+            "{{…}}"
+          ]
+        }
+      ]
+    }
+  ],
+  "editor_notes": [
+    "{{reaction cuts, SFX for comedy beats, loop ending}}"
+  ],
+  "posting": {
+    "cover_text": "{{…}}",
+    "caption": "{{…}}",
+    "hashtags": [
+      "{{…}}"
+    ],
+    "alt_hooks": [
+      "{{…}}"
+    ]
+  }
+}

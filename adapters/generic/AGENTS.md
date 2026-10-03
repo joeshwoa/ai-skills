@@ -38,6 +38,18 @@ below for what that feeds.
   garbled ASR cue may only be re-transcribed from audio, marked
   unclear, or asked about — never guessed from context, however obvious
   it looks.
+- **reels-studio** (`skills/reels-studio/SKILL.md`) — a full short-form
+  content team (strategist, audience analyst, trend researcher, idea lead,
+  hook writer, scriptwriter + dialect specialist, director, editor,
+  copywriter, growth analyst, brand/legal reviewer): locks scope and audience
+  first, researches live dated trends, scores ideas, writes hook variants,
+  then a scene-by-scene reel script in any language or dialect (Egyptian
+  Arabic as people speak it, Gulf, Levantine, Maghrebi, MSA, English…),
+  validated and rendered as PDF + DOCX in the house script style (Neo AI
+  style built in) plus teleprompter, draft SRT and a production file
+  flow-studio-director reads. Trigger: write/plan/brainstorm/fix a Reel,
+  TikTok, Short or any short vertical video script, hooks, trends, or a
+  reels content calendar — before any production skill.
 - **creative-studio** (`skills/creative-studio/SKILL.md`) — a whole
   content-creation team on free/open-source tools via the user's studio-mcp
   (110 tools): brand kits (logo concepts, palette, Arabic+Latin type,

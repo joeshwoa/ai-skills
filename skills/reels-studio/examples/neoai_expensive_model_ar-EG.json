@@ -1,0 +1,121 @@
+{
+  "version": 1,
+  "brand": "neoai",
+  "language": "ar-EG",
+  "color_mode": "editor_talent",
+  "title": "REEL — YOU DON'T NEED THE MOST EXPENSIVE MODEL",
+  "meta": [
+    ["Target Duration", "55–65 sec"],
+    ["Talent", "Dr. Joshua"],
+    ["Tone", "Confident • Direct • Educational • Sharp"],
+    ["Purpose", "Trend Commentary + Myth-Busting + Advanced AI Diploma Positioning + CTA"]
+  ],
+  "brief": {
+    "platforms": ["instagram_reels", "tiktok", "facebook_reels"],
+    "audience": "Egyptian professionals, marketers, creators and students who use AI tools and feel pressure to pay for every new top-tier model",
+    "awareness_stage": "problem_aware",
+    "goal": "consideration",
+    "funnel_stage": "middle",
+    "format": "talking_head_trend_commentary",
+    "hook_type": "news_jacking",
+    "duration_sec": [55, 65],
+    "cta": "Enroll in the Advanced AI Diploma",
+    "trend_refs": [
+      {"name": "new-model launch hype cycle (GPT-6 Astra, Sora)", "kind": "news_jacking", "source": "user brief", "checked": "2026-10-03"}
+    ],
+    "scope": "single reel, part of the Neo AI programmes campaign"
+  },
+  "scenes": [
+    {
+      "title": "SCENE 01 — VISUAL HOOK",
+      "duration": "1.2 sec",
+      "duration_sec": 1.2,
+      "blocks": [
+        {"type": "visual", "lines": [
+          "Dr. Joshua يظهر على الشاشة — 0.4 sec",
+          "Glitch Effect",
+          "Mascot يظهر — 0.4 sec",
+          "Glitch Effect",
+          "Dr. Joshua يرجع ويبدأ الكلام مباشرة"
+        ]},
+        {"type": "sfx", "lines": [
+          "Short digital glitch sound مع كل transition.",
+          "الـGlitch يكون سريع وclean، بدون مبالغة."
+        ]}
+      ]
+    },
+    {
+      "title": "SCENE 02 — HOOK: THE TREND CYCLE",
+      "blocks": [
+        {"type": "dialogue", "speaker": "Dr. Joshua", "lines": [
+          "\"كل ما شركة تطلع Model جديد… زي GPT-6 Astra أو Sora…",
+          "السوشيال ميديا بتولّع في ثواني.",
+          "تريندات، ريلز، بوستات: 'لازم تجرب ده دلوقتي.'\""
+        ]}
+      ]
+    },
+    {
+      "title": "SCENE 03 — THE MYTH",
+      "blocks": [
+        {"type": "dialogue", "speaker": "Dr. Joshua", "lines": [
+          "\"وكل مرة، نفس الكلام:",
+          "'من غير أغلى Model، مش هتطلع نتيجة قوية.'",
+          {"pause": true},
+          "ودي أكبر غلطة بيقع فيها ناس كتير مع الـAI.\""
+        ]}
+      ]
+    },
+    {
+      "title": "SCENE 04 — THE TRUTH",
+      "blocks": [
+        {"type": "visual", "lines": ["Camera closer شوية، performance أكتر ثقة."]},
+        {"type": "dialogue", "speaker": "Dr. Joshua", "lines": [
+          "\"الحقيقة إنك تقدر تطلع Outputs احترافية من موديلات Intermediate، بجزء صغير من التكلفة.",
+          "اللي بيفرق مش سعر الـModel…",
+          "اللي بيفرق إنك تعرف تفكر، وتفهم، وتستخدم الـTools والـConnectors والـSkills صح.\""
+        ]}
+      ]
+    },
+    {
+      "title": "SCENE 05 — NEO AI POSITIONING",
+      "blocks": [
+        {"type": "dialogue", "speaker": "Dr. Joshua", "lines": [
+          "\"وده بالظبط اللي بنعلمه في الـAdvanced AI Diploma في Neo AI.",
+          "مش إزاي تجري ورا كل Model جديد…",
+          "لكن إزاي تطلع أحسن نتيجة من أي Model قدامك.\""
+        ]}
+      ]
+    },
+    {
+      "title": "SCENE 06 — CTA",
+      "blocks": [
+        {"type": "visual", "lines": ["Very subtle push-in.", "No gestures.", "Direct eye contact."]},
+        {"type": "dialogue", "speaker": "Dr. Joshua", "lines": [
+          "\"أي Model، أي Budget… نتيجة حقيقية.",
+          "احجز مكانك دلوقتي في الـAdvanced AI Diploma.",
+          "مستنيينك.\""
+        ]}
+      ]
+    }
+  ],
+  "end_frame": {"lines": ["Advanced AI Diploma", "ENROLL NOW", "Neo AI"], "notes": ["Minimal animation — no flashy effects."]},
+  "editor_notes": [
+    "Visual Hook: Joshua → 0.4 sec → Glitch → Mascot → 0.4 sec → Glitch → Joshua.",
+    "الـGlitch يكون fast, clean, minimal.",
+    "استخدام short digital SFX مع الـGlitch والـtransitions الرئيسية فقط.",
+    "باقي الفيديو يكون clean وminimal، والـfocus الأساسي على Joshua والـdelivery.",
+    "لو فيه B-roll: شاشات حقيقية لموديل أرخص بيطلع Output قوي — مش Generic AI Visuals.",
+    "Captions بالعربي على كل الكلام، بعيد عن آخر 25% من الشاشة (منطقة الـUI)."
+  ],
+  "posting": {
+    "cover_text": "مش محتاج أغلى Model",
+    "caption": "كل أسبوع Model جديد وتريند جديد… بس النتيجة الحلوة مش بتيجي من السعر.\nبتيجي من إنك تعرف تفكر وتستخدم الـTools صح.\nالـAdvanced AI Diploma من Neo AI — احجز مكانك من اللينك في البايو.",
+    "hashtags": ["#NeoAI", "#الذكاء_الاصطناعي", "#AI", "#AdvancedAIDiploma"],
+    "alt_hooks": [
+      "\"إنت بتدفع على AI أكتر من اللازم.\"",
+      "\"أغلى Model مش هو اللي هيطلعلك أحسن نتيجة.\"",
+      "\"كل ما يطلع Model جديد… بتحس إنك متأخر؟\""
+    ],
+    "best_time": "Weekday evening, Cairo time — confirm with the account's own Insights"
+  }
+}

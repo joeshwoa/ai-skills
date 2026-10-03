@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "language": "ar-EG",
+  "title": "BROKEN FIXTURE — validator must reject this",
+  "brief": {
+    "platforms": ["instagram_reels"],
+    "goal": "conversions",
+    "duration_sec": [15, 20],
+    "account_type": "business",
+    "trend_refs": [
+      {"name": "old dance sound", "kind": "audio", "checked": "2026-08-01"},
+      {"name": "undated meme"}
+    ]
+  },
+  "scenes": [
+    {"title": "SCENE 01 — SLOW OPEN", "duration_sec": 6, "blocks": [
+      {"type": "visual", "lines": ["Logo animation, 6 seconds, no words"]}
+    ]},
+    {"title": "SCENE 02", "blocks": [
+      {"type": "dialogue", "speaker": "Host", "lines": [
+        "سوف نتحدث اليوم عن موضوع مهم جداً لماذا يجب أن تتعلم هذا الآن قبل أن يفوتك القطار وتندم على الفرص التي ضاعت منك طوال الوقت الماضي كله",
+        "نتيجة مضمون 100% — اكتب تم في الكومنتات",
+        "TODO add the price here"
+      ]},
+      {"type": "laser_show", "lines": ["x"]}
+    ]}
+  ],
+  "posting": {"caption": "اكتب تم", "hashtags": ["#a", "#b", "#c", "#d", "#e", "#f", "#g"]}
+}

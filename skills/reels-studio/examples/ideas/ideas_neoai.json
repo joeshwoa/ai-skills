@@ -1,0 +1,11 @@
+{"brief": "Neo AI — Advanced AI Diploma, problem-aware Egyptian professionals",
+ "ideas": [
+  {"title": "You don't need the most expensive model", "angle": "myth vs truth", "format": "talking_head", "hook": "كل ما شركة تطلع Model جديد… السوشيال ميديا بتولّع", "trend": "model-launch hype (checked 2026-10-03)", "why": "rides every launch; positions the diploma as skill over spend",
+   "scores": {"hook": 4, "audience_fit": 5, "trend_timing": 4, "shareability": 4, "feasibility": 5, "brand_fit": 5, "originality": 3}},
+  {"title": "$20 model vs $200 model — same prompt", "angle": "comparison", "format": "voiceover_broll", "hook": "Model بـ٢٠ دولار قصاد Model بـ٢٠٠… نفس الـprompt", "why": "visual proof, very shareable — needs a fair real test",
+   "scores": {"hook": 5, "audience_fit": 4, "trend_timing": 3, "shareability": 5, "feasibility": 3, "brand_fit": 4, "originality": 4}},
+  {"title": "POV: you paid for Pro and still get generic answers", "angle": "relatable pain", "format": "skit", "hook": "POV: دفعت Pro ولسه الإجابات عامة", "why": "funny, recognisable; lower brand depth",
+   "scores": {"hook": 4, "audience_fit": 4, "trend_timing": 3, "shareability": 4, "feasibility": 4, "brand_fit": 3, "originality": 3}},
+  {"title": "AI dance trend with our mascot", "angle": "trend", "format": "skit", "hook": "(trend audio)", "why": "reach, but off-voice for the diploma",
+   "scores": {"hook": 3, "audience_fit": 2, "trend_timing": 5, "shareability": 3, "feasibility": 4, "brand_fit": 1, "originality": 2}}
+ ]}

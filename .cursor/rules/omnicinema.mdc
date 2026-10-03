@@ -1,25 +1,20 @@
 ---
-description: Generate cinematic video, design assets (logos/vector art/textures/UI mockups), voiceover, music, or SFX via the real omnicinema-mcp server, run as a one-shot local command (no MCP registration needed). Apply whenever the user asks to make a video/short film/trailer, a logo/design asset, or voiceover/music/SFX via OmniCinema.
+description: Make logos (with reversed/icon variants), vector illustrations, UI mockups, background music (WAV + MIDI), sound effects, voiceover, and short promo/animatic videos with the user's omnicinema-mcp engine — offline and free by default, stock/AI via the user's own keys. Apply when the user asks for a logo, mockup, illustration, music, beat, sound effect, voiceover, or a quick promo/storyboard video. Real AI film shots in Google Flow → flow-studio-director.
 globs:
 alwaysApply: false
 ---
 # OmniCinema
 
-This project has the omnicinema skill at `skills/omnicinema/SKILL.md` in
-this repo (or wherever you copied the `skills/omnicinema/` folder). Read
-that file in full before using it.
+Read `skills/omnicinema/SKILL.md` in full before using it.
 
 Quick reference:
-- First use: `bash skills/omnicinema/scripts/bootstrap.sh` (clones/builds
-  the real omnicinema-mcp server into a local cache — one-time, safe to
-  re-run).
-- Full tool catalog with exact JSON argument shapes:
-  `skills/omnicinema/references/tools.md`.
-- Call a tool: `bash skills/omnicinema/scripts/call.sh <tool_name> '<json-args>'`.
-- Anything with `generative:true`, or `install_dependencies` with
-  `consent:true`, or `approve_suggestion` with `approve:true` costs money
-  or runs real installs/APIs — confirm with the user before passing that
-  flag, the tool itself can't ask.
-- Known upstream build issue documented in the skill's SKILL.md /
-  bootstrap.sh — not something to work around by guessing at the missing
-  source files.
+- Setup: `bash skills/omnicinema/scripts/bootstrap.sh` (`--with-render` adds Remotion; `--check`).
+- Call: `bash skills/omnicinema/scripts/call.sh <tool> '<json>'` (or `@args.json`; `--list`).
+- Inputs in English using the vocabulary in `references/workflows.md` §1;
+  brand colours as hex codes in `style`.
+- Videos: `run_cinema_pipeline` with `"dry_run": true` first; without stock
+  keys the result is an animatic — say so.
+- Check every output: `scripts/check_media.sh <files>` and LOOK at the
+  `.check.png` / `.contact.png` previews before presenting.
+- `generative:true`, `approveOverBudget`, `install_dependencies consent:true`
+  only after an explicit yes. Keys live in `~/.cache/ai-skills/omnicinema-mcp/.env`, edited by the user.

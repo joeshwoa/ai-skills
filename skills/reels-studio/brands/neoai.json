@@ -1,0 +1,28 @@
+{
+  "name": "Neo AI",
+  "about": "Neo AI's own reel-script house style, matched to the team's existing scripts (REEL — STAY UP TO DATE, REEL 03/04 NEXT_START, HERO REEL — Mr. Wael / Sama | COO): A4, Cairo, right-aligned, black headers, blue = for the editor, dark red = what the talent says.",
+  "colors": {"brand_navy": "040E2D", "brand_orange": "FF5A00"},
+  "legend": true,
+  "end_frame_default": ["Neo AI"],
+  "voice": {
+    "language_default": "ar-EG",
+    "register": "Egyptian Arabic with English industry terms kept in English and prefixed with الـ (الـAI، الـbusiness، الـtools). Short lines, a Pause between ideas, 'مش… لكن…' contrasts, direct 'إنت' address.",
+    "tone_words": ["Professional", "Confident", "Strategic", "Practical", "Direct"],
+    "never": ["robots / futuristic-screen clichés in visuals", "corporate-motivational music", "promising results the programme can't prove"]
+  },
+  "talents": {
+    "Mr. Wael": {"role": "Founder", "format": "founder-led cinematic statement, English, premium business location, 50mm + gimbal, no glitch, 3–4 main shots", "wardrobe": "dark navy suit or blazer, white / light-blue shirt, no tie"},
+    "Ms. Sama": {"role": "COO", "format": "executive-led, strategic and inclusive, Arabic × English free mix, same premium location as Mr. Wael"},
+    "Dr. Joshua": {"role": "Head of Development & Research for Innovation / instructor", "format": "trend & industry commentary, studio, visual hook Joshua → glitch → mascot → glitch → Joshua, FOR EDITOR / FOR TALENT colour legend"},
+    "Saif": {"role": "Host", "format": "energetic, conversational event-value reels, studio medium shot"}
+  },
+  "signatures": {
+    "trend_reel_hook": "SCENE 01 — VISUAL HOOK, 1.2 sec: Talent 0.4 sec → Glitch → Mascot 0.4 sec → Glitch → Talent starts talking. Short digital glitch SFX on each transition only; the rest of the video clean and minimal.",
+    "founder_end_frame": "Deep navy background, very subtle orange + white light elements, then the Neo AI logo, then the campaign line and date. Minimal animation — no flashy effects.",
+    "audio_mix": "Voice > Music > Environment. Cinematic ambient bed (soft pad, light pulse, slow build), never generic corporate-motivational music."
+  },
+  "programmes": ["Advanced AI Diploma", "AI for Kids", "AI for Marketing", "AI for Software & Automation", "AI Coworker", "AI for Medical", "AI for Sales", "AI for Data Analysis", "AI for Lawyers", "AI for Finance", "Business"],
+  "campaigns": {
+    "NEXT_START": {"type": "free launch event", "date": "2026-09-12", "status": "past — confirm before reusing"}
+  }
+}

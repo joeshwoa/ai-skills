@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "language": "en-US",
+  "color_mode": "editor_talent",
+  "title": "REEL — 3 LATTE ART MISTAKES",
+  "meta": [["Target Duration", "25–35 sec"], ["Talent", "Mariam (head barista)"], ["Tone", "Warm • Quick • Playful"], ["Purpose", "Tutorial + Saves + Visit CTA"]],
+  "brief": {
+    "platforms": ["instagram_reels", "tiktok", "youtube_shorts"],
+    "audience": "Home-coffee fans in Cairo, 20–35, who own a milk frother and post their cups",
+    "awareness_stage": "solution_aware",
+    "goal": "consideration",
+    "funnel_stage": "top",
+    "format": "tutorial_listicle",
+    "hook_type": "mistake",
+    "duration_sec": [25, 35],
+    "cta": "Save it and come practise at the Saturday latte-art class",
+    "account_type": "business",
+    "scope": "episode 1 of a 6-part series 'Barista in 30 seconds'"
+  },
+  "scenes": [
+    {"title": "SCENE 01 — HOOK", "duration_sec": 3, "blocks": [
+      {"type": "visual", "lines": ["Top-down: a sad, blobby heart in a cup. Hard cut to Mariam pointing at it."]},
+      {"type": "onscreen_text", "lines": ["Your latte art fails because of THIS"]},
+      {"type": "dialogue", "speaker": "Mariam", "lines": ["\"If your heart looks like a cloud — it's not your hands.\""]}
+    ]},
+    {"title": "SCENE 02 — MISTAKE 1: MILK TOO HOT", "blocks": [
+      {"type": "onscreen_text", "lines": ["1. Milk too hot"]},
+      {"type": "broll", "lines": ["Thermometer close-up hitting 70°C, steam everywhere."]},
+      {"type": "dialogue", "speaker": "Mariam", "lines": ["\"Stop at 60 degrees. Hotter milk loses the silky foam you need.\""]}
+    ]},
+    {"title": "SCENE 03 — MISTAKE 2: TOO MUCH FOAM", "blocks": [
+      {"type": "onscreen_text", "lines": ["2. Too much foam"]},
+      {"type": "broll", "lines": ["Side view of a jug: thick foam vs glossy 'wet paint' milk, split screen."]},
+      {"type": "dialogue", "speaker": "Mariam", "lines": ["\"You want wet paint, not a bubble bath. Swirl it till it shines.\""]}
+    ]},
+    {"title": "SCENE 04 — MISTAKE 3: POURING FROM TOO HIGH", "blocks": [
+      {"type": "onscreen_text", "lines": ["3. Pouring from too high"]},
+      {"type": "visual", "lines": ["Slow motion: jug drops close to the cup, white blooms on the surface."]},
+      {"type": "dialogue", "speaker": "Mariam", "lines": ["\"Start high to mix, then drop the jug close — that's when the white appears.\"", {"pause": true}]}
+    ]},
+    {"title": "SCENE 05 — PAYOFF + CTA", "blocks": [
+      {"type": "visual", "lines": ["Perfect heart, slow push-in. Mariam slides the cup to camera."]},
+      {"type": "dialogue", "speaker": "Mariam", "lines": ["\"Save this, and come practise with me Saturday — link in bio.\""]}
+    ]}
+  ],
+  "end_frame": {"lines": ["Barista in 30 seconds — Ep. 1", "Qahwa House"]},
+  "editor_notes": [
+    "Cut on every mistake number; numbers pop in with a soft 'tick' SFX.",
+    "Captions burned in, centre band, never under the bottom UI.",
+    "Commercial-library acoustic bed, ducked under voice."
+  ],
+  "posting": {
+    "cover_text": "3 latte art mistakes",
+    "title": "3 Latte Art Mistakes Every Beginner Makes",
+    "caption": "Your heart looks like a cloud? It's probably one of these 3.\nSave it for your next pour.\nSaturday latte-art class — link in bio.",
+    "hashtags": ["#latteart", "#homebarista", "#cairocoffee"],
+    "alt_hooks": ["\"Stop heating your milk this hot.\"", "\"Why your latte art always looks like a blob.\""],
+    "best_time": "Weekend mornings — confirm with Insights"
+  }
+}

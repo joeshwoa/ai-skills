@@ -1,6 +1,6 @@
 {
   "generated_by": "skills/skill-router/scripts/build_manifest.py",
-  "skill_count": 9,
+  "skill_count": 10,
   "skills": [
     {
       "name": "creative-studio",
@@ -48,6 +48,13 @@
       "name": "premium-subtitle-localization",
       "path": "skills/premium-subtitle-localization",
       "description": "Add translated subtitles to a video — find or generate source-language subtitles, translate them with real cultural/comedic adaptation (never a flat literal translation), validate formatting and timing, and mux the result into the video without re-encoding. Use this whenever the user asks to subtitle, translate, localize, or dub (subtitle-only) a video/movie/show into another language, or gives a video file and a target language. Involves a \"virtual expert team\" of translation passes (literal draft, meaning-preserving rewrite, cultural adaptation, fluency/timing polish) plus automated QA and an agentic review pass — not a single mechanical translate-and-burn-in step. Also verifies the source transcript against the actual audio before translating, so dialect/ASR errors are caught rather than silently rewritten into fluent invented dialogue.",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "reels-studio",
+      "path": "skills/reels-studio",
+      "description": "A full short-form video content team (strategist, audience analyst, trend researcher, idea lead, hook writer, scriptwriter, dialect specialist, director, editor, copywriter, growth analyst, brand/legal reviewer) that turns a topic, product or \"we need reels\" into shoot-ready reel scripts in ANY language or dialect — Egyptian Arabic as people really speak it, Gulf, Levantine, Maghrebi, MSA, English, French… Locks scope and audience first, researches live dated trends, scores ideas, writes hook variants, then a validated scene-by-scene script for the editor and talent plus a posting pack, rendered as PDF + DOCX in the user's house style (Neo AI built in), with teleprompter text, draft captions and a production hand-off. Use for any request to write, plan, brainstorm or fix a Reel, TikTok, YouTube Short or other short vertical video — \"اكتب سكريبت ريل\", \"عايز أفكار ريلز\", \"make a reel about X\", \"what's trending\", \"write hooks\", \"reels content calendar\" — even when no platform is named.",
       "has_scripts": true,
       "has_references": true
     },

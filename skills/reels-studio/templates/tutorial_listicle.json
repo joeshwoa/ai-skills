@@ -1,0 +1,144 @@
+{
+  "version": 1,
+  "template": "tutorial_listicle",
+  "brand": null,
+  "language": null,
+  "color_mode": "editor_talent",
+  "title": "{{REEL — TITLE}}",
+  "about": "Teach one thing fast: hook with the outcome, 3–5 numbered steps, save-worthy.",
+  "meta": [
+    [
+      "Target Duration",
+      "{{30–45 sec}}"
+    ],
+    [
+      "Talent",
+      "{{…}}"
+    ]
+  ],
+  "brief": {
+    "platforms": [
+      "{{instagram_reels|tiktok|youtube_shorts|facebook_reels|linkedin}}"
+    ],
+    "audience": "{{who exactly — role, age band, city/country, what they already know}}",
+    "awareness_stage": "{{unaware|problem_aware|solution_aware|product_aware|most_aware}}",
+    "goal": "{{awareness|engagement|followers|consideration|leads|conversions|retention}}",
+    "funnel_stage": "{{top|middle|bottom}}",
+    "format": "tutorial_listicle",
+    "hook_type": "{{result_first|listicle|mistake}}",
+    "duration_sec": [
+      30,
+      45
+    ],
+    "cta": "{{one action, or none}}",
+    "scope": "{{single reel | series ep N/M | campaign}}",
+    "account_type": "{{creator|business}}",
+    "trend_refs": []
+  },
+  "scenes": [
+    {
+      "title": "SCENE 01 — HOOK (THE OUTCOME)",
+      "duration_sec": 3,
+      "blocks": [
+        {
+          "type": "visual",
+          "lines": [
+            "{{show the end result first}}"
+          ]
+        },
+        {
+          "type": "onscreen_text",
+          "lines": [
+            "{{N ways to … in X min}}"
+          ]
+        },
+        {
+          "type": "dialogue",
+          "speaker": "{{talent}}",
+          "lines": [
+            "{{hook}}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 02 — STEP 1",
+      "blocks": [
+        {
+          "type": "onscreen_text",
+          "lines": [
+            "1. {{…}}"
+          ]
+        },
+        {
+          "type": "dialogue",
+          "speaker": "{{talent}}",
+          "lines": [
+            "{{…}}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 03 — STEP 2",
+      "blocks": [
+        {
+          "type": "onscreen_text",
+          "lines": [
+            "2. {{…}}"
+          ]
+        },
+        {
+          "type": "dialogue",
+          "speaker": "{{talent}}",
+          "lines": [
+            "{{…}}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 04 — STEP 3",
+      "blocks": [
+        {
+          "type": "onscreen_text",
+          "lines": [
+            "3. {{…}}"
+          ]
+        },
+        {
+          "type": "dialogue",
+          "speaker": "{{talent}}",
+          "lines": [
+            "{{…}}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 05 — CTA (SAVE / FOLLOW)",
+      "blocks": [
+        {
+          "type": "dialogue",
+          "speaker": "{{talent}}",
+          "lines": [
+            "{{…}}"
+          ]
+        }
+      ]
+    }
+  ],
+  "editor_notes": [
+    "{{screen recordings zoomed to the action; one step = one cut}}"
+  ],
+  "posting": {
+    "cover_text": "{{…}}",
+    "caption": "{{…}}",
+    "hashtags": [
+      "{{…}}"
+    ],
+    "alt_hooks": [
+      "{{…}}"
+    ]
+  }
+}

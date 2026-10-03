@@ -1,0 +1,132 @@
+{
+  "version": 1,
+  "template": "voiceover_broll",
+  "brand": null,
+  "language": null,
+  "color_mode": "editor_talent",
+  "title": "{{REEL — TITLE}}",
+  "about": "Faceless: narrator over B-roll / screen recordings, with on-screen text carrying the hook.",
+  "meta": [
+    [
+      "Target Duration",
+      "{{30–40 sec}}"
+    ],
+    [
+      "Voice",
+      "{{narrator / TTS voice}}"
+    ],
+    [
+      "Tone",
+      "{{…}}"
+    ]
+  ],
+  "brief": {
+    "platforms": [
+      "{{instagram_reels|tiktok|youtube_shorts|facebook_reels|linkedin}}"
+    ],
+    "audience": "{{who exactly — role, age band, city/country, what they already know}}",
+    "awareness_stage": "{{unaware|problem_aware|solution_aware|product_aware|most_aware}}",
+    "goal": "{{awareness|engagement|followers|consideration|leads|conversions|retention}}",
+    "funnel_stage": "{{top|middle|bottom}}",
+    "format": "voiceover_broll",
+    "hook_type": "{{curiosity_gap|listicle|result_first}}",
+    "duration_sec": [
+      30,
+      40
+    ],
+    "cta": "{{one action, or none}}",
+    "scope": "{{single reel | series ep N/M | campaign}}",
+    "account_type": "{{creator|business}}",
+    "trend_refs": []
+  },
+  "scenes": [
+    {
+      "title": "SCENE 01 — HOOK",
+      "duration_sec": 2.5,
+      "blocks": [
+        {
+          "type": "broll",
+          "lines": [
+            "{{the most striking shot first}}"
+          ]
+        },
+        {
+          "type": "onscreen_text",
+          "lines": [
+            "{{hook text ≤ 7 words}}"
+          ]
+        },
+        {
+          "type": "voiceover",
+          "lines": [
+            "{{hook line}}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 02 — POINT 1",
+      "blocks": [
+        {
+          "type": "broll",
+          "lines": [
+            "{{…}}"
+          ]
+        },
+        {
+          "type": "voiceover",
+          "lines": [
+            "{{…}}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 03 — POINT 2",
+      "blocks": [
+        {
+          "type": "broll",
+          "lines": [
+            "{{…}}"
+          ]
+        },
+        {
+          "type": "voiceover",
+          "lines": [
+            "{{…}}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 04 — CTA",
+      "blocks": [
+        {
+          "type": "onscreen_text",
+          "lines": [
+            "{{CTA text}}"
+          ]
+        },
+        {
+          "type": "voiceover",
+          "lines": [
+            "{{CTA}}"
+          ]
+        }
+      ]
+    }
+  ],
+  "editor_notes": [
+    "{{music bed, caption style, cut every 1.5–3 s}}"
+  ],
+  "posting": {
+    "cover_text": "{{…}}",
+    "caption": "{{…}}",
+    "hashtags": [
+      "{{…}}"
+    ],
+    "alt_hooks": [
+      "{{…}}"
+    ]
+  }
+}

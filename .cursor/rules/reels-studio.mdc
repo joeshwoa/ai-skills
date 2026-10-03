@@ -1,0 +1,15 @@
+---
+description: Short-form video content team — scope & audience first, live dated trends, scored ideas, hook variants, and shoot-ready Reels/TikTok/Shorts scripts in any language or dialect (Egyptian Arabic as spoken, Gulf, Levantine, MSA, English…), rendered as PDF + DOCX in the house script style (Neo AI built in) with teleprompter, draft SRT, posting pack and a production hand-off file. Apply when the user asks to write, plan, brainstorm or fix a reel/TikTok/Short script, hooks, trends or a reels content calendar.
+globs:
+alwaysApply: false
+---
+# Reels Studio
+
+Read `skills/reels-studio/SKILL.md` in full before using it.
+
+Quick reference:
+- Setup once: `bash skills/reels-studio/scripts/setup.sh` (`--fonts` to install Cairo); prove it: `bash skills/reels-studio/scripts/selftest.sh`.
+- Gates: brief (scope + audience confirmed) → live trend scan (dated) → idea board (`rs.sh score`) → hooks → spec (`rs.sh new --template …`) → `rs.sh validate` (0 errors; `--strict` before delivery) → reviewer checklist → `rs.sh render --formats pdf,docx,teleprompter,production,srt` → look at the PDF → user review → hand-off.
+- Write how the audience speaks: `references/languages-dialects.md` (Egyptian: ده/مش/إزاي/هـ, English terms with الـ).
+- House style: `brand: neoai` — blue = editor, dark red = talent; `color_mode: mono` = all-blue variant.
+- Production: AI video → flow-studio-director (`*_for_production.txt`); shoot/edit/voice/captions → creative-studio; other languages → transcreate here, subtitles → premium-subtitle-localization.

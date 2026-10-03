@@ -1,0 +1,164 @@
+{
+  "version": 1,
+  "template": "talking_head",
+  "brand": null,
+  "language": null,
+  "color_mode": "editor_talent",
+  "title": "{{REEL — TITLE}}",
+  "about": "One talent to camera. The Neo AI trend/industry reel shape: visual hook → hook line → problem/myth → insight → positioning → CTA.",
+  "meta": [
+    [
+      "Target Duration",
+      "{{45–55 sec}}"
+    ],
+    [
+      "Talent",
+      "{{name}}"
+    ],
+    [
+      "Tone",
+      "{{Confident • Direct • …}}"
+    ],
+    [
+      "Purpose",
+      "{{Hook + … + CTA}}"
+    ]
+  ],
+  "brief": {
+    "platforms": [
+      "{{instagram_reels|tiktok|youtube_shorts|facebook_reels|linkedin}}"
+    ],
+    "audience": "{{who exactly — role, age band, city/country, what they already know}}",
+    "awareness_stage": "{{unaware|problem_aware|solution_aware|product_aware|most_aware}}",
+    "goal": "{{awareness|engagement|followers|consideration|leads|conversions|retention}}",
+    "funnel_stage": "{{top|middle|bottom}}",
+    "format": "talking_head",
+    "hook_type": "{{hook type from references/hooks.md}}",
+    "duration_sec": [
+      45,
+      55
+    ],
+    "cta": "{{one action, or none}}",
+    "scope": "{{single reel | series ep N/M | campaign}}",
+    "account_type": "{{creator|business}}",
+    "trend_refs": []
+  },
+  "scenes": [
+    {
+      "title": "SCENE 01 — VISUAL HOOK",
+      "duration": "1.2 sec",
+      "duration_sec": 1.2,
+      "blocks": [
+        {
+          "type": "visual",
+          "lines": [
+            "{{pattern-interrupt opening: framing, movement, effect}}"
+          ]
+        },
+        {
+          "type": "sfx",
+          "lines": [
+            "{{one short sound on the cut — or delete this block}}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 02 — HOOK",
+      "blocks": [
+        {
+          "type": "dialogue",
+          "speaker": "{{talent}}",
+          "lines": [
+            "{{hook line ≤ 12 words}}",
+            {
+              "pause": true
+            },
+            "{{payoff that opens the loop}}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 03 — THE PROBLEM",
+      "blocks": [
+        {
+          "type": "dialogue",
+          "speaker": "{{talent}}",
+          "lines": [
+            "{{…}}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 04 — THE INSIGHT",
+      "blocks": [
+        {
+          "type": "visual",
+          "lines": [
+            "{{camera change}}"
+          ]
+        },
+        {
+          "type": "dialogue",
+          "speaker": "{{talent}}",
+          "lines": [
+            "{{…}}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 05 — POSITIONING",
+      "blocks": [
+        {
+          "type": "dialogue",
+          "speaker": "{{talent}}",
+          "lines": [
+            "{{why us / the offer}}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 06 — CTA",
+      "blocks": [
+        {
+          "type": "visual",
+          "lines": [
+            "Very subtle push-in.",
+            "Direct eye contact."
+          ]
+        },
+        {
+          "type": "dialogue",
+          "speaker": "{{talent}}",
+          "lines": [
+            "{{CTA}}"
+          ]
+        }
+      ]
+    }
+  ],
+  "end_frame": {
+    "lines": [
+      "{{offer / date}}",
+      "{{brand}}"
+    ]
+  },
+  "editor_notes": [
+    "{{cut rhythm, SFX only on key transitions, captions style, safe zones}}"
+  ],
+  "posting": {
+    "cover_text": "{{3–5 words}}",
+    "caption": "{{…}}",
+    "hashtags": [
+      "{{#specific}}"
+    ],
+    "alt_hooks": [
+      "{{alt hook 1}}",
+      "{{alt hook 2}}"
+    ]
+  }
+}

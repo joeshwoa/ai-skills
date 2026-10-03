@@ -1,0 +1,97 @@
+{
+  "version": 1,
+  "template": "text_only",
+  "brand": null,
+  "language": null,
+  "color_mode": "editor_talent",
+  "title": "{{REEL — TITLE}}",
+  "about": "No face, no voice: kinetic text over footage/music. Works muted.",
+  "meta": [
+    [
+      "Target Duration",
+      "{{10–15 sec}}"
+    ],
+    [
+      "Music",
+      "{{commercially licensed track}}"
+    ]
+  ],
+  "brief": {
+    "platforms": [
+      "{{instagram_reels|tiktok|youtube_shorts|facebook_reels|linkedin}}"
+    ],
+    "audience": "{{who exactly — role, age band, city/country, what they already know}}",
+    "awareness_stage": "{{unaware|problem_aware|solution_aware|product_aware|most_aware}}",
+    "goal": "{{awareness|engagement|followers|consideration|leads|conversions|retention}}",
+    "funnel_stage": "{{top|middle|bottom}}",
+    "format": "text_only",
+    "hook_type": "{{bold_statement|question}}",
+    "duration_sec": [
+      10,
+      15
+    ],
+    "cta": "{{one action, or none}}",
+    "scope": "{{single reel | series ep N/M | campaign}}",
+    "account_type": "{{creator|business}}",
+    "trend_refs": []
+  },
+  "scenes": [
+    {
+      "title": "SCENE 01 — HOOK",
+      "duration_sec": 2,
+      "blocks": [
+        {
+          "type": "visual",
+          "lines": [
+            "{{background shot}}"
+          ]
+        },
+        {
+          "type": "onscreen_text",
+          "lines": [
+            "{{hook ≤ 7 words}}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 02 — BEATS",
+      "duration_sec": 8,
+      "blocks": [
+        {
+          "type": "onscreen_text",
+          "lines": [
+            "{{beat 1}}",
+            "{{beat 2}}",
+            "{{beat 3}}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SCENE 03 — CTA",
+      "duration_sec": 3,
+      "blocks": [
+        {
+          "type": "onscreen_text",
+          "lines": [
+            "{{CTA}}"
+          ]
+        }
+      ]
+    }
+  ],
+  "editor_notes": [
+    "{{each text beat on screen ≥ reading time: ~0.3 s per word + 0.5 s}}"
+  ],
+  "posting": {
+    "cover_text": "{{…}}",
+    "caption": "{{…}}",
+    "hashtags": [
+      "{{…}}"
+    ],
+    "alt_hooks": [
+      "{{…}}"
+    ]
+  }
+}

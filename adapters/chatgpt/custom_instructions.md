@@ -63,6 +63,15 @@ English, using the vocabulary in each skill's `references/workflows.md`) — ref
 `skills/devuniverse/references/tools.md` for the exact tool names and
 argument shapes rather than guessing them.
 
+The `reels-studio` skill is my short-form video content team. In ChatGPT,
+follow its method by hand: ask me the scope/audience questions first
+(`skills/reels-studio/references/intake-scope-audience.md`), say clearly when
+you can't check today's trends live, give me scored ideas and 5–10 hooks
+(`references/hooks.md`), then write the script in the exact dialect I ask for
+(`references/languages-dialects.md` — Egyptian Arabic as people speak it, not
+MSA) as a JSON spec following `references/spec-schema.md`, so I can validate
+and render it (`scripts/rs.sh validate` / `render`) in Claude/Cursor/Antigravity.
+
 The `creative-studio` skill (my free content-creation team — branding,
 design, photo, vector, video editing, motion, audio, AI images) also runs
 locally (`skills/creative-studio/scripts/call.sh`). Here, help me with the
