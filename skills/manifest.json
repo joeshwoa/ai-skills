@@ -1,6 +1,6 @@
 {
   "generated_by": "skills/skill-router/scripts/build_manifest.py",
-  "skill_count": 10,
+  "skill_count": 13,
   "skills": [
     {
       "name": "creative-studio",
@@ -20,6 +20,13 @@
       "name": "flow-studio-director",
       "path": "skills/flow-studio-director",
       "description": "Full AI film crew that takes a client's script (or just an idea) to a finished, delivered video in Google Flow (Veo 3.1 + Omni Flash + Nano Banana), right the first time — script breakdown and analysis, characters and voices built and approved before any shot, storyboard animatic for sign- off, per-shot routing and credit pricing, dense cinematic prompts, native in-clip dialogue, planned transitions, automatic QC of every take, editing and montage (trims, fixes, J/L cuts, captions from the script, logo, loudness), revisions and delivery. Can drive Flow itself in Chrome (Kapture) in four autonomy modes. Use whenever the user wants to make, plan, script, analyse, prompt, fix, check, edit, cut, extend or finish an AI video, ad, reel, short film, explainer or animated series — in Google Flow or when no platform is named — or asks which Flow model to use or what it will cost.",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "motion-design-studio",
+      "path": "skills/motion-design-studio",
+      "description": "A professional motion-graphics studio the AI runs itself on free engines (the user's studio-mcp) — After Effects / Cinema 4D-level work in Arabic and English. Full team: creative director, art director, motion designer/animator, typographer, 3D artist, illustrator, data-viz designer, sound designer and technical director, with an engine router that picks the best engine per job: GSAP compositions (40 animation presets, 12 transitions, camera moves, charts, motion blur), Lottie, three.js real-time 3D, Blender (Cycles/EEVEE), and Remotion when licensed. Kinetic typography, logo animations and stings, title sequences, lower thirds, social promos, app promos, explainer and infographic animation, animated charts, map routes, 3D titles and product turntables, transitions, CTAs and captions, with alpha output for editors. Use for any request to animate, make motion graphics, an intro/outro, a logo animation, a title, an animated post or ad, an explainer animation, 3D text, or \"make it move\" — even when no tool is named.",
       "has_scripts": true,
       "has_references": true
     },
@@ -69,6 +76,20 @@
       "name": "skill-router",
       "path": "skills/skill-router",
       "description": "Read this FIRST, before any other skill, for any non-trivial request — it is the dispatcher for every skill in this repo. Checks skills/manifest.json and auto-selects a matching installed skill with no need to ask the user which one to use. If nothing installed matches, searches for or builds a new skill and installs it into this repo automatically (clone/build for the user's own MCP repos, or build from scratch via the skill-creator methodology), then tells the user what was added. Also covers keeping skills/manifest.json in sync as skills are added or changed.",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "stock-library",
+      "path": "skills/stock-library",
+      "description": "Find, check and download free stock media from every free stock site with an official API — video footage, photos, illustrations, vectors, music, sound effects and icons from Pexels, Pixabay, Unsplash, Coverr, Freesound, Jamendo (free keys) and Openverse, Wikimedia Commons, Internet Archive, NASA, Iconify (no key) — with a stock researcher and a licensing/clearance officer: labelled contact sheets to choose from, verified downloads, licence sidecars, rejection of non-commercial, people and third-party-brand risks, and ready credits for the description. Use whenever a video, post, presentation or motion piece needs b-roll, footage, a background, a photo, an illustration, an icon, music or a sound effect, or the user asks for \"free stock\", \"copyright-free\", \"royalty-free\" or licences/credits.",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "video-post-studio",
+      "path": "skills/video-post-studio",
+      "description": "A complete post-production house the AI runs itself on free tools (the user's studio-mcp) — editing existing footage into a finished piece AND making new videos from a brief, stock and motion graphics. Full team: post producer, editor, assistant editor, story/transcript editor, colorist, sound editor and mixer, music supervisor, graphics, captions, QC and delivery. Scene detection and take selection, Descript-style transcript editing (Arabic and English filler removal), cut-to-beat montages, J/L cuts, b-roll from own footage or free stock, colour match and grading (.cube LUTs), ducked music, captions, broadcast/social QC, platform exports, and editable masters (Kdenlive, FCPXML/OTIO/EDL for DaVinci Resolve, Premiere, Final Cut). Use for any request to edit, cut, montage, assemble, recut, colour, mix, caption, reframe, clean up or deliver a video — or to make a reel, ad, promo, YouTube video or documentary from footage, a script or a voiceover — even when no tool is named.",
       "has_scripts": true,
       "has_references": true
     }

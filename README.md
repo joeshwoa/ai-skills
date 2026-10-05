@@ -92,10 +92,25 @@ adapter around.
   blue for the editor, dark red for the talent (Neo AI's format built in) —
   plus teleprompter text, a draft SRT, a posting pack and a production file
   that hands straight to flow-studio-director / creative-studio.
+- **[video-post-studio](skills/video-post-studio/SKILL.md)** — a professional
+  post-production house the AI runs: ingest and take selection, Descript-style
+  transcript editing (Arabic + English fillers), cut-to-beat montages, auto-edit
+  from a brief with free stock b-roll (people/brand clearance), colour match →
+  .cube, sound and loudness, captions, delivery QC, platform exports, and
+  editable masters (Kdenlive, FCPXML/OTIO/EDL for Resolve, Premiere, FCP).
+- **[motion-design-studio](skills/motion-design-studio/SKILL.md)** — After Effects /
+  Cinema 4D-level motion graphics with an engine router: GSAP compositions (40
+  presets, transitions, camera, charts, motion blur, 11 pro templates), Lottie,
+  three.js 3D (correct Arabic 3D text), Blender with `.blend` masters, Remotion
+  when licensed.
+- **[stock-library](skills/stock-library/SKILL.md)** — one search across every
+  free stock site with an official API (Pexels, Pixabay, Unsplash, Coverr,
+  Freesound, Jamendo with free keys; Openverse, Wikimedia, Internet Archive, NASA,
+  Iconify without) — contact sheets, verified downloads, licence sidecars, credits.
 - **[creative-studio](skills/creative-studio/SKILL.md)** — a full content
   creation team the AI drives itself, using only free tools, through the real
   [studio-mcp](https://github.com/joeshwoa/studio-mcp) server (MCP or plain
-  CLI, 110 tools): branding (brief-driven logo concepts, palettes, Arabic +
+  CLI, 132 tools): branding (brief-driven logo concepts, palettes, Arabic +
   Latin type, guidelines PDF), graphic design (posts, carousels, stories,
   thumbnails, menus, print PDFs with bleed), photo editing with layered
   PSD/XCF masters (GIMP), vector (Inkscape), video editing that also writes an

@@ -1,5 +1,5 @@
 ---
-description: The user's free content-creation team (studio-mcp, 110 tools) — brand kits and logos, social/print design, photo retouching with layered PSD, vector/SVG, video editing to MP4 + editable Kdenlive project, captions, motion graphics, Egyptian-Arabic voiceover and transcription, audio mastering/music/SFX, AI image/video (ComfyUI/mflux/free). Apply when the user asks to design, brand, edit, animate, caption, voice, retouch or make content for a business or social media.
+description: The user's free content-creation team (studio-mcp, 132 tools) — brand kits and logos, social/print design, photo retouching with layered PSD, vector/SVG, video editing to MP4 + editable Kdenlive project, captions, motion graphics, Egyptian-Arabic voiceover and transcription, audio mastering/music/SFX, AI image/video (ComfyUI/mflux/free). Apply when the user asks to design, brand, edit, animate, caption, voice, retouch or make content for a business or social media.
 globs:
 alwaysApply: false
 ---
@@ -16,4 +16,4 @@ Quick reference:
   `project=<name>` → LOOK at every preview and read warnings → deliver files + editable masters.
 - Reels with captions: design at `ig_story` with `"leave_bottom": 0.26`; `captions.position: "bottom"`.
 - Installs (`studio_install`, `comfyui_setup`, `mflux_setup`) and paid tools: dry run first, run only after the user's yes.
-- Cinematic AI video with characters/dialogue → flow-studio-director.
+- Cinematic AI video with characters/dialogue → flow-studio-director. Real editing jobs → video-post-studio; motion graphics → motion-design-studio; stock → stock-library.

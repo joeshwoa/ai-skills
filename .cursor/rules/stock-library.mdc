@@ -1,0 +1,13 @@
+---
+description: Free stock media with licences: one search across Pexels, Pixabay, Unsplash, Coverr, Freesound, Jamendo (free keys the user adds) and Openverse, Wikimedia Commons, Internet Archive, NASA, Iconify (no key) — footage, photos, illustrations, vectors, music, SFX, icons; numbered contact sheets, verified downloads with licence sidecars, clearance (no NC, no identifiable people or other brands in ads), auto credits. Apply whenever a piece needs b-roll, a photo, music, a sound effect or an icon, or the user asks for free/royalty-free stock or credits.
+globs:
+alwaysApply: false
+---
+# Stock Library
+
+Read `skills/stock-library/SKILL.md` in full before using it.
+
+Quick reference:
+- `bash skills/stock-library/scripts/call.sh stock_sources` — active providers + keys.json template; the USER pastes free keys himself (never create accounts or handle key values).
+- `stock_search` (English queries: object + action + setting; orientation by platform) → LOOK at the numbered sheet → `stock_download` ids → `stock_credits` at delivery.
+- `commercial=true` default; reject red badges, identifiable people for ads, third-party logos, NASA insignia, watermarks.

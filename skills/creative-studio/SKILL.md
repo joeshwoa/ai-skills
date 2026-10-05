@@ -5,8 +5,8 @@ description: A whole content-creation team for the AI, built only on free/open-s
 
 # Creative Studio
 
-The user's own MCP server **studio-mcp** (github.com/joeshwoa/studio-mcp) — 110 tools in
-eight departments plus housekeeping. Every tool runs free software headlessly (Chromium,
+The user's own MCP server **studio-mcp** (github.com/joeshwoa/studio-mcp) — 132 tools in
+nine departments plus housekeeping. Every tool runs free software headlessly (Chromium,
 ffmpeg, MLT, GIMP, Inkscape, Pillow/OpenCV, faster-whisper, edge-tts, ComfyUI…), returns
 **file paths + preview images + measured facts** (sizes, loudness, contrast, text fit), and
 where a free desktop app exists it also writes that app's editable file so a human can take over.
@@ -17,8 +17,9 @@ where a free desktop app exists it also writes that app's editable file so a hum
 | Graphic designer | `design` | `design_create`, `design_carousel`, `design_resize`, `design_catalog`, `design_check` |
 | Photo editor (Photoshop) | `photo` | `photo_retouch`, `photo_look`, `photo_remove_background`, `photo_upscale`, `photo_compose_layers` (PSD+XCF), `photo_mockup` |
 | Illustrator | `vector` | `vector_compose`, `vector_trace`, `vector_export` (PDF/EPS/icon sets), `vector_text_to_outlines`, `vector_boolean` |
-| Video editor (Premiere) | `video` | `video_edit` (timeline → MP4 + .kdenlive), `video_captions`, `video_reframe`, `video_grade`, `video_remove_silence`, `video_export` |
-| Motion designer (After Effects) | `motion` | `motion_title_card`, `motion_lower_third`, `motion_logo_reveal`, `motion_kinetic_text`, `motion_cta`, `motion_render_html` |
+| Video editor (Premiere / Resolve) | `video` | `video_edit` (timeline → MP4 + .kdenlive), `video_auto_edit`, `video_transcript_edit`, `video_cut_to_beats`, `video_color_match`, `video_qc`, `video_export_interchange` — full workflow: **video-post-studio** skill |
+| Motion designer (After Effects / C4D) | `motion` | `motion_plan`, `motion_compose` (+ pro templates), `motion_lottie`, `motion_3d`, `motion_blender`, `motion_title_card`, `motion_logo_reveal` — full workflow: **motion-design-studio** skill |
+| Stock researcher / clearance | `stock` | `stock_search`, `stock_download`, `stock_credits`, `stock_icon`, `stock_sources` — full workflow: **stock-library** skill |
 | Sound engineer (Audition) | `audio` | `audio_voiceover`, `audio_transcribe`, `audio_clean`, `audio_master`, `audio_mix`, `audio_music`, `audio_sfx` |
 | AI artist (Midjourney/Runway) | `ai` | `ai_backends`, `ai_generate_image`, `ai_edit_image`, `ai_upscale`, `ai_generate_video`, `comfyui_setup` |
 | Studio manager | `system` | `studio_doctor`, `studio_install`, `open_in_app` |
@@ -103,6 +104,12 @@ Put Arabic or long arguments in a JSON file and pass `@file` (no shell-quoting a
   composer. Say so when it matters.
 
 ## Related skills (pick the right one)
+
+- **video-post-studio** — the full post-production team (edit footage, make videos from a brief,
+  colour, sound, QC, delivery, Resolve/Premiere hand-off). Use it for any real editing job.
+- **motion-design-studio** — the motion-graphics team with the engine router (GSAP, Lottie,
+  three.js, Blender, Remotion). Use it for anything that moves beyond a quick overlay.
+- **stock-library** — free stock footage/photos/music/SFX/icons with licences and credits.
 
 - **flow-studio-director** — cinematic AI film in Google Flow (characters, dialogue, Veo 3.1).
   The studio hands such videos over and then edits/captions/brands the returned clips.

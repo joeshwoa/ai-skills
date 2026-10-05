@@ -1,0 +1,16 @@
+---
+description: The user's full post-production team (studio-mcp): edit footage into finished pieces AND make new videos from a brief — ingest/scene detection/take selection, Descript-style transcript edits with Arabic+English filler removal, cut-to-beat montages, auto-edit with free stock b-roll, colour match/grade (.cube), sound/ducking/loudness, captions, QC, platform exports, Kdenlive + FCPXML/OTIO/EDL for Resolve/Premiere. Apply for any request to edit, cut, montage, colour, mix, caption, reframe or deliver a video, or make a reel/ad/promo/YouTube video from footage, a script or a voiceover.
+globs:
+alwaysApply: false
+---
+# Video Post Studio
+
+Read `skills/video-post-studio/SKILL.md` in full before using it.
+
+Quick reference:
+- Setup once: `bash skills/creative-studio/scripts/bootstrap.sh`; prove it: `bash skills/video-post-studio/scripts/selftest.sh`.
+- Call: `bash skills/video-post-studio/scripts/call.sh <tool> '<json>'` (or `@args.json`; `help <tool>`).
+- Gates: brief → ingest/log (`video_probe`, `video_scene_detect`, `video_select_takes`, `video_transcript`) → paper edit (`video_transcript_edit`) → rough cut (`video_edit` / `video_cut_to_beats` / `video_auto_edit`) → fine cut → colour → sound → captions → `video_qc` → `video_export` + `stock_credits` + `video_export_interchange`.
+- LOOK at every preview (shot sheets, storyboard, contact sheet, Kdenlive check, QC table). Never deliver with a QC FAIL.
+- Stock b-roll: no identifiable people or other brands' logos in ads (auto-edit rejects faces by default); licences credited.
+- Revisions go into the timeline JSON and re-render — never patch the MP4.

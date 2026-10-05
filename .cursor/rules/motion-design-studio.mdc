@@ -1,0 +1,15 @@
+---
+description: The user's motion-graphics studio (studio-mcp) with an engine router — GSAP compositions (40 presets, transitions, camera, charts, motion blur), Lottie, three.js 3D (Arabic 3D text), Blender (Cycles/EEVEE + .blend), Remotion when licensed; kinetic type, logo stings, titles, lower thirds, social/app promos, explainers, animated charts, 3D titles/products, transitions, alpha overlays. Apply for any request to animate, make motion graphics, an intro/outro, logo animation, animated post/ad or explainer animation.
+globs:
+alwaysApply: false
+---
+# Motion Design Studio
+
+Read `skills/motion-design-studio/SKILL.md` in full before using it.
+
+Quick reference:
+- Setup once: `bash skills/creative-studio/scripts/bootstrap.sh`; prove it: `bash skills/motion-design-studio/scripts/selftest.sh`.
+- Always start with `motion_plan` (engine + reasons + spec skeleton); default engine `motion_compose` (spec or `template=`).
+- Iterate with `"preview": true` at 720p; LOOK at stills/contact sheet/key frames; final 1080p (4K on request), `motion_blur` for fast moves, alpha MOV/WebM for editors.
+- Stack text with `id` + `below/above` + `gap` (measured heights) — never guess y for wrapped/Arabic lines. Arabic animates by word.
+- Never invent copy; brand kit via `brand=<slug>`; no third-party logos; Remotion only with `licence_ok=true` (≤3 people or company licence).

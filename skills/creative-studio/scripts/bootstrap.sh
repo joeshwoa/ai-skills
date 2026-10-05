@@ -29,7 +29,7 @@ fi
 
 if [ "$CHECK" = 1 ]; then
   if [ -x "$VENV/bin/studio" ]; then
-    echo "studio-mcp installed in $VENV ($("$VENV/bin/pip" show studio-mcp 2>/dev/null | sed -n 's/^Version: //p'))"
+    echo "studio-mcp installed in $VENV ($("$VENV/bin/pip" show studio-mcp 2>/dev/null | sed -n 's/^Version: //p'), $("$VENV/bin/pip" freeze 2>/dev/null | sed -n 's/.*studio-mcp@\([0-9a-f]\{7\}\).*/commit \1/p'))"
     PLAYWRIGHT_BROWSERS_PATH="$VENV/ms-playwright" "$VENV/bin/studio" doctor || true
   else
     echo "studio-mcp not installed — run: bash $S/bootstrap.sh"
@@ -56,6 +56,8 @@ EXTRAS="all"; [ "$LITE" = 1 ] && EXTRAS="design,vector,motion"
 if [ "$(uname -s)" = Darwin ] && [ "$(uname -m)" = arm64 ] && [ "$LITE" = 0 ]; then EXTRAS="$EXTRAS,mac"; fi
 echo "Installing studio-mcp[$EXTRAS] from $REPO@$REF"
 "$VENV/bin/pip" install --quiet --upgrade "studio-mcp[$EXTRAS] @ git+$REPO@$REF"
+# the version number rarely changes between commits, so make sure the newest code is really in place
+"$VENV/bin/pip" install --quiet --force-reinstall --no-deps "studio-mcp @ git+$REPO@$REF"
 export PLAYWRIGHT_BROWSERS_PATH="$VENV/ms-playwright"
 echo "Installing headless Chromium for layouts and motion graphics"
 "$VENV/bin/python" -m playwright install chromium >/dev/null

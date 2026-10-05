@@ -53,6 +53,22 @@ below for what that feeds.
   production file flow-studio-director reads. Trigger: write/plan/fix a reel,
   ad/commercial, YouTube video, lesson or podcast script, hooks, trends, or a
   content calendar — before any production skill.
+- **video-post-studio** (`skills/video-post-studio/SKILL.md`) — the full
+  post-production team on the user's studio-mcp: edit footage (scene detection,
+  take selection, transcript edits with Arabic/English filler removal, cut to
+  the beat, colour match, sound, captions, QC, exports, Kdenlive + FCPXML/OTIO
+  for Resolve/Premiere) or make new videos from a brief with free stock b-roll.
+  Trigger: edit/cut/montage/colour/mix/caption/deliver a video, make a reel/ad/
+  promo/YouTube video from footage, a script or a voiceover.
+- **motion-design-studio** (`skills/motion-design-studio/SKILL.md`) — the motion
+  graphics team with an engine router (GSAP compositions, Lottie, three.js 3D,
+  Blender, Remotion when licensed): kinetic type, logo stings, titles, lower
+  thirds, promos, explainers, charts, 3D titles. Trigger: animate, motion
+  graphics, intro/outro, logo animation, animated post/ad.
+- **stock-library** (`skills/stock-library/SKILL.md`) — free stock footage,
+  photos, illustrations, vectors, music, SFX and icons from every free stock
+  site with an official API, with licence sidecars, clearance and credits.
+  Trigger: b-roll, stock, royalty-free, music/SFX for a video, credits.
 - **creative-studio** (`skills/creative-studio/SKILL.md`) — a whole
   content-creation team on free/open-source tools via the user's studio-mcp
   (110 tools): brand kits (logo concepts, palette, Arabic+Latin type,

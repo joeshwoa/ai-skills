@@ -534,7 +534,48 @@ before tracing. Returns SVG + side-by-side (source vs vector) preview, path coun
 
 Arguments: `image: str`; `colors: int = 6`; `preset: str = 'logo'`; `remove_background: bool = True`; `max_side: int = 1600`; `smooth: float = 1.0`; `black_and_white: bool = False`; `threshold: int = 128`; `project: str = ''`; `out: str = ''`
 
-## video (20)
+## video (31)
+
+### `video_auto_color`
+
+One-click colour correction (the 'balance' pass before a look): white balance from near-neutral
+pixels (grey-world on low-saturation midtones, guarded by the brightest neutrals), exposure to a
+healthy mid-grey, and contrast by setting black/white points (0.5 / 99.5 percentiles) — measured on
+`samples` frames, written as a .cube LUT and applied with ffmpeg. strength 0–1. Returns the corrected
+MP4 (apply=false: LUT only), the .cube, a before/after sheet and the measured gains in data. For a
+look on top use video_grade (or a timeline grade) after this.
+
+Arguments: `path: str`; `strength: float = 1.0`; `white_balance: bool = True`; `exposure: bool = True`; `contrast: bool = True`; `samples: int = 8`; `apply: bool = True`; `project: str = ''`; `out: str = ''`
+
+### `video_auto_edit` [N]
+
+Make a video from a brief — the whole edit planned and assembled automatically, then rendered AND
+left fully editable. brief = {script: "text to voice" | voiceover: "vo.wav" | talking_head: "cam.mp4",
+footage: ["a.mp4", …] | "folder", style: reel | ad | promo | youtube | documentary, size ("9:16"
+default for reel/ad), duration (montage length without voice), music: "song.mp3" | "stock:<query>" |
+"generate" (default) | "none", music_genre, broll: stock | footage | both, broll_queries: ["English
+query per shot/sentence", …] (needed for Arabic scripts; stock APIs index English), topic: fallback
+query, captions: style | false, voice (audio_voiceover id), brand, title: "hook" | {text, subtitle},
+lower_thirds: [{name, role, at}], cta: "follow" | {kind, handle, text}, grade: preset, transitions:
+cut | mixed | dissolve, language}. Pacing per style (reel 1.4–2.8 s shots cut on the beat … documentary
+4–8 s), b-roll per phrase from own footage (shot detection + quality ranking + filename keywords) and/or
+free stock in the right orientation (licences kept), music ducked under the voice. Writes the timeline
+JSON (tweak + re-render with video_edit), MP4 + .kdenlive, EDIT-REPORT.md (shot list: time, words,
+source, licence/attribution) and a storyboard sheet + QC table to LOOK at. render=false: plan only.
+
+Arguments: `brief: dict | str`; `project: str = ''`; `out: str = ''`; `render: bool = True`
+
+### `video_beats`
+
+Tempo and beat/downbeat times of a song (or a video's soundtrack) for cutting to music. Returns
+data {tempo (BPM), beats [s], downbeats [s] (bar starts, assuming `meter` beats per bar), confidence,
+regularity, method}, a plot to LOOK at (waveform + blue beat lines + red downbeats), beats.json and an
+Audacity label track (.txt). bpm_hint: nudge toward a known tempo (fixes half/double-time picks).
+start/duration: analyse part of the file. method: auto (librosa if installed, else numpy spectral
+flux + dynamic programming) | numpy | librosa. Use the beats with video_cut_to_beats or a timeline's
+"cut_to_beats".
+
+Arguments: `path: str`; `bpm_hint: float = 0.0`; `start: float = 0.0`; `duration: float = 0.0`; `meter: int = 4`; `method: str = 'auto'`; `project: str = ''`; `out: str = ''`
 
 ### `video_broll`
 
@@ -558,6 +599,18 @@ dialect='egyptian'). position: auto | bottom | lower | middle | top. accent: hig
 
 Arguments: `path: str`; `style: str = 'auto'`; `language: str = 'auto'`; `srt: str = ''`; `words: list = []`; `position: str = 'auto'`; `accent: str = ''`; `words_per_chunk: int = 0`; `uppercase: bool | None = None`; `size: float = 1.0`; `model: str = 'auto'`; `dialect: str = ''`; `allow_download: bool = False`; `brand: str = ''`; `project: str = ''`; `out: str = ''`
 
+### `video_color_match`
+
+Match a clip's colour to a reference (another camera, the hero shot, a still/frame grab you like):
+Reinhard colour transfer in CIELAB — mean and spread of lightness and both colour axes — measured on
+`samples` frames of each, baked into a 33³ .cube LUT (reuse it in Resolve/Premiere/Kdenlive or
+video_grade lut=…) and applied with ffmpeg. reference: video or image; reference_time: use one frame of
+a reference video (s). strength 0–1 blends toward the original. preserve_luminance: match colour only
+(keep the clip's exposure/contrast). Returns the graded MP4 (apply=false: LUT only), the .cube and a
+before | after | reference sheet to LOOK at, with measured LAB distances in data.
+
+Arguments: `path: str`; `reference: str`; `strength: float = 1.0`; `reference_time: float = -1.0`; `samples: int = 8`; `preserve_luminance: bool = False`; `apply: bool = True`; `project: str = ''`; `out: str = ''`
+
 ### `video_concat`
 
 Join clips in order into one video (any mix of sizes/fps/codecs — they are conformed to `size`/
@@ -566,6 +619,17 @@ wipe_left | slide_left | zoom | iris … (transition_duration seconds, audio cro
 fit: auto | cover | contain | blur (for clips of another aspect ratio). Also writes a .kdenlive.
 
 Arguments: `paths: list[str]`; `transition: str = 'cut'`; `transition_duration: float = 0.5`; `size: str = ''`; `fps: float = 0`; `fit: str = 'auto'`; `project: str = ''`; `out: str = ''`
+
+### `video_cut_to_beats`
+
+Cut a montage to music: each clip lasts `every` beats (1 = every beat, 2, 4 = every bar; or a
+pattern like [4,2,2] that repeats) so every cut lands exactly on a beat; the song starts on its first
+downbeat (align: downbeat | beat | start). clips: paths or timeline clip dicts ({"src","in"} — "out"/
+"duration" are replaced; images get Ken Burns). Clips too short for their span take fewer beats.
+transition: cut (default) or dissolve/zoom/… (starts on the beat). max_duration: stop after N s.
+Renders MP4 + .kdenlive; data.cut_to_beats lists every cut time; also writes the timeline JSON.
+
+Arguments: `clips: list`; `music: str`; `every: int | list = 2`; `align: str = 'downbeat'`; `size: str = ''`; `transition: str = 'cut'`; `max_duration: float = 0.0`; `music_volume_db: float = 0.0`; `grade: str = ''`; `captions: bool = False`; `project: str = ''`; `out: str = ''`
 
 ### `video_edit`
 
@@ -600,6 +664,18 @@ high profile + bitrate cap, AAC 48 kHz, faststart, and masters loudness to the p
 track | blur | pad | crop. Warns about platform length limits (trim_to_limit=true cuts to fit).
 
 Arguments: `path: str`; `preset: str = 'youtube'`; `fit: str = 'auto'`; `loudness: bool = True`; `trim_to_limit: bool = False`; `project: str = ''`; `out: str = ''`
+
+### `video_export_interchange`
+
+Export a video_edit timeline (dict / JSON / .json path — e.g. the one video_auto_edit or
+video_transcript_edit wrote) for a professional NLE: format fcpxml (Final Cut Pro 10.5+, DaVinci
+Resolve: File › Import › Timeline), otio (OpenTimelineIO — Resolve 18+, Kdenlive 23+, Premiere/Avid
+via OTIO adapters), edl (CMX3600 — Premiere: File › Import; Resolve: Import Timeline; V1 + its audio)
+or all. Each file is re-read and checked (time math, every media path exists; opentimelineio strict
+load when installed). Carries cuts, dissolves, speed, overlays on V2+, music on A2+; not grades,
+position/scale, captions (import the .srt) or ducking. Returns the files + a track-layout preview.
+
+Arguments: `timeline: dict | str`; `format: str = 'all'`; `name: str = 'edit'`; `project: str = ''`; `out: str = ''`
 
 ### `video_grade`
 
@@ -656,6 +732,20 @@ Returns data.info with everything ffprobe knows that matters for editing.
 
 Arguments: `path: str`; `sheet: bool = True`; `project: str = ''`; `out: str = ''`
 
+### `video_qc`
+
+Delivery QC report before a video goes out — a PASS/WARN/FAIL table image (LOOK at it) + data.checks:
+black frames, frozen/static picture, flash/strobe risk (luminance flashes per second, whole frame and
+quadrants, vs the 3-per-second ITU-R BT.1702/WCAG limit), letterbox/pillarbox bars, audio clipping,
+loudness (integrated LUFS, LRA, true peak vs the platform target), silence gaps, A/V stream alignment
+(start/duration sanity — not lip-sync), resolution / fps / codec / pixel format / faststart vs the
+platform, caption safe zone (renders the .ass beside the file, or captions=<.ass>, and checks text stays
+out of the platform UI zones), duration and file-size limits. platform: reels | tiktok | shorts |
+youtube | linkedin | instagram_feed | x | whatsapp | broadcast | '' (generic). Also a timeline strip
+marking where each problem is.
+
+Arguments: `path: str`; `platform: str = ''`; `captions: str = ''`; `project: str = ''`; `out: str = ''`
+
 ### `video_reframe`
 
 Smart reframe a landscape video for Reels/TikTok/Shorts (9:16), square (1:1) or feed (4:5) — the
@@ -686,6 +776,35 @@ user fine-tuned a studio edit by hand in Kdenlive. size: WxH (default the projec
 the MP4, measured, with a contact sheet.
 
 Arguments: `project_file: str`; `size: str = ''`; `preset: str = 'youtube'`; `project: str = ''`; `out: str = ''`
+
+### `video_scene_detect`
+
+Find the shots in a video (cut detection) and measure each one — the assistant-editor pass before
+cutting. Returns a labelled shot-list contact sheet (LOOK at it: shot number, in/out timecodes,
+duration, flags SOFT / SHAKY / EXPOSURE, FACE badge) and data.shots [{n, start, end, duration, thumb,
+motion (0–100 frame difference), shake (% of frame width of hand-held jitter), camera_move, sharpness
+(Laplacian variance at 640 px: <40 soft, >150 crisp), blurry, brightness/contrast/clip_low/clip_high,
+has_face/faces (OpenCV when installed), audio_db/audio_peak_db}].
+
+threshold: scene-change sensitivity 0.15 (catches soft cuts, more false hits) … 0.3 (default) … 0.5
+(only hard cuts). min_scene: shortest shot in seconds (suppresses flashes). method: auto (ffmpeg-style
+scene score in numpy) | pyscenedetect (if installed). Dissolves/fades may be missed — lower threshold.
+Feed shots to video_edit clips ({"src", "in": start, "out": end}) or to video_select_takes.
+
+Arguments: `path: str`; `threshold: float = 0.3`; `min_scene: float = 0.6`; `method: str = 'auto'`; `analysis_fps: float = 0.0`; `thumbs: bool = True`; `project: str = ''`; `out: str = ''`
+
+### `video_select_takes`
+
+Pick the good footage from a pile: analyse every clip (or every shot inside each clip when
+per_shot=true) for sharpness, stability (hand-held jitter), exposure, faces, audio level and motion,
+rank them and return the top `count` with reasons — plus a ranked contact sheet to LOOK at and
+ready-to-paste timeline clips ({"src","in","out"}) in data.picks.
+
+paths: video files, and/or folder: every video in it. want: best | sharp | stable | faces | talking
+(faces + clean audio) | audio | action (more motion) | calm (less motion) | broll (sharp, steady, no
+faces needed). min_duration: shots shorter than this score low. data.ranked has every unit.
+
+Arguments: `paths: list[str] = []`; `folder: str = ''`; `want: str = 'best'`; `count: int = 6`; `per_shot: bool = True`; `min_duration: float = 1.0`; `threshold: float = 0.3`; `project: str = ''`; `out: str = ''`
 
 ### `video_speed`
 
@@ -732,6 +851,34 @@ slideshow (photos with Ken Burns and dissolves).
 
 Arguments: `kind: str = 'full'`
 
+### `video_transcript`
+
+Readable, INDEXED transcript of a video/audio for text-based editing: one sentence per line with
+its timecode and word-index range ([00:12.30 | w45–w61] …), pauses ≥ 0.6 s shown as ⏸, likely fillers
+in {braces}. Writes .md (read it) + .json (words with index/start/end — pass it as transcript= to
+video_transcript_edit so Whisper does not run twice). verbatim=true prompts Whisper to keep
+um/uh/يعني (it tends to drop them). language: auto | en | ar | egyptian.
+
+Arguments: `path: str`; `language: str = 'auto'`; `model: str = 'auto'`; `speed: str = 'accurate'`; `verbatim: bool = True`; `allow_download: bool = False`; `project: str = ''`; `out: str = ''`
+
+### `video_transcript_edit`
+
+Edit a talking video by its transcript (Descript-style). Cut what you remove from the text:
+remove=["exact words to cut", [i0, i1], {"start": 12.0, "end": 15.5}] and/or keep only some parts
+(keep=[…] in the ORDER you want them — reorders the story). Word indices come from video_transcript
+(pass its .json as transcript= so Whisper does not run again). remove_fillers: English um/uh/er/hmm
+always, 'like / you know / I mean / basically…' only when standalone (pause or comma on both sides);
+Egyptian/MSA Arabic امم/ممم/فـ always, 'يعني / آه / بص / يعني إيه / إيه ده / طب' only when standalone —
+filler_mode safe (hesitation sounds only) | standard | aggressive. remove_silences shortens every pause
+to max_pause s. remove_repeats drops stutters ('I I think'). remove_unlabelled also cuts voiced gaps
+Whisper did not transcribe (often 'um'). Cut points snap to the quietest 10 ms; audio crossfades
+(crossfade_ms, 10–20) at every cut. captions: '' or a style (reels/clean/bold…) to burn captions from
+the edited words. dry_run: only the plan. verify: re-transcribe the result (fast model) and warn if a
+cut word is still audible (Whisper word times are ±0.1 s). Returns MP4 + .kdenlive + timeline .json + cut list (.md/
+.json, source timecodes) + CMX3600 .edl + a transcript image with every cut struck through (LOOK).
+
+Arguments: `path: str`; `keep: list = []`; `remove: list = []`; `remove_fillers: bool = True`; `filler_mode: str = 'standard'`; `remove_silences: bool = True`; `max_pause: float = 0.35`; `remove_repeats: bool = False`; `remove_unlabelled: bool = False`; `language: str = 'auto'`; `transcript: str = ''`; `captions: str = ''`; `crossfade_ms: float = 15.0`; `model: str = 'auto'`; `speed: str = 'accurate'`; `allow_download: bool = False`; `dry_run: bool = False`; `verify: bool = True`; `project: str = ''`; `out: str = ''`
+
 ### `video_trim`
 
 Cut one section out of a video (start → end, or start + duration). mode: accurate (re-encode,
@@ -740,7 +887,45 @@ frame-exact, default) | fast (stream copy, instant and lossless but snaps to the
 
 Arguments: `path: str`; `start: float = 0.0`; `end: float = 0.0`; `duration: float = 0.0`; `mode: str = 'accurate'`; `project: str = ''`; `out: str = ''`
 
-## motion (12)
+## motion (18)
+
+### `motion_3d` [N]
+
+Real-time 3D motion graphics (three.js/WebGL, studio lighting with HDR-style reflections, soft
+shadows, ACES tone mapping) rendered frame-exactly: 3D extruded titles, 3D logos, product
+turntables, device mockups, particle fields and abstract loops. Fast (seconds per second of video
+at 1080p) — use motion_blender instead for photoreal glass/caustics/real depth of field. Returns
+MP4 (or alpha MOV/WebM), a timecoded contact sheet and key frames.
+
+preset: title (text — any language: shaped with HarfBuzz so Arabic joins correctly, then extruded)
+| logo (an SVG, or brand=<slug>'s logo, extruded + bevelled) | product (model=<.glb> turntable on a
+shadow catcher) | device (phone|laptop mockup; screen=<image or video> plays on the display) |
+particles (depth field of glowing points flying toward the camera) | abstract (glossy glass/chrome
+shapes orbiting). material: plastic | metal | chrome | gold | glass | matte | clay | neon | satin.
+camera: orbit | push-in | dolly | crane | static | turntable. animation: rise | spin-in | flip |
+drop | zoom-through | turntable | float. depth: extrusion (world units, ~0.35 default).
+background: CSS colour/gradient ('' = brand-tinted studio gradient); transparent=true for alpha.
+bloom 0–1.5 = glow on bright parts (opaque only). motion_blur=6 → sub-frame motion blur.
+options = extra scene settings (fov, orbit_degrees, exposure, count, side_color, …).
+
+Arguments: `preset: str = 'title'`; `text: str = ''`; `logo: str = ''`; `model: str = ''`; `screen: str = ''`; `device: str = 'phone'`; `material: str = ''`; `camera: str = ''`; `animation: str = ''`; `duration: float = 5.0`; `size: str = '1920x1080'`; `fps: int = 30`; `transparent: bool = False`; `background: str = ''`; `color: str = ''`; `accent: str = ''`; `depth: float = 0`; `bloom: float = 0`; `motion_blur: int = 0`; `font: str = ''`; `weight: int = 800`; `brand: str = ''`; `options: dict = {}`; `formats: list[str] = []`; `project: str = ''`; `out: str = ''`
+
+### `motion_blender` [N]
+
+Physically based 3D motion graphics in Blender (headless): 3D title (any language — text is
+shaped with HarfBuzz into outlines first, so Arabic joins correctly), 3D logo from SVG, product
+turntable from a .glb, abstract glass/chrome loop — on a curved studio cyclorama with area lights,
+real depth of field and motion blur. Returns the video, a timecoded contact sheet + key frames AND
+the editable .blend master. Slow (minutes); for fast real-time 3D use motion_3d (three.js).
+
+engine_name: EEVEE (fast raster, good for most titles) | CYCLES (path traced: glass, caustics,
+soft GI — slowest). quality: draft (½ res, 16 samples) | preview (¾ res, 32) | final (full, 128).
+material: metal | chrome | gold | glass | plastic | matte | clay | neon | satin. camera: push-in |
+orbit | dolly | static. animation: rise | spin-in | flip | turntable. transparent=true → alpha
+(shadow catcher in Cycles). If Blender is not installed and fallback=true, the same preset is
+rendered with three.js instead and the result says FALLBACK clearly (no .blend then).
+
+Arguments: `preset: str = 'title'`; `text: str = ''`; `logo: str = ''`; `model: str = ''`; `material: str = ''`; `engine_name: str = 'EEVEE'`; `quality: str = 'preview'`; `camera: str = ''`; `animation: str = ''`; `duration: float = 4.0`; `size: str = '1920x1080'`; `fps: int = 30`; `transparent: bool = False`; `dof: bool = True`; `motion_blur: bool = True`; `color: str = ''`; `accent: str = ''`; `background: str = ''`; `depth: float = 0.35`; `font: str = ''`; `weight: int = 800`; `brand: str = ''`; `fallback: bool = True`; `timeout: int = 3600`; `formats: list[str] = []`; `project: str = ''`; `out: str = ''`
 
 ### `motion_captions`
 
@@ -755,6 +940,35 @@ with the accent colour as spoken) | clean (sentence fades in, subtle). Arabic ch
 For burned captions directly on a video (faster, libass), use video_captions instead.
 
 Arguments: `srt: str = ''`; `segments: list = []`; `words: list = []`; `style: str = 'pop'`; `size: str = '1080x1920'`; `fps: int = 30`; `words_per_chunk: int = 3`; `position: str = 'auto'`; `brand: str = ''`; `colors: dict = {}`; `fonts: dict = {}`; `formats: list[str] = []`; `project: str = ''`; `out: str = ''`
+
+### `motion_compose`
+
+The pro motion-graphics engine (After Effects-style comp → video): write a JSON scene spec (or
+pick a ready template) and get a frame-exact MP4 / ProRes 4444 / WebM-alpha, a timecoded contact
+sheet + key frames to LOOK at, the standalone GSAP HTML and the spec JSON (editable masters).
+
+spec = {size, fps, background, colors, post:{grain, vignette, light_leaks, letterbox, glow, chroma,
+motion_blur}, camera, markers:{name: s}, scenes:[{duration, background, camera, transition:{type,
+duration}, layers:[…]}]} (or top-level layers for one scene). Layer: {type: text|shape|image|video|
+svg|lottie|icon|chart|counter|3d|group, id, x, y (or below|above: '<id of an earlier layer>' + gap — stacks on the
+MEASURED height, so wrapped/Arabic headlines never collide with the line under them), anchor, w, h, scale, rotation, opacity, z, blend, in,
+out, enter, exit, animate:[{preset, at, duration, ease, stagger, …}], keyframes:[{t,x,y,scale,
+rotation,opacity,ease}], tweens:[raw GSAP]} + type props (text: text with *emphasis*, font head|
+body|<Google family>, weight, size, color, align, rtl auto, bg, glow, shadow, stroke; shape: shape
+rect|circle|ring|line|star|polygon|heart|triangle|arrow|path, fill (colour or gradient), radius;
+image/video: src, fit, radius; svg: src or svg markup ('brand:logo'); lottie: src .json/.lottie,
+speed, loop, recolor; chart: chart bar|hbar|line|area|pie|donut, data [{label,value}]; 3d: scene
+{preset title|logo|product|particles|abstract|device, …}). Colours accept brand tokens (primary,
+accent, background, text, muted). Presets: fade slide rise drop scale zoom pop blur elastic bounce
+flip spin swing wipe iris block split-chars/words/lines (style rise|fade|pop|blur|rotate|punch)
+typewriter scramble highlight underline shine glitch draw morph motion-path counter + loops wiggle
+float parallax pulse kenburns shake; any preset takes -out for exits. Transitions: crossfade dip
+wipe slide push zoom blur iris whip shape glitch. Arabic text is shaped by Chromium and never split
+into letters. template=<name> + fields={…} builds a ready spec (see motion_templates);
+preview=true renders 12 stills only (fast iteration). motion_blur=8 → real sub-frame motion blur
+(8× render time). Full reference: docs/motion.md.
+
+Arguments: `spec: dict = {}`; `template: str = ''`; `fields: dict = {}`; `size: str = ''`; `fps: int = 0`; `transparent: bool = False`; `brand: str = ''`; `colors: dict = {}`; `fonts: dict = {}`; `formats: list[str] = []`; `motion_blur: int = 0`; `preview: bool = False`; `project: str = ''`; `out: str = ''`
 
 ### `motion_countdown`
 
@@ -817,6 +1031,24 @@ background instead). tagline appears under the logo (Arabic ok).
 
 Arguments: `logo: str = ''`; `tagline: str = ''`; `style: str = 'draw'`; `duration: float = 4.5`; `size: str = '1920x1080'`; `fps: int = 30`; `transparent: bool = False`; `fade_out: bool = False`; `brand: str = ''`; `colors: dict = {}`; `fonts: dict = {}`; `formats: list[str] = []`; `project: str = ''`; `out: str = ''`
 
+### `motion_lottie` [N]
+
+Render a Lottie animation (.json Bodymovin or .lottie dotLottie, e.g. from LottieFiles or an
+After Effects export) frame-exactly to MP4 / ProRes 4444 / WebM alpha / GIF, with optional brand
+recolouring and retiming. Returns the video, a timecoded contact sheet, key frames, and data
+(native fps/size/length, colours used, features such as expressions/effects that lottie-web may
+not fully support).
+
+size: '' = the animation's own size (capped at 1920) | 1080x1080 | 9:16 …; fit contain|cover.
+speed: 0.5 = half speed; loops: play N times; duration (s) overrides the length (loops forever).
+recolor_map {"#FF0000": "#00AA88", …} (nearest colour within tolerance) or recolor_mode brand
+(uses brand=<slug> colours on the most used colours) | mono:#hex (every colour → a shade of #hex).
+transparent=true → alpha (.mov + .webm); background: colour behind it otherwise (brand background
+or white). fps: 0 = the animation's own fps. To use a Lottie as a LAYER in a bigger composition use
+motion_compose with {"type": "lottie", "src": …}.
+
+Arguments: `src: str`; `size: str = ''`; `fit: str = 'contain'`; `speed: float = 1.0`; `loops: int = 1`; `duration: float = 0`; `recolor_map: dict = {}`; `recolor_mode: str = ''`; `transparent: bool = False`; `background: str = ''`; `padding: int = 0`; `fps: int = 0`; `brand: str = ''`; `formats: list[str] = []`; `project: str = ''`; `out: str = ''`
+
 ### `motion_lower_third`
 
 Lower-third name/role super with alpha, ready to overlay on an interview or talking head.
@@ -830,6 +1062,33 @@ title-safe area (higher on 9:16 to clear platform UI). Arabic names/roles are sh
 brand: saved brand kit slug.
 
 Arguments: `name: str`; `role: str = ''`; `style: str = 'modern'`; `position: str = 'auto'`; `duration: float = 6.0`; `size: str = '1920x1080'`; `fps: int = 30`; `photo: str = ''`; `brand: str = ''`; `colors: dict = {}`; `fonts: dict = {}`; `formats: list[str] = []`; `project: str = ''`; `out: str = ''`
+
+### `motion_plan`
+
+Router for motion graphics: describe the job in plain words (+ optional assets, size, duration,
+needs_alpha, needs_3d, photoreal, arabic, brand) and get the best engine with the reasons, the
+exact next tool call (args filled in), a ready spec skeleton/template, and the alternatives.
+Engines: motion_compose (HTML+GSAP: 2D typography/infographics/UI/logo/transitions — default),
+motion_lottie (designer .json/.lottie files), motion_3d (three.js real-time 3D), motion_blender
+(photoreal Blender, slow), motion_remotion (existing React projects, licence-gated). Call this
+first when unsure; it costs nothing and renders nothing.
+
+Arguments: `brief: str`; `assets: list[str] = []`; `size: str = ''`; `duration: float = 0`; `needs_alpha: bool = False`; `needs_3d: bool = False`; `photoreal: bool = False`; `arabic: bool = False`; `brand: str = ''`
+
+### `motion_remotion` [NI]
+
+Render a composition of an EXISTING Remotion (React) project with `npx remotion render` — for
+teams that already build videos in React or batch-render data-driven templates (pass input
+props as props={…}). Returns the video + a contact sheet. For new motion graphics prefer
+motion_compose (no Node, no licence question).
+
+licence_ok=true is REQUIRED: confirm the user's organisation has ≤ 3 people or holds a Remotion
+company licence (remotion.dev/docs/license). install=true runs `npm install` when node_modules is
+missing (downloads packages). codec: h264 | h265 | vp9 | prores; transparent=true → ProRes 4444
+(or VP9 with alpha when codec=vp9). frames: '0-89' to render a range. entry: the entry file if
+Remotion cannot find it (e.g. src/index.ts). · INSTALLS software — only with the user's explicit OK
+
+Arguments: `project_dir: str`; `composition: str`; `licence_ok: bool = False`; `install: bool = False`; `props: dict = {}`; `entry: str = ''`; `codec: str = 'h264'`; `transparent: bool = False`; `frames: str = ''`; `scale: float = 1.0`; `timeout: int = 3600`; `project: str = ''`; `out: str = ''`
 
 ### `motion_render_html`
 
@@ -1202,3 +1461,64 @@ Apache-2.0, default), schnell-q8 (≈13 GB), z-image-turbo (≈20 GB download, q
 excellent photorealism). confirm=false returns the plan and sizes only. · INSTALLS software — only with the user's explicit OK
 
 Arguments: `model: str = 'schnell-q4'`; `confirm: bool = False`; `background: bool = True`
+
+## stock (5)
+
+### `stock_credits`
+
+Write CREDITS.md (human-readable) and credits.txt (paste into a video/post description) from the
+project's stock_credits.json — every stock item downloaded with stock_download/stock_icon, grouped
+by provider, with REQUIRED attributions first, licence names + links, and any special terms (share-alike,
+NASA insignia rules…). Regenerates both files each time from the ledger. Returns the credit text in data.
+
+Arguments: `project: str = ''`; `out: str = ''`
+
+### `stock_download` [N]
+
+Download stock items found by stock_search (ids like "pexels:123", or the result numbers of the last
+search like "3") into projects/<project>/stock/<kind>/<provider>-<title>.<ext>, each with a
+<file>.license.json sidecar (licence, attribution, source URLs, date) and an entry in the project's
+stock_credits.json (feed stock_credits). quality: best | 4k | hd (≤1080p / ≤1920 px photos) | sd (≤720p).
+For video the closest rendition is chosen (mp4/H.264 preferred); for photos the largest ≤ max_width.
+Every file is verified (ffprobe for video/audio, Pillow for images) and shown on a contact sheet (LOOK).
+Unsplash download pings are sent as its API requires. Non-commercial items from a commercial=true search
+are refused unless allow_noncommercial=true.
+
+Arguments: `ids: list[str]`; `quality: str = 'best'`; `max_width: int = 0`; `allow_noncommercial: bool = False`; `project: str = ''`; `out: str = ''`
+
+### `stock_icon` [N]
+
+Find and download open-source icons from Iconify (200 000+ icons, 150+ sets: Material, Tabler,
+Phosphor, Lucide, MDI…) as SVG plus a transparent PNG at `size` px, with the icon set's licence in a
+sidecar and the project's stock_credits.json. query: words ("coffee cup") or an exact "prefix:name"
+("mdi:coffee"). color: hex like "#C8102E" (applies to single-colour icons). count: how many of the best
+matches to download. Returns the files, a preview, and (for word queries) a numbered sheet of other
+matches with their exact names (data.alternatives) so you can pick a different style.
+
+Arguments: `query: str`; `color: str = ''`; `size: int = 512`; `count: int = 1`; `project: str = ''`; `out: str = ''`
+
+### `stock_search` [N]
+
+Search FREE stock media across every free stock site with an official API and show a numbered,
+labelled contact sheet to pick from (LOOK at it). kind: video | photo | illustration | vector | music |
+sfx | icon | any. Providers fan out in parallel: videos from Pexels, Coverr, Pixabay, Wikimedia Commons,
+NASA, Internet Archive; photos from Unsplash, Pexels, Pixabay, Openverse, Wikimedia, NASA; music from
+Jamendo, Freesound, Openverse, Internet Archive; sfx from Freesound, Openverse, NASA…; icons from Iconify.
+Keyless providers always work; keyed ones (free keys) join once the user adds them (see stock_sources).
+orientation: landscape | portrait | square. min/max_duration in seconds, min_width in px.
+commercial=true (default) keeps only licences allowing commercial use AND edits. providers: "auto" or
+a comma list (e.g. "pexels,wikimedia"). Write queries in ENGLISH (Arabic is passed through but most
+APIs index English). Returns data.results (n, id, size, duration, licence, attribution…) — pass ids
+(or the numbers) to stock_download.
+
+Arguments: `query: str`; `kind: str = 'video'`; `orientation: str = ''`; `count: int = 12`; `min_duration: float = 0`; `max_duration: float = 0`; `min_width: int = 0`; `commercial: bool = True`; `providers: str = 'auto'`; `page: int = 1`; `project: str = ''`; `out: str = ''`
+
+### `stock_sources`
+
+Which free stock providers are active right now (keyless ones always; keyed ones once the user adds a
+free key), what each gives, licence + attribution rules, rate limits, and step-by-step "get a free key"
+instructions for each keyed provider (Pexels, Pixabay, Unsplash, Coverr, Freesound, Jamendo). Also creates
+STUDIO_HOME/keys.json with EMPTY entries for missing names, so the user only pastes keys in (existing
+values are never touched or shown). Call this before telling the user a provider is unavailable.
+
+Arguments: 

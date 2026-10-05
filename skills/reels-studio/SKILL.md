@@ -118,8 +118,9 @@ edits to the spec and re-render; never hand-edit the PDF.
 
 **9. Production hand-off (Producer)** — only when the user wants the video made:
 `references/production-handoff.md` → flow-studio-director (AI-generated video/ads, reads
-`*_for_production.txt`), creative-studio (shoot edit, voice-over incl. Egyptian Arabic, captions,
-ratio exports, thumbnails), premium-subtitle-localization (other-language subtitles). If a needed
+`*_for_production.txt`), video-post-studio (shoot edit, captions, colour, sound, ratio exports;
+motion-design-studio for graphics, stock-library for b-roll), creative-studio (voice-over incl. Egyptian
+Arabic, thumbnails), premium-subtitle-localization (other-language subtitles). If a needed
 capability exists in no skill, build it with skill-router's procedure and connect it here.
 
 **10. Learn.** After publishing, ask for the numbers (reels: hold, watch %, shares/saves; ads: hook

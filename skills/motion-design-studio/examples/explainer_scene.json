@@ -1,0 +1,10 @@
+{"size": "1920x1080", "spec": {
+  "background": {"type": "grid", "pattern_opacity": 0.06},
+  "post": {"grain": 3, "vignette": 0.3},
+  "scenes": [
+   {"duration": 3.6, "camera": {"preset": "push-in", "amount": 0.05}, "layers": [
+     {"type": "text", "id": "k", "text": "STEP 1", "font": "body", "size": 38, "weight": 800, "letter_spacing": 0.25, "color": "accent", "y": "36%", "enter": {"preset": "block", "duration": 0.7}},
+     {"type": "text", "id": "h", "text": "Collect the *right* data", "size": 120, "weight": 900, "below": "k", "gap": 30, "w": 1500, "align": "center", "enter": {"preset": "split-words", "style": "rise", "stagger": 0.08}},
+     {"type": "icon", "name": "chart", "size": 150, "color": "primary", "below": "h", "gap": 60, "enter": {"preset": "pop", "at": 0.8}, "loop_anim": "float"}]},
+   {"duration": 4, "transition": {"type": "push", "duration": 0.6}, "layers": [
+     {"type": "chart", "chart": "bar", "w": 1400, "h": 700, "y": "55%", "data": [{"label": "2023", "value": 40}, {"label": "2024", "value": 62}, {"label": "2025", "value": 97}], "highlight": 2, "annotations": [{"index": 2, "text": "+56%"}]}]}]}}

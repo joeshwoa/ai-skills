@@ -72,6 +72,10 @@ you can't check today's trends live, give me scored ideas and 5–10 hooks
 MSA) as a JSON spec following `references/spec-schema.md`, so I can validate
 and render it (`scripts/rs.sh validate` / `render`) in Claude/Cursor/Antigravity.
 
+The `video-post-studio` (editing/post-production), `motion-design-studio`
+(motion graphics) and `stock-library` (free stock + licences) skills run on
+the same local server as creative-studio — same rule as below.
+
 The `creative-studio` skill (my free content-creation team — branding,
 design, photo, vector, video editing, motion, audio, AI images) also runs
 locally (`skills/creative-studio/scripts/call.sh`). Here, help me with the
