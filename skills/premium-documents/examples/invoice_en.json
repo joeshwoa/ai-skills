@@ -1,0 +1,64 @@
+{
+ "type": "invoice",
+ "theme": "plain-pro",
+ "currency": "EGP",
+ "meta": {
+  "org": "Cominde",
+  "from": "Cominde LLC\n12 Street 9, Maadi\nCairo, Egypt",
+  "bill_to": "Don Bosco Institute\nRod El Farag, Cairo",
+  "number": "INV-2026-041",
+  "date": "7 Oct 2026",
+  "due": "21 Oct 2026"
+ },
+ "blocks": [
+  {
+   "type": "items",
+   "tax_pct": 14,
+   "items": [
+    {
+     "description": "AI for teachers — training programme",
+     "detail": "6 sessions × 3 groups",
+     "qty": 18,
+     "price": 4500
+    },
+    {
+     "description": "Course materials pack",
+     "detail": "slides, handouts, question banks",
+     "qty": 1,
+     "price": 12000
+    },
+    {
+     "description": "Certificates",
+     "qty": 120,
+     "price": 75
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "text": "Payment details",
+   "numbered": false
+  },
+  {
+   "type": "kv",
+   "items": [
+    [
+     "Bank",
+     "CIB — Maadi branch"
+    ],
+    [
+     "Account name",
+     "Cominde LLC"
+    ],
+    [
+     "Reference",
+     "INV-2026-041"
+    ]
+   ]
+  },
+  {
+   "type": "paragraph",
+   "text": "Thank you for your business. Payment within 14 days."
+  }
+ ]
+}

@@ -1,0 +1,41 @@
+{
+ "type": "newsletter",
+ "theme": "mint-fresh",
+ "meta": {
+  "title": "Neo AI Monthly \u2014 October",
+  "org": "Neo AI",
+  "issue": "Issue 4"
+ },
+ "blocks": [
+  {
+   "type": "heading",
+   "text": "120 teachers trained",
+   "numbered": false
+  },
+  {
+   "type": "paragraph",
+   "text": "Our first cohort finished the programme with an average of 4 hours saved every week. The second cohort starts in November with three new schools joining."
+  },
+  {
+   "type": "image",
+   "image": {
+    "art": "waves"
+   },
+   "caption": "Cohort 1 graduation"
+  },
+  {
+   "type": "heading",
+   "text": "New: question banks",
+   "numbered": false
+  },
+  {
+   "type": "paragraph",
+   "text": "Teachers can now generate exam-style questions by difficulty and export them to Word in one click. We tested it with 30 teachers in September."
+  },
+  {
+   "type": "quote",
+   "text": "I finished my midterm in one evening instead of a weekend.",
+   "author": "Science teacher"
+  }
+ ]
+}

@@ -1,0 +1,8 @@
+{"type":"contract","theme":"paper-ink","meta":{"title":"Training Services Agreement","subtitle":"Draft for review","org":"Neo AI","date":"7 October 2026","confidential":true},
+ "blocks":[{"type":"kv","items":[["Provider","Neo AI LLC, Cairo"],["Client","Don Bosco Institute, Cairo"],["Effective date","1 November 2026"]]},
+  {"type":"callout","kind":"warning","title":"Draft","text":"This draft must be reviewed by a lawyer before signing."},
+  {"type":"heading","text":"Definitions"},{"type":"paragraph","text":"**Programme** means the six-week AI for Teachers training described in Schedule A."},
+  {"type":"heading","text":"Services"},{"type":"paragraph","text":"The Provider will deliver six sessions of three hours to three groups of up to forty teachers."},
+  {"type":"heading","text":"Fees and payment"},{"type":"paragraph","text":"The Client will pay EGP 120,000 in two equal instalments: on signature and after session three."},
+  {"type":"heading","text":"Termination"},{"type":"paragraph","text":"Either party may terminate with thirty days' written notice."},
+  {"type":"signature","parties":[{"name":"Joshua George","role":"Neo AI"},{"name":"","role":"Don Bosco Institute"}]}]}

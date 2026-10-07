@@ -1,0 +1,85 @@
+{
+ "title": "P&L 2027",
+ "theme": "azure-finance",
+ "currency": "EGP",
+ "sheets": [
+  {
+   "name": "Inputs",
+   "kind": "inputs",
+   "fields": [
+    {
+     "label": "Growth",
+     "name": "Growth",
+     "value": 0.1,
+     "type": "percent"
+    },
+    {
+     "label": "COGS %",
+     "name": "Cogs",
+     "value": 0.3,
+     "type": "percent"
+    }
+   ]
+  },
+  {
+   "name": "P&L",
+   "kind": "calc",
+   "columns": [
+    "Q1",
+    "Q2",
+    "Q3",
+    "Q4",
+    "FY"
+   ],
+   "lines": [
+    {
+     "id": "rev",
+     "label": "Revenue",
+     "values": [
+      1000000,
+      "={rev@prev}*(1+Growth)",
+      "={rev@prev}*(1+Growth)",
+      "={rev@prev}*(1+Growth)",
+      "=SUM(B{rev#}:E{rev#})"
+     ],
+     "input": false
+    },
+    {
+     "id": "cogs",
+     "label": "Cost of sales",
+     "formula": "=-{rev}*Cogs"
+    },
+    {
+     "id": "gp",
+     "label": "Gross profit",
+     "formula": "={rev}+{cogs}",
+     "style": "total"
+    },
+    {
+     "id": "opex",
+     "label": "Operating costs",
+     "values": [
+      -400000,
+      -420000,
+      -440000,
+      -460000,
+      "=SUM(B{opex#}:E{opex#})"
+     ],
+     "input": true
+    },
+    {
+     "id": "ebit",
+     "label": "Operating profit",
+     "formula": "={gp}+{opex}",
+     "style": "total"
+    },
+    {
+     "id": "m",
+     "label": "Operating margin",
+     "formula": "=IF({rev}=0,0,{ebit}/{rev})",
+     "type": "percent"
+    }
+   ]
+  }
+ ]
+}

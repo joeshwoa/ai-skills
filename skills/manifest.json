@@ -1,7 +1,14 @@
 {
   "generated_by": "skills/skill-router/scripts/build_manifest.py",
-  "skill_count": 13,
+  "skill_count": 17,
   "skills": [
+    {
+      "name": "course-studio",
+      "path": "skills/course-studio",
+      "description": "A full curriculum and course-production team that designs and writes complete courses — programme/course plans, syllabi, learning outcomes and alignment matrices, session-by-session lesson plans with timing, the full lesson content (not just slides), slide decks with speaker notes, student handouts, worksheets, labs, quizzes and exams with answer keys, rubrics, instructor guides, gradebooks, question banks and schedules — for schools (e.g. Don Bosco technical schools), universities, academies/bootcamps, corporate training and online courses, in Arabic or English. Always asks first what the context is (school subject content vs. a training programme, level, sessions, language, brand). Use for any request to plan, design, write or produce a course, curriculum, programme, lesson series, training, workshop, lesson plans, course materials or exam materials.",
+      "has_scripts": true,
+      "has_references": true
+    },
     {
       "name": "creative-studio",
       "path": "skills/creative-studio",
@@ -45,9 +52,30 @@
       "has_references": true
     },
     {
+      "name": "premium-design-kit",
+      "path": "skills/premium-design-kit",
+      "description": "The shared design engine and art department behind premium-presentations, premium-documents, premium-spreadsheets and course-studio — 24 themes plus brand kits (creative-studio brands), Arabic/RTL typography, contrast-safe colour tokens, real images from free stock, Iconify icons, generated original art (covers, backgrounds, patterns), themed charts, and visual QA (page/slide previews and contact sheets). Use when choosing or making a theme or brand look for any document, finding or generating images, icons, grids or backgrounds for a design, making a chart image, previewing/QA-ing a PDF/PPTX/DOCX/XLSX, or setting up the document skills on a new machine.",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "premium-documents",
+      "path": "skills/premium-documents",
+      "description": "A document design studio that writes and designs any document as BOTH an editable Word file (.docx — real styles, headings, TOC, tables, RTL) and a designed PDF (covers, grids, cards, charts, real TOC page numbers, embedded fonts) from one spec — reports, proposals, business plans, whitepapers, e-books and guides, manuals, policies/SOPs, case studies, newsletters, brochures, flyers and one-pagers, letters, cover letters, memos and minutes, contracts and NDAs, invoices, quotations and receipts, CVs, certificates, lesson plans, syllabi, handouts, worksheets, lab sheets, exams and answer keys — in English or Arabic (right-to-left), with real photos, icons, charts and brand kits. Use for any request to write, design, format or redo a document, report, letter, CV, invoice, certificate, worksheet or PDF, even when no format is named.",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
       "name": "premium-presentations",
       "path": "skills/premium-presentations",
-      "description": "Build fully editable, professional/premium presentations (and the same quality bar for documents, spreadsheets, and PDFs) — not flat images, not generic template filler. Use this whenever the user asks for a presentation, slide deck, pitch deck, investor deck, PowerPoint, keynote, or any \"make me slides about X\" request, even if they don't say \"professional\" or \"premium\" explicitly — treat every deck request as wanting agency-quality output unless they clearly say otherwise (e.g. \"just a rough draft\"). If the user hasn't specified a visual style/theme, ALWAYS stop and ask them (see \"Step 1: figure out the design\" below) instead of guessing — a wrong visual direction is expensive to redo, a quick question is not. Also use this skill's methodology (deck-spec to native-format generation, ask-before-guessing on design, real data not placeholders) as the pattern for sibling skills that build documents or spreadsheets to the same premium bar.",
+      "description": "Build fully editable, agency-quality presentations — real .pptx (every title, bullet, table cell and chart is native and editable) plus an animated HTML version — in English or Arabic (full right-to-left), with real photos from free stock, icons, generated art, native PowerPoint charts, diagrams (cycle, funnel, pyramid, hierarchy, venn, matrix), KPI dashboards, teaching slides (objectives, definitions, quizzes with reveal, activities), speaker notes, brand kits and 24 themes. Use whenever the user asks for a presentation, slide deck, pitch/investor/sales deck, PowerPoint, Keynote, lecture or lesson slides, or \"make me slides about X\" — even without the word \"professional\". If no visual style is given, ask before building. For documents use premium-documents, for spreadsheets premium-spreadsheets, for a whole course course-studio.",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "premium-spreadsheets",
+      "path": "skills/premium-spreadsheets",
+      "description": "A spreadsheet/financial-modelling studio that builds professional, formula-driven Excel workbooks (.xlsx, also fine in Google Sheets/LibreOffice) — budgets, financial models and forecasts, KPI dashboards with native charts, trackers, inventories, invoices registers, timesheets, gradebooks, attendance sheets, question banks and course schedules — with real Excel tables, live formulas (no pasted results), named inputs, drop-down validation, conditional formatting, contents sheet, print setup, Arabic right-to-left sheets, and an automatic recalculation check that reports every formula error. Use for any request to make, clean, model or redesign a spreadsheet, Excel file, tracker, dashboard, budget or gradebook.",
       "has_scripts": true,
       "has_references": true
     },

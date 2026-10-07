@@ -1,0 +1,154 @@
+{
+ "title": "كشف درجات بايثون",
+ "language": "ar",
+ "theme": "school-bright",
+ "sheets": [
+  {
+   "name": "الدرجات",
+   "title": "كشف درجات بايثون",
+   "subtitle": "الأوزان: اختبار ١ 15%, مشروع 35%, نهائي 50%",
+   "columns": [
+    {
+     "name": "الطالب",
+     "width": 26
+    },
+    {
+     "name": "اختبار ١",
+     "type": "score",
+     "input": true,
+     "width": 11
+    },
+    {
+     "name": "مشروع",
+     "type": "score",
+     "input": true,
+     "width": 11
+    },
+    {
+     "name": "نهائي",
+     "type": "score",
+     "input": true,
+     "width": 11
+    },
+    {
+     "name": "النسبة",
+     "type": "pct",
+     "bold": true,
+     "formula": "=IF(COUNT([اختبار ١]:[نهائي])=0,\"\",ROUND(([اختبار ١]/10*0.15+[مشروع]/20*0.35+[نهائي]/50*0.5),4))"
+    },
+    {
+     "name": "التقدير",
+     "formula": "=IF([النسبة]=\"\",\"\",IF([النسبة]>=0.85,\"ممتاز\",IF([النسبة]>=0.75,\"جيد جداً\",IF([النسبة]>=0.65,\"جيد\",IF([النسبة]>=0.5,\"مقبول\",\"راسب\")))))",
+     "align": "center",
+     "bold": true
+    }
+   ],
+   "rows": [
+    [
+     "مريم أحمد",
+     9,
+     18,
+     44
+    ],
+    [
+     "يوسف علي",
+     6,
+     12,
+     25
+    ],
+    [
+     "كيرلس مينا",
+     8,
+     17,
+     38
+    ],
+    [
+     "سارة محمود",
+     10,
+     20,
+     47
+    ],
+    [
+     "عمر خالد",
+     5,
+     9,
+     22
+    ]
+   ],
+   "freeze_cols": 1,
+   "validation": {
+    "اختبار ١": {
+     "type": "decimal",
+     "min": 0,
+     "max": 10,
+     "error": "0 – 10"
+    },
+    "مشروع": {
+     "type": "decimal",
+     "min": 0,
+     "max": 20,
+     "error": "0 – 20"
+    },
+    "نهائي": {
+     "type": "decimal",
+     "min": 0,
+     "max": 50,
+     "error": "0 – 50"
+    }
+   },
+   "conditional": [
+    {
+     "column": "النسبة",
+     "type": "data_bar"
+    },
+    {
+     "column": "النسبة",
+     "type": "rule",
+     "formula": "=AND(ISNUMBER([النسبة]),[النسبة]<0.5)",
+     "style": "bad"
+    }
+   ],
+   "description": "درجات كل طالب والنسبة والتقدير"
+  },
+  {
+   "name": "ملخص",
+   "kind": "dashboard",
+   "title": "ملخص الفصل",
+   "kpis": [
+    {
+     "label": "متوسط الفصل",
+     "formula": "=IFERROR(AVERAGE({الدرجات.النسبة}),\"—\")",
+     "type": "pct"
+    },
+    {
+     "label": "نسبة النجاح",
+     "formula": "=IFERROR(COUNTIF({الدرجات.النسبة},\">=0.5\")/COUNT({الدرجات.النسبة}),\"—\")",
+     "type": "pct"
+    },
+    {
+     "label": "أعلى نسبة",
+     "formula": "=IF(COUNT({الدرجات.النسبة})=0,\"—\",MAX({الدرجات.النسبة}))",
+     "type": "pct"
+    },
+    {
+     "label": "عدد الطلاب",
+     "formula": "=COUNTA({الدرجات.الطالب})",
+     "type": "int"
+    }
+   ],
+   "charts": [
+    {
+     "type": "bar",
+     "title": "نسبة كل طالب",
+     "data_sheet": "الدرجات",
+     "categories": "الطالب",
+     "values": [
+      "النسبة"
+     ]
+    }
+   ],
+   "description": "متوسطات ونسبة النجاح"
+  }
+ ],
+ "contents": false
+}

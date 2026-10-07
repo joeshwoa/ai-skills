@@ -1,0 +1,3 @@
+{"type":"minutes","theme":"plain-pro","language":"ar","meta":{"title":"محضر اجتماع فريق المناهج","date":"٧ أكتوبر ٢٠٢٦","attendees":["جوشوا","مريم","كيرلس"],"subject":"خطة كورس بايثون"},
+ "blocks":[{"type":"heading","text":"القرارات"},{"type":"checklist","items":[{"text":"اعتماد ١٢ حصة","done":true},{"text":"الاختبار النهائي مشروع عملي","done":true}]},
+  {"type":"heading","text":"المهام"},{"type":"table","headers":["المهمة","المسؤول","الموعد"],"rows":[["كتابة خطة الكورس","جوشوا","١٠ أكتوبر"],["تجهيز المعمل","كيرلس","١٢ أكتوبر"]]}]}

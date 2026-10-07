@@ -1,0 +1,272 @@
+{
+ "theme": "midnight-violet",
+ "footer": "Cominde — Seed round 2026",
+ "slides": [
+  {
+   "type": "title",
+   "kicker": "Seed round",
+   "title": "Cominde: AI study buddy for 2M Egyptian students",
+   "subtitle": "Raising $750k to reach 100k paying families by 2028",
+   "background": {
+    "art": "blobs",
+    "dark": true
+   },
+   "overlay": 0.2
+  },
+  {
+   "type": "image_split",
+   "title": "Students study alone at night",
+   "text": "Private lessons cost families 20–40% of household spending; most practice happens with no feedback.",
+   "bullets": [
+    {
+     "point": "No feedback loop",
+     "detail": "Mistakes are found at the exam, not the night before"
+    },
+    {
+     "point": "Expensive tutoring",
+     "detail": "Concentrated in the last 3 months before exams"
+    }
+   ],
+   "image": {
+    "photo": "student studying night desk lamp",
+    "orientation": "portrait"
+   }
+  },
+  {
+   "type": "kpi",
+   "title": "Traction after 6 months",
+   "metrics": [
+    {
+     "label": "Weekly active",
+     "value": "18.4k",
+     "delta": "+32% m/m",
+     "icon": "group"
+    },
+    {
+     "label": "Paid conversion",
+     "value": "6.1%",
+     "delta": "+1.2 pts",
+     "icon": "payments"
+    },
+    {
+     "label": "D30 retention",
+     "value": "41%",
+     "delta": "-2 pts",
+     "good": false,
+     "icon": "event repeat"
+    }
+   ],
+   "chart": {
+    "chart": "line",
+    "categories": [
+     "Apr",
+     "May",
+     "Jun",
+     "Jul",
+     "Aug",
+     "Sep"
+    ],
+    "series": [
+     {
+      "name": "WAU (k)",
+      "values": [
+       3.1,
+       5.2,
+       7.9,
+       10.4,
+       13.9,
+       18.4
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "type": "chart",
+   "chart": "donut",
+   "title": "Use of funds",
+   "categories": [
+    "Product & AI",
+    "Growth",
+    "Content",
+    "Ops"
+   ],
+   "series": [
+    {
+     "name": "Share",
+     "values": [
+      45,
+      30,
+      15,
+      10
+     ]
+    }
+   ],
+   "unit": "%",
+   "insight": "Most of the round goes into the tutor model and the curriculum graph",
+   "takeaways": [
+    "18 months runway",
+    "Hire 6 engineers"
+   ]
+  },
+  {
+   "type": "diagram",
+   "kind": "funnel",
+   "title": "Acquisition funnel (Sept)",
+   "items": [
+    {
+     "label": "App installs",
+     "value": "120k",
+     "detail": "Mostly TikTok creators"
+    },
+    {
+     "label": "Activated",
+     "value": "48k",
+     "detail": "Finished first lesson"
+    },
+    {
+     "label": "Weekly active",
+     "value": "18k"
+    },
+    {
+     "label": "Paying",
+     "value": "1.1k",
+     "detail": "EGP 149 / month"
+    }
+   ]
+  },
+  {
+   "type": "diagram",
+   "kind": "matrix",
+   "title": "Where we play",
+   "axes": [
+    "Price",
+    "Personalisation"
+   ],
+   "items": [
+    {
+     "label": "Cominde",
+     "detail": "High personalisation, low price",
+     "highlight": true
+    },
+    {
+     "label": "Private tutors",
+     "detail": "High personalisation, high price"
+    },
+    {
+     "label": "YouTube",
+     "detail": "Free, one-size-fits-all"
+    },
+    {
+     "label": "Centers",
+     "detail": "Mid price, group classes"
+    }
+   ]
+  },
+  {
+   "type": "diagram",
+   "kind": "hierarchy",
+   "title": "Team",
+   "items": [
+    {
+     "label": "CEO",
+     "detail": "Product & AI",
+     "children": [
+      {
+       "label": "Engineering",
+       "children": [
+        "Mobile",
+        "AI",
+        "Backend"
+       ]
+      },
+      {
+       "label": "Content",
+       "children": [
+        "Math",
+        "Science"
+       ]
+      },
+      {
+       "label": "Growth",
+       "children": [
+        "Creators",
+        "Schools"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "type": "gallery",
+   "title": "In classrooms today",
+   "items": [
+    {
+     "image": {
+      "photo": "classroom students tablets"
+     },
+     "caption": "Pilot school, Giza"
+    },
+    {
+     "image": {
+      "photo": "teacher whiteboard math"
+     },
+     "caption": "Teacher dashboard"
+    },
+    {
+     "image": {
+      "art": "geo"
+     },
+     "caption": "Curriculum graph"
+    }
+   ]
+  },
+  {
+   "type": "diagram",
+   "kind": "pyramid",
+   "title": "Learning model",
+   "items": [
+    {
+     "label": "Mastery",
+     "detail": "Spaced exam-style practice"
+    },
+    {
+     "label": "Practice",
+     "detail": "Instant feedback on every step"
+    },
+    {
+     "label": "Understanding",
+     "detail": "Short explanations in Egyptian Arabic"
+    }
+   ]
+  },
+  {
+   "type": "diagram",
+   "kind": "venn",
+   "title": "Why now",
+   "center": "Cominde",
+   "items": [
+    {
+     "label": "Cheap LLMs"
+    },
+    {
+     "label": "Phones everywhere"
+    },
+    {
+     "label": "Exam pressure"
+    }
+   ]
+  },
+  {
+   "type": "quote_image",
+   "quote": "My son finally asks for practice instead of avoiding it.",
+   "author": "Parent, pilot school"
+  },
+  {
+   "type": "closing",
+   "title": "Let's talk",
+   "contact": "founder@cominde.example"
+  }
+ ]
+}

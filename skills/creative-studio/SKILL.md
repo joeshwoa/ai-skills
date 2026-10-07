@@ -115,7 +115,9 @@ Put Arabic or long arguments in a JSON file and pass `@file` (no shell-quoting a
   The studio hands such videos over and then edits/captions/brands the returned clips.
 - **omnicinema** — the user's omnicinema-mcp engine: one-prompt promo animatics and genre music
   with MIDI. Use the studio for brand kits, layouts, photo/vector work and real timeline editing.
-- **premium-presentations** — slide decks; take the palette/fonts from `brand_show`.
+- **premium-presentations / premium-documents / premium-spreadsheets / course-studio** — decks,
+  Word+PDF documents, Excel workbooks and whole courses; they read this studio's brand kits
+  directly (`"brand": "<slug>"`).
 - **premium-subtitle-localization** — translating/localising subtitles; the studio burns them in.
 
 ## Troubleshooting

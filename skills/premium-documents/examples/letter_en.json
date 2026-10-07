@@ -1,0 +1,47 @@
+{
+ "type": "letter",
+ "theme": "paper-ink",
+ "meta": {
+  "org": "Cominde",
+  "org_address": "12 Street 9, Maadi\nCairo, Egypt\nhello@cominde.example",
+  "date": "7 October 2026",
+  "to": "Ms. Laila Hassan\nPrincipal, Nile Language School\nGiza",
+  "subject": "Pilot partnership for the 2026/27 school year"
+ },
+ "blocks": [
+  {
+   "type": "paragraph",
+   "text": "Dear Ms. Hassan,"
+  },
+  {
+   "type": "paragraph",
+   "text": "Thank you for meeting us last week. As discussed, we would like to run a one-term pilot of our AI study companion with your Grade 8 students at no cost to the school."
+  },
+  {
+   "type": "bullets",
+   "items": [
+    "Teacher training in two 90-minute sessions",
+    "Weekly progress reports to the school",
+    "No student data shared outside the school"
+   ]
+  },
+  {
+   "type": "paragraph",
+   "text": "We would be glad to start on 1 November. I look forward to your reply."
+  },
+  {
+   "type": "paragraph",
+   "text": "Kind regards,"
+  },
+  {
+   "type": "signature",
+   "parties": [
+    {
+     "name": "Joshua George",
+     "role": "Founder, Cominde",
+     "date_line": false
+    }
+   ]
+  }
+ ]
+}

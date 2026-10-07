@@ -131,8 +131,9 @@ def add_footer(slide, theme, page_num, total, footer_text=""):
         _, tf = add_textbox(slide, Inches(0.5), SLIDE_H - Inches(0.45), Inches(8), Inches(0.35))
         style_run(set_text(tf, footer_text), theme["body_font"], 10, theme["secondary"])
 
-    _, tf2 = add_textbox(slide, SLIDE_W - Inches(1.6), SLIDE_H - Inches(0.45), Inches(1.2), Inches(0.35),
+    box2, tf2 = add_textbox(slide, SLIDE_W - Inches(1.6), SLIDE_H - Inches(0.45), Inches(1.2), Inches(0.35),
                           align=PP_ALIGN.RIGHT)
+    box2.name = "ltr-text page"
     style_run(set_text(tf2, f"{page_num:02d} / {total:02d}"), theme["body_font"], 10, theme["secondary"])
 
 
@@ -195,7 +196,7 @@ def slide_title(prs, theme, spec):
     text_color = theme["text_on_dark"] if theme["style"] == "dark" else theme["text_on_light"]
 
     if spec.get("kicker"):
-        _, tf = add_textbox(slide, Inches(0.9), Inches(2.05), Inches(11.5), Inches(0.4))
+        _, tf = add_textbox(slide, Inches(0.9), Inches(1.75), Inches(11.5), Inches(0.42))
         style_run(set_text(tf, spec["kicker"].upper()), theme["body_font"], 14, theme["primary"], bold=True)
 
     # 1.7in comfortably fits a 44pt title up to 2 wrapped lines without the
@@ -471,17 +472,20 @@ def slide_process(prs, theme, spec):
     circle_text_color = theme["bg"] if theme["style"] == "dark" else "FFFFFF"
     for i, s in enumerate(steps):
         cx = x0 + (span * i if n > 1 else (x1 - x0) / 2)
-        add_circle(slide, Inches(cx), Inches(y_center), Inches(diameter), theme["primary"])
-        _, tf_n = add_textbox(slide, Inches(cx - diameter / 2), Inches(y_center - diameter / 2),
-                               Inches(diameter), Inches(diameter), align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
-        style_run(set_text(tf_n, str(s.get("number", i + 1)), align=PP_ALIGN.CENTER),
-                  theme["heading_font"], 26, circle_text_color, bold=True)
+        if s.get("icon"):
+            deck_extras.icon_or_glyph(slide, theme, s["icon"], str(i + 1), cx - diameter / 2, y_center - diameter / 2, diameter)
+        else:
+            add_circle(slide, Inches(cx), Inches(y_center), Inches(diameter), theme["primary"])
+            _, tf_n = add_textbox(slide, Inches(cx - diameter / 2), Inches(y_center - diameter / 2),
+                                   Inches(diameter), Inches(diameter), align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
+            style_run(set_text(tf_n, str(s.get("number", i + 1)), align=PP_ALIGN.CENTER),
+                      theme["heading_font"], 26, circle_text_color, bold=True)
 
         _, tf_l = add_textbox(slide, Inches(cx - box_w / 2), Inches(y_center + diameter / 2 + 0.25),
-                               Inches(box_w), Inches(0.5), align=PP_ALIGN.CENTER)
+                               Inches(box_w), Inches(0.8), align=PP_ALIGN.CENTER)
         style_run(set_text(tf_l, str(s.get("label", "")), align=PP_ALIGN.CENTER),
                   theme["heading_font"], 16, text_color, bold=True)
-        _, tf_d = add_textbox(slide, Inches(cx - box_w / 2), Inches(y_center + diameter / 2 + 0.8),
+        _, tf_d = add_textbox(slide, Inches(cx - box_w / 2), Inches(y_center + diameter / 2 + 1.1),
                                Inches(box_w), Inches(1.6), align=PP_ALIGN.CENTER)
         style_run(set_text(tf_d, str(s.get("detail", "")), align=PP_ALIGN.CENTER), theme["body_font"], 13,
                   theme["secondary"])
@@ -497,6 +501,8 @@ def slide_big_statement(prs, theme, spec):
 
     statement = spec["statement"]
     size = 54 if len(statement) < 40 else (40 if len(statement) < 80 else 30)
+    if deck_extras.RTL:
+        size -= 8 if size > 30 else 4       # Arabic glyphs are taller at the same size
     box_h = 2.6 if size >= 40 else 3.2
     _, tf = add_textbox(slide, Inches(1.15), Inches(2.6), Inches(11.0), Inches(box_h),
                          align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
@@ -531,11 +537,16 @@ def slide_team(prs, theme, spec):
         cx = 0.9 + card_w * col + card_w / 2
         top = 2.0 + row * row_h
         initials = "".join(w[0].upper() for w in str(person.get("name", "?")).split()[:2]) or "?"
-        add_circle(slide, Inches(cx), Inches(top + avatar_d / 2), Inches(avatar_d), theme["primary"])
-        _, tf_i = add_textbox(slide, Inches(cx - avatar_d / 2), Inches(top), Inches(avatar_d), Inches(avatar_d),
-                               align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
-        style_run(set_text(tf_i, initials, align=PP_ALIGN.CENTER), theme["heading_font"], 22, circle_text_color,
-                  bold=True)
+        photo = deck_extras.asset(person.get("photo")) if person.get("photo") else None
+        if photo:   # the person's OWN photo (a file the user gave) — never a stock face for a real person
+            pic = deck_extras.picture_cover(slide, photo, cx - avatar_d / 2, top, avatar_d, avatar_d)
+            pic.auto_shape_type = MSO_SHAPE.OVAL
+        else:
+            add_circle(slide, Inches(cx), Inches(top + avatar_d / 2), Inches(avatar_d), theme["primary"])
+            _, tf_i = add_textbox(slide, Inches(cx - avatar_d / 2), Inches(top), Inches(avatar_d), Inches(avatar_d),
+                                   align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
+            style_run(set_text(tf_i, initials, align=PP_ALIGN.CENTER), theme["heading_font"], 22, circle_text_color,
+                      bold=True)
 
         _, tf_n = add_textbox(slide, Inches(cx - card_w / 2 + 0.1), Inches(top + avatar_d + 0.15),
                                Inches(card_w - 0.2), Inches(0.45), align=PP_ALIGN.CENTER)
@@ -560,9 +571,9 @@ def slide_feature(prs, theme, spec):
 
     cursor = 1.9
     if spec.get("description"):
-        _, tf = add_textbox(slide, Inches(0.9), Inches(cursor), Inches(6.3), Inches(1.3))
+        _, tf = add_textbox(slide, Inches(0.9), Inches(cursor), Inches(6.3), Inches(1.55))
         style_run(set_text(tf, spec["description"]), theme["body_font"], 17, text_color)
-        cursor += 1.5
+        cursor += 1.75
 
     _, tf = add_textbox(slide, Inches(0.9), Inches(cursor), Inches(6.3), Inches(6.8 - cursor))
     for i, b in enumerate(spec.get("bullets", [])):
@@ -574,6 +585,21 @@ def slide_feature(prs, theme, spec):
         style_run(r, theme["body_font"], 16, text_color)
 
     panel_x, panel_w = 7.8, 4.6
+    img = deck_extras.asset(spec.get("image"), size=(1100, 1170)) if spec.get("image") else None
+    if img:
+        deck_extras.picture_cover(slide, img, panel_x, 1.9, panel_w, 4.9, rounded=0.05)
+        if spec.get("panel_value"):
+            deck_extras.rect(slide, panel_x + 0.3, 5.1, panel_w - 0.6, 1.45, theme["bg"], alpha=0.9,
+                             shape=MSO_SHAPE.ROUNDED_RECTANGLE, radius=0.12)
+            _, tfv = add_textbox(slide, Inches(panel_x + 0.45), Inches(5.12), Inches(panel_w - 0.9), Inches(0.8),
+                                  align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
+            style_run(set_text(tfv, str(spec["panel_value"]), align=PP_ALIGN.CENTER), theme["heading_font"], 30,
+                      theme["primary"], bold=True)
+            _, tfc = add_textbox(slide, Inches(panel_x + 0.45), Inches(5.9), Inches(panel_w - 0.9), Inches(0.55),
+                                  align=PP_ALIGN.CENTER)
+            style_run(set_text(tfc, str(spec.get("panel_caption") or spec.get("panel_label") or ""), align=PP_ALIGN.CENTER),
+                      theme["body_font"], 12, text_color)
+        return slide
     add_panel(slide, Inches(panel_x), Inches(1.9), Inches(panel_w), Inches(4.9), theme["bg_alt"])
     py = 2.5
     if spec.get("panel_label"):
@@ -584,7 +610,7 @@ def slide_feature(prs, theme, spec):
         py += 0.6
     _, tfv = add_textbox(slide, Inches(panel_x + 0.3), Inches(py), Inches(panel_w - 0.6), Inches(1.6),
                           align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
-    style_run(set_text(tfv, str(spec.get("panel_value", "")), align=PP_ALIGN.CENTER), theme["heading_font"], 48,
+    style_run(set_text(tfv, str(spec.get("panel_value", "")), align=PP_ALIGN.CENTER), theme["heading_font"], 36,
               theme["primary"], bold=True)
     py += 1.7
     if spec.get("panel_caption"):
@@ -618,11 +644,14 @@ def slide_icon_grid(prs, theme, spec):
         x = 0.85 + col * (col_w + gap)
         top = 1.9 + row * row_h
         glyph = str(item.get("glyph", "")) or str(i + 1)
-        add_circle(slide, Inches(x + glyph_d / 2), Inches(top + glyph_d / 2), Inches(glyph_d), theme["primary"])
-        _, tf_g = add_textbox(slide, Inches(x), Inches(top), Inches(glyph_d), Inches(glyph_d),
-                               align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
-        style_run(set_text(tf_g, glyph[:2].upper(), align=PP_ALIGN.CENTER), theme["heading_font"], 13,
-                  circle_text_color, bold=True)
+        if item.get("icon"):
+            deck_extras.icon_or_glyph(slide, theme, item["icon"], glyph, x, top, glyph_d)
+        else:
+            add_circle(slide, Inches(x + glyph_d / 2), Inches(top + glyph_d / 2), Inches(glyph_d), theme["primary"])
+            _, tf_g = add_textbox(slide, Inches(x), Inches(top), Inches(glyph_d), Inches(glyph_d),
+                                   align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
+            style_run(set_text(tf_g, glyph[:2].upper(), align=PP_ALIGN.CENTER), theme["heading_font"], 13,
+                      circle_text_color, bold=True)
 
         _, tf_l = add_textbox(slide, Inches(x), Inches(top + glyph_d + 0.15), Inches(col_w), Inches(0.4))
         style_run(set_text(tf_l, item.get("label", "")), theme["heading_font"], 16, theme["primary"], bold=True)
@@ -794,6 +823,252 @@ def slide_vertical_timeline(prs, theme, spec):
     return slide
 
 
+def slide_array_pass(prs, theme, spec):
+    """A binary-search picture: one row of array cells per step.
+
+    Cells inside the current window stay bright. The middle cell uses the
+    accent color. Cells outside the window are dim. L / M / R sit under the
+    left, mid, and right indexes. Text is real PowerPoint text, not a picture.
+    """
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    set_background(slide, theme, "content")
+    text_color = theme["text_on_dark"] if theme["style"] == "dark" else theme["text_on_light"]
+    on_accent = theme["bg"] if theme["style"] == "dark" else "FFFFFF"
+    header(slide, theme, spec["title"], text_color)
+
+    steps = spec.get("steps") or [spec]
+    n_rows = max(len(steps), 1)
+    top, bottom = 1.7, 6.85
+    row_h = (bottom - top) / n_rows
+    dim = "101828" if theme["style"] == "dark" else "E4E7EE"
+
+    for r, step in enumerate(steps):
+        values = [str(v) for v in step.get("values", [])]
+        n = max(len(values), 1)
+        left = int(step.get("left", 0))
+        right = int(step.get("right", n - 1))
+        mid = step.get("mid", None)
+        mid = None if mid is None else int(mid)
+        caption = str(step.get("caption", ""))
+
+        margin, gap = 0.7, 0.1
+        usable = 11.95
+        cell_w = (usable - gap * (n - 1)) / n
+        cell_h = 1.35 if n_rows == 1 else 0.42
+        y = top + r * row_h
+        value_size = 28 if n_rows == 1 else 16
+        index_size = 12
+
+        for i, val in enumerate(values):
+            x = margin + i * (cell_w + gap)
+            in_window = left <= i <= right
+            is_mid = mid is not None and i == mid and in_window
+            if is_mid:
+                fill, color = theme["primary"], on_accent
+            elif in_window:
+                fill, color = theme["bg_alt"], text_color
+            else:
+                fill, color = dim, theme["secondary"]
+            add_panel(slide, Inches(x), Inches(y), Inches(cell_w), Inches(cell_h), fill)
+            _, tf_v = add_textbox(
+                slide, Inches(x), Inches(y), Inches(cell_w), Inches(cell_h),
+                align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE,
+            )
+            style_run(set_text(tf_v, val, align=PP_ALIGN.CENTER), theme["heading_font"], value_size, color, bold=True)
+
+            _, tf_i = add_textbox(
+                slide, Inches(x), Inches(y + cell_h + 0.02), Inches(cell_w), Inches(0.40),
+                align=PP_ALIGN.CENTER,
+            )
+            style_run(set_text(tf_i, str(i), align=PP_ALIGN.CENTER), theme["body_font"], index_size, theme["secondary"])
+
+            roles = []
+            if in_window and i == left:
+                roles.append("L")
+            if in_window and mid is not None and i == mid:
+                roles.append("M")
+            if in_window and i == right and "R" not in roles:
+                roles.append("R")
+            if roles:
+                _, tf_role = add_textbox(
+                    slide, Inches(x), Inches(y + cell_h + 0.44), Inches(cell_w), Inches(0.40),
+                    align=PP_ALIGN.CENTER,
+                )
+                style_run(
+                    set_text(tf_role, " ".join(roles), align=PP_ALIGN.CENTER),
+                    theme["heading_font"], 12, theme["primary"], bold=True,
+                )
+
+        cap_y = y + cell_h + 0.88
+        cap_h = row_h - (cell_h + 0.92)
+        _, tf_c = add_textbox(slide, Inches(0.7), Inches(cap_y), Inches(11.95), Inches(cap_h))
+        style_run(set_text(tf_c, caption), theme["body_font"], 16 if n_rows == 1 else 13, text_color)
+    return slide
+
+
+def _fill_lines(tf, lines, font_name, size, color_hex):
+    for i, line in enumerate(lines):
+        p = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
+        p.alignment = PP_ALIGN.LEFT
+        p.space_before = Pt(0)
+        p.space_after = Pt(0)
+        run = p.add_run()
+        run.text = line if line else " "
+        style_run(run, font_name, size, color_hex)
+
+
+def _token_style(ttype):
+    """IDE colours: blue keywords, gold strings, green names, pink tags, grey comments."""
+    name = "" if ttype is None else str(ttype)
+    if "Comment" in name:
+        return "8B9AAB", True
+    if "Keyword" in name or "Name.Builtin" in name:
+        return "7EE0FF", False
+    if "String" in name:
+        return "E8C547", False
+    if "Number" in name:
+        return "C3A6FF", False
+    if any(k in name for k in ("Name.Function", "Name.Class", "Name.Namespace")):
+        return "9BE36D", False
+    if "Name.Tag" in name or name.endswith("Operator") or ".Operator" in name:
+        return "FF6B9D", False
+    return "E6EDF3", False
+
+
+def _lexer_for(code, lang):
+    from pygments.lexers import PhpLexer, SqlLexer, get_lexer_by_name
+
+    if lang:
+        return get_lexer_by_name(lang, stripall=False)
+    head = code.lstrip()
+    if head.startswith(("CREATE", "INSERT", "SELECT", "UPDATE", "DELETE")):
+        return SqlLexer()
+    if "<form" in code or "<html" in code or "<div" in code:
+        return get_lexer_by_name("html+php")
+    return PhpLexer(startinline=True)
+
+
+def _paint_code(tf, code, lang=None, size=16):
+    src = code.replace("\t", "    ").strip("\n") + "\n"
+    try:
+        tokens = list(_lexer_for(src, lang).get_tokens(src))
+    except Exception:
+        tokens = [(None, src)]
+    p = tf.paragraphs[0]
+    p.alignment = PP_ALIGN.LEFT
+    p.space_before = Pt(0)
+    p.space_after = Pt(0)
+    for ttype, value in tokens:
+        color, italic = _token_style(ttype)
+        parts = value.split("\n")
+        for i, part in enumerate(parts):
+            if i > 0:
+                p = tf.add_paragraph()
+                p.alignment = PP_ALIGN.LEFT
+                p.space_before = Pt(0)
+                p.space_after = Pt(0)
+            if part == "":
+                if i > 0:
+                    run = p.add_run()
+                    run.text = " "
+                    style_run(run, "Consolas", size, "E6EDF3")
+                continue
+            run = p.add_run()
+            run.text = part
+            style_run(run, "Consolas", size, color, italic=italic)
+
+
+def slide_code(prs, theme, spec):
+    """A dark editor panel. Tokens are coloured; every run is still editable text."""
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    set_background(slide, theme, "content")
+    text_color = theme["text_on_dark"] if theme["style"] == "dark" else theme["text_on_light"]
+    header(slide, theme, spec["title"], text_color)
+    code = str(spec.get("code", ""))
+    nlines = max(code.strip("\n").count("\n") + 1, 1)
+    panel_h = min(4.85, 0.72 + 0.30 * nlines)
+    add_panel(slide, Inches(0.55), Inches(1.7), Inches(12.2), Inches(panel_h), "1E2433").name = "keep-ltr panel"
+    for i, col in enumerate(("FF5F57", "FEBC2E", "28C840")):
+        dot = slide.shapes.add_shape(
+            MSO_SHAPE.OVAL, Inches(0.78 + i * 0.22), Inches(1.86), Inches(0.12), Inches(0.12)
+        )
+        dot.fill.solid()
+        dot.fill.fore_color.rgb = rgb(col)
+        dot.line.fill.background()
+        dot.shadow.inherit = False
+        dot.name = "keep-ltr dot"
+    box, tf = add_textbox(slide, Inches(0.78), Inches(2.08), Inches(11.7), Inches(max(0.45, panel_h - 0.52)))
+    box.name = "keep-ltr code"
+    tf.word_wrap = False
+    _paint_code(tf, code, spec.get("lang"))
+    if spec.get("caption"):
+        _, tfc = add_textbox(slide, Inches(0.7), Inches(min(6.3, 1.7 + panel_h + 0.25)), Inches(11.9), Inches(0.75))
+        style_run(set_text(tfc, spec["caption"]), theme["body_font"], 17, text_color)
+    return slide
+
+
+def slide_shot(prs, theme, spec):
+    """A real screenshot, kept as a picture. The caption under it is editable text."""
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    set_background(slide, theme, "content")
+    text_color = theme["text_on_dark"] if theme["style"] == "dark" else theme["text_on_light"]
+    header(slide, theme, spec["title"], text_color)
+    src = spec.get("src", "")
+    if spec.get("image"):
+        src = deck_extras.asset(spec["image"]) or src
+    cap_y = 6.45
+    if src and Path(src).exists():
+        from PIL import Image
+        iw, ih = Image.open(src).size
+        aspect = iw / ih if ih else 1
+        box_w, box_h = 11.6, 4.55
+        if box_w / box_h > aspect:
+            h, w = box_h, box_h * aspect
+        else:
+            w, h = box_w, box_w / aspect
+        x = 0.85 + (11.6 - w) / 2
+        slide.shapes.add_picture(str(src), Inches(x), Inches(1.6), Inches(w), Inches(h))
+        cap_y = 1.6 + h + 0.08
+    _, tf = add_textbox(slide, Inches(0.7), Inches(cap_y), Inches(11.9), Inches(0.4))
+    style_run(set_text(tf, spec.get("caption", "")), theme["body_font"], 14, theme["secondary"])
+    return slide
+
+
+def slide_relation(prs, theme, spec):
+    """Entity cards with the cardinality written in the gap. Native shapes, not a bitmap."""
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    set_background(slide, theme, "content")
+    text_color = theme["text_on_dark"] if theme["style"] == "dark" else theme["text_on_light"]
+    header(slide, theme, spec["title"], text_color)
+
+    cards = spec.get("cards") or []
+    n = max(len(cards), 1)
+    gap = 1.15 if n == 2 else 0.7
+    margin = 0.55
+    usable = 13.333 - margin * 2 - gap * (n - 1)
+    cw = usable / n
+    top, ch = 1.85, 3.55
+    for i, card in enumerate(cards):
+        x = margin + i * (cw + gap)
+        add_panel(slide, Inches(x), Inches(top), Inches(cw), Inches(ch), "161D32")
+        _, tf_h = add_textbox(slide, Inches(x + 0.2), Inches(top + 0.16), Inches(cw - 0.4), Inches(0.55))
+        style_run(set_text(tf_h, card.get("name", "")), theme["heading_font"], 20, "E0B56A", bold=True)
+        _, tf_b = add_textbox(slide, Inches(x + 0.2), Inches(top + 0.82), Inches(cw - 0.4), Inches(2.45))
+        _fill_lines(tf_b, card.get("lines") or [], theme["body_font"], 16, "F7F3EC")
+        if i < n - 1:
+            mark = (spec.get("marks") or ["", ""])[i] if i < len(spec.get("marks") or []) else ""
+            gx = x + cw
+            _, tf_m = add_textbox(slide, Inches(gx), Inches(top + 1.35), Inches(gap), Inches(0.7), align=PP_ALIGN.CENTER)
+            style_run(set_text(tf_m, mark, align=PP_ALIGN.CENTER), theme["heading_font"], 18, theme["primary"], bold=True)
+    note = spec.get("note", "")
+    if note:
+        _, tf_n = add_textbox(slide, Inches(0.7), Inches(5.6), Inches(11.9), Inches(0.7))
+        style_run(set_text(tf_n, note), theme["body_font"], 16, text_color)
+    return slide
+
+
+import deck_extras  # noqa: E402  (v2 slide types, images, RTL — see deck_extras.py)
+
 SLIDE_BUILDERS = {
     "title": slide_title,
     "section": slide_section,
@@ -816,21 +1091,48 @@ SLIDE_BUILDERS = {
     "chart_bar": slide_chart_bar,
     "logo_wall": slide_logo_wall,
     "vertical_timeline": slide_vertical_timeline,
+    "array_pass": slide_array_pass,
+    "code": slide_code,
+    "shot": slide_shot,
+    "relation": slide_relation,
 }
+SLIDE_BUILDERS.update(deck_extras.register(sys.modules[__name__]))
 
 
-def build(deck_spec_path: str, out_path: str):
-    spec = json.loads(Path(deck_spec_path).read_text(encoding="utf-8"))
-    theme = get_theme(spec["theme"])
+def build(deck_spec_path: str, out_path: str, *, offline: bool = False):
+    spec_path = Path(deck_spec_path)
+    spec = json.loads(spec_path.read_text(encoding="utf-8"))
+    out_path = Path(out_path)
+    from pdk.text import spec_is_rtl
+    from pdk.themes import tokens, ARABIC_FONTS
+    from pdk.assets import Assets
+
+    theme = dict(get_theme(spec.get("theme", "plain-pro"), spec.get("brand")))
+    rtl = spec_is_rtl(spec)
+    if rtl:
+        style = spec.get("arabic_style", "modern")
+        h, b = ARABIC_FONTS.get(style, ARABIC_FONTS["modern"])
+        theme["heading_font"] = theme.get("heading_font_ar") or spec.get("heading_font") or h
+        theme["body_font"] = theme.get("body_font_ar") or spec.get("body_font") or b
+    else:
+        theme["heading_font"] = spec.get("heading_font") or theme["heading_font"]
+        theme["body_font"] = spec.get("body_font") or theme["body_font"]
+    tk = tokens(theme, arabic=rtl)
+    deck_extras.RTL = rtl
+    deck_extras.TOKENS = tk
+    deck_extras.ASSETS = Assets(out_path.parent / f"_assets-{out_path.stem}", tk, base=spec_path.parent,
+                                project=spec.get("project") or out_path.stem, offline=offline,
+                                icon_set=spec.get("icon_set", "material-symbols"))
+    _BG_CACHE.clear()
 
     prs = Presentation()
     prs.slide_width = SLIDE_W
     prs.slide_height = SLIDE_H
 
-    slides_spec = spec["slides"]
+    slides_spec = list(spec["slides"])
     total = len(slides_spec)
     transition = spec.get("transition", "fade")
-
+    built = []
     for i, s in enumerate(slides_spec, start=1):
         builder = SLIDE_BUILDERS.get(s["type"])
         if builder is None:
@@ -838,17 +1140,43 @@ def build(deck_spec_path: str, out_path: str):
                 f"Unknown slide type '{s['type']}' (slide {i}). Available: {', '.join(SLIDE_BUILDERS)}"
             )
         slide = builder(prs, theme, s)
-        if s["type"] not in ("title",):
+        if s.get("background"):
+            deck_extras.apply_background(slide, theme, s["background"], s.get("overlay", 0.6),
+                                         s.get("overlay_direction", "full"))
+        if s["type"] not in ("title", "image_hero"):
             add_footer(slide, theme, i, total, footer_text=spec.get("footer", ""))
-        add_transition(slide, kind=transition)
+        add_transition(slide, kind=s.get("transition", transition))
+        deck_extras.set_notes(slide, s.get("notes"))
+        built.append(slide)
 
-    Path(out_path).parent.mkdir(parents=True, exist_ok=True)
-    prs.save(out_path)
-    print(f"Wrote {out_path}  ({total} slides, theme={theme['id']})")
+    credits = deck_extras.ASSETS.credits()
+    if credits and spec.get("credits", True):
+        slide = deck_extras.slide_credits(prs, theme, {"lines": credits})
+        add_transition(slide, kind=transition)
+        built.append(slide)
+    if rtl:
+        for slide in built:
+            deck_extras.mirror_slide(slide)
+    for slide in built:
+        deck_extras.rtl_font_runs(slide, theme["heading_font"], theme["body_font"]) if rtl else None
+    if spec.get("meta_title") or spec.get("title"):
+        prs.core_properties.title = spec.get("meta_title") or spec.get("title")
+    if spec.get("author"):
+        prs.core_properties.author = spec["author"]
+
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    prs.save(str(out_path))
+    print(f"Wrote {out_path}  ({len(built)} slides, theme={theme['id']}{', RTL' if rtl else ''})")
+    for w in deck_extras.ASSETS.warnings:
+        print("  WARN:", w)
+    if credits:
+        print(f"  {len(credits)} credit line(s) → last slide")
+    return str(out_path)
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
-        print("Usage: python3 build_deck.py deck_spec.json output.pptx")
+    args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    if len(args) != 2:
+        print("Usage: python3 build_deck.py deck_spec.json output.pptx [--offline]")
         sys.exit(1)
-    build(sys.argv[1], sys.argv[2])
+    build(args[0], args[1], offline="--offline" in sys.argv)

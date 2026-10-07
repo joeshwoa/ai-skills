@@ -1,21 +1,16 @@
 ---
-description: Build fully editable, professional/premium presentations (and to the same bar, documents/spreadsheets/PDFs) instead of generic template filler. Apply whenever the user asks for a deck, slides, pitch deck, or PowerPoint.
+description: Agency-quality editable decks (.pptx + animated HTML) in English or Arabic RTL: 33 slide types incl. native charts, diagrams, KPI, image slides, teaching slides (objectives, quiz+reveal, activity), speaker notes, real stock photos/icons, brand kits, 24 themes. Apply for any deck, slides, pitch deck, PowerPoint, lecture/lesson slides.
 globs:
 alwaysApply: false
 ---
 # Premium Presentations
 
-This project has a full presentation-building skill at
-`skills/premium-presentations/SKILL.md` in this repo (or wherever you copied
-the `skills/premium-presentations/` folder). Read that file in full before
-building any deck — it covers the design-interview step, the deck-spec
-format, the two generator scripts (`build_deck.py` for the editable .pptx,
-`render_preview.py` for an animated HTML preview), and the real-data policy.
+Read `skills/premium-presentations/SKILL.md` in full before building a deck (schema: `references/deck_spec_schema.md`).
 
 Quick reference:
-- Don't guess the visual theme if the user didn't specify one — ask, and
-  show `skills/premium-presentations/assets/theme_gallery.html`.
-- Generate the .pptx natively with `build_deck.py` (python-pptx) — never by
-  converting HTML, which breaks editability.
-- Fill decks with real data pulled from the user's files/context or live
-  research; flag genuine gaps instead of inventing numbers.
+- Setup once: `bash skills/premium-design-kit/scripts/setup.sh`. Run scripts with `bash skills/premium-design-kit/scripts/run.sh <script>`.
+- Ask style once if not given: `bash skills/premium-design-kit/scripts/run.sh skills/premium-design-kit/scripts/kit.py themes --html gallery.html`; brand only when asked.
+- Build: `bash skills/premium-design-kit/scripts/run.sh skills/premium-presentations/scripts/build_deck.py deck.json out/deck.pptx` + `render_preview.py deck.json out/deck.html`.
+- QA (mandatory): `validate_deck.py out/deck.pptx`, then `kit.py preview out/deck.pptx` and LOOK at the contact sheet.
+- Arabic text → whole deck RTL automatically. Photos: `{"photo": "english query"}` → look at the contact sheet, pin with `{"stock": id}`.
+- Real data only; gaps as [NEEDS: …]. Mix slide types; never 3 bullet slides in a row.

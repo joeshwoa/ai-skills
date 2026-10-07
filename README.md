@@ -57,10 +57,30 @@ adapter around.
 ## Skills
 
 - **[premium-presentations](skills/premium-presentations/SKILL.md)** —
-  fully editable, professional/premium slide decks (native .pptx via
-  python-pptx, not flattened HTML), with a design-interview step, a themed
-  visual gallery, real-data-not-placeholder content, and slide transitions.
-  Also documents how to extend the same approach to docs/sheets/PDFs.
+  agency-quality, fully editable decks (native .pptx + animated HTML) in
+  English or Arabic right-to-left: 33 slide types (native charts, diagrams,
+  KPI dashboards, full-bleed photos, galleries, objectives, quizzes with
+  reveal, activities), speaker notes, real stock photos and icons, brand
+  kits, 24 themes, overflow/overlap validator.
+- **[premium-documents](skills/premium-documents/SKILL.md)** — one spec →
+  an editable Word file AND a designed PDF: reports, proposals, e-books,
+  manuals, policies, contracts, letters, memos, minutes, invoices, CVs,
+  certificates, newsletters, flyers, handouts, worksheets, exams and answer
+  keys; covers, grids, cards, charts, real TOC page numbers, Arabic RTL.
+- **[premium-spreadsheets](skills/premium-spreadsheets/SKILL.md)** —
+  formula-driven Excel workbooks (budgets, P&L, KPI dashboards, trackers,
+  gradebooks, attendance, question banks, schedules) with Excel tables,
+  named inputs, validation, conditional formats, native charts and an
+  automatic LibreOffice recalculation error check.
+- **[course-studio](skills/course-studio/SKILL.md)** — a curriculum team:
+  intake (school content vs programme), outcomes and alignment matrix,
+  timed lesson plans, full lesson content, slides, handouts, worksheets,
+  labs, quizzes + answer keys, rubrics, instructor guide, gradebook,
+  question bank and schedule — built from one course spec, validated first.
+- **[premium-design-kit](skills/premium-design-kit/SKILL.md)** — the shared
+  design engine: themes + brand kits, Arabic typography, contrast-safe
+  tokens, stock photos/icons (via stock-library), generated art, themed
+  charts, previews and contact sheets for visual QA.
 - **[premium-3d-models](skills/premium-3d-models/SKILL.md)** — real,
   parametric 3D models (.glb + optional .stl/.obj) via CSG (trimesh +
   manifold3d booleans), for Flutter (model_viewer_plus), web/React

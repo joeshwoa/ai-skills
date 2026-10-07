@@ -1,0 +1,13 @@
+---
+description: Professional formula-driven Excel workbooks: budgets, P&L/forecasts, KPI dashboards with native charts, trackers, gradebooks, attendance, question banks, schedules — Excel tables, named inputs, validation, conditional formats, Arabic RTL, automatic recalculation error check. Apply for any spreadsheet/Excel/tracker/dashboard/budget/gradebook request.
+globs:
+alwaysApply: false
+---
+# Premium Spreadsheets
+
+Read `skills/premium-spreadsheets/SKILL.md` in full first (spec: `references/sheet-spec.md`).
+
+Quick reference:
+- Build: `bash skills/premium-design-kit/scripts/run.sh skills/premium-spreadsheets/scripts/build_sheet.py spec.json out/name.xlsx` — reports every #DIV/0!/#REF!/#NAME? after a LibreOffice recalculation; fix until none.
+- Presets: `scripts/presets.py` → gradebook, attendance, question_bank, tracker, schedule.
+- Every calculated value is a formula; inputs yellow + named; check one row by hand; preview with `kit.py preview`.

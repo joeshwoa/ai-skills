@@ -1,210 +1,81 @@
 ---
 name: premium-presentations
 description: >
-  Build fully editable, professional/premium presentations (and the same
-  quality bar for documents, spreadsheets, and PDFs) — not flat images, not
-  generic template filler. Use this whenever the user asks for a
-  presentation, slide deck, pitch deck, investor deck, PowerPoint, keynote,
-  or any "make me slides about X" request, even if they don't say
-  "professional" or "premium" explicitly — treat every deck request as
-  wanting agency-quality output unless they clearly say otherwise (e.g.
-  "just a rough draft"). If the user hasn't specified a visual style/theme,
-  ALWAYS stop and ask them (see "Step 1: figure out the design" below)
-  instead of guessing — a wrong visual direction is expensive to redo, a
-  quick question is not. Also use this skill's methodology (deck-spec to
-  native-format generation, ask-before-guessing on design, real data not
-  placeholders) as the pattern for sibling skills that build documents or
-  spreadsheets to the same premium bar.
+  Build fully editable, agency-quality presentations — real .pptx (every title, bullet, table cell
+  and chart is native and editable) plus an animated HTML version — in English or Arabic (full
+  right-to-left), with real photos from free stock, icons, generated art, native PowerPoint charts,
+  diagrams (cycle, funnel, pyramid, hierarchy, venn, matrix), KPI dashboards, teaching slides
+  (objectives, definitions, quizzes with reveal, activities), speaker notes, brand kits and 24 themes.
+  Use whenever the user asks for a presentation, slide deck, pitch/investor/sales deck, PowerPoint,
+  Keynote, lecture or lesson slides, or "make me slides about X" — even without the word
+  "professional". If no visual style is given, ask before building. For documents use
+  premium-documents, for spreadsheets premium-spreadsheets, for a whole course course-studio.
 ---
 
 # Premium Presentations
 
-## Why this skill exists
+A presentation studio: strategist, writer, art director, data designer, photo editor and QA, on
+the shared design kit (`../premium-design-kit`). Output: an editable `.pptx` (PowerPoint, Keynote,
+Google Slides) + an animated `.html` (present in a browser, send as one file) + a PDF on request.
 
-Most AI-generated decks fail in one of two ways: either they're gorgeous
-HTML that becomes a flattened, uneditable mess the moment someone tries to
-tweak a bullet point in PowerPoint, or they're a real .pptx that looks like
-the default Office template with "Click to add text" energy. This skill is
-built to avoid both failure modes: it generates a **real, natively editable
-.pptx** (every title, bullet, and table cell is a genuine text run — not a
-picture of text) using a themed design system, and it never ships a deck
-full of "[Company Name]" and "Lorem ipsum" unless the user explicitly asked
-for a blank template.
+## Setup
+`bash ../premium-design-kit/scripts/setup.sh` once (Python deps). Run every script through
+`R="bash ../premium-design-kit/scripts/run.sh"`. Stock photos/icons need the user's studio-mcp
+(creative-studio bootstrap); without it decks still build with generated art.
 
-## The two outputs, and why there are two
+## The team and the gates
+| Role | Does |
+|---|---|
+| Strategist | purpose, audience, the ONE message, story arc, slide count |
+| Writer | headlines that say the point ("Prep time fell 40%"), point/detail bullets, speaker notes |
+| Art director | theme or brand, cover style, image direction, icon family, variety of slide types |
+| Data designer | native charts with the takeaway highlighted, KPI cards, true numbers + sources |
+| Photo editor | stock searches (English, concrete), picks from the contact sheet, credits |
+| QA | validator, page images, contrast, RTL, story read-through |
 
-| Output | Built by | Purpose |
-|---|---|---|
-| `.pptx` | `scripts/build_deck.py` (python-pptx, direct) | The deliverable. Fully editable in PowerPoint, Keynote, Google Slides. |
-| `.html` | `scripts/render_preview.py` | A preview with real CSS transitions/animations, and the source for a polished PDF export. |
+1. **Brief (ask once, briefly)** — purpose & audience · language (Arabic → RTL deck) · length/time ·
+   style: show the gallery (`$R ../premium-design-kit/scripts/kit.py themes --html gallery.html`) and
+   recommend one; brand only if the user asks (`"brand": "<slug>"`) · content source (their doc/data,
+   or research) · outputs (pptx + html default; PDF?). Default sensible answers; don't interrogate.
+2. **Story** — write the arc as slide headlines first (one line each). Check: does it flow if you
+   read only the headlines? Pick the slide TYPE that matches each point (see the patterns in
+   `../premium-design-kit/references/design-system.md`). Never more than 2 `bullets` slides in a row.
+3. **Content with real data** — numbers from the user/research; gaps as `[NEEDS: …]` and flagged.
+4. **Assets** — photos: `{"photo": "concrete english query"}`; LOOK at the printed contact sheet and
+   pin better picks with `{"stock": "<id>"}`. Icons: one family (`icon_set`). Art for covers/dividers.
+5. **Build** — `$R scripts/build_deck.py deck.json out/deck.pptx` and
+   `$R scripts/render_preview.py deck.json out/deck.html` (same spec → same content).
+6. **QA (mandatory)** — `$R scripts/validate_deck.py out/deck.pptx` (overflow/overlap) → fix → then
+   `$R ../premium-design-kit/scripts/kit.py preview out/deck.pptx` and LOOK at the contact sheet;
+   zoom on any slide that looks off. PDF: `soffice --headless --convert-to pdf out/deck.pptx`.
+7. **Deliver** — files + one line on what was assumed + credits note if stock was used.
 
-Both read the *same* `deck_spec.json`, so they always match. Do **not** try
-to build the .pptx by converting the HTML — LibreOffice/unoconv-style HTML
-→ PPTX conversion flattens text into images or uneditable boxes, which
-defeats the entire point of "fully editable." Generate them independently
-from the shared spec instead.
+## Spec
+Full schema: `references/deck_spec_schema.md` — 33 slide types. Examples:
+`examples/v2_types_deck_spec.json` (pitch deck: image_split, kpi, native charts, diagrams, gallery),
+`examples/lesson_deck_ar.json` (Arabic lesson: objectives, definition, code, process, cycle, quiz +
+reveal, activity), `examples/full_types_deck_spec.json` (the 21 classic types).
 
-## Step 1: figure out the design
+Classic: title, section, bullets, stats, quote, table, closing, agenda, two_column, comparison,
+timeline, process, big_statement, team, feature, icon_grid, pricing, faq, chart_bar, logo_wall,
+vertical_timeline, array_pass, code, shot, relation.
+v2: image_hero, image_split, gallery, quote_image, chart (native), diagram, kpi, objectives,
+definition, quiz, activity, credits. Any slide: `notes`, `background` + `overlay`.
 
-If the user gave you a theme, brand colors, an example deck, or a company
-style guide to follow — use it, skip the questions below.
+## Writing rules
+- Headline = the conclusion, ≤ 10 words. Body ≤ 5 bullets, ≤ 12 words each; use point/detail.
+- One accent per slide: the number or step that matters (`highlight` in charts).
+- Arabic decks: write in the register the audience speaks (Egyptian for students/social, MSA for
+  formal/government); keep technical terms in English where people say them that way (Python, for).
+- Speaker notes carry what you would SAY; slides carry what they must SEE.
+- Never invent a person's photo, a logo, a quote or a statistic.
 
-**If they didn't specify anything about visual style**, don't guess. Ask,
-briefly, covering:
+## Animations
+Slide transitions are native in the .pptx. Object-by-object entrance animations: use the HTML
+version (full CSS motion) or add them in PowerPoint; say which you did. For real motion graphics →
+motion-design-studio.
 
-1. **Purpose & audience** — investor pitch, internal review, sales deck,
-   conference talk, etc. (This alone often implies a theme — an investor
-   deck usually wants `onyx-gold` or `sunset-startup`, an engineering
-   review wants `cobalt-tech`.)
-2. **Show the theme gallery** — render
-   `scripts/themes.py` → `assets/theme_gallery.html` (or open the one
-   already in this folder) and share it so they can pick by eye rather than
-   by reading hex codes. Recommend one based on (1) and say why.
-3. **Roughly how many slides / how long a talk.**
-4. **Do they have the content already** (a doc, notes, data) or do you need
-   to draft the narrative and pull real numbers yourself?
-5. **Output needed**: editable .pptx, a PDF leave-behind, or both.
-
-Keep this to one focused round of questions, not an interrogation — default
-sensible answers for anything they don't care about (e.g. assume both pptx
-+ pdf if they don't say). If you have follow-up ideas the user didn't ask
-for (e.g. "want a one-page PDF summary too, for the email that goes out
-before the meeting?"), offer them briefly rather than silently deciding.
-
-## Step 2: write the content — with real data
-
-Never ship a deck of placeholders unless the user explicitly wants "just a
-template." Before writing `deck_spec.json`:
-
-- Pull real facts/numbers from whatever the user gave you (an attached
-  file, pasted text, earlier context) or from live research if the task
-  needs current information you don't have.
-- If a number genuinely isn't available, write an obvious bracketed
-  placeholder (`[REVENUE FIGURE NEEDED]`) and flag it to the user — never
-  invent a number that could be mistaken for a real one.
-- Write actual sentences, not generic corporate filler. A bullet like
-  "Increased efficiency" is weak; "Cut average onboarding time from 9 days
-  to 36 minutes by shipping self-serve signup" is what this skill is for.
-  Use the `{"point": ..., "detail": ...}` bullet form (see schema) to
-  separate the headline claim from its supporting evidence — that split is
-  what makes a slide read as "premium" instead of "bullet soup."
-
-Full schema and all **21 slide types** (`title`, `section`, `bullets`,
-`stats`, `quote`, `table`, `closing`, `agenda`, `two_column`, `comparison`,
-`timeline`, `process`, `big_statement`, `team`, `feature`, `icon_grid`,
-`pricing`, `faq`, `chart_bar`, `logo_wall`, `vertical_timeline`) are in
-`references/deck_spec_schema.md`, with worked examples at
-`examples/sample_deck_spec.json` and `examples/full_types_deck_spec.json`
-(the second one showcases all 21 types). Read the schema file before
-writing your first deck spec.
-
-Mix types deliberately. A deck that's all `bullets` slides reads as a
-template no matter how good the theme looks — real variety (a `stats` row
-here, a `timeline` there, one `big_statement` for the killer number, a
-`comparison` card for the competitive slide) is what makes it read as
-designed. Pick the type that matches what the content actually is, not
-whatever's fastest to write.
-
-## Step 3: generate
-
-```bash
-python3 scripts/build_deck.py   deck_spec.json  output.pptx   # the deliverable
-python3 scripts/render_preview.py deck_spec.json output.html  # animated preview
-```
-
-To also produce a PDF (from the .pptx, which is the higher-fidelity source —
-not from the HTML, whose CSS LibreOffice renders imperfectly):
-
-```bash
-soffice --headless --convert-to pdf output.pptx
-```
-
-If `soffice`/LibreOffice isn't available in your environment, use whatever
-document-conversion skill/tool is available, or hand back the .pptx and
-let the user's own PowerPoint/Keynote export the PDF — don't silently skip
-the PDF if the user asked for one.
-
-## Step 4: check it before you hand it over
-
-**Always run the validator — this is not optional.** Before delivering any
-.pptx, run:
-
-```bash
-python3 scripts/validate_deck.py output.pptx
-```
-
-It measures every text box against the font it'll actually be rendered
-with and flags two failure modes that are easy to miss just eyeballing a
-couple of slides: text overflowing its box (`vertical_overflow`,
-`word_too_wide`) and shapes overlapping each other (`overlap`). If it
-reports any issues, fix them (shorten the copy, enlarge the box, shrink
-the font, or move the overlapping shape) and re-run — don't hand over a
-deck the validator flagged. It exits non-zero when issues remain, so wire
-it into your own check rather than skimming the printed report. This is
-a heuristic check, not a substitute for looking at the deck, so also:
-
-- Convert a few slides to images and look at them —
-  `soffice --headless --convert-to pdf` then `pdftoppm -png` on 2-3 slides
-  (especially any slide type you haven't used before in this session) is a
-  fast way to sanity-check layout the validator can't judge, like whether
-  a design just *looks* good.
-- Enough contrast between text and background (the built-in themes are
-  pre-checked, but if you add a custom theme, verify it).
-- The story arc makes sense slide-to-slide, not just each slide in
-  isolation.
-
-Then deliver both files, plus a one-line note on how to get the PDF if they
-didn't already get one.
-
-## Animations & transitions — what's realistic
-
-The user will often ask for "animations and transitions." Be upfront about
-what each output format can actually do, rather than promising more than
-PowerPoint delivers:
-
-- **Slide transitions** (fade/push/wipe between slides): `build_deck.py`
-  writes these directly into the .pptx via `add_transition()` — they work
-  natively in PowerPoint, Keynote, and Google Slides.
-- **Object-level entrance animations** (bullets flying in one by one, etc.):
-  python-pptx has no public API for this, and hand-writing the OOXML
-  `<p:timing>` tree is fragile and easy to corrupt. If the user specifically
-  needs this, either (a) do it by hand in PowerPoint after generating the
-  base deck — it's a few clicks per object — or (b) lean on the HTML
-  version, which has full, reliable CSS animation support and looks great
-  for a live/embedded presentation, a video capture, or a webpage version
-  of the deck.
-- Don't silently skip this — tell the user which path you're taking and
-  why, in one sentence, so they're not surprised the .pptx doesn't have
-  bullets flying in.
-
-## Adding themes or slide types
-
-Themes live entirely in `scripts/themes.py` — add a dict to `THEMES` (see
-the file for the schema: bg/bg_alt/primary/secondary/fonts/style). New
-slide types go in `scripts/build_deck.py` (a `slide_x(prs, theme, spec)`
-function added to `SLIDE_BUILDERS`) **and** the matching branch in
-`scripts/render_preview.py`'s `render_slide_body()` — keep both renderers
-in sync or the preview and the deliverable will drift apart. After adding
-either, run `scripts/validate_deck.py` on a deck that exercises the new
-theme/type before trusting it — new geometry is exactly what tends to
-introduce an overlap or overflow.
-
-## Applying this to documents, sheets, and PDFs
-
-The user may also ask for a report/doc, a spreadsheet, or a standalone PDF
-built to the same bar. The pattern here generalizes:
-
-1. Ask about design/format only when it's not specified (don't ask about
-   things you can reasonably default).
-2. Build natively in the target format (python-docx for Word, openpyxl for
-   Excel — this repo already has both available) rather than converting
-   from HTML, for the same "must stay editable" reason.
-3. Fill with real content/data, flag genuine gaps instead of inventing
-   numbers.
-4. Visually verify the output before handing it over.
-
-If a dedicated doc/sheet/pdf skill already exists in this environment
-(check the available skills first), prefer it and use this skill only for
-presentations — don't duplicate work. If none exists, this section is your
-starting methodology for building one, following the same repo's
-`skills/<name>/` layout.
+## Hand-offs
+premium-documents (handouts, reports from the same content) · premium-spreadsheets (the data behind
+charts) · course-studio (full courses) · stock-library (photos/icons with licences) ·
+motion-design-studio (animated intros) · creative-studio (brand kits).

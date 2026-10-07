@@ -20,6 +20,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 from themes import get_theme
+import preview_extras
 
 TRANSITIONS_CSS = {
     "fade": "opacity 0.6s ease",
@@ -33,9 +34,35 @@ def esc(s):
     return html.escape(str(s))
 
 
+def _highlight_code(code, lang=None):
+    """Same IDE colours as the PowerPoint code slides."""
+    src = str(code).replace("\t", "    ").strip("\n")
+    try:
+        from pygments import highlight
+        from pygments.formatters import HtmlFormatter
+        from pygments.lexers import PhpLexer, SqlLexer, get_lexer_by_name
+
+        if lang:
+            lexer = get_lexer_by_name(lang, stripall=False)
+        else:
+            head = src.lstrip()
+            if head.startswith(("CREATE", "INSERT", "SELECT", "UPDATE", "DELETE")):
+                lexer = SqlLexer()
+            elif "<form" in src or "<html" in src or "<div" in src:
+                lexer = get_lexer_by_name("html+php")
+            else:
+                lexer = PhpLexer(startinline=True)
+        return highlight(src, lexer, HtmlFormatter(nowrap=True))
+    except Exception:
+        return esc(src)
+
+
 def render_slide_body(theme, spec):
     text_color = theme["text_on_dark"] if theme["style"] == "dark" else theme["text_on_light"]
     t = spec["type"]
+    extra = preview_extras.render_extra(theme, spec)
+    if extra is not None:
+        return extra
 
     if t == "title":
         kicker = f'<div class="kicker">{esc(spec.get("kicker","").upper())}</div>' if spec.get("kicker") else ""
@@ -144,7 +171,7 @@ def render_slide_body(theme, spec):
                 return 50.0
             return 8 + (i / (n - 1)) * 84
         dots = "".join(
-            f'<div class="tl-item" style="left:{_inset_pct(i, n):.2f}%">'
+            f'<div class="tl-item" style="inset-inline-start:{_inset_pct(i, n):.2f}%">'
             f'<div class="tl-label">{esc(m.get("label",""))}</div><div class="tl-dot"></div>'
             f'<div class="tl-text">{esc(m.get("text",""))}</div></div>'
             for i, m in enumerate(spec.get("milestones", []))
@@ -163,8 +190,8 @@ def render_slide_body(theme, spec):
                 return 50.0
             return 8 + (i / (n - 1)) * 84
         steps = "".join(
-            f'<div class="proc-item" style="left:{_inset_pct(i, n):.2f}%">'
-            f'<div class="proc-circle">{esc(s.get("number", i+1))}</div>'
+            f'<div class="proc-item" style="inset-inline-start:{_inset_pct(i, n):.2f}%">'
+            f'<div class="proc-circle proc-ico">{preview_extras.icon_img(s["icon"], "FFFFFF") if s.get("icon") else esc(s.get("number", i+1))}</div>'
             f'<div class="proc-label">{esc(s.get("label",""))}</div>'
             f'<div class="proc-detail">{esc(s.get("detail",""))}</div></div>'
             for i, s in enumerate(spec.get("steps", []))
@@ -207,7 +234,7 @@ def render_slide_body(theme, spec):
 
     if t == "icon_grid":
         items = "".join(
-            f'<div class="icon-item"><div class="icon-glyph">{esc((it.get("glyph") or str(i+1))[:2].upper())}</div>'
+            f'<div class="icon-item"><div class="icon-glyph">{preview_extras.icon_img(it["icon"], "FFFFFF") if it.get("icon") else esc((it.get("glyph") or str(i+1))[:2].upper())}</div>'
             f'<div class="icon-label">{esc(it.get("label",""))}</div>'
             f'<div class="icon-desc">{esc(it.get("description",""))}</div></div>'
             for i, it in enumerate(spec.get("items", []))
@@ -269,6 +296,77 @@ def render_slide_body(theme, spec):
           <div class="logo-wall">{badges}</div>
         </div>'''
 
+    if t == "array_pass":
+        steps = spec.get("steps") or [spec]
+        rows = []
+        for step in steps:
+            values = [str(v) for v in step.get("values", [])]
+            n = len(values)
+            left = int(step.get("left", 0))
+            right = int(step.get("right", n - 1 if n else 0))
+            mid = step.get("mid", None)
+            mid = None if mid is None else int(mid)
+            cells = []
+            for i, val in enumerate(values):
+                in_window = left <= i <= right
+                is_mid = mid is not None and i == mid and in_window
+                klass = "cell mid" if is_mid else ("cell in" if in_window else "cell out")
+                roles = []
+                if i == left and in_window:
+                    roles.append("L")
+                if is_mid:
+                    roles.append("M")
+                if i == right and in_window and (right != left or "M" in roles):
+                    roles.append("R")
+                role = " ".join(roles)
+                cells.append(
+                    f'<div class="arr-cell"><div class="{klass}">{esc(val)}</div>'
+                    f'<div class="arr-index">{i}</div><div class="arr-role">{esc(role)}</div></div>'
+                )
+            rows.append(
+                f'<div class="arr-row"><div class="arr-cells">{"".join(cells)}</div>'
+                f'<p class="arr-caption">{esc(step.get("caption", ""))}</p></div>'
+            )
+        return f'''<div class="slide">
+          <h2>{esc(spec["title"])}</h2><div class="accent-bar small"></div>
+          <div class="arr-pass">{"".join(rows)}</div>
+        </div>'''
+
+    if t == "code":
+        coloured = _highlight_code(spec.get("code", ""), spec.get("lang"))
+        return f'''<div class="slide">
+          <h2>{esc(spec["title"])}</h2><div class="accent-bar small"></div>
+          <pre class="code-panel"><span class="code-dots"></span>{coloured}</pre>
+          {f'<p class="lead">{esc(spec["caption"])}</p>' if spec.get("caption") else ""}
+        </div>'''
+
+    if t == "shot":
+        src = spec.get("src", "")
+        uri = Path(src).resolve().as_uri() if src and Path(src).exists() else ""
+        cap = f'<p class="shot-cap">{esc(spec.get("caption",""))}</p>' if spec.get("caption") else ""
+        img = f'<img class="shot" src="{esc(uri)}" alt="">' if uri else ""
+        return f'''<div class="slide">
+          <h2>{esc(spec["title"])}</h2><div class="accent-bar small"></div>
+          {img}{cap}
+        </div>'''
+
+    if t == "relation":
+        cards = spec.get("cards") or []
+        marks = spec.get("marks") or []
+        parts = []
+        for i, card in enumerate(cards):
+            lines = "".join(f"<div>{esc(line)}</div>" for line in card.get("lines") or [])
+            parts.append(f'<div class="rel-card"><div class="rel-name">{esc(card.get("name",""))}</div>{lines}</div>')
+            if i < len(cards) - 1:
+                mark = marks[i] if i < len(marks) else ""
+                parts.append(f'<div class="rel-mark">{esc(mark)}</div>')
+        note = f'<p class="rel-note">{esc(spec.get("note",""))}</p>' if spec.get("note") else ""
+        return f'''<div class="slide">
+          <h2>{esc(spec["title"])}</h2><div class="accent-bar small"></div>
+          <div class="rel-row">{"".join(parts)}</div>
+          {note}
+        </div>'''
+
     if t == "vertical_timeline":
         n = len(spec.get("milestones", [])) or 1
         row_parts = []
@@ -288,16 +386,42 @@ def render_slide_body(theme, spec):
     return f'<div class="slide"><p>Unknown slide type: {esc(t)}</p></div>'
 
 
-def render(deck_spec_path: str, out_path: str):
-    spec = json.loads(Path(deck_spec_path).read_text(encoding="utf-8"))
-    theme = get_theme(spec["theme"])
+def render(deck_spec_path: str, out_path: str, *, offline: bool = False):
+    spec_path = Path(deck_spec_path)
+    spec = json.loads(spec_path.read_text(encoding="utf-8"))
+    out_path = Path(out_path)
+    from pdk.text import spec_is_rtl
+    from pdk.themes import tokens, ARABIC_FONTS
+    from pdk.assets import Assets
+    theme = dict(get_theme(spec.get("theme", "plain-pro"), spec.get("brand")))
+    rtl = spec_is_rtl(spec)
+    if rtl:
+        h, b = ARABIC_FONTS.get(spec.get("arabic_style", "modern"), ARABIC_FONTS["modern"])
+        theme["heading_font"] = theme.get("heading_font_ar") or spec.get("heading_font") or h
+        theme["body_font"] = theme.get("body_font_ar") or spec.get("body_font") or b
+    tk = tokens(theme, arabic=rtl)
+    preview_extras.RTL = rtl
+    preview_extras.TK = tk
+    preview_extras.A = Assets(out_path.parent / f"_assets-{out_path.stem}", tk, base=spec_path.parent,
+                              project=spec.get("project") or out_path.stem, offline=offline,
+                              icon_set=spec.get("icon_set", "material-symbols"))
     transition = spec.get("transition", "fade")
     text_color = theme["text_on_dark"] if theme["style"] == "dark" else theme["text_on_light"]
 
+    def bg(s):
+        if not s.get("background"):
+            return ""
+        im = preview_extras.img(s["background"], "slide-bg", (2000, 1125))
+        a = s.get("overlay", 0.6)
+        return im + f'<div class="slide-bg-shade" style="background:#{theme["bg"]};opacity:{a}"></div>'
+
     slides_html = "".join(
-        f'<section class="slide-wrap" data-index="{i}">{render_slide_body(theme, s)}</section>'
+        f'<section class="slide-wrap" data-index="{i}">{bg(s)}{render_slide_body(theme, s)}</section>'
         for i, s in enumerate(spec["slides"])
     )
+    credits = preview_extras.A.credits()
+    if credits and spec.get("credits", True):
+        slides_html += f'<section class="slide-wrap">{render_slide_body(theme, {"type": "credits", "lines": credits})}</section>'
 
     glow = theme.get("glow", [theme["primary"], theme["primary"]])
     grad_angle = theme.get("gradient_angle", 135)
@@ -448,6 +572,17 @@ def render(deck_spec_path: str, out_path: str):
                     border:1px solid rgba(128,128,128,.25); border-radius:12px; padding:22px 12px;
                     text-align:center; font-family:var(--heading-font); font-weight:700; color:var(--primary); }}
 
+    .arr-pass {{ display:flex; flex-direction:column; gap:2vh; margin-top:2vh; }}
+    .arr-cells {{ display:flex; gap:0.6vw; }}
+    .arr-cell {{ flex:1; text-align:center; }}
+    .cell {{ border-radius:10px; padding:1.6vh 0; font-family:var(--heading-font); font-weight:700; font-size:22px; }}
+    .cell.in {{ background:var(--bg-alt); color:var(--text); }}
+    .cell.mid {{ background:var(--primary); color:var(--bg); }}
+    .cell.out {{ background:rgba(128,128,128,.15); color:var(--secondary); }}
+    .arr-index {{ font-size:12px; color:var(--secondary); margin-top:4px; }}
+    .arr-role {{ font-size:13px; font-weight:700; color:var(--primary); min-height:1.2em; }}
+    .arr-caption {{ margin:0.6vh 0 0; font-size:15px; color:var(--text); }}
+
     .vertical-timeline {{ margin-top:2vh; max-width:90ch; }}
     .vt-row {{ display:flex; gap:24px; min-height:80px; }}
     .vt-dot-col {{ display:flex; flex-direction:column; align-items:center; width:16px; }}
@@ -455,6 +590,28 @@ def render(deck_spec_path: str, out_path: str):
     .vt-line {{ width:2px; flex:1; background:var(--primary); opacity:.5; }}
     .vt-label {{ width:80px; flex-shrink:0; font-family:var(--heading-font); font-weight:700; color:var(--primary); font-size:15px; }}
     .vt-text {{ font-size:14px; color:var(--text); padding-bottom:20px; }}
+
+    .code-panel {{ margin-top:1.5vh; background:#1E2433; color:#E6EDF3; border-radius:16px;
+                    padding:18px 26px 22px; font-family: ui-monospace, Menlo, Consolas, monospace;
+                    font-size:16px; line-height:1.45; white-space:pre; overflow:hidden; }}
+    .code-dots {{ display:block; height:14px; margin-bottom:12px; }}
+    .code-dots::before {{ content:""; display:inline-block; width:12px; height:12px; border-radius:50%; background:#FF5F57; box-shadow: 16px 0 0 #FEBC2E, 32px 0 0 #28C840; }}
+    .code-panel .c, .code-panel .c1, .code-panel .cm, .code-panel .ch {{ color:#8B9AAB; font-style:italic; }}
+    .code-panel .k, .code-panel .kd, .code-panel .kc, .code-panel .kr, .code-panel .kt, .code-panel .nb {{ color:#7EE0FF; }}
+    .code-panel .s, .code-panel .s1, .code-panel .s2 {{ color:#E8C547; }}
+    .code-panel .m, .code-panel .mi, .code-panel .mf {{ color:#C3A6FF; }}
+    .code-panel .nf, .code-panel .nc, .code-panel .nn {{ color:#9BE36D; }}
+    .code-panel .nt, .code-panel .o, .code-panel .cp {{ color:#FF6B9D; }}
+    .shot {{ display:block; max-width:100%; max-height:58vh; margin:1.2vh auto 0; border-radius:12px;
+              box-shadow:0 10px 28px rgba(0,0,0,.18); }}
+    .shot-cap {{ text-align:center; color:var(--secondary); font-size:14px; margin-top:8px; }}
+    .rel-row {{ display:flex; align-items:stretch; gap:12px; margin-top:2vh; min-height:42vh; }}
+    .rel-card {{ flex:1; background:#161D32; color:#F7F3EC; border-radius:16px; padding:18px 18px; }}
+    .rel-name {{ color:#E0B56A; font-family:var(--heading-font); font-weight:700; font-size:20px; margin-bottom:12px; }}
+    .rel-card div {{ font-size:16px; line-height:1.45; }}
+    .rel-mark {{ width:72px; display:flex; align-items:center; justify-content:center;
+                  color:var(--primary); font-weight:800; font-size:18px; text-align:center; }}
+    .rel-note {{ margin-top:16px; font-size:16px; }}
 
     #nav {{ position:fixed; bottom:18px; right:24px; z-index:10; color:var(--secondary);
             font-family: var(--body-font); font-size:13px; background:rgba(0,0,0,.25);
@@ -479,8 +636,8 @@ def render(deck_spec_path: str, out_path: str):
     """
 
     out = f"""<!doctype html>
-<html><head><meta charset="utf-8"><title>{esc(spec.get('meta_title','Presentation'))}</title>
-<style>{css}</style></head>
+<html lang="{'ar' if rtl else 'en'}" dir="{'rtl' if rtl else 'ltr'}"><head><meta charset="utf-8"><title>{esc(spec.get('meta_title','Presentation'))}</title>
+<style>{css}{preview_extras.EXTRA_CSS}</style></head>
 <body>
 <div id="deck">{slides_html}</div>
 <div id="nav">Space/→ next · ← back &nbsp;·&nbsp; <span id="counter"></span></div>
@@ -492,7 +649,8 @@ def render(deck_spec_path: str, out_path: str):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
-        print("Usage: python3 render_preview.py deck_spec.json output.html")
+    args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    if len(args) != 2:
+        print("Usage: python3 render_preview.py deck_spec.json output.html [--offline]")
         sys.exit(1)
-    render(sys.argv[1], sys.argv[2])
+    render(args[0], args[1], offline="--offline" in sys.argv)

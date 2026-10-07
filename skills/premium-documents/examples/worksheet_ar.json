@@ -1,0 +1,59 @@
+{
+ "type": "worksheet",
+ "theme": "donbosco-lab",
+ "language": "ar",
+ "meta": {
+  "title": "ورقة عمل: الحلقات التكرارية",
+  "course": "برمجة بايثون — الصف الأول",
+  "instructions": "اقرأ كل سؤال كويس. اكتب الكود بخط واضح. عندك **٣٠ دقيقة**."
+ },
+ "blocks": [
+  {
+   "type": "definition",
+   "term": "for loop",
+   "text": "بتكرر الأوامر لعدد مرات معروف.",
+   "example": "`for i in range(3): print(i)`"
+  },
+  {
+   "type": "questions",
+   "items": [
+    {
+     "q": "كام مرة هيتطبع السطر في `for i in range(4)`؟",
+     "options": [
+      "٣",
+      "٤",
+      "٥",
+      "مالانهاية"
+     ],
+     "answer": 1,
+     "points": 2
+    },
+    {
+     "q": "`while` مناسبة لما نعرف عدد اللفات من الأول.",
+     "kind": "tf",
+     "answer": 1,
+     "points": 1
+    },
+    {
+     "q": "اكتب حلقة تطبع الأعداد الزوجية من ٢ لـ ٢٠.",
+     "kind": "code",
+     "lines": 5,
+     "points": 4,
+     "answer": "for i in range(2, 21, 2): print(i)"
+    },
+    {
+     "q": "اشرح بكلامك الفرق بين for و while.",
+     "kind": "short",
+     "lines": 3,
+     "points": 3
+    }
+   ]
+  },
+  {
+   "type": "callout",
+   "kind": "tip",
+   "title": "تحدي إضافي",
+   "text": "عدّل الحلقة عشان تطبع جدول الضرب لأي رقم يدخله المستخدم."
+  }
+ ]
+}

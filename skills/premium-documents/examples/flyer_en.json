@@ -1,0 +1,5 @@
+{"type":"flyer","theme":"sunset-startup","meta":{"title":"AI for Teachers — Free Workshop","subtitle":"Saturday 24 Oct · 10:00–13:00 · Don Bosco, Rod El Farag","cta":{"text":"Register free","detail":"30 seats · bring a laptop","contact":"neo-ai.example/teachers"}},
+ "cover":{"image":{"art":"blobs","dark":true}},
+ "blocks":[{"type":"cards","items":[{"icon":"schedule","title":"Save 4 hours a week","text":"Lesson plans and quizzes in minutes"},{"icon":"quiz","title":"Better quizzes","text":"Question banks by difficulty"},{"icon":"verified","title":"Certificate","text":"Neo AI certificate of attendance"}]},
+  {"type":"stats","items":[{"value":"3 h","label":"hands-on workshop"},{"value":"0 EGP","label":"free for teachers"},{"value":"30","label":"seats only"}]},
+  {"type":"paragraph","text":"No experience needed. Every tool used has a free version."}]}

@@ -76,6 +76,16 @@ The `video-post-studio` (editing/post-production), `motion-design-studio`
 (motion graphics) and `stock-library` (free stock + licences) skills run on
 the same local server as creative-studio — same rule as below.
 
+The document team — `premium-presentations` (decks), `premium-documents` (Word + designed PDF),
+`premium-spreadsheets` (formula-driven Excel) and `course-studio` (whole courses), on the shared
+`premium-design-kit` — builds files with Python scripts on my machine. Here, do the thinking and
+the writing to the same bar: ask the brief/intake questions first (course-studio: always ask the
+context — school content vs. training programme, level, sessions, language, assessment, look),
+then write the spec JSON exactly as in each skill's `references/` (deck_spec_schema.md,
+doc-spec.md, sheet-spec.md, course-spec.md) with real content and `[NEEDS: …]` for gaps, so I can
+build it with `bash skills/premium-design-kit/scripts/run.sh <skill>/scripts/build_*.py` in
+Claude/Cursor/Antigravity.
+
 The `creative-studio` skill (my free content-creation team — branding,
 design, photo, vector, video editing, motion, audio, AI images) also runs
 locally (`skills/creative-studio/scripts/call.sh`). Here, help me with the

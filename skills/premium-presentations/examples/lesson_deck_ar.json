@@ -1,0 +1,199 @@
+{
+ "theme": "donbosco-lab",
+ "language": "ar",
+ "footer": "مدرسة دون بوسكو — البرمجة بلغة بايثون",
+ "slides": [
+  {
+   "type": "image_hero",
+   "kicker": "الحصة الثالثة",
+   "title": "الحلقات التكرارية في بايثون",
+   "subtitle": "إزاي نخلّي الكمبيوتر يكرر شغل من غير ما نكتبه مية مرة",
+   "image": {
+    "photo": "computer programming code screen laptop",
+    "orientation": "landscape"
+   },
+   "notes": [
+    "رحّب بالطلاب",
+    "اسأل: مين جرب يكرر حاجة يدوي؟"
+   ]
+  },
+  {
+   "type": "objectives",
+   "title": "في آخر الحصة هتقدر:",
+   "items": [
+    {
+     "verb": "تشرح",
+     "text": "الفرق بين for و while بمثال من حياتك"
+    },
+    {
+     "verb": "تكتب",
+     "text": "حلقة for تطبع جدول الضرب"
+    },
+    {
+     "verb": "تتتبع",
+     "text": "قيمة المتغير في كل لفة"
+    },
+    {
+     "verb": "تصلّح",
+     "text": "حلقة لا نهائية"
+    }
+   ]
+  },
+  {
+   "type": "definition",
+   "term": "الحلقة (Loop)",
+   "definition": "أمر بيكرر مجموعة أوامر طول ما شرط معين متحقق، أو لعدد مرات محدد.",
+   "example": "for i in range(5): print(i)  ← بتطبع من 0 لـ 4",
+   "mistake": "ناسي تغيّر المتغير جوه while ⇐ الحلقة مش هتقف",
+   "image": {
+    "photo": "conveyor belt factory repetition"
+   }
+  },
+  {
+   "type": "code",
+   "title": "مثال: جدول الضرب",
+   "lang": "python",
+   "code": "for i in range(1, 11):\n    print(f\"7 x {i} = {7 * i}\")"
+  },
+  {
+   "type": "process",
+   "title": "إزاي الحلقة بتشتغل",
+   "steps": [
+    {
+     "label": "البداية",
+     "detail": "i = 1",
+     "icon": "play arrow"
+    },
+    {
+     "label": "الشرط",
+     "detail": "هل i ≤ 10؟",
+     "icon": "help"
+    },
+    {
+     "label": "التنفيذ",
+     "detail": "اطبع السطر",
+     "icon": "terminal"
+    },
+    {
+     "label": "الزيادة",
+     "detail": "i = i + 1",
+     "icon": "add"
+    }
+   ]
+  },
+  {
+   "type": "diagram",
+   "kind": "cycle",
+   "title": "دورة الحلقة",
+   "center": "لفة واحدة",
+   "items": [
+    {
+     "label": "تحقق من الشرط"
+    },
+    {
+     "label": "نفّذ الأوامر"
+    },
+    {
+     "label": "حدّث المتغير"
+    },
+    {
+     "label": "ارجع للبداية"
+    }
+   ]
+  },
+  {
+   "type": "chart",
+   "title": "الوقت اللي بتوفره الحلقات",
+   "chart": "bar",
+   "categories": [
+    "10 أسطر",
+    "100 سطر",
+    "1000 سطر"
+   ],
+   "series": [
+    {
+     "name": "يدوي (دقائق)",
+     "values": [
+      2,
+      20,
+      200
+     ]
+    },
+    {
+     "name": "بحلقة (دقائق)",
+     "values": [
+      1,
+      1,
+      1
+     ]
+    }
+   ],
+   "insight": "الحلقة بتاخد نفس الوقت مهما زاد العدد",
+   "source": "تقدير تقريبي لكتابة الكود"
+  },
+  {
+   "type": "quiz",
+   "question": "كام مرة هتتنفذ for i in range(3)؟",
+   "options": [
+    "مرتين",
+    "3 مرات",
+    "4 مرات",
+    "مالانهاية"
+   ],
+   "answer": 1
+  },
+  {
+   "type": "quiz",
+   "question": "كام مرة هتتنفذ for i in range(3)؟",
+   "options": [
+    "مرتين",
+    "3 مرات",
+    "4 مرات",
+    "مالانهاية"
+   ],
+   "answer": 1,
+   "reveal": true,
+   "explanation": "range(3) بتدي 0 و1 و2 — يعني 3 قيم."
+  },
+  {
+   "type": "activity",
+   "title": "اكتب جدول الضرب بتاعك",
+   "minutes": 15,
+   "mode": "كل اتنين مع بعض",
+   "icon": "keyboard",
+   "steps": [
+    "اختار رقم من 2 لـ 12",
+    "اكتب حلقة for تطبع جدوله",
+    "غيّرها لـ while وقارن",
+    "اعرض الشغل على زميلك"
+   ],
+   "deliverable": "ملف loops.py فيه الحلّين"
+  },
+  {
+   "type": "icon_grid",
+   "title": "خلاصة الحصة",
+   "items": [
+    {
+     "icon": "repeat",
+     "label": "for",
+     "description": "لما تعرف عدد اللفات"
+    },
+    {
+     "icon": "sync",
+     "label": "while",
+     "description": "لما تستنى شرط"
+    },
+    {
+     "icon": "bug report",
+     "label": "احذر",
+     "description": "الحلقة اللانهائية"
+    }
+   ]
+  },
+  {
+   "type": "closing",
+   "title": "شكراً — أسئلة؟",
+   "contact": "الواجب: تمارين صفحة 12"
+  }
+ ]
+}

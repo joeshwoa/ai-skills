@@ -1,0 +1,226 @@
+{
+ "title": "Cominde — 2027 Budget",
+ "subtitle": "Monthly plan, all figures in EGP",
+ "theme": "cobalt-tech",
+ "currency": "EGP",
+ "sheets": [
+  {
+   "name": "Inputs",
+   "kind": "inputs",
+   "title": "Assumptions",
+   "fields": [
+    {
+     "label": "Tax rate",
+     "name": "TaxRate",
+     "value": 0.14,
+     "type": "percent"
+    },
+    {
+     "label": "Price per subscription",
+     "name": "Price",
+     "value": 149,
+     "type": "money"
+    },
+    {
+     "label": "Monthly growth",
+     "name": "Growth",
+     "value": 0.08,
+     "type": "percent",
+     "note": "Month-over-month subscriber growth"
+    }
+   ],
+   "description": "Change these to update every sheet"
+  },
+  {
+   "name": "Expenses",
+   "title": "Monthly expenses",
+   "columns": [
+    {
+     "name": "Item"
+    },
+    {
+     "name": "Category"
+    },
+    {
+     "name": "Monthly",
+     "type": "money",
+     "input": true
+    },
+    {
+     "name": "Annual",
+     "type": "money",
+     "formula": "=[Monthly]*12"
+    },
+    {
+     "name": "Share",
+     "type": "pct",
+     "formula": "=[Annual]/SUM([Annual:all])"
+    }
+   ],
+   "rows": [
+    [
+     "Salaries",
+     "Team",
+     180000
+    ],
+    [
+     "Cloud & AI APIs",
+     "Tech",
+     42000
+    ],
+    [
+     "Office",
+     "Ops",
+     25000
+    ],
+    [
+     "Marketing",
+     "Growth",
+     60000
+    ],
+    [
+     "Content creators",
+     "Growth",
+     35000
+    ]
+   ],
+   "totals": {
+    "Monthly": "sum",
+    "Annual": "sum"
+   },
+   "validation": {
+    "Category": [
+     "Team",
+     "Tech",
+     "Ops",
+     "Growth"
+    ]
+   },
+   "conditional": [
+    {
+     "column": "Annual",
+     "type": "data_bar"
+    }
+   ],
+   "description": "Every cost line with its share"
+  },
+  {
+   "name": "Revenue",
+   "title": "Subscriber forecast",
+   "columns": [
+    {
+     "name": "Month",
+     "type": "text"
+    },
+    {
+     "name": "Subscribers",
+     "type": "int"
+    },
+    {
+     "name": "Revenue",
+     "type": "money",
+     "formula": "=[Subscribers]*Price"
+    },
+    {
+     "name": "Net of tax",
+     "type": "money",
+     "formula": "=[Revenue]*(1-TaxRate)"
+    }
+   ],
+   "rows": [
+    [
+     "Jan",
+     1100
+    ],
+    [
+     "Feb",
+     "=ROUND(B{prev}*(1+Growth),0)"
+    ],
+    [
+     "Mar",
+     "=ROUND(B{prev}*(1+Growth),0)"
+    ],
+    [
+     "Apr",
+     "=ROUND(B{prev}*(1+Growth),0)"
+    ],
+    [
+     "May",
+     "=ROUND(B{prev}*(1+Growth),0)"
+    ],
+    [
+     "Jun",
+     "=ROUND(B{prev}*(1+Growth),0)"
+    ]
+   ],
+   "totals": {
+    "Revenue": "sum",
+    "Net of tax": "sum"
+   },
+   "conditional": [
+    {
+     "column": "Subscribers",
+     "type": "color_scale"
+    }
+   ],
+   "description": "Growth-driven revenue"
+  },
+  {
+   "name": "Dashboard",
+   "kind": "dashboard",
+   "title": "Budget at a glance",
+   "kpis": [
+    {
+     "label": "Annual costs",
+     "formula": "=SUM({Expenses.Annual})",
+     "type": "money"
+    },
+    {
+     "label": "H1 revenue",
+     "formula": "={Revenue.Revenue.total}",
+     "type": "money"
+    },
+    {
+     "label": "Subscribers (Jun)",
+     "formula": "={Revenue.Subscribers.last}",
+     "type": "int"
+    },
+    {
+     "label": "Biggest cost share",
+     "formula": "=MAX({Expenses.Share})",
+     "type": "pct"
+    }
+   ],
+   "charts": [
+    {
+     "type": "bar",
+     "title": "Annual cost by item",
+     "data_sheet": "Expenses",
+     "categories": "Item",
+     "values": [
+      "Annual"
+     ]
+    },
+    {
+     "type": "line",
+     "title": "Subscribers",
+     "data_sheet": "Revenue",
+     "categories": "Month",
+     "values": [
+      "Subscribers"
+     ]
+    },
+    {
+     "type": "donut",
+     "title": "Cost split",
+     "data_sheet": "Expenses",
+     "categories": "Item",
+     "values": [
+      "Monthly"
+     ]
+    }
+   ],
+   "description": "KPIs and charts"
+  }
+ ]
+}

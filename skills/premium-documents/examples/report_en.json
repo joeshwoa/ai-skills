@@ -1,0 +1,235 @@
+{
+ "type": "report",
+ "theme": "azure-finance",
+ "meta": {
+  "title": "Digital Learning in Egyptian Schools 2026",
+  "subtitle": "What 1,200 teachers told us about tablets, AI tutors and exam pressure",
+  "author": "Cominde Research",
+  "prepared_for": "Ministry partners",
+  "date": "October 2026",
+  "org": "Cominde",
+  "kicker": "Annual report"
+ },
+ "cover": {
+  "style": "photo",
+  "image": {
+   "photo": "classroom students tablets",
+   "orientation": "portrait"
+  }
+ },
+ "blocks": [
+  {
+   "type": "heading",
+   "text": "Executive summary"
+  },
+  {
+   "type": "paragraph",
+   "style": "lead",
+   "text": "Teachers are not resisting technology — they are resisting **extra work**. The schools that saw results cut preparation time first."
+  },
+  {
+   "type": "stats",
+   "items": [
+    {
+     "value": "1,214",
+     "label": "teachers surveyed in 9 governorates"
+    },
+    {
+     "value": "63%",
+     "label": "use a phone for lesson prep weekly"
+    },
+    {
+     "value": "4.1 h",
+     "label": "saved per week with shared lesson banks"
+    }
+   ]
+  },
+  {
+   "type": "callout",
+   "kind": "tip",
+   "title": "Key recommendation",
+   "text": "Fund shared, curriculum-aligned lesson banks before buying more devices."
+  },
+  {
+   "type": "heading",
+   "text": "Findings"
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "text": "Device access"
+  },
+  {
+   "type": "paragraph",
+   "text": "Access is no longer the main barrier: most teachers own a smartphone, but only *one in five* classrooms has a working projector."
+  },
+  {
+   "type": "chart",
+   "chart": {
+    "type": "bar",
+    "categories": [
+     "Smartphone",
+     "Laptop",
+     "Projector",
+     "Tablets for students"
+    ],
+    "series": [
+     {
+      "name": "Share of teachers",
+      "values": [
+       91,
+       47,
+       21,
+       8
+      ]
+     }
+    ],
+    "unit": "%",
+    "highlight": 2
+   },
+   "caption": "Devices available to teachers during lessons (n=1,214)."
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "text": "Time spent preparing"
+  },
+  {
+   "type": "table",
+   "headers": [
+    "Task",
+    "Hours / week",
+    "Change vs 2025"
+   ],
+   "rows": [
+    [
+     "Lesson preparation",
+     "6.2",
+     "−0.8"
+    ],
+    [
+     "Marking",
+     "5.4",
+     "+0.3"
+    ],
+    [
+     "Admin & reports",
+     "3.9",
+     "+0.6"
+    ],
+    [
+     "Total",
+     "15.5",
+     "+0.1"
+    ]
+   ],
+   "total_row": true,
+   "caption": "Average weekly hours outside class."
+  },
+  {
+   "type": "two_column",
+   "left": [
+    {
+     "type": "heading",
+     "level": 3,
+     "text": "What works"
+    },
+    {
+     "type": "bullets",
+     "items": [
+      "Shared lesson banks",
+      "Short WhatsApp-sized trainings",
+      "Ready-made quizzes"
+     ]
+    }
+   ],
+   "right": [
+    {
+     "type": "heading",
+     "level": 3,
+     "text": "What fails"
+    },
+    {
+     "type": "bullets",
+     "items": [
+      "Long platform trainings",
+      "Devices without content",
+      "Parallel paperwork"
+     ]
+    }
+   ]
+  },
+  {
+   "type": "quote",
+   "text": "If the tool saves me ten minutes tomorrow morning, I will use it. If it costs me ten minutes, I won't.",
+   "author": "Math teacher, Assiut"
+  },
+  {
+   "type": "heading",
+   "text": "Roadmap"
+  },
+  {
+   "type": "timeline",
+   "items": [
+    {
+     "date": "Q1 2027",
+     "title": "Lesson bank pilot",
+     "text": "Grades 7–9 maths and science in 40 schools"
+    },
+    {
+     "type": "x",
+     "date": "Q2 2027",
+     "title": "AI quiz builder",
+     "text": "Teachers generate exam-style quizzes from the bank"
+    },
+    {
+     "date": "Q4 2027",
+     "title": "Scale",
+     "text": "All governorates, Arabic and English schools"
+    }
+   ]
+  },
+  {
+   "type": "cards",
+   "items": [
+    {
+     "icon": "school",
+     "title": "Schools",
+     "text": "Start with willing principals, not mandates."
+    },
+    {
+     "icon": "groups",
+     "title": "Teachers",
+     "text": "Recognise champions publicly every term."
+    },
+    {
+     "icon": "bar chart",
+     "title": "Data",
+     "text": "Measure time saved, not logins."
+    }
+   ]
+  },
+  {
+   "type": "steps",
+   "items": [
+    {
+     "title": "Pick 40 pilot schools",
+     "text": "Mix of urban and rural"
+    },
+    {
+     "title": "Load the lesson bank",
+     "text": "300 lessons reviewed by supervisors"
+    },
+    {
+     "title": "Measure for one term",
+     "text": "Prep time, quiz use, student scores"
+    }
+   ]
+  },
+  {
+   "type": "code",
+   "lang": "python",
+   "code": "hours_saved = teachers * 4.1 * weeks\nprint(f\"{hours_saved:,.0f} hours per year\")"
+  }
+ ]
+}

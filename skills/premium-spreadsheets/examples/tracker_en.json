@@ -1,0 +1,96 @@
+{
+ "title": "Task tracker",
+ "language": "en",
+ "theme": "plain-pro",
+ "contents": false,
+ "sheets": [
+  {
+   "name": "Tasks",
+   "columns": [
+    {
+     "name": "Task",
+     "width": 40
+    },
+    {
+     "name": "Owner",
+     "width": 16
+    },
+    {
+     "name": "Start",
+     "type": "date"
+    },
+    {
+     "name": "Due",
+     "type": "date"
+    },
+    {
+     "name": "Status",
+     "width": 14
+    },
+    {
+     "name": "Priority",
+     "width": 10
+    },
+    {
+     "name": "Late?",
+     "formula": "=IF(AND([Due]<TODAY(),[Status]<>\"Done\"),\"⚠\",\"\")",
+     "align": "center"
+    },
+    {
+     "name": "Notes",
+     "width": 36
+    }
+   ],
+   "rows": [
+    [
+     "Write course outline",
+     "Joshua",
+     "2026-10-01",
+     "2026-10-05",
+     "Done",
+     "",
+     null,
+     ""
+    ],
+    [
+     "Record session 1",
+     "Mariam",
+     "2026-10-06",
+     "2026-10-06",
+     "In progress",
+     "P1",
+     null,
+     ""
+    ]
+   ],
+   "validation": {
+    "Status": [
+     "Not started",
+     "In progress",
+     "Done",
+     "Blocked"
+    ],
+    "Priority": [
+     "P1",
+     "P2",
+     "P3"
+    ]
+   },
+   "conditional": [
+    {
+     "column": "Status",
+     "type": "rule",
+     "formula": "=[Status]=\"Done\"",
+     "style": "good",
+     "whole_row": true
+    },
+    {
+     "column": "Late?",
+     "type": "rule",
+     "formula": "=[Late?]=\"⚠\"",
+     "style": "bad"
+    }
+   ]
+  }
+ ]
+}

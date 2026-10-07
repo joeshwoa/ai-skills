@@ -34,15 +34,50 @@ from pptx.util import Emu
 EMU_PER_IN = 914400
 DPI = 96  # measurement resolution; only the ratios matter, not the absolute value
 
+def _first_existing(paths):
+    for p in paths:
+        if Path(p).exists():
+            return p
+    return paths[0]
+
+
 FONT_FILES = {
-    ("sans", False, False): "/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf",
-    ("sans", True, False): "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf",
-    ("sans", False, True): "/usr/share/fonts/truetype/liberation/LiberationSans-Italic.ttf",
-    ("sans", True, True): "/usr/share/fonts/truetype/liberation/LiberationSans-BoldItalic.ttf",
-    ("serif", False, False): "/usr/share/fonts/truetype/liberation/LiberationSerif-Regular.ttf",
-    ("serif", True, False): "/usr/share/fonts/truetype/liberation/LiberationSerif-Bold.ttf",
-    ("serif", False, True): "/usr/share/fonts/truetype/liberation/LiberationSerif-Italic.ttf",
-    ("serif", True, True): "/usr/share/fonts/truetype/liberation/LiberationSerif-BoldItalic.ttf",
+    ("sans", False, False): _first_existing([
+        "/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf",
+        "/System/Library/Fonts/Supplemental/Arial.ttf",
+        "/Library/Fonts/Arial.ttf",
+    ]),
+    ("sans", True, False): _first_existing([
+        "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf",
+        "/System/Library/Fonts/Supplemental/Arial Bold.ttf",
+        "/Library/Fonts/Arial Bold.ttf",
+    ]),
+    ("sans", False, True): _first_existing([
+        "/usr/share/fonts/truetype/liberation/LiberationSans-Italic.ttf",
+        "/System/Library/Fonts/Supplemental/Arial Italic.ttf",
+        "/Library/Fonts/Arial Italic.ttf",
+    ]),
+    ("sans", True, True): _first_existing([
+        "/usr/share/fonts/truetype/liberation/LiberationSans-BoldItalic.ttf",
+        "/System/Library/Fonts/Supplemental/Arial Bold Italic.ttf",
+        "/Library/Fonts/Arial Bold Italic.ttf",
+    ]),
+    ("serif", False, False): _first_existing([
+        "/usr/share/fonts/truetype/liberation/LiberationSerif-Regular.ttf",
+        "/System/Library/Fonts/Supplemental/Georgia.ttf",
+    ]),
+    ("serif", True, False): _first_existing([
+        "/usr/share/fonts/truetype/liberation/LiberationSerif-Bold.ttf",
+        "/System/Library/Fonts/Supplemental/Georgia Bold.ttf",
+    ]),
+    ("serif", False, True): _first_existing([
+        "/usr/share/fonts/truetype/liberation/LiberationSerif-Italic.ttf",
+        "/System/Library/Fonts/Supplemental/Georgia Italic.ttf",
+    ]),
+    ("serif", True, True): _first_existing([
+        "/usr/share/fonts/truetype/liberation/LiberationSerif-BoldItalic.ttf",
+        "/System/Library/Fonts/Supplemental/Georgia Bold Italic.ttf",
+    ]),
 }
 
 
@@ -112,7 +147,7 @@ def check_text_frame(shape, slide_idx, issues):
         n_lines, word_overflow = _wrap_and_measure(text, font, box_w_px)
         line_height_px = size_pt * DPI / 72 * 1.32  # ~normal line-spacing incl. leading
         total_line_px += n_lines * line_height_px
-        if word_overflow:
+        if word_overflow and not str(getattr(shape, "name", "")).startswith("allow-wrap"):
             snippet = text[:40] + ("…" if len(text) > 40 else "")
             issues.append({
                 "slide": slide_idx, "type": "word_too_wide",

@@ -1,0 +1,14 @@
+---
+description: Any document as editable Word + designed PDF from one spec — reports, proposals, e-books, manuals, policies, contracts, letters, memos, minutes, invoices, CVs, certificates, newsletters, flyers, handouts, worksheets, exams — English or Arabic RTL, photos, icons, charts, brand kits. Apply for any request to write, design or format a document or PDF.
+globs:
+alwaysApply: false
+---
+# Premium Documents
+
+Read `skills/premium-documents/SKILL.md` in full first (spec: `references/doc-spec.md`; what each type must contain: `references/doc-types.md`).
+
+Quick reference:
+- Build: `bash skills/premium-design-kit/scripts/run.sh skills/premium-documents/scripts/build_doc.py spec.json out/name` → name.docx + name.pdf.
+- QA (mandatory): `bash skills/premium-design-kit/scripts/run.sh skills/premium-documents/scripts/validate_doc.py out/name.pdf out/name.docx --sheet` → LOOK at the contact sheet; fix and rebuild.
+- Outline first, real content, `[NEEDS: …]` for gaps. Legal docs = draft for lawyer review. Invoice totals are computed, never typed.
+- Default theme plain-pro (unbranded); `"brand": "<slug>"` only when asked.

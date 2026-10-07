@@ -1,0 +1,13 @@
+---
+description: Shared design engine for the document skills: themes + brand kits, Arabic RTL typography, contrast-safe tokens, free stock photos/icons/generated art, themed charts, previews and contact sheets. Apply when choosing a look, sourcing images/icons/backgrounds for a design, previewing/QA-ing PDF/PPTX/DOCX/XLSX, or setting up the document skills.
+globs:
+alwaysApply: false
+---
+# Premium Design Kit
+
+Read `skills/premium-design-kit/SKILL.md` (and `references/design-system.md`) before designing.
+
+Quick reference:
+- Setup: `bash skills/premium-design-kit/scripts/setup.sh` (venv), `fonts.sh` (free Arabic/Latin fonts — ask first), `selftest.sh`.
+- `bash skills/premium-design-kit/scripts/run.sh skills/premium-design-kit/scripts/kit.py themes --html gallery.html | tokens <id> | chart spec.json out.png | art <kind> out.jpg | asset '<ref>' dir | preview <file>`.
+- Asset refs everywhere: path · {"photo": q} · {"stock": id} · {"icon": q} · {"art": kind} · {"chart": {…}}.

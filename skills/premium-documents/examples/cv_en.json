@@ -1,0 +1,108 @@
+{
+ "type": "cv",
+ "theme": "cobalt-tech",
+ "meta": {
+  "name": "Joshua George",
+  "role": "ML Engineer & Flutter Developer"
+ },
+ "blocks": [
+  {
+   "type": "contact",
+   "items": [
+    [
+     "Email",
+     "joshua@example.com"
+    ],
+    [
+     "Location",
+     "Cairo, Egypt"
+    ],
+    [
+     "GitHub",
+     "github.com/joeshwoa"
+    ]
+   ]
+  },
+  {
+   "type": "skills",
+   "groups": [
+    {
+     "group": "ML / AI",
+     "items": [
+      "PyTorch",
+      "Computer vision",
+      "LLM apps"
+     ]
+    },
+    {
+     "group": "Mobile",
+     "items": [
+      "Flutter",
+      "Dart",
+      "Firebase"
+     ]
+    }
+   ]
+  },
+  {
+   "type": "skills",
+   "title": "Languages",
+   "groups": [
+    {
+     "items": [
+      "Arabic",
+      "English",
+      "German (A2)"
+     ],
+     "levels": [
+      100,
+      90,
+      35
+     ]
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "title": "Profile",
+   "text": "Engineer who ships AI features into mobile products — from data to model to the app in the user's hand."
+  },
+  {
+   "type": "experience",
+   "items": [
+    {
+     "role": "Founder & Lead Developer",
+     "org": "Cominde",
+     "place": "Cairo",
+     "from": "2024",
+     "to": "Present",
+     "bullets": [
+      "Built an AI study companion used by 18k weekly students",
+      "Led a team of 4 engineers"
+     ]
+    },
+    {
+     "role": "Head of Development & Research",
+     "org": "Neo AI",
+     "from": "2025",
+     "to": "Present",
+     "bullets": [
+      "Designed AI training programmes for 1,000+ learners"
+     ]
+    }
+   ]
+  },
+  {
+   "type": "education",
+   "items": [
+    {
+     "degree": "B.Sc. Computer Science & AI",
+     "school": "Cairo University FCAI",
+     "from": "2020",
+     "to": "2024",
+     "text": "GPA 3.52 — ranked 17th"
+    }
+   ]
+  }
+ ]
+}

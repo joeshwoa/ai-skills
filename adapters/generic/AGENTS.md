@@ -21,9 +21,27 @@ below for what that feeds.
 ## Available skills
 
 - **premium-presentations** (`skills/premium-presentations/SKILL.md`) —
-  build fully editable, professional/premium presentations (and to the same
-  bar, documents/spreadsheets/PDFs). Trigger: any request for a deck,
-  slides, pitch deck, PowerPoint, or presentation.
+  agency-quality editable decks (.pptx + animated HTML) in English or Arabic
+  (RTL): 33 slide types incl. native charts, diagrams, KPI, image and teaching
+  slides, speaker notes, stock photos/icons, brand kits. Trigger: any request
+  for a deck, slides, pitch deck, PowerPoint, lecture or lesson slides.
+- **premium-documents** (`skills/premium-documents/SKILL.md`) — any document
+  as editable Word + designed PDF from one spec (reports, proposals, e-books,
+  contracts, letters, invoices, CVs, certificates, newsletters, worksheets,
+  exams…), English or Arabic. Trigger: write/design/format a document or PDF.
+- **premium-spreadsheets** (`skills/premium-spreadsheets/SKILL.md`) —
+  formula-driven Excel workbooks (budgets, P&L, dashboards, trackers,
+  gradebooks, question banks) with tables, validation, charts and an
+  automatic recalculation error check. Trigger: any spreadsheet/Excel request.
+- **course-studio** (`skills/course-studio/SKILL.md`) — designs and writes
+  complete courses (plans, outcomes, timed lessons, full content, slides,
+  handouts, labs, quizzes + keys, rubrics, instructor guides, gradebooks);
+  always asks the context first. Trigger: course, curriculum, programme,
+  training, lesson series, course materials.
+- **premium-design-kit** (`skills/premium-design-kit/SKILL.md`) — the shared
+  design engine of the four skills above (themes, brands, Arabic, assets,
+  charts, previews). Trigger: choosing a look, sourcing images/icons for a
+  design, previewing/QA-ing an Office/PDF file, setting the skills up.
 - **premium-3d-models** (`skills/premium-3d-models/SKILL.md`) — build
   real parametric 3D models (.glb/.stl/.obj) for Flutter, web/React,
   Blender, or 3D printing. Trigger: any request to "model," "3D model,"
