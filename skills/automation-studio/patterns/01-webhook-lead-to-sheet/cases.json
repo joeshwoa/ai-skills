@@ -1,0 +1,84 @@
+{
+ "cases": [
+  {
+   "name": "valid lead is saved and gets 200",
+   "trigger": {
+    "body": {
+     "name": " Mariam Adel ",
+     "email": "Mariam@Example.COM ",
+     "phone": "+20 100-123-4567"
+    },
+    "headers": {},
+    "query": {}
+   },
+   "mocks": {
+    "Add to Leads sheet": [
+     {
+      "name": "Mariam Adel",
+      "email": "mariam@example.com"
+     }
+    ]
+   },
+   "expect": {
+    "nodes": {
+     "Clean lead": {
+      "json": {
+       "name": "Mariam Adel",
+       "email": "mariam@example.com",
+       "phone": "+201001234567",
+       "source": "website"
+      }
+     },
+     "Valid email?": {
+      "output": 0,
+      "items": 1
+     },
+     "Add to Leads sheet": {
+      "items": 1
+     },
+     "Reply 200": {
+      "json": {
+       "status": 200,
+       "response": {
+        "ok": true,
+        "email": "mariam@example.com"
+       }
+      }
+     },
+     "Reply 400": {
+      "ran": false
+     }
+    }
+   }
+  },
+  {
+   "name": "bad email gets 400 and nothing is saved",
+   "trigger": {
+    "body": {
+     "name": "X",
+     "email": "not-an-email"
+    }
+   },
+   "expect": {
+    "nodes": {
+     "Valid email?": {
+      "output": 1,
+      "items": 1
+     },
+     "Add to Leads sheet": {
+      "ran": false
+     },
+     "Reply 400": {
+      "json": {
+       "status": 400,
+       "response": {
+        "ok": false,
+        "error": "invalid email"
+       }
+      }
+     }
+    }
+   }
+  }
+ ]
+}

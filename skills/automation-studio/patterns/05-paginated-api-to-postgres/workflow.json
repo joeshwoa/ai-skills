@@ -1,0 +1,229 @@
+{
+  "id": "paginated-api-to-postgres",
+  "name": "Paginated API → Postgres upsert",
+  "nodes": [
+    {
+      "id": "cc72aa81-16c2-42c8-8324-baeaedef2990",
+      "name": "Nightly 02:30",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        100,
+        300
+      ],
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "30 2 * * *"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "475b3149-9308-4440-9924-75b954b10a83",
+      "name": "Fetch all pages",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        300,
+        300
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "https://dummyjson.com/products",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "limit",
+              "value": "50"
+            },
+            {
+              "name": "select",
+              "value": "id,title,price,stock,category,rating"
+            }
+          ]
+        },
+        "options": {
+          "pagination": {
+            "pagination": {
+              "paginationMode": "updateAParameterInEachRequest",
+              "parameters": {
+                "parameters": [
+                  {
+                    "type": "qs",
+                    "name": "skip",
+                    "value": "={{ $pageCount * 50 }}"
+                  }
+                ]
+              },
+              "paginationCompleteWhen": "other",
+              "completeExpression": "={{ $response.body.skip + $response.body.limit >= $response.body.total }}",
+              "limitPagesFetched": true,
+              "maxRequests": 100,
+              "requestInterval": 250
+            }
+          },
+          "timeout": 30000
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 5000
+    },
+    {
+      "id": "beaebe95-9e32-4610-88b4-8ac276a30e2d",
+      "name": "One item per product",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        500,
+        300
+      ],
+      "parameters": {
+        "fieldToSplitOut": "products",
+        "options": {}
+      }
+    },
+    {
+      "id": "0a5e1006-9956-4011-9c98-ad4c40de594a",
+      "name": "Map to table row",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        700,
+        300
+      ],
+      "parameters": {
+        "mode": "manual",
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1",
+              "name": "id",
+              "value": "={{ $json.id }}",
+              "type": "number"
+            },
+            {
+              "id": "2",
+              "name": "title",
+              "value": "={{ $json.title.trim() }}",
+              "type": "string"
+            },
+            {
+              "id": "3",
+              "name": "price_cents",
+              "value": "={{ Math.round($json.price * 100) }}",
+              "type": "number"
+            },
+            {
+              "id": "4",
+              "name": "in_stock",
+              "value": "={{ $json.stock > 0 }}",
+              "type": "boolean"
+            },
+            {
+              "id": "5",
+              "name": "category",
+              "value": "={{ $json.category }}",
+              "type": "string"
+            },
+            {
+              "id": "6",
+              "name": "synced_at",
+              "value": "={{ $now.toISO() }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "0b44dc59-55df-4bd6-8274-0cbb38a0b411",
+      "name": "Upsert products",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.7,
+      "position": [
+        900,
+        300
+      ],
+      "parameters": {
+        "operation": "upsert",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "mode": "name",
+          "value": "products"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": []
+        },
+        "options": {
+          "queryBatching": "transaction"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Nightly 02:30": {
+      "main": [
+        [
+          {
+            "node": "Fetch all pages",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch all pages": {
+      "main": [
+        [
+          {
+            "node": "One item per product",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "One item per product": {
+      "main": [
+        [
+          {
+            "node": "Map to table row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Map to table row": {
+      "main": [
+        [
+          {
+            "node": "Upsert products",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

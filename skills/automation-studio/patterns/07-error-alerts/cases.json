@@ -1,0 +1,17 @@
+{"cases": [
+ {"name": "auth failure is classified and both alerts go out",
+  "env": {"ALERT_TELEGRAM_CHAT_ID": "42"},
+  "trigger": {"execution": {"id": "231", "url": "https://n8n.example.com/workflow/7/executions/231", "mode": "trigger",
+               "lastNodeExecuted": "Add to Leads sheet",
+               "error": {"message": "Request failed with status code 401 - invalid credentials"}},
+              "workflow": {"id": "7", "name": "Lead webhook → Google Sheets"}},
+  "mocks": {"Alert on Telegram": [{"ok": true}], "Alert by email": [{"id": "m"}]},
+  "expect": {"nodes": {
+    "Format alert": {"json": {"severity": "AUTH", "node": "Add to Leads sheet", "workflow": "Lead webhook → Google Sheets"},
+                      "contains": "executions/231"},
+    "Alert on Telegram": {"items": 1}, "Alert by email": {"items": 1}}}},
+ {"name": "trigger-level failure (no execution data) still alerts",
+  "trigger": {"trigger": {"error": {"message": "ETIMEDOUT connecting to imap"}}, "workflow": {"id": "9", "name": "Inbox watcher"}},
+  "mocks": {"Alert on Telegram": [{"ok": true}], "Alert by email": [{"id": "m"}]},
+  "expect": {"nodes": {"Format alert": {"json": {"severity": "TRANSIENT", "node": "trigger"}}}}}
+]}

@@ -1,0 +1,26 @@
+{"cases": [
+ {"name": "only matching, new posts are sent (max 5)",
+  "env": {"TELEGRAM_CHAT_ID": "123"},
+  "mocks": {
+    "Read feed": [
+      {"title": "Show HN: an n8n template gallery", "link": "https://a/1"},
+      {"title": "Gardening tips", "link": "https://a/2"},
+      {"title": "LLM evals at scale", "link": "https://a/3"},
+      {"title": "LLM evals at scale", "link": "https://a/3"},
+      {"title": "Flutter 4 released", "link": "https://a/4"},
+      {"title": "AI in hospitals", "link": "https://a/5"},
+      {"title": "Home automation with ESP32", "link": "https://a/6"},
+      {"title": "Ask HN: AI pair programming", "link": "https://a/7"}],
+    "Send to Telegram": [{"ok": true}]},
+  "expect": {"nodes": {
+    "Matches keywords": {"items": 7},
+    "Only new posts": {"items": 7},
+    "Max 5": {"items": 5, "json": {"link": "https://a/1"}},
+    "Send to Telegram": {"min_items": 1}}}},
+ {"name": "nothing relevant → nothing sent",
+  "mocks": {"Read feed": [{"title": "Gardening tips", "link": "https://a/2"}]},
+  "expect": {"nodes": {"Matches keywords": {"items": 0}, "Send to Telegram": {"ran": false}}}},
+ {"name": "live feed reads (network)", "live": ["Read feed"],
+  "mocks": {"Send to Telegram": [{"ok": true}]},
+  "expect": {"nodes": {"Read feed": {"min_items": 5}}}}
+]}

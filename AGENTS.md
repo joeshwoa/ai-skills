@@ -42,6 +42,17 @@ below for what that feeds.
   design engine of the four skills above (themes, brands, Arabic, assets,
   charts, previews). Trigger: choosing a look, sourcing images/icons for a
   design, previewing/QA-ing an Office/PDF file, setting the skills up.
+- **automation-studio** (`skills/automation-studio/SKILL.md`) — an automation
+  agency: brief → process map + diagram → build n8n workflows with n8n's own SDK
+  and schemas → validate → test every case in a real local n8n (mocked apps,
+  live key-less APIs, idempotency over repeated runs) → credentials walkthrough
+  → deploy/activate/monitor via the API (local Mac, self-hosted, n8n Cloud);
+  12 tested patterns from simple to orchestrated (error alerts, idempotency, AI
+  agent, document AI, human approval, sub-workflows); converters to Node-RED
+  (runs), Make (blueprint) and build guides for Zapier, Power Automate,
+  Pipedream, Activepieces. Never creates accounts or handles keys itself.
+  Trigger: automate a task/process, n8n/Make/Zapier/flow, webhook, schedule,
+  connect apps, AI agent workflow, automation diagram.
 - **premium-3d-models** (`skills/premium-3d-models/SKILL.md`) — build
   real parametric 3D models (.glb/.stl/.obj) for Flutter, web/React,
   Blender, or 3D printing. Trigger: any request to "model," "3D model,"

@@ -1,0 +1,17 @@
+---
+description: An automation agency — designs, diagrams, builds, TESTS and deploys workflow automations from simple to complex. n8n first (local Mac, self-hosted or n8n Cloud; the real n8n engine runs every test), plus Make, Zapier, Power Automate, Pipedream, Activepieces, Node-RED (converter + build guides). Apply for any request to automate a task/process, build/fix/test/convert a workflow, zap, scenario or flow, connect apps, webhooks, schedules, AI agents in n8n, or draw an automation diagram.
+globs:
+alwaysApply: false
+---
+# Automation Studio
+
+Read `skills/automation-studio/SKILL.md` in full first (gates G0–G7), then `references/n8n-building.md` before the first build.
+
+Quick reference (`A="bash skills/automation-studio/scripts/auto.sh"`):
+- `$A doctor` — if n8n isn't installed: `bash skills/automation-studio/scripts/setup_n8n.sh` (ask first), `--start` for the local server.
+- Brief → plan JSON → `$A diagram plan.json -o out --formats png,html` → user sign-off.
+- `$A new list` / `$A new <n> -o flow.ts` → `$A nodes …` / `$A node <type> --ts` → `$A build flow.ts -o flow.json` (validates).
+- `$A test flow.json flow.cases.json` — all green before deploy. `$A creds flow.json` → user connects credentials.
+- `$A deploy flow.json --target local [--activate]` (ask before activating) → `$A trigger` / `$A executions`.
+- Other platforms: `$A convert flow.json --to node-red|make|zapier|power-automate|pipedream|activepieces -o out`.
+- NEVER create accounts or type/print API keys — the user does it (references/credentials.md); keys live in ~/.config/ai-skills/automation-secrets.json.

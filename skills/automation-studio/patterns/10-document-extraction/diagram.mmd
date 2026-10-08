@@ -1,0 +1,46 @@
+flowchart LR
+  n0(["Invoice URL"])
+  n1["Download PDF"]
+  n2["PDF to text"]
+  n3{{"Extract invoice fields"}}
+  n4["OpenAI model"]
+  n5["Check the maths"]
+  n6{"Valid?"}
+  n7["Append to Invoices"]
+  n8[/"Reply saved"/]
+  n9["Flag for review"]
+  n10[/"Reply needs review"/]
+  n0 --> n1
+  n1 --> n2
+  n2 --> n3
+  n3 --> n5
+  n4 -.->|model| n3
+  n5 --> n6
+  n6 -->|true| n7
+  n6 -->|false| n9
+  n7 --> n8
+  n9 --> n10
+  classDef trigger fill:#E8F7EE,stroke:#1E9E5A,color:#0F3D24,stroke-width:1.5px
+  classDef action fill:#EEF0FF,stroke:#4F46E5,color:#1E1B4B,stroke-width:1.5px
+  classDef decision fill:#FFF6E5,stroke:#D97706,color:#4A2A00,stroke-width:1.5px
+  classDef loop fill:#FFF6E5,stroke:#D97706,color:#4A2A00,stroke-width:1.5px
+  classDef transform fill:#EAF4FF,stroke:#2F6FED,color:#0B2559,stroke-width:1.5px
+  classDef code fill:#F1F5F9,stroke:#475569,color:#0F172A,stroke-width:1.5px
+  classDef ai fill:#FCE8F3,stroke:#C026D3,color:#4A044E,stroke-width:1.5px
+  classDef ai_sub fill:#FDF4FF,stroke:#D946EF,color:#4A044E,stroke-width:1.5px
+  classDef wait fill:#F5F5F4,stroke:#78716C,color:#292524,stroke-width:1.5px
+  classDef output fill:#E6FFFA,stroke:#0D9488,color:#134E4A,stroke-width:1.5px
+  classDef error fill:#FEECEC,stroke:#DC2626,color:#450A0A,stroke-width:1.5px
+  classDef subflow fill:#EEF2FF,stroke:#6366F1,color:#1E1B4B,stroke-width:1.5px
+  classDef note fill:#FFFBEA,stroke:#CA8A04,color:#3F2E00,stroke-width:1.5px
+  class n0 trigger
+  class n1 action
+  class n2 transform
+  class n3 ai
+  class n4 ai_sub
+  class n5 code
+  class n6 decision
+  class n7 action
+  class n8 output
+  class n9 transform
+  class n10 output

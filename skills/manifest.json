@@ -1,7 +1,14 @@
 {
   "generated_by": "skills/skill-router/scripts/build_manifest.py",
-  "skill_count": 17,
+  "skill_count": 18,
   "skills": [
+    {
+      "name": "automation-studio",
+      "path": "skills/automation-studio",
+      "description": "A full automation agency that designs, draws, builds, TESTS and deploys workflow automations from simple to enterprise-grade — n8n first (local on the Mac, self-hosted or n8n Cloud; real n8n engine runs every test), plus Make, Zapier, Power Automate, Pipedream, Activepieces and Node-RED (converter + build guides). Process mapping and diagrams (SVG/PNG/PDF, interactive HTML, Mermaid, Excalidraw, Miro/FigJam), node-accurate building with n8n's own SDK and schemas, mocked and live test runs, credentials walkthroughs, deploy/activate/monitor through the API, error workflows, idempotency, AI agents, documents, human approval, sub-workflows. Use for any request to automate a task or process, build/fix/test/explain/convert a workflow, zap, scenario or flow, connect apps, schedule jobs, webhooks, AI agents in n8n, or draw an automation diagram.",
+      "has_scripts": true,
+      "has_references": true
+    },
     {
       "name": "course-studio",
       "path": "skills/course-studio",

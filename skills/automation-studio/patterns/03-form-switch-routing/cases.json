@@ -1,0 +1,17 @@
+{"cases": [
+ {"name": "sales request goes to Slack only",
+  "trigger": {"Name": " Omar ", "Email": "Omar@Shop.EG", "Type": "Sales", "Message": " Need 40 licences ", "submittedAt": "2026-10-08T09:00:00Z"},
+  "mocks": {"Tell sales on Slack": [{"ok": true, "ts": "1.2"}]},
+  "expect": {"nodes": {
+    "Tidy fields": {"json": {"name": "Omar", "email": "omar@shop.eg", "type": "sales", "message": "Need 40 licences"}},
+    "Route by type": {"output": 0, "items": 1},
+    "Tell sales on Slack": {"items": 1},
+    "Open support email": {"ran": false}, "Mark for triage": {"ran": false}}}},
+ {"name": "support request becomes an email",
+  "trigger": {"Name": "Hana", "Email": "hana@x.com", "Type": "Support", "Message": "Login fails"},
+  "mocks": {"Open support email": [{"id": "m1"}]},
+  "expect": {"nodes": {"Route by type": {"output": 1, "items": 1}, "Open support email": {"items": 1}, "Tell sales on Slack": {"ran": false}}}},
+ {"name": "anything else is marked for triage",
+  "trigger": {"Name": "Ali", "Email": "ali@x.com", "Type": "Other", "Message": "Partnership?"},
+  "expect": {"nodes": {"Route by type": {"output": 2, "items": 1}, "Mark for triage": {"json": {"status": "needs-triage", "name": "Ali"}}}}}
+]}

@@ -1,0 +1,14 @@
+{"cases": [
+ {"name": "answer is shaped and returned",
+  "trigger": {"body": {"session_id": "u-77", "message": "فين أوردر A1023؟"}},
+  "mocks": {"Support agent": [{"output": "أوردرك A1023 اتشحن ويوصل 10 أكتوبر 🚚"}]},
+  "expect": {"nodes": {"Valid message?": {"output": 0, "items": 1},
+    "Reply": {"json": {"status": 200, "response": {"handoff": false}}, "contains": "A1023"}}}},
+ {"name": "handoff flag is detected",
+  "trigger": {"body": {"session_id": "u-78", "message": "I want a human now"}},
+  "mocks": {"Support agent": [{"output": "Sure, connecting you to a colleague. [HANDOFF]"}]},
+  "expect": {"nodes": {"Shape reply": {"json": {"handoff": true, "reply": "Sure, connecting you to a colleague."}}}}},
+ {"name": "empty message never reaches the AI",
+  "trigger": {"body": {"session_id": "u-79", "message": "   "}},
+  "expect": {"nodes": {"Support agent": {"ran": false}, "Reply 422": {"json": {"status": 422}}}}}
+]}

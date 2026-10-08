@@ -1,0 +1,83 @@
+{
+ "cases": [
+  {
+   "name": "live: customer 6 is scored from real carts (network)",
+   "trigger": {
+    "customer_id": 6,
+    "email": "six@x.com"
+   },
+   "live": [
+    "Get carts"
+   ],
+   "expect": {
+    "nodes": {
+     "Score": {
+      "json": {
+       "customer_id": 6,
+       "email": "six@x.com"
+      }
+     }
+    }
+   }
+  },
+  {
+   "name": "no carts \u2192 tier new",
+   "trigger": {
+    "customer_id": 999,
+    "email": "n@x.com"
+   },
+   "mocks": {
+    "Get carts": [
+     {
+      "carts": [],
+      "total": 0
+     }
+    ]
+   },
+   "expect": {
+    "nodes": {
+     "Score": {
+      "json": {
+       "tier": "new",
+       "spent": 0,
+       "carts": 0
+      }
+     }
+    }
+   }
+  },
+  {
+   "name": "big spender \u2192 gold",
+   "trigger": {
+    "customer_id": 7,
+    "email": "g@x.com"
+   },
+   "mocks": {
+    "Get carts": [
+     {
+      "carts": [
+       {
+        "total": 4000,
+        "discountedTotal": 3800
+       },
+       {
+        "total": 1500
+       }
+      ]
+     }
+    ]
+   },
+   "expect": {
+    "nodes": {
+     "Score": {
+      "json": {
+       "tier": "gold",
+       "spent": 5300,
+       "carts": 2
+      }
+     }
+    }
+   }
+  }
+ ]
+}

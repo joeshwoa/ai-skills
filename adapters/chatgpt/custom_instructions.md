@@ -125,3 +125,10 @@ characters' dialogue is written into the video prompt (native audio, no
 dubbing), analyse the whole script and get the characters approved before
 designing any scene or shot, plan every transition, route every shot
 separately, and always show the cheapest viable option beside the best one.
+
+For automations (`automation-studio`): you can do the consulting and design half here — the brief,
+the process map (plan JSON with steps/edges), the choice of platform, the node-by-node design, n8n
+expressions and Code node logic, test cases (cases.json) and click-by-click credential steps. Building,
+validating against n8n's schemas, running the tests in a real n8n, deploying through the API and
+converting to Make/Node-RED need a tool with local file/shell access (Claude, Cursor, Antigravity) — say
+so plainly. Never ask me to paste API keys into chat; keys go into my secrets file or the n8n UI.

@@ -1,0 +1,17 @@
+{"cases": [
+ {"name": "small expense is auto-approved",
+  "trigger": {"body": {"employee": "Mina", "amount": "350", "reason": "Taxi"}},
+  "mocks": {"Notify requester": [{"ok": true}]},
+  "expect": {"nodes": {"Reply 202": {"json": {"status": 202, "response": {"received": true}}},
+    "Over 1000 EGP?": {"output": 1, "items": 1}, "Ask manager": {"ran": false},
+    "Auto-approved": {"json": {"status": "approved", "amount": 350}}, "Notify requester": {"items": 1}}}},
+ {"name": "big expense waits for the manager — approved",
+  "trigger": {"body": {"employee": "Sara", "amount": 4200, "reason": "Conference ticket"}},
+  "mocks": {"Ask manager": [{"data": {"approved": true}}], "Notify requester": [{"ok": true}]},
+  "expect": {"nodes": {"Ask manager": {"items": 1}, "Approved by manager": {"json": {"employee": "Sara", "amount": 4200, "status": "approved"}},
+    "Declined or timed out": {"ran": false}}}},
+ {"name": "big expense — declined (or no answer in 3 days)",
+  "trigger": {"body": {"employee": "Sara", "amount": 4200, "reason": "Conference ticket"}},
+  "mocks": {"Ask manager": [{"data": {"approved": false}}], "Notify requester": [{"ok": true}]},
+  "expect": {"nodes": {"Declined or timed out": {"json": {"status": "declined"}}, "Approved by manager": {"ran": false}}}}
+]}

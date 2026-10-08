@@ -1,0 +1,16 @@
+{"cases": [
+ {"name": "new event is processed once → 201",
+  "trigger": {"headers": {"idempotency-key": "evt_1"}, "body": {"order": {"id": 9, "total": 120}}},
+  "mock_http": true,
+  "expect": {"nodes": {"Send to fulfilment": {"items": 1},
+    "Reply 201": {"json": {"status": 201, "response": {"ok": true, "key": "evt_1"}}}, "Reply 200 duplicate": {"ran": false}}}},
+ {"name": "same event delivered again → 200 duplicate, not processed",
+  "runs": 2,
+  "trigger": {"headers": {"idempotency-key": "evt_1"}, "body": {"order": {"id": 9, "total": 120}}},
+  "mock_http": true,
+  "expect": {"nodes": {"Send to fulfilment": {"ran": false},
+    "Reply 200 duplicate": {"json": {"status": 200, "response": {"duplicate": true, "key": "evt_1"}}}}}},
+ {"name": "no key → 400",
+  "trigger": {"headers": {}, "body": {"order": {"id": 1}}},
+  "expect": {"nodes": {"Reply 400": {"json": {"status": 400}}, "First time we see it?": {"ran": false}}}}
+]}

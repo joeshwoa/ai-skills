@@ -1,0 +1,14 @@
+---
+description: A curriculum team that designs and writes whole courses: course/programme plans, syllabi, outcomes + alignment, timed lesson plans, FULL lesson content, slides with notes, handouts, worksheets, labs, quizzes + answer keys, rubrics, instructor guides, gradebook, question bank, schedule — schools (e.g. Don Bosco), universities, academies, corporate. Always asks the context first. Apply for any course, curriculum, programme, training, lesson series or course-materials request.
+globs:
+alwaysApply: false
+---
+# Course Studio
+
+Read `skills/course-studio/SKILL.md` in full first. ALWAYS start with the intake questions (context: school content vs programme, level, sessions, language, assessment rules, deliverables, look).
+
+Quick reference:
+- Write `course_spec.json` (`references/course-spec.md`, example `examples/python_school_ar.json`) — full content, not just slides.
+- `bash skills/premium-design-kit/scripts/run.sh skills/course-studio/scripts/validate_course.py course_spec.json` → fix every ERROR.
+- Pilot: `bash skills/premium-design-kit/scripts/run.sh skills/course-studio/scripts/build_course.py course_spec.json out/Course --only S01` → show the user → then build all.
+- LOOK at the course plan, one full session pack and the gradebook before delivering.

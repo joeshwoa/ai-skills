@@ -1,0 +1,253 @@
+{
+  "id": "idempotent-webhook",
+  "name": "Idempotent order webhook",
+  "nodes": [
+    {
+      "id": "68e4fe2e-fe87-4679-9298-5d44631772de",
+      "name": "Order webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.2,
+      "position": [
+        100,
+        300
+      ],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "orders",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "webhookId": "be80cb0f-8601-40fa-9894-f626cbc52f59"
+    },
+    {
+      "id": "33df69d0-741b-48d6-b7f6-6edaf6f2bb2a",
+      "name": "Read key",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        300,
+        300
+      ],
+      "parameters": {
+        "mode": "manual",
+        "assignments": {
+          "assignments": [
+            {
+              "id": "k",
+              "name": "key",
+              "value": "={{ $json.headers[\"idempotency-key\"] || $json.body.event_id || \"\" }}",
+              "type": "string"
+            },
+            {
+              "id": "o",
+              "name": "order",
+              "value": "={{ $json.body.order }}",
+              "type": "object"
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "ddc3dcca-cbaf-44ac-bb43-4c0b227f9369",
+      "name": "Has key?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        500,
+        300
+      ],
+      "parameters": {
+        "conditions": {
+          "combinator": "and",
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "h",
+              "leftValue": "={{ $json.key }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "eebb5ec3-9ce3-4eaa-bf10-7f6dc8a7df54",
+      "name": "First time we see it?",
+      "type": "n8n-nodes-base.removeDuplicates",
+      "typeVersion": 2,
+      "position": [
+        700,
+        300
+      ],
+      "parameters": {
+        "operation": "removeItemsSeenInPreviousExecutions",
+        "logic": "removeItemsWithAlreadySeenKeyValues",
+        "dedupeValue": "={{ $json.key }}",
+        "options": {
+          "historySize": 10000
+        }
+      }
+    },
+    {
+      "id": "3a8b3aeb-315e-4639-b1e5-83cb29a3f274",
+      "name": "Reply 400",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        700,
+        450
+      ],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { ok: false, error: \"Idempotency-Key header or event_id required\" } }}",
+        "options": {
+          "responseCode": 400
+        }
+      }
+    },
+    {
+      "id": "71a0fbbd-1207-4d6e-ad9f-06c24be3157b",
+      "name": "Send to fulfilment",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        900,
+        300
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://httpbin.org/post",
+        "sendBody": true,
+        "contentType": "json",
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ key: $json.key, order: $json.order }) }}",
+        "options": {
+          "timeout": 20000
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3
+    },
+    {
+      "id": "13ff2e77-6264-4640-a0e0-cd60ae7ba914",
+      "name": "Reply 201",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        1100,
+        300
+      ],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { ok: true, key: $(\"Read key\").item.json.key } }}",
+        "options": {
+          "responseCode": 201
+        }
+      }
+    },
+    {
+      "id": "01dbf522-2308-48aa-ba5f-fc1b3d33c519",
+      "name": "Reply 200 duplicate",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        900,
+        450
+      ],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { ok: true, duplicate: true, key: $(\"Read key\").item.json.key } }}",
+        "options": {
+          "responseCode": 200
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Order webhook": {
+      "main": [
+        [
+          {
+            "node": "Read key",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read key": {
+      "main": [
+        [
+          {
+            "node": "Has key?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Has key?": {
+      "main": [
+        [
+          {
+            "node": "First time we see it?",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Reply 400",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "First time we see it?": {
+      "main": [
+        [
+          {
+            "node": "Send to fulfilment",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Reply 200 duplicate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send to fulfilment": {
+      "main": [
+        [
+          {
+            "node": "Reply 201",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

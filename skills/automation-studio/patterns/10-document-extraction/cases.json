@@ -1,0 +1,149 @@
+{
+ "cases": [
+  {
+   "name": "real PDF text is extracted; correct invoice is saved",
+   "trigger": {
+    "body": {
+     "file_url": "https://example.com/inv42.pdf"
+    }
+   },
+   "mocks": {
+    "Download PDF": [
+     {
+      "json": {},
+      "binary": {
+       "data": {
+        "data": "JVBERi0xLjMKJZOMi54gUmVwb3J0TGFiIEdlbmVyYXRlZCBQREYgZG9jdW1lbnQgKG9wZW5zb3VyY2UpCjEgMCBvYmoKPDwKL0YxIDIgMCBSCj4+CmVuZG9iagoyIDAgb2JqCjw8Ci9CYXNlRm9udCAvSGVsdmV0aWNhIC9FbmNvZGluZyAvV2luQW5zaUVuY29kaW5nIC9OYW1lIC9GMSAvU3VidHlwZSAvVHlwZTEgL1R5cGUgL0ZvbnQKPj4KZW5kb2JqCjMgMCBvYmoKPDwKL0NvbnRlbnRzIDcgMCBSIC9NZWRpYUJveCBbIDAgMCA0MTkuNTI3NiA1OTUuMjc1NiBdIC9QYXJlbnQgNiAwIFIgL1Jlc291cmNlcyA8PAovRm9udCAxIDAgUiAvUHJvY1NldCBbIC9QREYgL1RleHQgL0ltYWdlQiAvSW1hZ2VDIC9JbWFnZUkgXQo+PiAvUm90YXRlIDAgL1RyYW5zIDw8Cgo+PiAKICAvVHlwZSAvUGFnZQo+PgplbmRvYmoKNCAwIG9iago8PAovUGFnZU1vZGUgL1VzZU5vbmUgL1BhZ2VzIDYgMCBSIC9UeXBlIC9DYXRhbG9nCj4+CmVuZG9iago1IDAgb2JqCjw8Ci9BdXRob3IgKGFub255bW91cykgL0NyZWF0aW9uRGF0ZSAoRDoyMDI2MTAwODA3NDk0NiswMCcwMCcpIC9DcmVhdG9yIChhbm9ueW1vdXMpIC9LZXl3b3JkcyAoKSAvTW9kRGF0ZSAoRDoyMDI2MTAwODA3NDk0NiswMCcwMCcpIC9Qcm9kdWNlciAoUmVwb3J0TGFiIFBERiBMaWJyYXJ5IC0gXChvcGVuc291cmNlXCkpIAogIC9TdWJqZWN0ICh1bnNwZWNpZmllZCkgL1RpdGxlICh1bnRpdGxlZCkgL1RyYXBwZWQgL0ZhbHNlCj4+CmVuZG9iago2IDAgb2JqCjw8Ci9Db3VudCAxIC9LaWRzIFsgMyAwIFIgXSAvVHlwZSAvUGFnZXMKPj4KZW5kb2JqCjcgMCBvYmoKPDwKL0ZpbHRlciBbIC9BU0NJSTg1RGVjb2RlIC9GbGF0ZURlY29kZSBdIC9MZW5ndGggMzE1Cj4+CnN0cmVhbQpHYXNLNzsvXyU/Ji1xXUs1SzNZNk0tSXBTWzA7Kz9gbjRuLy4jRXJQYmEhaGJLSUEwcnI3L3JiS0ptXDlsaSNPRCkuWWhAcTlUK1spUXQ0ayg9NEAwL0pbbjoxLU1zYCpgPGBoW21OKkFZO2NARzNtQFo6bi0iVGAsPyFNPXFARUdhIVRWUDNwUydUJD5YIj9BNDo1JSUzM14jOj8hV2pzTihtOmtDczArRihfImdgMysiLFRlJyM6P1JpPi9YVkU0XkZFVCloRkdlPkVtN0hbKlA6LlEpJTlRM2AlWm04ITNSPyZGYHBYNDIyWy5sLkFrVTNrSU1nNW9eLGFWcG5xQ1dZYWlLSmBlW1ApQ21aTzhlbCwsbmhIbzZrKWNsNyVIJWRBLkAyPCYqL0FYPCY1JnJXLjBwTC9cfj5lbmRzdHJlYW0KZW5kb2JqCnhyZWYKMCA4CjAwMDAwMDAwMDAgNjU1MzUgZiAKMDAwMDAwMDA2MSAwMDAwMCBuIAowMDAwMDAwMDkyIDAwMDAwIG4gCjAwMDAwMDAxOTkgMDAwMDAgbiAKMDAwMDAwMDQwMiAwMDAwMCBuIAowMDAwMDAwNDcwIDAwMDAwIG4gCjAwMDAwMDA3MzEgMDAwMDAgbiAKMDAwMDAwMDc5MCAwMDAwMCBuIAp0cmFpbGVyCjw8Ci9JRCAKWzxlMGRkMWViZjJkMmY4ZjE4NTFiOGQ2NTE2OTgyYTEzZj48ZTBkZDFlYmYyZDJmOGYxODUxYjhkNjUxNjk4MmExM2Y+XQolIFJlcG9ydExhYiBnZW5lcmF0ZWQgUERGIGRvY3VtZW50IC0tIGRpZ2VzdCAob3BlbnNvdXJjZSkKCi9JbmZvIDUgMCBSCi9Sb290IDQgMCBSCi9TaXplIDgKPj4Kc3RhcnR4cmVmCjExOTUKJSVFT0YK",
+        "mimeType": "application/pdf",
+        "fileName": "invoice.pdf",
+        "fileExtension": "pdf"
+       }
+      }
+     }
+    ],
+    "Extract invoice fields": [
+     {
+      "output": {
+       "invoice_no": "INV-2026-0042",
+       "date": "2026-10-01",
+       "supplier": "Nile Office Supplies",
+       "subtotal": 2350,
+       "vat": 329,
+       "total": 2679,
+       "currency": "EGP",
+       "lines": [
+        {
+         "item": "Paper A4",
+         "qty": 10,
+         "amount": 450
+        },
+        {
+         "item": "Toner HP 85A",
+         "qty": 2,
+         "amount": 1900
+        }
+       ]
+      }
+     }
+    ],
+    "Append to Invoices": [
+     {
+      "ok": true
+     }
+    ]
+   },
+   "expect": {
+    "nodes": {
+     "PDF to text": {
+      "contains": "INV-2026-0042"
+     },
+     "Check the maths": {
+      "json": {
+       "valid": true,
+       "total": 2679
+      }
+     },
+     "Reply saved": {
+      "json": {
+       "status": 200,
+       "response": {
+        "ok": true,
+        "invoice_no": "INV-2026-0042",
+        "total": 2679
+       }
+      }
+     },
+     "Reply needs review": {
+      "ran": false
+     }
+    }
+   }
+  },
+  {
+   "name": "AI misread total → caught by code, not saved",
+   "trigger": {
+    "body": {
+     "file_url": "https://example.com/inv42.pdf"
+    }
+   },
+   "mocks": {
+    "Download PDF": [
+     {
+      "json": {},
+      "binary": {
+       "data": {
+        "data": "JVBERi0xLjMKJZOMi54gUmVwb3J0TGFiIEdlbmVyYXRlZCBQREYgZG9jdW1lbnQgKG9wZW5zb3VyY2UpCjEgMCBvYmoKPDwKL0YxIDIgMCBSCj4+CmVuZG9iagoyIDAgb2JqCjw8Ci9CYXNlRm9udCAvSGVsdmV0aWNhIC9FbmNvZGluZyAvV2luQW5zaUVuY29kaW5nIC9OYW1lIC9GMSAvU3VidHlwZSAvVHlwZTEgL1R5cGUgL0ZvbnQKPj4KZW5kb2JqCjMgMCBvYmoKPDwKL0NvbnRlbnRzIDcgMCBSIC9NZWRpYUJveCBbIDAgMCA0MTkuNTI3NiA1OTUuMjc1NiBdIC9QYXJlbnQgNiAwIFIgL1Jlc291cmNlcyA8PAovRm9udCAxIDAgUiAvUHJvY1NldCBbIC9QREYgL1RleHQgL0ltYWdlQiAvSW1hZ2VDIC9JbWFnZUkgXQo+PiAvUm90YXRlIDAgL1RyYW5zIDw8Cgo+PiAKICAvVHlwZSAvUGFnZQo+PgplbmRvYmoKNCAwIG9iago8PAovUGFnZU1vZGUgL1VzZU5vbmUgL1BhZ2VzIDYgMCBSIC9UeXBlIC9DYXRhbG9nCj4+CmVuZG9iago1IDAgb2JqCjw8Ci9BdXRob3IgKGFub255bW91cykgL0NyZWF0aW9uRGF0ZSAoRDoyMDI2MTAwODA3NDk0NiswMCcwMCcpIC9DcmVhdG9yIChhbm9ueW1vdXMpIC9LZXl3b3JkcyAoKSAvTW9kRGF0ZSAoRDoyMDI2MTAwODA3NDk0NiswMCcwMCcpIC9Qcm9kdWNlciAoUmVwb3J0TGFiIFBERiBMaWJyYXJ5IC0gXChvcGVuc291cmNlXCkpIAogIC9TdWJqZWN0ICh1bnNwZWNpZmllZCkgL1RpdGxlICh1bnRpdGxlZCkgL1RyYXBwZWQgL0ZhbHNlCj4+CmVuZG9iago2IDAgb2JqCjw8Ci9Db3VudCAxIC9LaWRzIFsgMyAwIFIgXSAvVHlwZSAvUGFnZXMKPj4KZW5kb2JqCjcgMCBvYmoKPDwKL0ZpbHRlciBbIC9BU0NJSTg1RGVjb2RlIC9GbGF0ZURlY29kZSBdIC9MZW5ndGggMzE1Cj4+CnN0cmVhbQpHYXNLNzsvXyU/Ji1xXUs1SzNZNk0tSXBTWzA7Kz9gbjRuLy4jRXJQYmEhaGJLSUEwcnI3L3JiS0ptXDlsaSNPRCkuWWhAcTlUK1spUXQ0ayg9NEAwL0pbbjoxLU1zYCpgPGBoW21OKkFZO2NARzNtQFo6bi0iVGAsPyFNPXFARUdhIVRWUDNwUydUJD5YIj9BNDo1JSUzM14jOj8hV2pzTihtOmtDczArRihfImdgMysiLFRlJyM6P1JpPi9YVkU0XkZFVCloRkdlPkVtN0hbKlA6LlEpJTlRM2AlWm04ITNSPyZGYHBYNDIyWy5sLkFrVTNrSU1nNW9eLGFWcG5xQ1dZYWlLSmBlW1ApQ21aTzhlbCwsbmhIbzZrKWNsNyVIJWRBLkAyPCYqL0FYPCY1JnJXLjBwTC9cfj5lbmRzdHJlYW0KZW5kb2JqCnhyZWYKMCA4CjAwMDAwMDAwMDAgNjU1MzUgZiAKMDAwMDAwMDA2MSAwMDAwMCBuIAowMDAwMDAwMDkyIDAwMDAwIG4gCjAwMDAwMDAxOTkgMDAwMDAgbiAKMDAwMDAwMDQwMiAwMDAwMCBuIAowMDAwMDAwNDcwIDAwMDAwIG4gCjAwMDAwMDA3MzEgMDAwMDAgbiAKMDAwMDAwMDc5MCAwMDAwMCBuIAp0cmFpbGVyCjw8Ci9JRCAKWzxlMGRkMWViZjJkMmY4ZjE4NTFiOGQ2NTE2OTgyYTEzZj48ZTBkZDFlYmYyZDJmOGYxODUxYjhkNjUxNjk4MmExM2Y+XQolIFJlcG9ydExhYiBnZW5lcmF0ZWQgUERGIGRvY3VtZW50IC0tIGRpZ2VzdCAob3BlbnNvdXJjZSkKCi9JbmZvIDUgMCBSCi9Sb290IDQgMCBSCi9TaXplIDgKPj4Kc3RhcnR4cmVmCjExOTUKJSVFT0YK",
+        "mimeType": "application/pdf",
+        "fileName": "invoice.pdf",
+        "fileExtension": "pdf"
+       }
+      }
+     }
+    ],
+    "Extract invoice fields": [
+     {
+      "output": {
+       "invoice_no": "INV-2026-0042",
+       "date": "2026-10-01",
+       "supplier": "Nile Office Supplies",
+       "subtotal": 2350,
+       "vat": 329,
+       "total": 2769,
+       "currency": "EGP",
+       "lines": [
+        {
+         "item": "Paper A4",
+         "qty": 10,
+         "amount": 450
+        },
+        {
+         "item": "Toner HP 85A",
+         "qty": 2,
+         "amount": 1900
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "expect": {
+    "nodes": {
+     "Check the maths": {
+      "json": {
+       "valid": false
+      },
+      "contains": "≠ total 2769"
+     },
+     "Append to Invoices": {
+      "ran": false
+     },
+     "Reply needs review": {
+      "json": {
+       "status": 422
+      }
+     }
+    }
+   }
+  }
+ ]
+}

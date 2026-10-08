@@ -1,0 +1,251 @@
+{
+  "id": "batch-rate-limit",
+  "name": "Bulk job in rate-limited batches",
+  "nodes": [
+    {
+      "id": "4f81600c-8b83-443a-b4f0-ad4ea7b10756",
+      "name": "Bulk job",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.2,
+      "position": [
+        100,
+        300
+      ],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "bulk-notify",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "webhookId": "836fd89d-8af6-4e61-9b8a-34df14ef768d"
+    },
+    {
+      "id": "a8c950ad-614b-45ff-b098-b78e304c11dd",
+      "name": "Reply 202 accepted",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        300,
+        300
+      ],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { accepted: ($json.body.contacts || []).length } }}",
+        "options": {
+          "responseCode": 202
+        }
+      }
+    },
+    {
+      "id": "3422f28a-09fb-411d-abc3-9c715f3f4f78",
+      "name": "One item per contact",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        500,
+        300
+      ],
+      "parameters": {
+        "fieldToSplitOut": "body.contacts",
+        "options": {}
+      }
+    },
+    {
+      "id": "534671dd-8a88-4b5a-8538-5698e7877755",
+      "name": "Count results",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        900,
+        300
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "\nconst all = $input.all();\nconst ok = all.filter(i => (i.json.statusCode ?? 200) < 400 && !i.json.error).length;\nreturn [{ json: { total: all.length, ok, failed: all.length - ok,\n  text: `Bulk notify finished: ${ok}/${all.length} sent, ${all.length - ok} failed.` } }];"
+      }
+    },
+    {
+      "id": "f08be964-0dd4-4d40-ab89-cd57a59a3b5a",
+      "name": "Report on Slack",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.7,
+      "position": [
+        1100,
+        300
+      ],
+      "parameters": {
+        "resource": "message",
+        "operation": "post",
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "mode": "name",
+          "value": "#ops"
+        },
+        "text": "={{ $json.text }}",
+        "otherOptions": {}
+      },
+      "webhookId": "f3aa1938-c88b-44fa-babc-171287477cdc"
+    },
+    {
+      "id": "2f83c5f7-25c9-443d-8ada-e8053053637b",
+      "name": "Notify contact",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        900,
+        450
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://httpbin.org/post",
+        "sendBody": true,
+        "contentType": "json",
+        "specifyBody": "keypair",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "to",
+              "value": "={{ $json.phone }}"
+            },
+            {
+              "name": "text",
+              "value": "=Hi {{ $json.name }}, your order is ready."
+            }
+          ]
+        },
+        "options": {
+          "timeout": 15000,
+          "response": {
+            "response": {
+              "neverError": true,
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 2,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "id": "abe1ddc6-68cf-45df-b40b-87865a2e89fe",
+      "name": "Pause 1 s",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1100,
+        450
+      ],
+      "parameters": {
+        "resume": "timeInterval",
+        "amount": 1,
+        "unit": "seconds"
+      },
+      "webhookId": "4a0b6106-6e25-4b04-86cc-1de8d0db24e6"
+    },
+    {
+      "id": "20eae16b-9ee4-4497-a96c-7ad0861cb974",
+      "name": "Batches of 10",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        700,
+        300
+      ],
+      "parameters": {
+        "batchSize": 10,
+        "options": {}
+      }
+    }
+  ],
+  "connections": {
+    "Bulk job": {
+      "main": [
+        [
+          {
+            "node": "Reply 202 accepted",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reply 202 accepted": {
+      "main": [
+        [
+          {
+            "node": "One item per contact",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "One item per contact": {
+      "main": [
+        [
+          {
+            "node": "Batches of 10",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Count results": {
+      "main": [
+        [
+          {
+            "node": "Report on Slack",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Notify contact": {
+      "main": [
+        [
+          {
+            "node": "Pause 1 s",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pause 1 s": {
+      "main": [
+        [
+          {
+            "node": "Batches of 10",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Batches of 10": {
+      "main": [
+        [
+          {
+            "node": "Count results",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Notify contact",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

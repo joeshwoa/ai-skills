@@ -1,0 +1,349 @@
+{
+  "id": "document-extraction",
+  "name": "Invoice PDF → AI fields → checked → Sheets",
+  "nodes": [
+    {
+      "id": "b97ea764-7607-4a6a-9b89-7b89ecfab15a",
+      "name": "Invoice URL",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.2,
+      "position": [
+        100,
+        300
+      ],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "invoice",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "webhookId": "56828d19-2475-42f9-bdfe-9692bd5a8f57"
+    },
+    {
+      "id": "f32f84a5-81e8-4008-821e-e65bfac730b7",
+      "name": "Download PDF",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        300,
+        300
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "={{ $json.body.file_url }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file",
+              "outputPropertyName": "data"
+            }
+          },
+          "timeout": 30000
+        }
+      }
+    },
+    {
+      "id": "e360902c-ef1e-43d7-854f-388316af921b",
+      "name": "PDF to text",
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1.1,
+      "position": [
+        500,
+        300
+      ],
+      "parameters": {
+        "operation": "pdf",
+        "binaryPropertyName": "data",
+        "options": {}
+      }
+    },
+    {
+      "id": "6a011f66-7afe-4b3b-bff0-13d995d6332c",
+      "name": "Extract invoice fields",
+      "type": "@n8n/n8n-nodes-langchain.informationExtractor",
+      "typeVersion": 1.2,
+      "position": [
+        300,
+        450
+      ],
+      "parameters": {
+        "text": "={{ $json.text }}",
+        "schemaType": "fromJson",
+        "jsonSchemaExample": "{ \"invoice_no\": \"INV-1\", \"date\": \"2026-01-31\", \"supplier\": \"Name\", \"subtotal\": 100.0, \"vat\": 14.0, \"total\": 114.0, \"currency\": \"EGP\", \"lines\": [{ \"item\": \"Paper\", \"qty\": 1, \"amount\": 100.0 }] }",
+        "options": {
+          "systemPromptTemplate": "Extract the invoice fields exactly as printed. Numbers as plain numbers (no thousands separators). If a field is missing use null."
+        }
+      }
+    },
+    {
+      "id": "d3d325e2-475c-4c44-b75f-ffeea40d50f1",
+      "name": "OpenAI model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        100,
+        450
+      ],
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {
+          "temperature": 0
+        }
+      },
+      "credentials": {}
+    },
+    {
+      "id": "3fb1676a-9410-4300-a9f3-111dc4443a20",
+      "name": "Check the maths",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        500,
+        450
+      ],
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "\nconst inv = $json.output || $json;\nconst n = v => (v === null || v === undefined || v === '') ? null : Number(String(v).replace(/,/g, ''));\nconst sub = n(inv.subtotal), vat = n(inv.vat), total = n(inv.total);\nconst lines = Array.isArray(inv.lines) ? inv.lines : [];\nconst linesSum = lines.reduce((s, l) => s + (n(l.amount) || 0), 0);\nconst problems = [];\nif (!inv.invoice_no) problems.push('missing invoice number');\nif (total === null) problems.push('missing total');\nif (sub !== null && vat !== null && total !== null && Math.abs(sub + vat - total) > 0.01) problems.push(`subtotal + VAT = ${(sub + vat).toFixed(2)} ≠ total ${total}`);\nif (lines.length && sub !== null && Math.abs(linesSum - sub) > 0.01) problems.push(`lines sum ${linesSum.toFixed(2)} ≠ subtotal ${sub}`);\nreturn { json: { invoice_no: inv.invoice_no, date: inv.date, supplier: inv.supplier, subtotal: sub, vat, total,\n  currency: inv.currency || 'EGP', valid: problems.length === 0, problems: problems.join('; '), source: $('Invoice URL').item.json.body.file_url } };"
+      }
+    },
+    {
+      "id": "43ea6157-8e31-4099-8059-186976a3db98",
+      "name": "Valid?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        700,
+        450
+      ],
+      "parameters": {
+        "conditions": {
+          "combinator": "and",
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "v",
+              "leftValue": "={{ $json.valid }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "506042f3-6c92-4c8f-a7bb-07e44d74a417",
+      "name": "Append to Invoices",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        900,
+        450
+      ],
+      "parameters": {
+        "resource": "sheet",
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "",
+          "cachedResultName": "Invoices"
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "name",
+          "value": "Invoices"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "schema": []
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "87a855b4-9d1a-4680-8b71-8851377eb822",
+      "name": "Reply saved",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        1100,
+        450
+      ],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { ok: true, invoice_no: $(\"Check the maths\").item.json.invoice_no, total: $(\"Check the maths\").item.json.total } }}",
+        "options": {
+          "responseCode": 200
+        }
+      }
+    },
+    {
+      "id": "86671d5e-200f-42fb-b7d1-bcc85e6a087d",
+      "name": "Flag for review",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        900,
+        600
+      ],
+      "parameters": {
+        "mode": "manual",
+        "includeOtherFields": true,
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f",
+              "name": "status",
+              "value": "needs-review",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "b1c60127-2f2b-409b-bc07-023ae2337790",
+      "name": "Reply needs review",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        1100,
+        600
+      ],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { ok: false, problems: $json.problems } }}",
+        "options": {
+          "responseCode": 422
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Invoice URL": {
+      "main": [
+        [
+          {
+            "node": "Download PDF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download PDF": {
+      "main": [
+        [
+          {
+            "node": "PDF to text",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PDF to text": {
+      "main": [
+        [
+          {
+            "node": "Extract invoice fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract invoice fields": {
+      "main": [
+        [
+          {
+            "node": "Check the maths",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Extract invoice fields",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check the maths": {
+      "main": [
+        [
+          {
+            "node": "Valid?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Valid?": {
+      "main": [
+        [
+          {
+            "node": "Append to Invoices",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Flag for review",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append to Invoices": {
+      "main": [
+        [
+          {
+            "node": "Reply saved",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Flag for review": {
+      "main": [
+        [
+          {
+            "node": "Reply needs review",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

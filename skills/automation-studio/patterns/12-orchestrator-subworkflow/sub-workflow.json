@@ -1,0 +1,91 @@
+{
+  "id": "score-customer",
+  "name": "Score customer (sub-workflow)",
+  "nodes": [
+    {
+      "id": "0883064c-10dd-4a80-8fac-2de1f06bd7f3",
+      "name": "When called",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        100,
+        300
+      ],
+      "parameters": {
+        "inputSource": "workflowInputs",
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "customer_id",
+              "type": "number"
+            },
+            {
+              "name": "email",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "e6b87af1-026c-4ccd-a90b-81401b31af64",
+      "name": "Get carts",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        300,
+        300
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "=https://dummyjson.com/carts/user/{{ $json.customer_id }}",
+        "options": {
+          "timeout": 20000
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3
+    },
+    {
+      "id": "56b0d77d-661e-4940-9ea7-e2a209ee57f6",
+      "name": "Score",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        500,
+        300
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "\nconst input = $('When called').first().json;\nconst carts = $input.first().json.carts || [];\nconst spent = carts.reduce((s, c) => s + (c.discountedTotal || c.total || 0), 0);\nconst tier = spent >= 5000 ? 'gold' : spent >= 1000 ? 'silver' : spent > 0 ? 'bronze' : 'new';\nreturn [{ json: { customer_id: input.customer_id, email: input.email, carts: carts.length, spent: Math.round(spent * 100) / 100, tier } }];"
+      }
+    }
+  ],
+  "connections": {
+    "When called": {
+      "main": [
+        [
+          {
+            "node": "Get carts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get carts": {
+      "main": [
+        [
+          {
+            "node": "Score",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

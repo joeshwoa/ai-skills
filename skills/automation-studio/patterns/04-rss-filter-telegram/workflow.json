@@ -1,0 +1,190 @@
+{
+  "id": "rss-filter-telegram",
+  "name": "RSS → keywords → new only → Telegram",
+  "nodes": [
+    {
+      "id": "e8b1023f-6e2e-47ae-858b-bf61189a58d4",
+      "name": "Every hour",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        100,
+        300
+      ],
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "3ce9ab7b-8628-4a28-8cb7-0afdd3c9cce3",
+      "name": "Read feed",
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.2,
+      "position": [
+        300,
+        300
+      ],
+      "parameters": {
+        "url": "https://hnrss.org/frontpage",
+        "options": {}
+      },
+      "retryOnFail": true,
+      "maxTries": 2
+    },
+    {
+      "id": "7d0c3876-6c3f-4cbd-a248-46ee96f828d1",
+      "name": "Matches keywords",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.3,
+      "position": [
+        500,
+        300
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "k",
+              "leftValue": "={{ $json.title }}",
+              "rightValue": "\\b(ai|llm|n8n|automation|flutter)\\b",
+              "operator": {
+                "type": "string",
+                "operation": "regex"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {
+          "ignoreCase": true
+        }
+      }
+    },
+    {
+      "id": "f40d76f6-a14f-4377-98a5-17addce90f91",
+      "name": "Only new posts",
+      "type": "n8n-nodes-base.removeDuplicates",
+      "typeVersion": 2,
+      "position": [
+        700,
+        300
+      ],
+      "parameters": {
+        "operation": "removeItemsSeenInPreviousExecutions",
+        "logic": "removeItemsWithAlreadySeenKeyValues",
+        "dedupeValue": "={{ $json.link }}",
+        "options": {
+          "historySize": 2000
+        }
+      }
+    },
+    {
+      "id": "799d1752-ddd4-4786-949c-dc8113ee47e2",
+      "name": "Max 5",
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        900,
+        300
+      ],
+      "parameters": {
+        "maxItems": 5
+      }
+    },
+    {
+      "id": "971d4247-96b7-44ea-840e-e98e08f60fa7",
+      "name": "Send to Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1100,
+        300
+      ],
+      "parameters": {
+        "resource": "message",
+        "operation": "sendMessage",
+        "chatId": "={{ $env.TELEGRAM_CHAT_ID }}",
+        "text": "=<b>{{ $json.title }}</b>\n{{ $json.link }}",
+        "additionalFields": {
+          "parse_mode": "HTML",
+          "disable_web_page_preview": false,
+          "appendAttribution": false
+        }
+      },
+      "webhookId": "3f0b7c83-fb1a-48d3-9757-281d9654885c"
+    }
+  ],
+  "connections": {
+    "Every hour": {
+      "main": [
+        [
+          {
+            "node": "Read feed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read feed": {
+      "main": [
+        [
+          {
+            "node": "Matches keywords",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Matches keywords": {
+      "main": [
+        [
+          {
+            "node": "Only new posts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Only new posts": {
+      "main": [
+        [
+          {
+            "node": "Max 5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Max 5": {
+      "main": [
+        [
+          {
+            "node": "Send to Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

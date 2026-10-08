@@ -81,6 +81,14 @@ adapter around.
   design engine: themes + brand kits, Arabic typography, contrast-safe
   tokens, stock photos/icons (via stock-library), generated art, themed
   charts, previews and contact sheets for visual QA.
+- **[automation-studio](skills/automation-studio/SKILL.md)** — an automation
+  agency, n8n first: process map + diagrams (PNG/PDF, interactive HTML, Mermaid,
+  Excalidraw), workflows written with n8n's own SDK and validated against its
+  schemas, every case tested in a real local n8n, credentials walkthroughs,
+  deploy/activate/monitor through the API (local Mac, self-hosted or n8n Cloud),
+  12 tested patterns (webhooks, schedules, pagination, batching, error alerts,
+  idempotency, AI agents, document AI, human approval, sub-workflows), and
+  converters to Node-RED, Make, Zapier, Power Automate, Pipedream, Activepieces.
 - **[premium-3d-models](skills/premium-3d-models/SKILL.md)** — real,
   parametric 3D models (.glb + optional .stl/.obj) via CSG (trimesh +
   manifold3d booleans), for Flutter (model_viewer_plus), web/React

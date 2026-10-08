@@ -1,0 +1,113 @@
+{
+  "id": "error-alerts",
+  "name": "Error alerts",
+  "nodes": [
+    {
+      "id": "ac97d256-ec51-4b46-8ac6-cbe52cf8adc2",
+      "name": "On workflow error",
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [
+        100,
+        300
+      ],
+      "parameters": {}
+    },
+    {
+      "id": "e7ecea05-86f2-4a35-a9df-a554abcf73e4",
+      "name": "Format alert",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        300,
+        300
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "\nconst e = $input.first().json;\nconst wf = e.workflow || {};\nconst ex = e.execution || {};\nconst err = ex.error || e.trigger?.error || {};\nconst node = ex.lastNodeExecuted || err.node?.name || 'trigger';\nconst msg = (err.message || 'Unknown error').slice(0, 500);\nconst when = new Date().toISOString().replace('T', ' ').slice(0, 16) + ' UTC';\nconst severity = /401|403|credential|auth/i.test(msg) ? 'AUTH' : /timeout|ECONN|ETIMEDOUT|429|rate/i.test(msg) ? 'TRANSIENT' : 'BUG';\nreturn [{ json: {\n  severity, workflow: wf.name || wf.id, node, message: msg, url: ex.url || null, mode: ex.mode || null,\n  text: [`🚨 ${severity} — ${wf.name || wf.id}`, `Node: ${node}`, `Error: ${msg}`, ex.url ? `Open: ${ex.url}` : '', when]\n        .filter(Boolean).join('\\n'),\n} }];"
+      }
+    },
+    {
+      "id": "766517ac-1bb7-4b3b-8aec-990cc50c1f75",
+      "name": "Alert on Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        500,
+        300
+      ],
+      "parameters": {
+        "resource": "message",
+        "operation": "sendMessage",
+        "chatId": "={{ $env.ALERT_TELEGRAM_CHAT_ID }}",
+        "text": "={{ $json.text }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "onError": "continueRegularOutput",
+      "webhookId": "d29125d8-d653-4e89-964b-fe08e6f9acb7"
+    },
+    {
+      "id": "c6634f35-0b4d-4d4f-b94a-cd64cbeff876",
+      "name": "Alert by email",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        700,
+        300
+      ],
+      "parameters": {
+        "resource": "message",
+        "operation": "send",
+        "sendTo": "ops@example.com",
+        "subject": "=[n8n {{ $(\"Format alert\").item.json.severity }}] {{ $(\"Format alert\").item.json.workflow }} failed",
+        "emailType": "text",
+        "message": "={{ $(\"Format alert\").item.json.text }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "onError": "continueRegularOutput",
+      "webhookId": "0a037cd3-4cc0-4997-a94c-67248a7db650"
+    }
+  ],
+  "connections": {
+    "On workflow error": {
+      "main": [
+        [
+          {
+            "node": "Format alert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format alert": {
+      "main": [
+        [
+          {
+            "node": "Alert on Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Alert on Telegram": {
+      "main": [
+        [
+          {
+            "node": "Alert by email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

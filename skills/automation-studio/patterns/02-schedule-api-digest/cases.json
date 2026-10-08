@@ -1,0 +1,17 @@
+{"cases": [
+ {"name": "forecast is summarised and emailed",
+  "mocks": {
+    "Get forecast": [{"daily": {"time": ["2026-10-08", "2026-10-09", "2026-10-10"],
+       "temperature_2m_max": [33.4, 35.2, 31.0], "temperature_2m_min": [21.1, 22.0, 20.4],
+       "precipitation_probability_max": [0, 55, 10]}}],
+    "Email digest": [{"id": "msg_1", "labelIds": ["SENT"]}]},
+  "expect": {"nodes": {
+    "Build digest": {"items": 1, "json": {"subject": "Cairo weather — 2026-10-08", "hot_days": 1}, "contains": "Take an umbrella"},
+    "Email digest": {"items": 1}}}},
+ {"name": "bad API response fails loudly",
+  "mocks": {"Get forecast": [{"error": "rate limited"}]},
+  "expect": {"status": "error", "nodes": {"Build digest": {"error": "Unexpected API response"}, "Email digest": {"ran": false}}}},
+ {"name": "live call to the real API (network)", "live": ["Get forecast"],
+  "mocks": {"Email digest": [{"id": "msg_2"}]},
+  "expect": {"nodes": {"Get forecast": {"items": 1}, "Build digest": {"contains": "Cairo, next 3 days"}}}}
+]}

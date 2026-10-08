@@ -1,0 +1,85 @@
+{
+ "cases": [
+  {
+   "name": "5 customers scored via the sub-workflow, report built",
+   "mocks": {
+    "List customers": [
+     {
+      "users": [
+       {
+        "id": 1,
+        "email": "u1@x.com"
+       },
+       {
+        "id": 2,
+        "email": "u2@x.com"
+       },
+       {
+        "id": 3,
+        "email": "u3@x.com"
+       },
+       {
+        "id": 4,
+        "email": "u4@x.com"
+       },
+       {
+        "id": 5,
+        "email": "u5@x.com"
+       }
+      ]
+     }
+    ],
+    "Score customer": [
+     {
+      "customer_id": 1,
+      "email": "u1@x.com",
+      "spent": 6200,
+      "tier": "gold"
+     },
+     {
+      "customer_id": 2,
+      "email": "u2@x.com",
+      "spent": 1500,
+      "tier": "silver"
+     },
+     {
+      "customer_id": 3,
+      "email": "u3@x.com",
+      "spent": 90,
+      "tier": "bronze"
+     },
+     {
+      "customer_id": 4,
+      "email": "u4@x.com",
+      "spent": 0,
+      "tier": "new"
+     },
+     {
+      "error": "timeout"
+     }
+    ],
+    "Post report": [
+     {
+      "ok": true
+     }
+    ]
+   },
+   "expect": {
+    "nodes": {
+     "One per customer": {
+      "items": 5
+     },
+     "Build report": {
+      "json": {
+       "scored": 4,
+       "failed": 1,
+       "gold": 1,
+       "silver": 1
+      },
+      "contains": "u1@x.com (6200)"
+     }
+    }
+   }
+  }
+ ]
+}

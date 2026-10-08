@@ -1,0 +1,16 @@
+{"cases": [
+ {"name": "two pages become 3 clean rows",
+  "mocks": {
+    "Fetch all pages": [
+      {"products": [{"id": 1, "title": " Phone ", "price": 9.99, "stock": 4, "category": "tech"},
+                    {"id": 2, "title": "Mug", "price": 3.5, "stock": 0, "category": "home"}], "total": 3, "skip": 0, "limit": 2},
+      {"products": [{"id": 3, "title": "Lamp", "price": 12, "stock": 1, "category": "home"}], "total": 3, "skip": 2, "limit": 2}],
+    "Upsert products": [{"id": 1}, {"id": 2}, {"id": 3}]},
+  "expect": {"nodes": {
+    "One item per product": {"items": 3},
+    "Map to table row": {"items": 3, "json": {"id": 1, "title": "Phone", "price_cents": 999, "in_stock": true}},
+    "Upsert products": {"items": 3}}}},
+ {"name": "live pagination fetches every page (network)", "live": ["Fetch all pages"],
+  "mocks": {"Upsert products": [{"ok": true}]},
+  "expect": {"nodes": {"Fetch all pages": {"min_items": 4}, "One item per product": {"min_items": 150}}}}
+]}

@@ -1,0 +1,147 @@
+{
+  "id": "schedule-api-digest",
+  "name": "Daily API digest → email",
+  "nodes": [
+    {
+      "id": "eaa40a62-0a6b-494d-8879-b648822a8e4f",
+      "name": "Every morning 07:00",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        100,
+        300
+      ],
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "days",
+              "daysInterval": 1,
+              "triggerAtHour": 7,
+              "triggerAtMinute": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "2f691f44-acf7-4850-a1f9-9f70c41b2a04",
+      "name": "Get forecast",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        300,
+        300
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "https://api.open-meteo.com/v1/forecast",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "latitude",
+              "value": "30.04"
+            },
+            {
+              "name": "longitude",
+              "value": "31.24"
+            },
+            {
+              "name": "daily",
+              "value": "temperature_2m_max,temperature_2m_min,precipitation_probability_max"
+            },
+            {
+              "name": "timezone",
+              "value": "Africa/Cairo"
+            },
+            {
+              "name": "forecast_days",
+              "value": "3"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 20000
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 3000
+    },
+    {
+      "id": "bb868693-579f-46c9-9c15-2811e6594116",
+      "name": "Build digest",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        500,
+        300
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "\nconst d = $input.first().json.daily;\nif (!d || !Array.isArray(d.time)) throw new Error('Unexpected API response: no daily data');\nconst rows = d.time.map((day, i) => ({\n  day,\n  max: Math.round(d.temperature_2m_max[i]),\n  min: Math.round(d.temperature_2m_min[i]),\n  rain: d.precipitation_probability_max[i] ?? 0,\n}));\nconst lines = rows.map(r => `${r.day}: ${r.min}–${r.max}°C, rain ${r.rain}%`);\nconst warn = rows.some(r => r.rain >= 50) ? 'Take an umbrella this week.' : 'No rain expected.';\nreturn [{ json: {\n  subject: `Cairo weather — ${rows[0].day}`,\n  text: ['Cairo, next 3 days', ...lines, '', warn].join('\\n'),\n  hot_days: rows.filter(r => r.max >= 35).length,\n} }];"
+      }
+    },
+    {
+      "id": "4bc6f642-205f-41b8-bac9-9bfb84aa7f87",
+      "name": "Email digest",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        700,
+        300
+      ],
+      "parameters": {
+        "resource": "message",
+        "operation": "send",
+        "sendTo": "me@example.com",
+        "subject": "={{ $json.subject }}",
+        "emailType": "text",
+        "message": "={{ $json.text }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "webhookId": "f9cb7dcd-2471-4c8b-8bbe-d0f062384801"
+    }
+  ],
+  "connections": {
+    "Every morning 07:00": {
+      "main": [
+        [
+          {
+            "node": "Get forecast",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get forecast": {
+      "main": [
+        [
+          {
+            "node": "Build digest",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build digest": {
+      "main": [
+        [
+          {
+            "node": "Email digest",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}
