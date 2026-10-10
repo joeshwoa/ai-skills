@@ -1,6 +1,6 @@
 ---
 name: video-post-studio
-description: A complete post-production house the AI runs itself on free tools (the user's studio-mcp) — editing existing footage into a finished piece AND making new videos from a brief, stock and motion graphics. Full team: post producer, editor, assistant editor, story/transcript editor, colorist, sound editor and mixer, music supervisor, graphics, captions, QC and delivery. Scene detection and take selection, Descript-style transcript editing (Arabic and English filler removal), cut-to-beat montages, J/L cuts, b-roll from own footage or free stock, colour match and grading (.cube LUTs), ducked music, captions, broadcast/social QC, platform exports, and editable masters (Kdenlive, FCPXML/OTIO/EDL for DaVinci Resolve, Premiere, Final Cut). Use for any request to edit, cut, montage, assemble, recut, colour, mix, caption, reframe, clean up or deliver a video — or to make a reel, ad, promo, YouTube video or documentary from footage, a script or a voiceover — even when no tool is named.
+description: A complete post-production house the AI runs itself (the user's studio-mcp): edit footage into a finished piece or make new videos from a brief, stock and motion graphics. Full team: producer, editor, assistant/online editor, story editor, colorist, sound, music, graphics, captions, QC, delivery. Scene detection, take selection, transcript editing (Arabic/English fillers), cut to the beat, J/L cuts, b-roll, grading (.cube), ducked music, captions, QC, platform exports — and with EVERY video a fully editable project for every pro app (Premiere Pro, After Effects with live text graphics, DaVinci Resolve incl. Fusion titles and LUTs, Final Cut Pro, CapCut, Avid/Pro Tools, Kdenlive) so the user can change anything and export again. Use for any request to edit, cut, montage, colour, mix, caption, reframe or deliver a video, or make a reel, ad, promo, YouTube video or documentary, even when no tool is named.
 ---
 
 # Video Post Studio
@@ -43,7 +43,8 @@ Full tool reference: `references/tools.md`. Engine notes and limits: `references
 | Graphics (motion) | titles, lower thirds, CTAs, captions styling | motion-design-studio skill (`motion_*` tools, overlays in the timeline) |
 | Captions & localisation | captions, SRT, safe zones, other languages | `video_captions`, `audio_transcribe`; translation → premium-subtitle-localization |
 | Finishing / QC | technical QC before delivery | `video_qc`, `video_export` |
-| Delivery & archive | platform exports, editable masters, credits | `video_export`, `video_export_interchange`, `stock_credits` |
+| Online editor / conform | the editable project package for every app: tracks, native graphics, LUTs, fonts, stems, guide; opens it in the user's apps | `video_edit` (projects), `video_project_apps`, `video_project_open`, `video_project_relink` |
+| Delivery & archive | platform exports, the project package, credits | `video_export`, `stock_credits` |
 
 If the AI tool can run sub-agents, run ingest/logging and stock research in parallel, and let a
 separate agent do the final QC review (it didn't make the cut). Otherwise play the roles in order.
@@ -105,10 +106,44 @@ flashes (3 Hz rule), clipping, loudness/true peak, silence gaps, A/V length, res
 letterboxing, caption safe zones, size limits. Watch the contact sheet end to end. FAIL → fix → re-QC.
 
 **9. Deliver.** `video_export` per platform (reels/tiktok/shorts/youtube/…), `.srt`, thumbnail
-(`video_thumbnail` + design), `stock_credits` → paste `credits.txt` into the description, editable
-masters: `.kdenlive` (always written by `video_edit`) and `video_export_interchange`
-(FCPXML/OTIO/EDL + HOW-TO-OPEN.md) when the client edits in Resolve/Premiere/FCP. Delivery note:
-what's included, where, licences, what's approximate.
+(`video_thumbnail` + design), `stock_credits` → paste `credits.txt` into the description, and the
+**project package** (below) — always, unless the user says no. Delivery note: what's included,
+where, licences, what's approximate.
+
+## Editable projects for every app (the online editor's job — every delivery)
+Every `video_edit` render (and every tool that renders an edit: auto edit, transcript edit, silence
+removal, beats…) also writes **`<name> — Project/`** next to the MP4, ONE portable folder:
+`Exports/` (master + stems: dialogue, music, mix) · `Media/` (all footage, stills, audio, rendered and
+native graphics, LUTs, captions .srt/.vtt/.ass) · `Fonts/` · `Projects/<App>/` · `OPEN-IN.md` · `relink.py`.
+
+| App | What the user gets | How it opens |
+|---|---|---|
+| Premiere Pro | every track, cuts, transitions, speed, position/scale + Ken Burns keyframes, opacity, audio levels + ducking keyframes, J/L cuts, rendered graphics; captions as a native caption track from the .srt; MOGRTs when AE built them | File › Import › `.xml` |
+| After Effects | the WHOLE edit as a native comp + every graphic as a precomp of **live text and shape layers**, live captions, transitions rebuilt (dissolves, dips, Linear Wipe, push), audio levels; saves the `.aep` | File › Scripts › Run Script File › `build_project.jsx` |
+| DaVinci Resolve | Edit (FCPXML timeline), Fusion (each graphic as a **Fusion Title with live Text+**), Color (a .cube per graded clip + table), Fairlight (levels + stems), subtitles; Studio: `build_resolve.py` does it all (scripting is Studio-only since 21.1; Studio 21.1 also has a built-in MCP) | File › Import › Timeline |
+| Final Cut Pro | storyline + connected clips, transitions, transforms with keyframes, volume keyframes, **every graphic text and caption as an editable Basic Title** over a shapes plate (FCPXML 1.10, DTD-validated) | File › Import › XML |
+| CapCut desktop | a real draft: main track with dissolves and framing keyframes, overlays, **live text** for graphics and captions, music with volume keyframes | `Add to CapCut.command` (CapCut closed) |
+| Avid / Pro Tools / Logic | AAF (picture + audio tracks, dissolves) | File › Import |
+| Kdenlive / Shotcut | `.kdenlive` / `.mlt` (render-checked with melt) | open |
+| Anything else | OTIO, CMX3600 EDL | Import › Timeline |
+
+Rules:
+- Native graphics are read back from the motion design itself (same fonts, sizes, colours, positions)
+  and compared to the render (`Media/Graphics/Native/check-*.png` — LOOK at them). Stateful animations
+  (CTA clicks, counters, countdowns, logo reveals) stay as the rendered alpha clip — say so.
+- Every app's file is checked before delivery (XML/DTD validation, OTIO/AAF read-back, an After Effects
+  dry run against a mock AE, CapCut material checks, Fusion syntax). Any ⚠ in OPEN-IN.md is fixed or
+  explained to the user — never hidden.
+- When the studio runs in a VM/cloud and the user's apps see the files elsewhere, pass
+  `host_map: "<path here>=<path on the Mac>"` so the projects point at the right place; after moving the
+  folder the user runs `python3 relink.py` (or `video_project_relink`).
+- On the Mac (studio-mcp running locally): `video_project_apps` → what is installed;
+  `video_project_open package=… app=premiere|aftereffects|fcpx|resolve|capcut|kdenlive` builds the
+  native project in that app (AE saves the .aep itself). Ask before taking over the user's screen;
+  never during a call/screen-share.
+- `projects: "none"` only when the user asks for the MP4 alone; `projects: "premiere,aftereffects"` to
+  limit; `mogrts: true` makes After Effects export each graphic as a .mogrt for Premiere.
+Details, limits and per-app notes: `references/project-packages.md`.
 
 ## Quality bar (non-negotiable)
 - LOOK at every preview (shot sheets, storyboard, contact sheet, Kdenlive check, QC table) before

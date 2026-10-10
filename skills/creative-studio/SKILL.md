@@ -17,7 +17,7 @@ where a free desktop app exists it also writes that app's editable file so a hum
 | Graphic designer | `design` | `design_create`, `design_carousel`, `design_resize`, `design_catalog`, `design_check` |
 | Photo editor (Photoshop) | `photo` | `photo_retouch`, `photo_look`, `photo_remove_background`, `photo_upscale`, `photo_compose_layers` (PSD+XCF), `photo_mockup` |
 | Illustrator | `vector` | `vector_compose`, `vector_trace`, `vector_export` (PDF/EPS/icon sets), `vector_text_to_outlines`, `vector_boolean` |
-| Video editor (Premiere / Resolve) | `video` | `video_edit` (timeline → MP4 + .kdenlive), `video_auto_edit`, `video_transcript_edit`, `video_cut_to_beats`, `video_color_match`, `video_qc`, `video_export_interchange` — full workflow: **video-post-studio** skill |
+| Video editor (Premiere / Resolve) | `video` | `video_edit` (timeline → MP4 + .kdenlive), `video_auto_edit`, `video_transcript_edit`, `video_cut_to_beats`, `video_color_match`, `video_qc`, every edit also as an editable project for Premiere/After Effects/Resolve/Final Cut/CapCut/Avid — full workflow: **video-post-studio** skill |
 | Motion designer (After Effects / C4D) | `motion` | `motion_plan`, `motion_compose` (+ pro templates), `motion_lottie`, `motion_3d`, `motion_blender`, `motion_title_card`, `motion_logo_reveal` — full workflow: **motion-design-studio** skill |
 | Stock researcher / clearance | `stock` | `stock_search`, `stock_download`, `stock_credits`, `stock_icon`, `stock_sources` — full workflow: **stock-library** skill |
 | Sound engineer (Audition) | `audio` | `audio_voiceover`, `audio_transcribe`, `audio_clean`, `audio_master`, `audio_mix`, `audio_music`, `audio_sfx` |

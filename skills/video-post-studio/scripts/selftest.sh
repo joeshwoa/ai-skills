@@ -15,6 +15,7 @@ n=$(C video_scene_detect "{\"path\":\"$T/shots.mp4\"}" | J "len(d['data'].get('s
 b=$(C video_beats "{\"path\":\"$T/click120.wav\"}" | J "round(d['data'].get('tempo',0))")
 [ "${b:-0}" -ge 118 ] && [ "${b:-0}" -le 122 ] && ok "beat detection ($b BPM)" || bad "beats ($b)"
 C video_edit "{\"timeline\":{\"size\":\"640x360\",\"clips\":[{\"src\":\"$T/shots.mp4\",\"in\":0,\"out\":3},{\"src\":\"$T/shots.mp4\",\"in\":3.5,\"out\":6,\"transition\":\"dissolve\"}]},\"name\":\"st\"}" | J "any(f.endswith('.kdenlive') for f in d['files'])" | grep -q True && ok "timeline edit → MP4 + .kdenlive" || bad "video_edit"
+C video_edit "{\"timeline\":{\"size\":\"640x360\",\"clips\":[{\"src\":\"$T/shots.mp4\",\"in\":0,\"out\":3},{\"src\":\"$T/shots.mp4\",\"in\":3.5,\"out\":6,\"transition\":\"dissolve\",\"grade\":\"teal_orange\"}]},\"name\":\"pkg\"}" | J "all(v == [] for v in d['data']['project_package']['checks'].values())" | grep -q True && ok "project package: Premiere, After Effects, Resolve, Final Cut, CapCut, Avid, Kdenlive, OTIO, EDL — all checks pass" || bad "project package"
 mp4=$(ls -t "$STUDIO_HOME"/projects/*/video/st*.mp4 2>/dev/null | head -1)
 [ -n "$mp4" ] && { C video_qc "{\"path\":\"$mp4\"}" | J "d['ok']" | grep -q True && ok "QC report" || bad "video_qc"; }
 C video_export_interchange "{\"timeline\":{\"size\":\"640x360\",\"clips\":[{\"src\":\"$T/shots.mp4\",\"in\":0,\"out\":3}]},\"format\":\"all\"}" | J "d['ok']" | grep -q True && ok "FCPXML/OTIO/EDL export" || bad "interchange"

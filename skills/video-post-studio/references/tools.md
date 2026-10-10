@@ -2,7 +2,7 @@
 
 Generated from studio-mcp (`call.sh help <tool>` shows the same). Flags: **N** internet · **$** may spend (needs OK) · **I** installs (needs OK).
 
-## video (31)
+## video (34)
 
 ### `video_auto_color`
 
@@ -15,7 +15,7 @@ look on top use video_grade (or a timeline grade) after this.
 
 Arguments: `path: str`; `strength: float = 1.0`; `white_balance: bool = True`; `exposure: bool = True`; `contrast: bool = True`; `samples: int = 8`; `apply: bool = True`; `project: str = ''`; `out: str = ''`
 
-### `video_auto_edit` [N]
+### `video_auto_edit` N
 
 Make a video from a brief — the whole edit planned and assembled automatically, then rendered AND
 left fully editable. brief = {script: "text to voice" | voiceover: "vo.wav" | talking_head: "cam.mp4",
@@ -120,7 +120,15 @@ title|cta|kinetic|counter|motion|shape_wipe|overlay|image|broll|pip, "at", "dura
 brand: brand kit slug for titles/lower thirds/captions. Returns MP4, .kdenlive, .srt/.ass when
 captioned, a contact sheet and the melt check preview — LOOK at both.
 
-Arguments: `timeline: dict | str`; `brand: str = ''`; `kdenlive: bool = True`; `project: str = ''`; `out: str = ''`; `name: str = 'edit'`
+projects: the same edit as EDITABLE projects in one portable folder "<name> — Project/" next to the
+MP4 — all (default) | none | comma list of premiere, aftereffects, resolve, fcpx, capcut, avid, kdenlive,
+otio, edl. Graphics are rebuilt as live text/shape layers, captions as live text, grades as .cube LUTs,
+plus stems, fonts and OPEN-IN.md. project_media: copy (default, hard-links on the same disk) |
+reference. host_map: "local_prefix=host_prefix" when the studio runs in a VM/container and the apps
+see the files elsewhere (e.g. "/sessions/x/mnt/SSD=/Volumes/PortableSSD"). mogrts: the After Effects
+builder also exports each graphic as a .mogrt for Premiere.
+
+Arguments: `timeline: dict | str`; `brand: str = ''`; `kdenlive: bool = True`; `project: str = ''`; `out: str = ''`; `name: str = 'edit'`; `projects: str = 'all'`; `project_media: str = 'copy'`; `host_map: str = ''`; `mogrts: bool = False`
 
 ### `video_export`
 
@@ -199,6 +207,35 @@ Inspect a video before editing: duration, resolution, fps, codecs, rotation, alp
 Returns data.info with everything ffprobe knows that matters for editing.
 
 Arguments: `path: str`; `sheet: bool = True`; `project: str = ''`; `out: str = ''`
+
+### `video_project_apps`
+
+Which professional editing/motion apps are installed on this Mac (Premiere, After Effects, Final Cut,
+Resolve free/Studio, CapCut, Kdenlive, Shotcut) — so the AI knows which projects it can open for you.
+
+Arguments: 
+
+### `video_project_open`
+
+Open a project package (the '<name> — Project' folder video_edit writes) in one app on this Mac and
+build the native project there:
+  premiere      opens Premiere with the edit's XML (all tracks, transitions, motion, levels) — save as .prproj
+  aftereffects  runs Projects/AfterEffects/build_project.jsx inside After Effects → saves the native .aep
+                (needs AE › Settings › Scripting & Expressions › 'Allow Scripts to Write Files')
+  fcpx          imports the FCPXML into Final Cut Pro (library + project)
+  resolve       Resolve Studio: runs build_resolve.py (timeline, LUTs, subtitles); free: opens Resolve and the guide
+  capcut        adds the draft to CapCut's project list (CapCut must be closed) and opens CapCut
+  kdenlive | shotcut  opens the .kdenlive / .mlt
+Nothing in the user's existing projects is changed.
+
+Arguments: `package: str`; `app: str`; `save: bool = True`
+
+### `video_project_relink`
+
+After moving a project package (another disk, another Mac): rewrite the media and font paths inside
+every project file to the folder's new location.
+
+Arguments: `package: str`
 
 ### `video_qc`
 
@@ -410,7 +447,7 @@ result — useful for chapters/captions).
 
 Arguments: `paths: list[str]`; `crossfade: float = 0.0`; `gap: float = 0.0`; `format: str = 'wav'`; `project: str = ''`; `out: str = ''`
 
-### `audio_library_search` [N]
+### `audio_library_search` N
 
 Search FREE-licensed recorded music and sound effects and optionally download the top results
 with an attribution/licence file. kind: any | music | sfx. source: auto (Freesound if a key is set,
@@ -513,7 +550,7 @@ edit list mapping — use it to cut matching video.
 
 Arguments: `path: str`; `max_pause: float = 0.45`; `threshold_db: float = -42.0`; `keep_edges: float = 0.15`; `format: str = 'wav'`; `project: str = ''`; `out: str = ''`
 
-### `audio_voiceover` [N]
+### `audio_voiceover` N
 
 Text → natural voiceover (Egyptian/Saudi/Gulf Arabic, many English accents) with captions
 aligned to the voice. Long scripts are chunked by sentence/paragraph, synthesised, stitched with
@@ -530,7 +567,7 @@ Tip: write numbers/abbreviations the way they should be SAID (Egyptian: 'تلا�
 
 Arguments: `text: str = ''`; `script_path: str = ''`; `voice: str = 'auto'`; `rate: str = '+0%'`; `pitch: str = '+0Hz'`; `volume: str = '+0%'`; `engine: str = 'auto'`; `pause_ms: int = 350`; `loudness: float = -16.0`; `format: str = 'wav'`; `max_chars_per_line: int = 42`; `allow_download: bool = False`; `project: str = ''`; `out: str = ''`
 
-### `audio_voices` [N]
+### `audio_voices` N
 
 Voice catalogue for audio_voiceover: lists Edge neural voices (online, free) and/or Piper voices
 (offline) for a language ('ar', 'ar-EG', 'en', 'en-GB', 'all'), with gender, accent and personality.

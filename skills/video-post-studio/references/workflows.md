@@ -24,7 +24,7 @@ file). Always pass one `project` per job; LOOK at every preview.
 3. Timeline: A-roll clips with `l_cut`/`j_cut`, b-roll overlays, lower thirds at each new speaker,
    chapter titles, music bed `duck: true`, `captions: {"style": "clean"}`, `loudness: "youtube"`.
 4. `video_edit` → `video_qc platform=youtube` → `video_export youtube` + `video_thumbnail`.
-5. Client edits in Resolve? `video_export_interchange {"timeline": "timeline.json", "format": "all"}`.
+5. Client edits in Premiere / After Effects / Resolve / Final Cut / CapCut? Already done: `video_edit` writes `<name> — Project/` with every app (see OPEN-IN.md); on the Mac `video_project_open {"package": "…", "app": "premiere"}`.
 
 ## MAKE 1 — reel/ad from a script (no footage)
 Write the brief to a file (Arabic scripts need English `broll_queries`, one per sentence):

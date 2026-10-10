@@ -77,5 +77,5 @@ film_fuji 0.6").
 
 ## Delivery & archive
 - `video_export` per platform; thumbnail; `.srt`; `stock_credits` → credits.txt in the description.
-- Editable masters: `.kdenlive`; FCPXML/OTIO/EDL via `video_export_interchange` for Resolve/Premiere/FCP.
+- Editable project package with every delivery (`<name> — Project/`: Premiere, After Effects, Resolve, Final Cut, CapCut, Avid, Kdenlive) — read its OPEN-IN.md checks and LOOK at `Projects/tracks.png` + the graphics check images; `references/project-packages.md`.
 - Everything for the job under `STUDIO_HOME/projects/<project>/` — tell the client where.
