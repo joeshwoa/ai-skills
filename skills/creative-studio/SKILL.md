@@ -103,6 +103,10 @@ Put Arabic or long arguments in a JSON file and pass `@file` (no shell-quoting a
   user) should choose and refine; check trademarks. Offline music is a procedural bed, not a
   composer. Say so when it matters.
 
+## Motion graphics variety and safety
+Motion/edit pieces use `look=` identities (`motion_looks`), a presence guard (speaker stays on screen, face-aware
+PiP crops) and a layout audit (no text touching edges). Details: `../video-post-studio/references/looks-and-presence.md`.
+
 ## Related skills (pick the right one)
 
 - **video-post-studio** — the full post-production team (edit footage, make videos from a brief,

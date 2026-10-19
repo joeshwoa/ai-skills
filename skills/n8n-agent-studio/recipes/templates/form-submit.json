@@ -1,0 +1,12 @@
+{"name": "form-submit", "description": "TEMPLATE: fill a form and STOP before the irreversible click unless vars.confirm is true (approval gate lives in n8n: Wait node / IF).",
+ "steps": [
+  {"goto": "{{url}}"},
+  {"fill": true, "selector": "REPLACE: #name", "value": "{{name}}"},
+  {"fill": true, "selector": "REPLACE: #email", "value": "{{email}}"},
+  {"screenshot": "before-submit"},
+  {"if": "REPLACE: selector that only exists when confirm=yes (set by n8n after approval)", "then": [
+    {"click": true, "selector": "REPLACE: button[type=submit]", "expect_navigation": true},
+    {"assert": "REPLACE: .success", "message": "submit did not confirm"},
+    {"text": "REPLACE: .confirmation-id", "name": "confirmation"}
+  ]}
+ ]}

@@ -1,0 +1,9 @@
+{"name": "scrape-list", "description": "TEMPLATE: open a listing, extract rows (repeating selector) across pages.",
+ "steps": [
+  {"goto": "{{url}}"},
+  {"wait": "REPLACE: row selector, e.g. .item"},
+  {"paginate": true, "next": "REPLACE: next-page selector, e.g. a.next", "max": 10, "steps": [
+    {"extract": true, "name": "items", "selector": "REPLACE: .item", "append": true, "required": true,
+     "fields": {"title": "REPLACE: .title", "price": "REPLACE: .price", "link": "a@href"}}
+  ]}
+ ]}

@@ -88,6 +88,15 @@ per frame; Blender Cycles ≈ 20 s per frame draft. Iterate with `preview: true`
   licence); GSAP is free incl. commercial (not for no-code builders competing with Webflow).
 - LOOK before you show: contact sheet + key frames every render. Say what you checked.
 
+## Looks, presence and precision (read `references/looks-and-presence.md`)
+- Designs must differ video to video: every `motion_*` tool takes `look=<id>|auto|none` (`motion_looks`
+  lists 12 identities; `auto` rotates, never repeating the last 6). One look per video — pass the same `look`
+  to all its pieces. Don't answer "another design" with the same look or layout variant.
+- Graphics never hide the speaker: placed in the free region beside the face with a soft card; full-frame
+  only for logo/title moments (≤ 15 % of the video, ≤ 3.5 s each). PiP/avatar crops are face-aware.
+- Graphics are measured after build (edges, circles/rings, boxes, clipping, overlap). Never deliver with a
+  `LAYOUT ERROR`; fix the copy/size and re-render.
+
 ## Hand-offs
 Scripts/hooks → reels-studio · editing, sound, captions, delivery → video-post-studio · stock
 footage/icons/music → stock-library · brand kit → creative-studio · cinematic AI shots →

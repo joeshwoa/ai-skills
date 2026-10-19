@@ -127,6 +127,11 @@ capability exists in no skill, build it with skill-router's procedure and connec
 rate, hold rate, CTR, CPA/CPL; long-form: CTR on the thumbnail, average view duration, retention
 dips) and log what worked to the brand file's `notes` and a usage report (skill-router Part 1 point 6).
 
+## Visual direction for the edit (read `../video-post-studio/references/looks-and-presence.md`)
+When the script goes to editing, state the look (or `auto`) and the graphics plan: which moments get a graphic,
+where it sits (beside the speaker, not over the face), and which few moments may go full-screen. A reel where
+graphics cover the speaker for most of the video is a failed edit.
+
 ## House style (Neo AI and others)
 `brands/neoai.json` reproduces the team's existing scripts: A4, Cairo, right-aligned, black
 headers, **blue = for the editor** (Visual, SFX, B-roll, on-screen text, supers, notes), **dark red =

@@ -1,0 +1,6 @@
+{"cases": [
+ {"name": "agent answer is returned (model + tools are mocked, wiring is real)",
+  "trigger": {"body": {"task": "status of order 1005?", "start_url": "http://127.0.0.1:7799/orders"}},
+  "mocks": {"Web agent": [{"output": "Order 1005: customer Customer 5, status paid (page /order/1005)"}]},
+  "expect": {"nodes": {"Web agent": {"contains": "Customer 5"}}}}
+]}

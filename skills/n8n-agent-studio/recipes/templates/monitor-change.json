@@ -1,0 +1,6 @@
+{"name": "monitor-change", "description": "TEMPLATE: read one value (price / stock / status) so n8n can compare it with the last run (static data / DB) and alert on change.",
+ "steps": [
+  {"goto": "{{url}}"},
+  {"extract": true, "name": "value", "selector": "REPLACE: .price", "required": true},
+  {"screenshot": "monitor"}
+ ]}

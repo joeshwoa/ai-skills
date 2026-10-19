@@ -1,0 +1,15 @@
+{
+  "name": "orders-scrape",
+  "description": "Log in to the mock portal and scrape every order across all pages (demo recipe; adapt selectors).",
+  "steps": [
+    {"goto": "{{base}}/login"},
+    {"fill": true, "selector": "#user", "value": "{{secret:MOCK_USER}}"},
+    {"fill": true, "selector": "#pass", "value": "{{secret:MOCK_PASS}}"},
+    {"click": true, "selector": "#go", "expect_navigation": true},
+    {"assert": "#orders", "message": "login failed"},
+    {"paginate": true, "next": "#next", "max": 5, "steps": [
+      {"extract": true, "name": "orders", "selector": "tr.order", "append": true,
+       "fields": {"id": ".oid", "customer": ".cust", "total": ".tot", "status": ".st", "url": "a.view@href"}}
+    ]}
+  ]
+}

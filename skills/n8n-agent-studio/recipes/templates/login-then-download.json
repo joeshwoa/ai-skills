@@ -1,0 +1,8 @@
+{"name": "login-then-download", "description": "TEMPLATE: reuse the saved login (nx login <url> --session NAME) and download an export file. If the session expired it asks a human instead of typing a password.",
+ "steps": [
+  {"goto": "{{url}}"},
+  {"if": "REPLACE: login-form selector, e.g. input[type=password]", "then": [
+    {"pause_for_human": true, "message": "Session expired — run: nx login <url> --session NAME, then retry"}
+  ]},
+  {"download": true, "selector": "REPLACE: export button/link", "name": "export.csv", "as": "file"}
+ ]}

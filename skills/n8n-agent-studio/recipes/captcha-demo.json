@@ -1,0 +1,2 @@
+{"name": "captcha-demo", "description": "Demo: hits a page with a captcha and hands over to a human (never solves it).",
+ "steps": [{"goto": "{{base}}/captcha"}, {"pause_for_human": true, "message": "captcha — a person must solve it"}]}

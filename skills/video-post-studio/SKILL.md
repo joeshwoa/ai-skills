@@ -145,6 +145,15 @@ Rules:
   limit; `mogrts: true` makes After Effects export each graphic as a .mogrt for Premiere.
 Details, limits and per-app notes: `references/project-packages.md`.
 
+## Looks and presence (read `references/looks-and-presence.md`)
+- One **look** per edit (`"look": "<id>"` on the timeline or auto; 12 in `motion_looks`) so the graphics match each
+  other and differ from the previous video. Never reuse the last video's look for a new one.
+- The speaker stays visible: speaker ≥ 65 % of the time, no gap > 4 s, full-frame graphics ≤ 15 % and ≤ 3.5 s
+  each; graphics go in the free region beside the face (`placement`), PiP/avatar never tiny and never face-cut
+  (circle only when the head fits). LOOK at `-presence.png` and `data.presence` after every render.
+- Graphics are audited for text touching edges/containers (counters, timers, ring numbers); no delivery with a
+  `LAYOUT ERROR`.
+
 ## Quality bar (non-negotiable)
 - LOOK at every preview (shot sheets, storyboard, contact sheet, Kdenlive check, QC table) before
   showing the client; say what you checked.

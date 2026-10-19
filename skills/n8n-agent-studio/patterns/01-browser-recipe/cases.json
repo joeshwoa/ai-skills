@@ -1,0 +1,15 @@
+{"cases": [
+ {"name": "REAL: n8n -> browserd -> headless Chrome -> mock portal (25 orders over 3 pages)",
+  "trigger": {"body": {"vars": {"base": "http://127.0.0.1:7799"}}},
+  "expect": {"nodes": {"Recipe ok?": {"output": 0, "items": 1},
+    "Rows": {"items": 25, "json": {"id": "1001", "customer": "Customer 1", "status": "paid"}},
+    "Reply 200": {"json": {"ok": true, "count": 25}}}}},
+ {"name": "captcha / 2-step login becomes a polite 202 'needs human', not a crash",
+  "trigger": {"body": {"vars": {}}},
+  "mocks": {"Run recipe in browser": [{"ok": false, "status": "needs_human", "error": "solve the captcha", "shot": "/tmp/x.png"}]},
+  "expect": {"nodes": {"Needs a human?": {"output": 0}, "Reply 202 needs human": {"json": {"status": 202, "response": {"needs_human": true}}}, "Reply 502": {"ran": false}}}},
+ {"name": "selector broke -> 502 with the reason, never a silent empty result",
+  "trigger": {"body": {"vars": {}}},
+  "mocks": {"Run recipe in browser": [{"ok": false, "status": "error", "error": "extract orders: 'tr.order' not found"}]},
+  "expect": {"nodes": {"Reply 502": {"contains": "tr.order"}, "Rows": {"ran": false}}}}
+]}

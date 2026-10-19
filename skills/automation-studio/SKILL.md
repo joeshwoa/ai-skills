@@ -127,3 +127,7 @@ bash scripts/selftest.sh                         # proves the toolkit works on t
 ## References
 `team.md` · `levels-and-patterns.md` · `n8n-building.md` · `testing.md` · `deploy-hosting.md` ·
 `credentials.md` · `platforms.md` · `diagrams.md` · `patterns/README.md`
+
+## Sister skill: n8n-agent-studio
+When the target system has **no API** (supplier portals, dashboards, forms), or the task needs an **AI agent that operates a website**, or n8n should be an **MCP server** for Claude/Cursor, switch to `../n8n-agent-studio/SKILL.md`
+(`nx probe` → `nx ladder` → browser recipes via browserd, agent patterns, hosting local/published). It uses this skill's engine for build/test/deploy; the finished flow comes back here as a normal n8n flow.

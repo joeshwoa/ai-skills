@@ -1,6 +1,6 @@
 {
   "generated_by": "skills/skill-router/scripts/build_manifest.py",
-  "skill_count": 18,
+  "skill_count": 19,
   "skills": [
     {
       "name": "automation-studio",
@@ -41,6 +41,13 @@
       "name": "motion-design-studio",
       "path": "skills/motion-design-studio",
       "description": "A professional motion-graphics studio the AI runs itself on free engines (the user's studio-mcp) — After Effects / Cinema 4D-level work in Arabic and English. Full team: creative director, art director, motion designer/animator, typographer, 3D artist, illustrator, data-viz designer, sound designer and technical director, with an engine router that picks the best engine per job: GSAP compositions (40 animation presets, 12 transitions, camera moves, charts, motion blur), Lottie, three.js real-time 3D, Blender (Cycles/EEVEE), and Remotion when licensed. Kinetic typography, logo animations and stings, title sequences, lower thirds, social promos, app promos, explainer and infographic animation, animated charts, map routes, 3D titles and product turntables, transitions, CTAs and captions, with alpha output for editors. Use for any request to animate, make motion graphics, an intro/outro, a logo animation, a title, an animated post or ad, an explainer animation, 3D text, or \"make it move\" — even when no tool is named.",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "n8n-agent-studio",
+      "path": "skills/n8n-agent-studio",
+      "description": "Specialist for n8n flows and AI agents that must reach things with NO API — it works out HOW to automate any website or app (official node → API → hidden JSON → exports/webhooks → headless Chrome recipes → attach to the user's real Chrome → LLM browser agent → human-in-the-loop), builds the n8n flows itself, tests them on the real n8n engine, and deploys them locally or published. Includes browserd (a safe local browser worker n8n calls over HTTP), a site prober, an access-ladder ranker, recipe templates, n8n AI-Agent and MCP bridge patterns. Use whenever the request is \"automate a site/app that has no API\", \"control a website from n8n\", \"make an agent that uses a web UI\", n8n + Chrome/Playwright/scraping/RPA, n8n as MCP server for Claude/Cursor, or deciding how to connect any app to n8n or to an agent. Complements automation-studio (same engine, same tests).",
       "has_scripts": true,
       "has_references": true
     },

@@ -1,0 +1,11 @@
+# browserd as a container (Playwright + Chromium). Build context = this skill folder.
+FROM mcr.microsoft.com/playwright/python:v1.49.0-noble
+WORKDIR /app
+COPY scripts/browserd.py /app/browserd.py
+COPY recipes /app/recipes
+ENV NX_HOME=/data NX_RECIPES=/data/recipes:/app/recipes
+VOLUME /data
+EXPOSE 7788
+# --host 0.0.0.0 REQUIRES a token (browserd refuses otherwise). --allow = the only sites it may visit.
+# allow-list from $NX_ALLOW, token from $NX_TOKEN (read by browserd itself — not on the command line)
+CMD ["python3", "/app/browserd.py", "serve", "--host", "0.0.0.0", "--port", "7788"]
