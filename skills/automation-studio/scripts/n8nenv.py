@@ -24,14 +24,27 @@ import shutil
 import subprocess
 from pathlib import Path
 
-CFG_PATH = Path.home() / ".config" / "ai-skills" / "automation.json"
-DEFAULT_SECRETS = Path.home() / ".config" / "ai-skills" / "automation-secrets.json"
-DEFAULT_DIR = Path.home() / ".local" / "share" / "ai-skills" / "n8n"
+def _real_home() -> Path:
+    h = Path.home()
+    parts = h.parts
+    if ".gemini" in parts and "users" in parts:
+        idx = parts.index(".gemini")
+        return Path(*parts[:idx])
+    return h
+
+
+REAL_HOME = _real_home()
+CFG_PATH = REAL_HOME / ".config" / "ai-skills" / "automation.json"
+DEFAULT_SECRETS = REAL_HOME / ".config" / "ai-skills" / "automation-secrets.json"
+DEFAULT_DIR = REAL_HOME / ".local" / "share" / "ai-skills" / "n8n"
 HERE = Path(__file__).resolve().parent
 
 
 def _x(p) -> Path:
-    return Path(os.path.expanduser(str(p)))
+    s = str(p)
+    if s.startswith("~/"):
+        return REAL_HOME / s[2:]
+    return Path(os.path.expanduser(s))
 
 
 def load_cfg() -> dict:

@@ -44,8 +44,18 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlparse
 
-HOME = Path(os.environ.get("NX_HOME", Path.home() / ".local/share/ai-skills/browserd"))
-SECRETS_FILE = Path(os.environ.get("NX_SECRETS", Path.home() / ".config/ai-skills/automation-secrets.json"))
+def _real_home() -> Path:
+    h = Path.home()
+    parts = h.parts
+    if ".gemini" in parts and "users" in parts:
+        idx = parts.index(".gemini")
+        return Path(*parts[:idx])
+    return h
+
+
+REAL_HOME = _real_home()
+HOME = Path(os.environ.get("NX_HOME", REAL_HOME / ".local/share/ai-skills/browserd"))
+SECRETS_FILE = Path(os.environ.get("NX_SECRETS", REAL_HOME / ".config/ai-skills/automation-secrets.json"))
 RECIPE_DIRS = [Path(x) for x in os.environ.get("NX_RECIPES", "").split(os.pathsep) if x] + [HOME / "recipes", Path(__file__).resolve().parent.parent / "recipes"]
 MAX_STEPS = 400
 DEFAULT_TIMEOUT_MS = 20000

@@ -28,11 +28,21 @@ import time
 import urllib.request
 from pathlib import Path
 
+def _real_home() -> Path:
+    h = Path.home()
+    parts = h.parts
+    if ".gemini" in parts and "users" in parts:
+        idx = parts.index(".gemini")
+        return Path(*parts[:idx])
+    return h
+
+
+REAL_HOME = _real_home()
 HERE = Path(__file__).resolve().parent
 SKILL = HERE.parent
 AUTO = SKILL.parent / "automation-studio" / "scripts" / "auto.sh"
-STATE = Path(os.environ.get("NX_STATE", Path.home() / ".local/share/ai-skills/browserd"))
-SECRETS = Path(os.environ.get("NX_SECRETS", Path.home() / ".config/ai-skills/automation-secrets.json"))
+STATE = Path(os.environ.get("NX_STATE", REAL_HOME / ".local/share/ai-skills/browserd"))
+SECRETS = Path(os.environ.get("NX_SECRETS", REAL_HOME / ".config/ai-skills/automation-secrets.json"))
 PORT = int(os.environ.get("NX_PORT", "7788"))
 PATTERNS = {"recipe": "01-browser-recipe", "agent": "02-agent-browser-tools", "mcp": "03-mcp-bridge"}
 
