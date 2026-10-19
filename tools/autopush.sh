@@ -5,7 +5,7 @@
 # force-pushes; stops and logs if the remote has commits we don't have.
 set -u
 export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:${PATH:-}"
-REPO="${AI_SKILLS_REPO:-$HOME/.cursor/ai-skills}"
+REPO="${AI_SKILLS_REPO:-$(cd "$(dirname "$0")/.." && pwd)}"  # default: the repo this script lives in
 LOG="$HOME/Library/Logs/ai-skills-autopush.log"
 mkdir -p "$(dirname "$LOG")"
 log(){ echo "$(date '+%F %T') $*" >> "$LOG"; }
