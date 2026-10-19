@@ -188,6 +188,12 @@ adapter around.
   (or does a direct read-through audit when none exist yet), finds
   recurring issues and missing coverage, fixes the skill, re-validates,
   and ships the update.
+- **[packet-tracer-studio](skills/packet-tracer-studio/SKILL.md)** — Design, build, configure, test and save complete network labs in Cisco
+  Packet Tracer 9 on the user's Mac through packet-tracer-mcp (live IPC, port
+  39000): topologies, cabling, Cisco IOS CLI (VLANs, trunks, STP,
+  EtherChannel, inter-VLAN routing, OSPF/EIGRP/RIP/static, DHCP, NAT/PAT,
+  ACLs, port security, SSH, HSRP, ASA), host IPs, ping/PDU verification,
+  troubleshooting and the .pkt file.
 
 More skills get added here over time, one folder per skill, following the
 same layout and the same standard: ask before guessing on anything

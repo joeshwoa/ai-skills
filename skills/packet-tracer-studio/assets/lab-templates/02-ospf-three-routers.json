@@ -1,0 +1,45 @@
+{
+  "clearFirst": true,
+  "devices": [
+    {"name": "R1",  "deviceType": "ROUTER", "model": "2911",  "x": 300, "y": 120},
+    {"name": "R2",  "deviceType": "ROUTER", "model": "2911",  "x": 560, "y": 280},
+    {"name": "R3",  "deviceType": "ROUTER", "model": "2911",  "x": 40,  "y": 280},
+    {"name": "PC1", "deviceType": "PC",     "model": "PC-PT", "x": 300, "y": 20},
+    {"name": "PC2", "deviceType": "PC",     "model": "PC-PT", "x": 640, "y": 440},
+    {"name": "PC3", "deviceType": "PC",     "model": "PC-PT", "x": 40,  "y": 440}
+  ],
+  "links": [
+    {"device1": "R1", "port1": "GigabitEthernet0/0", "device2": "R2", "port2": "GigabitEthernet0/0", "cableType": "ETHERNET_CROSS"},
+    {"device1": "R2", "port1": "GigabitEthernet0/1", "device2": "R3", "port2": "GigabitEthernet0/0", "cableType": "ETHERNET_CROSS"},
+    {"device1": "R1", "port1": "GigabitEthernet0/1", "device2": "R3", "port2": "GigabitEthernet0/1", "cableType": "ETHERNET_CROSS"},
+    {"device1": "R1", "port1": "GigabitEthernet0/2", "device2": "PC1", "port2": "FastEthernet0", "cableType": "ETHERNET_CROSS"},
+    {"device1": "R2", "port1": "GigabitEthernet0/2", "device2": "PC2", "port2": "FastEthernet0", "cableType": "ETHERNET_CROSS"},
+    {"device1": "R3", "port1": "GigabitEthernet0/2", "device2": "PC3", "port2": "FastEthernet0", "cableType": "ETHERNET_CROSS"}
+  ],
+  "iosConfigs": {
+    "R1": ["enable", "configure terminal", "hostname R1",
+      "interface GigabitEthernet0/0", "ip address 10.0.12.1 255.255.255.252", "no shutdown", "exit",
+      "interface GigabitEthernet0/1", "ip address 10.0.13.1 255.255.255.252", "no shutdown", "exit",
+      "interface GigabitEthernet0/2", "ip address 192.168.1.1 255.255.255.0", "no shutdown", "exit",
+      "router ospf 1", "router-id 1.1.1.1", "network 10.0.12.0 0.0.0.3 area 0", "network 10.0.13.0 0.0.0.3 area 0", "network 192.168.1.0 0.0.0.255 area 0", "passive-interface GigabitEthernet0/2", "exit",
+      "end", "write memory"],
+    "R2": ["enable", "configure terminal", "hostname R2",
+      "interface GigabitEthernet0/0", "ip address 10.0.12.2 255.255.255.252", "no shutdown", "exit",
+      "interface GigabitEthernet0/1", "ip address 10.0.23.1 255.255.255.252", "no shutdown", "exit",
+      "interface GigabitEthernet0/2", "ip address 192.168.2.1 255.255.255.0", "no shutdown", "exit",
+      "router ospf 1", "router-id 2.2.2.2", "network 10.0.12.0 0.0.0.3 area 0", "network 10.0.23.0 0.0.0.3 area 0", "network 192.168.2.0 0.0.0.255 area 0", "passive-interface GigabitEthernet0/2", "exit",
+      "end", "write memory"],
+    "R3": ["enable", "configure terminal", "hostname R3",
+      "interface GigabitEthernet0/0", "ip address 10.0.23.2 255.255.255.252", "no shutdown", "exit",
+      "interface GigabitEthernet0/1", "ip address 10.0.13.2 255.255.255.252", "no shutdown", "exit",
+      "interface GigabitEthernet0/2", "ip address 192.168.3.1 255.255.255.0", "no shutdown", "exit",
+      "router ospf 1", "router-id 3.3.3.3", "network 10.0.23.0 0.0.0.3 area 0", "network 10.0.13.0 0.0.0.3 area 0", "network 192.168.3.0 0.0.0.255 area 0", "passive-interface GigabitEthernet0/2", "exit",
+      "end", "write memory"]
+  },
+  "hostConfigs": [
+    {"device": "PC1", "portName": "FastEthernet0", "ip": "192.168.1.10", "mask": "255.255.255.0", "gateway": "192.168.1.1"},
+    {"device": "PC2", "portName": "FastEthernet0", "ip": "192.168.2.10", "mask": "255.255.255.0", "gateway": "192.168.2.1"},
+    {"device": "PC3", "portName": "FastEthernet0", "ip": "192.168.3.10", "mask": "255.255.255.0", "gateway": "192.168.3.1"}
+  ],
+  "fastForwardTimes": 6
+}

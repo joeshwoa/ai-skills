@@ -1,6 +1,6 @@
 {
   "generated_by": "skills/skill-router/scripts/build_manifest.py",
-  "skill_count": 19,
+  "skill_count": 20,
   "skills": [
     {
       "name": "automation-studio",
@@ -55,6 +55,13 @@
       "name": "omnicinema",
       "path": "skills/omnicinema",
       "description": "Make brand and media assets with the user's omnicinema-mcp engine — logos (with reversed + icon variants), vector illustrations, app/web UI mockups, background music in a genre (WAV + editable MIDI), sound effects, voiceover, and short videos from a one-line idea (screenplay → stock footage or storyboard animatic → narration, captions, soundtrack → rendered MP4). Works fully offline and free; stock footage and AI photos/voices/music use the user's own API keys. Use for \"make me a logo\", \"design a mockup of my app screen\", \"I need background music / a beat / a sound effect\", \"turn this script into a voiceover\", \"make a quick promo/animatic/storyboard video\", or anything about OmniCinema. For real AI-generated film shots in Google Flow use flow-studio-director instead.",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "packet-tracer-studio",
+      "path": "skills/packet-tracer-studio",
+      "description": "Design, build, configure, test and save complete network labs in Cisco Packet Tracer 9 on the user's Mac through packet-tracer-mcp (live IPC, port 39000): topologies, cabling, Cisco IOS CLI (VLANs, trunks, STP, EtherChannel, inter-VLAN routing, OSPF/EIGRP/RIP/static, DHCP, NAT/PAT, ACLs, port security, SSH, HSRP, ASA), host IPs, ping/PDU verification, troubleshooting and the .pkt file. Includes a pre-build spec checker, lab templates and an offline mode that prints paste-ready CLI when Packet Tracer is not reachable. Use for any request about Packet Tracer, CCNA/CCNP labs, network topologies, router or switch configuration, or fixing a broken lab.",
       "has_scripts": true,
       "has_references": true
     },

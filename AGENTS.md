@@ -149,6 +149,12 @@ below for what that feeds.
   missing coverage, fixes them, re-validates, ships the update. Trigger:
   a skill produced a bad/incomplete result, or any request to
   enhance/improve/audit/review a skill's quality.
+- **packet-tracer-studio** (`skills/packet-tracer-studio/SKILL.md`) — Design, build, configure, test and save complete network labs in Cisco
+  Packet Tracer 9 on the user's Mac through packet-tracer-mcp (live IPC, port
+  39000): topologies, cabling, Cisco IOS CLI (VLANs, trunks, STP,
+  EtherChannel, inter-VLAN routing, OSPF/EIGRP/RIP/static, DHCP, NAT/PAT,
+  ACLs, port security, SSH, HSRP, ASA), host IPs, ping/PDU verification,
+  troubleshooting and the .pkt file.
 
 This file follows the emerging `AGENTS.md` convention several agentic tools
 (Cursor, GitHub Copilot, OpenAI Codex CLI, and others) read automatically

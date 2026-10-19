@@ -1,0 +1,40 @@
+{
+  "clearFirst": true,
+  "devices": [
+    {"name": "R1",     "deviceType": "ROUTER", "model": "2911",      "x": 300, "y": 120},
+    {"name": "ISP",    "deviceType": "ROUTER", "model": "1941",      "x": 560, "y": 120},
+    {"name": "SW1",    "deviceType": "SWITCH", "model": "2960-24TT", "x": 300, "y": 280},
+    {"name": "PC1",    "deviceType": "PC",     "model": "PC-PT",     "x": 180, "y": 440},
+    {"name": "PC2",    "deviceType": "PC",     "model": "PC-PT",     "x": 420, "y": 440},
+    {"name": "Server1","deviceType": "SERVER", "model": "Server-PT", "x": 560, "y": 280}
+  ],
+  "links": [
+    {"device1": "R1",  "port1": "GigabitEthernet0/0", "device2": "SW1", "port2": "GigabitEthernet0/1", "cableType": "ETHERNET_STRAIGHT"},
+    {"device1": "R1",  "port1": "GigabitEthernet0/1", "device2": "ISP", "port2": "GigabitEthernet0/0", "cableType": "ETHERNET_CROSS"},
+    {"device1": "ISP", "port1": "GigabitEthernet0/1", "device2": "Server1", "port2": "FastEthernet0",  "cableType": "ETHERNET_CROSS"},
+    {"device1": "SW1", "port1": "FastEthernet0/1",    "device2": "PC1", "port2": "FastEthernet0",      "cableType": "ETHERNET_STRAIGHT"},
+    {"device1": "SW1", "port1": "FastEthernet0/2",    "device2": "PC2", "port2": "FastEthernet0",      "cableType": "ETHERNET_STRAIGHT"}
+  ],
+  "iosConfigs": {
+    "R1": ["enable", "configure terminal", "hostname R1",
+      "ip dhcp excluded-address 192.168.10.1 192.168.10.9",
+      "ip dhcp pool LAN", "network 192.168.10.0 255.255.255.0", "default-router 192.168.10.1", "dns-server 198.51.100.10", "exit",
+      "interface GigabitEthernet0/0", "ip address 192.168.10.1 255.255.255.0", "ip nat inside", "no shutdown", "exit",
+      "interface GigabitEthernet0/1", "ip address 203.0.113.2 255.255.255.252", "ip nat outside", "no shutdown", "exit",
+      "access-list 1 permit 192.168.10.0 0.0.0.255",
+      "ip nat inside source list 1 interface GigabitEthernet0/1 overload",
+      "ip route 0.0.0.0 0.0.0.0 203.0.113.1",
+      "end", "write memory"],
+    "ISP": ["enable", "configure terminal", "hostname ISP",
+      "interface GigabitEthernet0/0", "ip address 203.0.113.1 255.255.255.252", "no shutdown", "exit",
+      "interface GigabitEthernet0/1", "ip address 198.51.100.1 255.255.255.0", "no shutdown", "exit",
+      "end", "write memory"],
+    "SW1": ["enable", "configure terminal", "hostname SW1", "end", "write memory"]
+  },
+  "hostConfigs": [
+    {"device": "PC1", "portName": "FastEthernet0", "dhcp": true},
+    {"device": "PC2", "portName": "FastEthernet0", "dhcp": true},
+    {"device": "Server1", "portName": "FastEthernet0", "ip": "198.51.100.10", "mask": "255.255.255.0", "gateway": "198.51.100.1"}
+  ],
+  "fastForwardTimes": 4
+}
