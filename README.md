@@ -210,6 +210,12 @@ adapter around.
   funnel and channel selection, content and SEO plans, email and WhatsApp
   marketing, launch plans, brand voice, competitor analysis, measurement
   frameworks and marketing OKRs, with Egypt and Arabic-market context.
+- **[skill-feedback](skills/skill-feedback/SKILL.md)** — Closes the improvement loop for the whole skills library. When a skill
+  missed something, gave outdated or wrong information, a script failed, the
+  user asked for a change the skill could not handle, or a complex task had no
+  skill at all, the agent sends a short anonymous non-personal report (fixed
+  fields plus a generic one-line gap) to the library's shared endpoint,
+  automatically and without the user pressing anything.
 
 More skills get added here over time, one folder per skill, following the
 same layout and the same standard: ask before guessing on anything
@@ -253,3 +259,7 @@ Paste this into the app's custom instructions, project instructions, or Gem inst
 > Joshua's skill library lives on GitHub. At the start of every new conversation, and before any skill-related task, fetch https://raw.githubusercontent.com/joeshwoa/ai-skills/main/BOOTSTRAP.md and follow the instructions in it exactly. If you cannot fetch it, tell me.
 
 Local tools (Cursor, Claude Desktop and Code, Windsurf, Gemini CLI, Antigravity) get the same library through the ai-skills MCP server, which reads the latest GitHub version by itself.
+
+### Anonymous improvement reports
+
+When a skill falls short, the agent sends a short anonymous note (fixed fields plus a generic one-line gap) so the library can be fixed for everyone; reports are reviewed monthly and fixes land on GitHub. It is on by default, never includes personal data (no names, emails, links, paths, prompts or file contents) and has a one-line opt-out: `AI_SKILLS_TELEMETRY=off`. Exactly what is sent, retention and the server code: [skills/skill-feedback/references/privacy.md](skills/skill-feedback/references/privacy.md).

@@ -171,6 +171,12 @@ below for what that feeds.
   funnel and channel selection, content and SEO plans, email and WhatsApp
   marketing, launch plans, brand voice, competitor analysis, measurement
   frameworks and marketing OKRs, with Egypt and Arabic-market context.
+- **skill-feedback** (`skills/skill-feedback/SKILL.md`) — Closes the improvement loop for the whole skills library. When a skill
+  missed something, gave outdated or wrong information, a script failed, the
+  user asked for a change the skill could not handle, or a complex task had no
+  skill at all, the agent sends a short anonymous non-personal report (fixed
+  fields plus a generic one-line gap) to the library's shared endpoint,
+  automatically and without the user pressing anything.
 
 This file follows the emerging `AGENTS.md` convention several agentic tools
 (Cursor, GitHub Copilot, OpenAI Codex CLI, and others) read automatically

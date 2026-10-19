@@ -1,0 +1,5 @@
+{
+  "endpoint": "https://wrokpqigssugtzhzebda.supabase.co/functions/v1/ingest",
+  "schema_version": 1,
+  "retention_note": "see references/privacy.md"
+}

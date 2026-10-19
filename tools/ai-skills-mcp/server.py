@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """ai-skills MCP server — one connection gives any MCP client every skill in the library.
 
-Reads straight from the skills/ folder of this repo (no copies). Exposes three tools:
+Reads straight from the skills/ folder of this repo (no copies). Exposes four tools:
   list_skills()                  name + description of every installed skill
   get_skill(name)                full SKILL.md of one skill
   read_skill_file(name, path)    any file inside a skill folder (references, scripts, examples)
+  report_skill_gap(...)          anonymous non-personal improvement report (see skills/skill-feedback)
 
 Stdlib only. Speaks MCP over stdio (newline-delimited JSON-RPC 2.0).
 Set AI_SKILLS_ROOT to point at another skills folder (default: ../../skills from this file).
@@ -69,11 +70,13 @@ def describe(name, folder):
 
 
 def tool_list_skills(_args):
+    """List every skill in Joshua's library with its description. Call first to choose a skill."""
     rows = [{"name": n, "description": describe(n, f)} for n, f in known_skills().items()]
     return json.dumps(rows, ensure_ascii=False, indent=2)
 
 
 def tool_get_skill(args):
+    """Return the full SKILL.md of one skill (name from list_skills)."""
     name = args.get("name", "")
     skills = known_skills()
     if not NAME_RE.match(name) or name not in skills:
@@ -82,6 +85,7 @@ def tool_get_skill(args):
 
 
 def tool_read_skill_file(args):
+    """Read a file inside a skill folder (references/, scripts/, templates/, data/)."""
     name, rel = args.get("name", ""), args.get("path", "")
     skills = known_skills()
     if not NAME_RE.match(name) or name not in skills:
@@ -97,12 +101,39 @@ def tool_read_skill_file(args):
     return target.read_text(encoding="utf-8", errors="replace")
 
 
+def tool_report_skill_gap(args):
+    """Send an anonymous, non-personal improvement report when a skill missed something, was wrong or outdated, or a task needed something it lacks. Fields are fixed enums plus a short GENERIC text (no names, emails, links, paths, prompts or file contents). Opt-out: AI_SKILLS_TELEMETRY=off. Never blocks the task."""
+    name = args.get("skill", "")
+    if not NAME_RE.match(name):
+        raise ValueError("skill must be a skill folder name")
+    script = ROOT / "skill-feedback" / "scripts" / "report.py"
+    if not script.is_file():
+        raise ValueError("skill-feedback is not installed in this library")
+    cmd = [sys.executable, str(script), "--skill", name, "--event", args.get("event", "gap"),
+           "--surface", args.get("surface", "cli"), "--agent", args.get("agent", "other")]
+    for flag in ("outcome", "tags", "gap", "suggestion"):
+        if args.get(flag):
+            cmd += ["--" + flag, str(args[flag])]
+    r = subprocess.run(cmd, capture_output=True, text=True, timeout=20)
+    return (r.stdout or r.stderr).strip() or "done"
+
+
 TOOLS = {
     "list_skills": (tool_list_skills, {"type": "object", "properties": {}}),
     "get_skill": (tool_get_skill, {"type": "object", "properties": {"name": {"type": "string"}}, "required": ["name"]}),
     "read_skill_file": (tool_read_skill_file, {"type": "object", "properties": {
         "name": {"type": "string"}, "path": {"type": "string", "description": "path inside the skill folder, e.g. references/x.md"}},
         "required": ["name", "path"]}),
+    "report_skill_gap": (tool_report_skill_gap, {"type": "object", "properties": {
+        "skill": {"type": "string", "description": "skill folder name the report is about"},
+        "event": {"type": "string", "enum": ["gap", "failure", "wrong_info", "suggestion", "new_skill_request", "success_note"]},
+        "outcome": {"type": "string", "enum": ["success", "partial", "failure"]},
+        "tags": {"type": "string", "description": "comma list from: platform-rule-outdated, missing-platform, missing-case, script-bug, unclear-instructions, automation-gap, language-dialect, too-long, tool-unavailable, wrong-output, missing-reference, other"},
+        "gap": {"type": "string", "description": "what was missing or wrong, generic, <=300 chars"},
+        "suggestion": {"type": "string", "description": "what to add or change, generic, <=500 chars"},
+        "agent": {"type": "string", "enum": ["claude", "cursor", "gemini", "antigravity", "windsurf", "chatgpt", "codex", "copilot", "other"]},
+        "surface": {"type": "string", "enum": ["cli", "desktop", "web", "mobile", "ide", "api", "other"]}},
+        "required": ["skill", "event"]}),
 }
 
 

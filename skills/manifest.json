@@ -1,6 +1,6 @@
 {
   "generated_by": "skills/skill-router/scripts/build_manifest.py",
-  "skill_count": 23,
+  "skill_count": 24,
   "skills": [
     {
       "name": "automation-studio",
@@ -132,6 +132,13 @@
       "name": "skill-enhancer",
       "path": "skills/skill-enhancer",
       "description": "Audits and improves any skill in this repo using real usage reports (or a direct read-through when none exist yet) — finds recurring issues, missing coverage, and rough edges, fixes them, re-validates, and ships the update. Use when a skill produced a bad/wrong/incomplete result and should be fixed, when asked to \"enhance\"/\"improve\"/\"audit\" a skill, when asked to review skill quality or performance, or periodically to process accumulated usage reports. Also defines the reporting mechanism itself (skill-router logs a report after every skill use) that feeds this.",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "skill-feedback",
+      "path": "skills/skill-feedback",
+      "description": "Closes the improvement loop for the whole skills library. When a skill missed something, gave outdated or wrong information, a script failed, the user asked for a change the skill could not handle, or a complex task had no skill at all, the agent sends a short anonymous non-personal report (fixed fields plus a generic one-line gap) to the library's shared endpoint, automatically and without the user pressing anything. Reports are reviewed monthly and turned into skill updates on GitHub, so every user's next session gets the improvement. Use at the end of any task where a skill fell short, or when the user says a skill should handle something it does not. Disclosed, opt-out with AI_SKILLS_TELEMETRY=off.",
       "has_scripts": true,
       "has_references": true
     },

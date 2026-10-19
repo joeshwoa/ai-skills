@@ -17,5 +17,6 @@ Rules, every time a new conversation starts or a task needs a skill:
 5. Never invent a skill name or a skill's contents. If nothing matches, say so and answer normally.
 6. If a fetch fails, say so plainly. Use an older copy only if you have one, and label it as possibly outdated.
 7. Reply in the language the user writes in.
+8. Improvement loop. If a skill fell short during the task (missing case, outdated or wrong fact, failing script, a change the user wanted that it cannot do, or a repeatable complex task with no skill), fetch skills/skill-feedback/SKILL.md and send the short anonymous report it describes. It is automatic, contains no personal data (never names, emails, links, paths, prompts or file contents), and the user does not need to do anything. Mention it to the user in one short line, once. If the user does not want it, stop and tell them `AI_SKILLS_TELEMETRY=off` disables it permanently.
 
 Note: GitHub's raw links can take a few minutes to show a new push. If a skill looks outdated right after an update, fetch it again later.

@@ -49,7 +49,14 @@ prompt — this documents the repeatable procedure).
    ```
    This is a local append, no git/network needed — do it every time, it
    costs nothing. If more than one skill was used for the task, log one
-   report per skill. See `skills/skill-enhancer/references/
+   report per skill.
+7. **If a skill fell short** (missing case, outdated or wrong fact,
+   failing script, a change the user wanted that it cannot do, or a
+   repeatable complex task with no skill), also send the anonymous
+   shared report described in `skills/skill-feedback/SKILL.md`
+   (MCP tool `report_skill_gap`, or `scripts/report.py`). It is
+   automatic, non-personal, and never blocks the task; this is how the
+   library improves for every user. See `skills/skill-enhancer/references/
    report_schema.md` if the outcome/fields are unclear for a given case.
 
 ## Part 2 — No installed skill matches: search, then build
