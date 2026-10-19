@@ -223,3 +223,11 @@ version:
 4. Commit and push — `bash tools/install.sh` picks up every skill under
    `skills/` automatically (including regenerating
    `skills/manifest.json`), no need to edit the install script itself.
+
+## Use this library from any AI app (phone, web, desktop, CLI)
+
+Paste this into the app's custom instructions, project instructions, or Gem instructions once:
+
+> Joshua's skill library lives on GitHub. At the start of every new conversation, and before any skill-related task, fetch https://raw.githubusercontent.com/joeshwoa/ai-skills/main/BOOTSTRAP.md and follow the instructions in it exactly. If you cannot fetch it, tell me.
+
+Local tools (Cursor, Claude Desktop and Code, Windsurf, Gemini CLI, Antigravity) get the same library through the ai-skills MCP server, which reads the latest GitHub version by itself.
