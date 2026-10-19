@@ -89,6 +89,10 @@ adapter around.
   12 tested patterns (webhooks, schedules, pagination, batching, error alerts,
   idempotency, AI agents, document AI, human approval, sub-workflows), and
   converters to Node-RED, Make, Zapier, Power Automate, Pipedream, Activepieces.
+- **[n8n-agent-studio](skills/n8n-agent-studio/SKILL.md)** — n8n + browser
+  agents for sites and apps with NO API: access-route planner (probe, ladder),
+  browserd recipe worker with login sessions and secrets, AI-agent and MCP-bridge
+  patterns, local/published hosting, selftest proving the whole chain (18/18).
 - **[premium-3d-models](skills/premium-3d-models/SKILL.md)** — real,
   parametric 3D models (.glb + optional .stl/.obj) via CSG (trimesh +
   manifold3d booleans), for Flutter (model_viewer_plus), web/React

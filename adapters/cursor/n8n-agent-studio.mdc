@@ -1,0 +1,16 @@
+---
+description: An n8n + browser-agent studio for anything that has NO API — websites, portals, dashboards, apps. Finds the best route (official node/API → hidden JSON → exports/webhooks → headless Chrome recipes → attach to the user's Chrome → LLM browser agent → human-in-the-loop), builds the n8n flow, tests it on the real n8n engine, deploys local or published. Also n8n as an MCP server for Claude/Cursor. Apply for: automate a site/app without an API, control a website from n8n, browser/Playwright/scraping/RPA in n8n, an agent that uses a web UI, connect an app to n8n or an agent.
+globs:
+alwaysApply: false
+---
+# n8n Agent Studio
+
+Read `skills/n8n-agent-studio/SKILL.md` in full first, then `references/access-ladder.md` before choosing a route.
+
+Quick reference (`N="bash skills/n8n-agent-studio/scripts/nx.sh"`):
+- `$N doctor`, then `$N probe <url>` and `$N ladder --url <url> [--needs-login --goal write]`.
+- `$N start --allow <domain>` (browser worker on 127.0.0.1:7788) and `$N login <url> --session <name>` (the user signs in themselves).
+- `$N recipe new <template> -o r.json` → fill selectors → `$N recipe run r.json --headed` → save.
+- `$N new recipe|agent|mcp -o flow/` → `$N build flow/workflow.ts -o flow/flow.json` → `$N test flow/flow.json flow/cases.json`.
+- `$N selftest` must stay green before any change ships.
+- NEVER create accounts, type passwords, solve captchas or bypass bot protection. Secrets only as {{secret:NAME}} via `$N secret NAME`. Ask before sending, paying, or writing production data.

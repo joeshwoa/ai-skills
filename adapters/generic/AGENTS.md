@@ -53,6 +53,13 @@ below for what that feeds.
   Pipedream, Activepieces. Never creates accounts or handles keys itself.
   Trigger: automate a task/process, n8n/Make/Zapier/flow, webhook, schedule,
   connect apps, AI agent workflow, automation diagram.
+- **n8n-agent-studio** (`skills/n8n-agent-studio/SKILL.md`) — n8n + browser
+  agents for anything with NO API: probes the site, ranks the access routes
+  (official node/API → hidden JSON → recipe → attach to the user's Chrome →
+  LLM agent → human-in-the-loop), builds and tests the n8n flow, deploys local
+  or published; browserd recipe worker, AI-agent and MCP-bridge patterns.
+  Trigger: automate a site/app without an API, control a website from n8n,
+  browser/scraping/RPA in n8n, a web-UI agent, n8n as an MCP server.
 - **premium-3d-models** (`skills/premium-3d-models/SKILL.md`) — build
   real parametric 3D models (.glb/.stl/.obj) for Flutter, web/React,
   Blender, or 3D printing. Trigger: any request to "model," "3D model,"
