@@ -37,3 +37,22 @@ echo "Auto-push installed: it runs only when a commit lands in the repo."
 bash "$REPO/tools/autopush.sh" || true
 echo "Log: $HOME/Library/Logs/ai-skills-autopush.log"
 tail -3 "$HOME/Library/Logs/ai-skills-autopush.log" 2>/dev/null || true
+
+# Self-check: macOS blocks background jobs from reading an external drive (like the SSD) unless
+# /bin/bash has Full Disk Access. Run the job the way launchd does and report what happened.
+OUT="$HOME/Library/Logs/ai-skills-autopush.out"
+: > "$OUT"
+launchctl kickstart -k "gui/$(id -u)/$LABEL" 2>/dev/null || true
+sleep 4
+if grep -q "Operation not permitted" "$OUT" 2>/dev/null; then
+  cat <<'MSG'
+
+!! Background pushes are BLOCKED by macOS (Operation not permitted on the SSD).
+   One-time fix, 30 seconds:
+   System Settings > Privacy & Security > Full Disk Access > click "+"
+   > press Cmd+Shift+G, type /bin/bash, Open > make sure the switch is ON.
+   Then run this installer again. It will say OK when the job can read the repo.
+MSG
+  exit 1
+fi
+echo "OK: the background job can read the repo and will push every new commit by itself."
