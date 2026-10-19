@@ -8,17 +8,42 @@ Reads straight from the skills/ folder of this repo (no copies). Exposes three t
 
 Stdlib only. Speaks MCP over stdio (newline-delimited JSON-RPC 2.0).
 Set AI_SKILLS_ROOT to point at another skills folder (default: ../../skills from this file).
+
+GitHub is the source every client reads: when this file lives in a git clone of the repo, each
+tool call first fast-forwards that clone from origin (at most once a minute, silently, never blocking
+on failure), so every agent always sees the latest pushed skills. Set AI_SKILLS_NO_SYNC=1 to disable.
 """
 import json
 import os
 import re
+import subprocess
 import sys
+import time
 from pathlib import Path
 
 ROOT = Path(os.environ.get("AI_SKILLS_ROOT") or Path(__file__).resolve().parents[2] / "skills").resolve()
 PROTOCOL = "2024-11-05"
 NAME_RE = re.compile(r"^[a-z0-9][a-z0-9-]*$")
 MAX_FILE = 300_000
+REPO = Path(__file__).resolve().parents[2]
+SYNC_EVERY = 60  # seconds between GitHub pulls
+_last_sync = 0.0
+
+
+def sync_from_github():
+    """Fast-forward the clone from origin, at most once per SYNC_EVERY seconds. Never raises."""
+    global _last_sync
+    if os.environ.get("AI_SKILLS_NO_SYNC") or not (REPO / ".git").exists():
+        return
+    now = time.time()
+    if now - _last_sync < SYNC_EVERY:
+        return
+    _last_sync = now
+    try:
+        subprocess.run(["git", "-C", str(REPO), "pull", "--ff-only", "--quiet"],
+                       timeout=15, capture_output=True)
+    except Exception:
+        pass
 
 
 def known_skills():
@@ -101,9 +126,11 @@ def handle(msg):
     if method == "ping":
         return reply(mid, {})
     if method == "tools/list":
+        sync_from_github()
         return reply(mid, {"tools": [{"name": n, "description": (fn.__doc__ or n), "inputSchema": schema}
                                      for n, (fn, schema) in TOOLS.items()]})
     if method == "tools/call":
+        sync_from_github()
         name = params.get("name")
         if name not in TOOLS:
             return reply(mid, error={"code": -32602, "message": f"unknown tool {name}"})

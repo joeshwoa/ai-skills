@@ -1,0 +1,37 @@
+name: publish-skills
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  bundle:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build per-skill zips (SKILL.md at the zip root) and one all-in-one zip
+        run: |
+          mkdir -p dist
+          for d in skills/*/; do
+            n=$(basename "$d")
+            [ -f "$d/SKILL.md" ] || continue
+            (cd "$d" && zip -rq "$OLDPWD/dist/$n.zip" .)
+          done
+          (cd skills && zip -rq ../dist/ai-skills-all.zip . -x "*.DS_Store")
+          cp skills/manifest.json dist/manifest.json
+          ls -la dist
+
+      - name: Publish to the rolling "latest" release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if ! gh release view latest >/dev/null 2>&1; then
+            gh release create latest --target "$GITHUB_SHA" --title "Latest skills" \
+              --notes "Rebuilt automatically on every push to main." --latest=false
+          fi
+          gh release upload latest dist/* --clobber
