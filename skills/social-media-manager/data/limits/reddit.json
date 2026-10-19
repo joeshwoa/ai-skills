@@ -1,0 +1,50 @@
+{
+  "platform": "reddit",
+  "verified": "2026-10-19",
+  "sources": [
+    "https://support.reddithelp.com/hc/en-us/articles/16160319875092-Reddit-Data-API-Wiki",
+    "https://support.reddithelp.com/hc/en-us/articles/205926439-Reddiquette",
+    "https://support.reddithelp.com/hc/en-us/articles/360043504051",
+    "https://support.reddithelp.com/hc/en-us/articles/23972085214484-What-s-a-brand-affiliate-tag",
+    "https://ag.ny.gov/sites/default/files/social-media-policy-report/2025-q4-reddit-inc-policy.pdf",
+    "https://docs.n8n.io/integrations/builtin/credentials/reddit.md",
+    "https://typecount.com/blog/reddit-post-character-limit",
+    "https://docs.zernio.com/platforms/reddit",
+    "https://datareportal.com/reports/digital-2026-egypt"
+  ],
+  "text": {
+    "post_max_chars": 40000,
+    "caption_max_chars": null,
+    "title_max_chars": 300,
+    "bio_max_chars": null,
+    "comment_max_chars": 10000,
+    "hashtags_max": null,
+    "mentions_max": null,
+    "links_clickable_in_post": true
+  },
+  "formats": [
+    {"name": "text_post", "ratio": null, "recommended_px": null, "min_len_s": null, "max_len_s": null, "max_file_mb": null, "notes": "title 300 (not editable after posting), body 40000 chars; figures from third-party sources"},
+    {"name": "link_post", "ratio": null, "recommended_px": null, "min_len_s": null, "max_len_s": null, "max_file_mb": null, "notes": "avoid link shorteners (Reddiquette)"},
+    {"name": "image", "ratio": null, "recommended_px": null, "min_len_s": null, "max_len_s": null, "max_file_mb": 20, "notes": "JPEG/PNG/GIF up to 20 MB each per third-party API doc"},
+    {"name": "gallery", "ratio": null, "recommended_px": null, "min_len_s": null, "max_len_s": null, "max_file_mb": 20, "notes": "2-20 images per third-party doc"},
+    {"name": "video", "ratio": null, "recommended_px": "1920x1080", "min_len_s": null, "max_len_s": null, "max_file_mb": 1024, "notes": "1 MP4 up to 1 GB, transcoded to max 1080p 30fps (third-party); duration cap unverified"},
+    {"name": "poll", "ratio": null, "recommended_px": null, "min_len_s": null, "max_len_s": null, "max_file_mb": null, "notes": "in-app only; not creatable via API per third-party doc"},
+    {"name": "comment", "ratio": null, "recommended_px": null, "min_len_s": null, "max_len_s": null, "max_file_mb": null, "notes": "10000 chars (third-party); edits show asterisk after 3 minutes (Reddiquette)"}
+  ],
+  "unverified": [
+    "all character limits (title 300, body 40000, comment 10000) come from third-party sources, not Reddit docs",
+    "text.bio_max_chars, username and flair limits",
+    "text.hashtags_max (Reddit has no hashtag system; practitioner knowledge)",
+    "text.mentions_max",
+    "image/gallery/video size and duration caps (third-party API-wrapper docs)",
+    "video duration cap",
+    "commercial API pricing (about $0.24 per 1000 calls) and approval timeline (third-party)",
+    "Responsible Builder Policy full text and review SLA (read via community mirror)",
+    "Reddit Data API Terms and Reddit Rules full text (redditinc.com blocked)",
+    "Reddit Pro eligibility, price, scheduling features",
+    "Brand Affiliate tag obligations (official page says option; third party says required)",
+    "sitewide contest/giveaway rules, copyright, health/finance and age-gating details",
+    "native analytics metric definitions",
+    "Arabic/Egypt subreddit rules, RTL rendering and Egyptian billing for Reddit Ads"
+  ]
+}

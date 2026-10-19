@@ -1,0 +1,58 @@
+{
+  "platform": "telegram",
+  "verified": "2026-10-19",
+  "sources": [
+    "https://core.telegram.org/bots/api",
+    "https://core.telegram.org/bots/api-changelog",
+    "https://core.telegram.org/bots/faq",
+    "https://core.telegram.org/bots/features",
+    "https://core.telegram.org/api/config",
+    "https://core.telegram.org/api/channel",
+    "https://core.telegram.org/api/scheduled-messages",
+    "https://telegram.org/faq",
+    "https://telegram.org/faq_channels",
+    "https://telegram.org/faq_spam",
+    "https://telegram.org/tos",
+    "https://telegram.org/tos/bot-developers",
+    "https://docs.aiogram.dev/en/latest/api/methods/send_message.html",
+    "https://docs.aiogram.dev/en/latest/api/methods/send_photo.html",
+    "https://docs.aiogram.dev/en/latest/api/methods/send_media_group.html",
+    "https://docs.aiogram.dev/en/latest/api/methods/send_poll.html",
+    "https://docs.aiogram.dev/en/latest/api/methods/post_story.html"
+  ],
+  "text": {
+    "post_max_chars": 4096,
+    "caption_max_chars": 1024,
+    "title_max_chars": null,
+    "bio_max_chars": 70,
+    "comment_max_chars": null,
+    "hashtags_max": null,
+    "mentions_max": null,
+    "links_clickable_in_post": true
+  },
+  "formats": [
+    {"name": "text message", "ratio": null, "recommended_px": null, "min_len_s": null, "max_len_s": null, "max_file_mb": null, "notes": "1-4096 chars after entities parsing; Bot API"},
+    {"name": "photo", "ratio": null, "recommended_px": null, "min_len_s": null, "max_len_s": null, "max_file_mb": 10, "notes": "Bot API: width+height <= 10000, ratio <= 20; caption 1024"},
+    {"name": "album", "ratio": null, "recommended_px": null, "min_len_s": null, "max_len_s": null, "max_file_mb": null, "notes": "2-10 items; documents/audio only grouped with same type"},
+    {"name": "video or file (Bot API upload)", "ratio": null, "recommended_px": null, "min_len_s": null, "max_len_s": null, "max_file_mb": 50, "notes": "Bot API upload 50 MB, download 20 MB; local Bot API server upload 2000 MB; user clients 2 GB (4 GB Premium)"},
+    {"name": "poll", "ratio": null, "recommended_px": null, "min_len_s": 5, "max_len_s": 2628000, "max_file_mb": null, "notes": "question 1-300 chars, 1-12 options, open_period seconds"},
+    {"name": "story via Bot API (business account)", "ratio": null, "recommended_px": null, "min_len_s": null, "max_len_s": null, "max_file_mb": null, "notes": "active_period 6/12/24/48 h; caption 0-2048; business account only"},
+    {"name": "channel story (client)", "ratio": null, "recommended_px": null, "min_len_s": null, "max_len_s": null, "max_file_mb": null, "notes": "posted by Premium admin with post_stories right; needs channel boosts; story caption 200 free / 2048 Premium"}
+  ],
+  "unverified": [
+    "title_max_chars (channel/group title)",
+    "channel/group description max chars (commonly cited 255)",
+    "comment_max_chars as a distinct rule",
+    "hashtags_max and mentions_max",
+    "recommended px and max duration for video/story",
+    "Telegram user count in Egypt",
+    "RTL rendering rules",
+    "Bot API scheduling parameter (none found)",
+    "bot-accessible channel analytics",
+    "maximum scheduled messages per chat and scheduling horizon",
+    "minimum subscriber threshold for channel statistics",
+    "paid-partnership label existence",
+    "Egypt Consumer Protection Law reference",
+    "bots cannot initiate conversations (not confirmed in pages fetched this run)"
+  ]
+}

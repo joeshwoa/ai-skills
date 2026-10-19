@@ -1,0 +1,116 @@
+{
+  "platform": "facebook",
+  "verified": "2026-10-19",
+  "sources": [
+    "https://developers.facebook.com/docs/video-api/guides/reels-publishing",
+    "https://developers.facebook.com/docs/page-stories-api/",
+    "https://developers.facebook.com/docs/graph-api/reference/page/feed/",
+    "https://developers.facebook.com/documentation/pages-api/posts",
+    "https://developers.facebook.com/docs/graph-api/overview/rate-limiting",
+    "https://developers.facebook.com/documentation/pages-api/platforminsights/page/deprecated-metrics.md",
+    "https://developers.facebook.com/documentation/business-messaging/messenger-platform/policy",
+    "https://creators.facebook.com/blog/combating-unoriginal-content",
+    "https://typecount.com/blog/facebook-post-character-limit-2026",
+    "https://datareportal.com/reports/digital-2026-egypt"
+  ],
+  "text": {
+    "post_max_chars": 63206,
+    "caption_max_chars": null,
+    "title_max_chars": null,
+    "bio_max_chars": null,
+    "comment_max_chars": 8000,
+    "hashtags_max": null,
+    "mentions_max": null,
+    "links_clickable_in_post": true
+  },
+  "formats": [
+    {
+      "name": "text_post",
+      "ratio": null,
+      "recommended_px": null,
+      "min_len_s": null,
+      "max_len_s": null,
+      "max_file_mb": null,
+      "notes": "Needs message or link. Visible length before See more about 125 chars mobile (third-party)."
+    },
+    {
+      "name": "photo_post",
+      "ratio": null,
+      "recommended_px": null,
+      "min_len_s": null,
+      "max_len_s": null,
+      "max_file_mb": null,
+      "notes": "Ratio and size not confirmed from a Meta source. API posts via /page-id/photos with public url."
+    },
+    {
+      "name": "link_post",
+      "ratio": null,
+      "recommended_px": null,
+      "min_len_s": null,
+      "max_len_s": null,
+      "max_file_mb": null,
+      "notes": "Custom preview only if Page owns and verified the domain. Thumbnail jpg, jpeg, gif or png."
+    },
+    {
+      "name": "feed_video",
+      "ratio": null,
+      "recommended_px": null,
+      "min_len_s": null,
+      "max_len_s": null,
+      "max_file_mb": null,
+      "notes": "API upload accepts video/mp4 only. Max length and size not confirmed."
+    },
+    {
+      "name": "reel",
+      "ratio": "9:16",
+      "recommended_px": "1080x1920",
+      "min_len_s": 3,
+      "max_len_s": 90,
+      "max_file_mb": null,
+      "notes": "Min 540x960. mp4, H.264 or H.265, 24-60 fps, AAC 48 kHz. Public only. 30 published per Page per 24 h via API."
+    },
+    {
+      "name": "story_photo",
+      "ratio": "9:16",
+      "recommended_px": null,
+      "min_len_s": null,
+      "max_len_s": null,
+      "max_file_mb": 10,
+      "notes": "JPEG, BMP, PNG, GIF, TIFF. Keep PNG under about 1 MB. Media already in a published post cannot be reused."
+    },
+    {
+      "name": "story_video",
+      "ratio": "9:16",
+      "recommended_px": "1080x1920",
+      "min_len_s": 3,
+      "max_len_s": 60,
+      "max_file_mb": null,
+      "notes": "Page story video cannot exceed 60 s. Min 540x960. 24-60 fps."
+    },
+    {
+      "name": "live_video",
+      "ratio": null,
+      "recommended_px": null,
+      "min_len_s": null,
+      "max_len_s": null,
+      "max_file_mb": null,
+      "notes": "Needs publish_video permission for API. Limits not confirmed."
+    }
+  ],
+  "unverified": [
+    "text.post_max_chars 63206 (third-party only)",
+    "text.comment_max_chars 8000 (third-party only)",
+    "text.bio_max_chars and Page name and description limits (third-party figures inconsistent)",
+    "text.hashtags_max: no official cap; Meta creator guidance recommends at most 5",
+    "text.mentions_max",
+    "photo post ratio and file size",
+    "feed video max length and file size",
+    "live video limits",
+    "Facebook Groups API publishing status",
+    "Meta Business Suite scheduling lead time (API docs conflict: 29, 30 or 75 days)",
+    "Community Standards wording for spam, engagement bait, inauthentic behavior",
+    "Facebook promotions (giveaway) rules text",
+    "Partner Monetization policy details",
+    "Egypt billing, verification and influencer-regulation specifics"
+  ]
+}

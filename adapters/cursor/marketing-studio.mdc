@@ -1,0 +1,9 @@
+---
+description: Marketing strategy and planning for businesses and creators - audience and market research, positioning and messaging, offers and pricing angles, funnel and channel selection, content and SEO plans, email and WhatsApp marketing, launch plans, brand voice, competitor analysis, measurement frameworks and marketing OKRs, with Egypt and Arabic-market context. Produces one-page strategies, 30/60/90-day plans, messaging houses, content pillars, launch timelines and KPI trees, then hands execution to social-media-manager (organic), media-buying (paid), reels-studio (video scripts), creative-studio (visuals) and automation-studio or n8n-agent-studio (workflows). Use for "عايز خطة تسويق", marketing strategy, positioning, go-to-market, launch plan, brand voice, content strategy, SEO plan, email or WhatsApp campaign plan, competitor analysis.
+globs:
+alwaysApply: false
+---
+# Marketing Studio
+
+Read `skills/marketing-studio/SKILL.md` in full first, then any `references/` file it points to for the task at hand.
+Run scripts from `skills/marketing-studio/scripts/` as the skill describes.

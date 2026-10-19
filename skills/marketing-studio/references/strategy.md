@@ -1,0 +1,106 @@
+# Marketing strategy process
+
+Purpose: take a business from "we need marketing" to a falsifiable one-page strategy, a 30/60/90 plan and clear hand-offs.
+Last updated: 2026-10-19
+
+Use with `templates/one-page-strategy.md` and `templates/plan-30-60-90.md`. Positioning detail is in `positioning-and-messaging.md`, channel choice in `funnel-and-channels.md`, metrics in `measurement.md`.
+
+## 1. The process in nine steps
+| Step | Question it answers | Output | Time box (heuristic) |
+|---|---|---|---|
+| 1 Situation | Where are we, honestly? | Facts sheet + assumptions list | 1 to 3 days |
+| 2 Goals | What business result by when? | 1 business goal, 2 to 3 marketing OKRs | half day |
+| 3 Segments | Who buys, who influences, who pays? | 1 primary + 1 secondary segment | 1 day |
+| 4 Positioning | Why us, for them, against what? | Positioning statement (see `positioning-and-messaging.md`) | 1 to 2 days |
+| 5 Offer | What exactly do we ask them to buy or do? | Core offer + entry offer | half day |
+| 6 Channels | Where do we reach them at an acceptable cost? | Scorecard, 1 to 3 chosen, list of "not now" | 1 day |
+| 7 Budget | How much money and time, split how? | Budget table with a reserve | half day |
+| 8 Plan | Who does what by when? | 30/60/90 plan + weekly rhythm | 1 day |
+| 9 Risks | What would make this fail, and what is the trigger to change? | Risk list, decision dates | half day |
+
+The time boxes are working heuristics for a small team, not benchmarks. For a one-person business compress steps 1 to 4 into one sitting.
+
+## 2. Situation analysis (step 1)
+Collect only what changes a decision.
+- **Business model and unit economics**: price, cost, gross margin per order, repeat rate if known, refund/return rate, and for cash-on-delivery sellers the delivery rate. Without margin there is no allowable acquisition cost; compute it or ask (see `measurement.md`, section 7, and `media-buying` for break-even CPA).
+- **Customers today**: last 20 to 50 buyers, how they found you, what they said before buying. This is a better data source than any report.
+- **Current channels and results**: what exists (Facebook page, Instagram, WhatsApp, Google Business Profile, website, marketplace listings), what each produced in the last 90 days in leads and sales, not followers.
+- **Constraints**: budget, hours per week, skills, stock/capacity (do not create demand you cannot fulfil), legal limits (regulated sector), seasonality (see `../../media-buying/references/mena-and-egypt-notes.md`, section 7).
+- **Market and competitors**: use `competitor-research.md`; keep it to 3 direct and 2 indirect alternatives.
+- **Assumptions list**: every number you could not source goes here with how to verify it and by when.
+
+Stop condition: you can state in two sentences how the business makes money and which single bottleneck (awareness, conversion, retention, capacity) is most limiting. If you cannot, interview customers before continuing.
+
+## 3. Goals and marketing OKRs tied to revenue (step 2)
+- Start from one **business goal** with a number and a date (revenue, gross profit, bookings, qualified leads, paid subscribers). Marketing goals must trace to it.
+- Work backwards: revenue goal / average order value (or deal size) = orders needed; orders / conversion rate = leads or visits needed; this gives the volume the channels must deliver. Mark each rate as measured or assumed.
+- Write **2 to 3 OKRs per quarter**, each objective qualitative, each key result a number with a baseline, a target and an owner. Examples are in `measurement.md`, section 9.
+- Prefer outcome key results (qualified leads, delivered orders, repeat purchases) to activity (posts published) and to reach.
+- Include one **guardrail** metric (for example refund rate, complaint rate, cost per delivered order) so growth cannot be bought with bad customers.
+
+## 4. Segments (step 3)
+- Segment by **situation and job to be done**, not by demographics alone (see `positioning-and-messaging.md`, section 1). "Mothers 25 to 40 in Cairo" is a targeting filter; "needs a birthday cake delivered tomorrow without calling five shops" is a segment.
+- Rank segments by: size you can reach, pain intensity, ability to pay, ease of reaching them, and fit with what you do best. Pick one primary segment for the first 90 days. A second segment is allowed only if it uses the same message and channel.
+- For B2B, separate the **user**, the **buyer** (budget owner) and the **blocker** (IT, legal, procurement). Each needs different proof.
+- Record how the segment talks (words, dialect, objections) from real chats, reviews and calls.
+
+## 5. Positioning, offer, channels, budget (steps 4 to 7)
+- **Positioning**: one sentence in the template of `positioning-and-messaging.md`, section 10, with the proof you can show today.
+- **Offer**: the specific thing and terms (price, bundle, guarantee, delivery, payment options). Also an **entry offer** with low risk (trial, sample, small pack, consultation) that leads to the core offer. Check legality and honesty of every claim (no fake scarcity or fake discounts).
+- **Channels**: score candidates with `templates/channel-scorecard.md` and `funnel-and-channels.md`. Choose at most three for the first 90 days: one to capture existing demand, one to create demand, one owned channel to keep contacts. Write the "not now" list with reasons.
+- **Budget** (heuristics, adjust to margin):
+  - Reserve 10 to 20 percent for testing and surprises.
+  - Fund production and follow-up (content, creative, someone replying to WhatsApp within minutes) before media spend; ads sent to a slow inbox waste money.
+  - Split between channels by evidence after week 4; before that split by the scorecard and keep any single untested channel under about one third of media budget.
+  - Convert money to time: if the team has 6 hours a week, plan 6 hours.
+
+## 6. One-page strategy format
+Fill `templates/one-page-strategy.md`. Required blocks, in order:
+1. Business goal and date. 2. Primary segment and the job. 3. Positioning statement. 4. Core offer and entry offer. 5. Message pillars (3). 6. Channels in / out. 7. Budget and hours. 8. OKRs with baselines. 9. 90-day milestones. 10. Top 3 risks with triggers. 11. Decision dates: continue / change / stop.
+A strategy that does not fit one page is usually undecided, not detailed.
+
+## 7. Plan (step 8)
+- Use `templates/plan-30-60-90.md`. Days 1 to 30: foundations (tracking, offer page, WhatsApp flow, Google Business Profile, first content batch, first test). Days 31 to 60: run what works, kill what does not, add one channel. Days 61 to 90: scale the winner, build retention (email/WhatsApp, referrals), review.
+- **Weekly rhythm** (small team): Monday 30-minute plan and priorities; daily 15-minute inbox and comments pass; Thursday content/creative review; Friday numbers (5 metrics only) and one decision. Keep it to a single page of notes.
+- Every row of the plan has an owner, a date, a budget and the metric it moves.
+
+## 8. Risks and decision rules (step 9)
+List risks as "if X by date D, then we do Y". Typical ones: tracking not working by day 14 (delay spend), cost per lead above the allowable level after the learning period (change offer/creative before changing channel), reply time too slow (fix operations first), stock-outs, account restriction (see `media-buying` policy file), key person unavailable, a competitor price cut, Ramadan/White Friday timing missed.
+Every strategy needs: a metric, a threshold, a date, and a decision (continue / change / stop). Without these it is a wish list.
+
+## 9. Variants
+| Context | What changes |
+|---|---|
+| Small local business (shop, clinic, restaurant, salon) | Demand already exists nearby: win Google Maps/Business Profile, WhatsApp bookings, reviews and a simple offer before any brand work. Channels: GBP, Facebook/Instagram, WhatsApp, flyers/QR on premises. Goal metric: calls, bookings, walk-ins. |
+| Startup (product-market fit unproven) | Strategy is a learning plan. Goal: validate one segment and one channel; metric: activation and retention before acquisition volume. Do not scale paid until retention exists. |
+| Creator / personal brand | The asset is attention and trust. Pillars, consistency, one monetization path (course, service, sponsorship, product). Measure email/WhatsApp list growth and revenue per 1,000 followers, not only views. Disclose paid partnerships. |
+| B2B / services | Long cycle, few accounts. Strategy is account selection, proof (case studies), outbound with consent-aware targeting, LinkedIn and search for high-intent terms, sales follow-up. Metric: qualified meetings and pipeline, with sales agreement on what "qualified" means. |
+| E-commerce with COD | Report on confirmed and delivered orders, not placed orders; build confirmation via WhatsApp or call; prepaid incentives. See `../../media-buying/references/mena-and-egypt-notes.md`, section 6. |
+
+## 10. How to say no
+Good strategy removes options. Use these patterns:
+- **Not yet**: "This is a good channel; it fails the scorecard now because we cannot reply to leads within a day. Revisit on [date] if reply time is under [x]."
+- **Not us**: "It reaches people who do not buy this product at this price."
+- **Sequence**: "Doing it before the offer page is fixed would pay to send people to a page that does not convert."
+- **Evidence**: "Show me the customer who asked for it; otherwise we test it at one tenth of the cost."
+- **Trade-off**: "If we add TikTok we drop Instagram Reels for the quarter. Which do you prefer?"
+- **Ethics/law**: "That tactic (fake scarcity, undisclosed paid reviews, unsolicited bulk WhatsApp) risks account bans and legal exposure; here is the honest version."
+Write each refusal with the revisit date so it is a decision, not a veto.
+
+## 11. Worked example (illustrative only)
+Fictional business: "Warsha", a small leather-goods workshop in Giza selling bags and wallets online with cash on delivery plus a small showroom. All figures below are placeholders to show the structure; none is a benchmark or a real statistic.
+
+1. **Situation**: sells mainly through Instagram DMs and Facebook messages; no tracking of source; orders confirmed by phone. Assumptions to verify: average order value, margin per bag, share of orders refused at the door, repeat purchase rate.
+2. **Goal**: "Grow delivered revenue by [X percent] by end of Q1." OKR 1: delivered orders per month from [baseline] to [target]. OKR 2: share of buyers who purchase a second time within 90 days from [baseline] to [target]. Guardrail: refusal rate at the door not above [limit].
+3. **Segment**: working women 25 to 40 in Greater Cairo who need a bag for work that "looks professional but does not cost an import price" (job: look put-together at work without a big spend). Secondary: gift buyers (men buying for wives/mothers) before Eid.
+4. **Positioning** (see template): "For working women in Cairo who want a durable work bag, Warsha is a handmade leather bag brand that ships in 2 days and can be returned within 14 days, unlike imported bags with long waits and unclear warranty." Proof: real photos from the workshop, customer photos with permission, written repair policy.
+5. **Offer**: core: bag at listed price with COD. Entry: small wallet at a lower price with the same quality. Guarantee only if the policy is real and written.
+6. **Channels in**: WhatsApp (conversion), Instagram + Facebook (content and Meta ads later), Google Business Profile for the showroom. **Out for now**: TikTok (no video capacity yet), marketplaces (margin and brand control, revisit in 60 days), paid Google Search (low search volume for the niche is an assumption to check with keyword research).
+7. **Budget**: [monthly media amount] with 15 percent reserve; first 30 days mostly time and creative, little media.
+8. **Plan highlights**: week 1 tracking (WhatsApp source tags, order sheet with source column); week 2 product page and WhatsApp quick replies; weeks 3 to 4 content batch (workshop process, customer styling, FAQs); day 31 first Click-to-WhatsApp test (hand to `media-buying`); day 45 review reply times and refusal rate; day 60 decide on marketplace; day 75 post-purchase WhatsApp message with consent (see `email-and-whatsapp.md`).
+9. **Risks**: refusal at the door erodes margin (trigger: refusal above limit for two weeks, so require WhatsApp confirmation or prepaid incentive); inbox overload (trigger: first reply over a set number of minutes, so add a quick-reply flow before more spend); leather price changes (reprice list monthly).
+10. **Hand-offs**: `social-media-manager` for calendar and replies, `media-buying` for the CTWA test, `reels-studio` for 4 workshop reels, `creative-studio` for product photos and the logo lockup.
+
+## Sources
+- Internal skills for platform and Egypt context: `../../media-buying/references/mena-and-egypt-notes.md` (sections 3, 5, 6, 7, with its own source list), `../../social-media-manager/references/platforms/whatsapp.md`.
+- No external statistics are used in this file. Process content is established marketing practice, written as heuristics where numbers appear.

@@ -1,0 +1,44 @@
+{
+  "platform": "pinterest",
+  "verified": "2026-10-19",
+  "sources": [
+    "https://help.pinterest.com/en/article/review-pin-specs",
+    "https://help.pinterest.com/en/business/article/pinterest-product-specs",
+    "https://help.pinterest.com/en/business/article/schedule-pins",
+    "https://help.pinterest.com/en/article/comment-on-a-pin",
+    "https://help.pinterest.com/en/article/edit-your-profile",
+    "https://developers.pinterest.com/docs/reference/rate-limits.md",
+    "https://developers.pinterest.com/docs/key-concepts/access-tiers/",
+    "https://raw.githubusercontent.com/pinterest/api-description/main/v5/openapi.yaml",
+    "https://policy.pinterest.com/en/community-guidelines",
+    "https://policy.pinterest.com/en/developer-guidelines"
+  ],
+  "text": {
+    "post_max_chars": 800,
+    "caption_max_chars": 800,
+    "title_max_chars": 100,
+    "bio_max_chars": 500,
+    "comment_max_chars": 500,
+    "hashtags_max": null,
+    "mentions_max": 5,
+    "links_clickable_in_post": true
+  },
+  "formats": [
+    {"name": "image_pin", "ratio": "2:3", "recommended_px": "1000x1500", "min_len_s": null, "max_len_s": null, "max_file_mb": 20, "notes": "BMP/JPEG/PNG/TIFF/WEBP; 20 MB web upload; alt text 500; safe zone px top 270 left 65 right 195 bottom 790. Link (destination) 2048 chars via API."},
+    {"name": "video_pin", "ratio": "9:16", "recommended_px": "1080x1920", "min_len_s": 4, "max_len_s": 300, "max_file_mb": null, "notes": "MP4/M4V (web), MP4/MOV/M4V (apps), H.264 or H.265; 1:2, 2:3, 3:4, 4:5, 1:1 also accepted; 15-60 s recommended; needs cover image; organic file-size cap not confirmed"},
+    {"name": "carousel_pin", "ratio": "1:1 or 2:3", "recommended_px": "1000x1500", "min_len_s": null, "max_len_s": null, "max_file_mb": 20, "notes": "2-5 images (ad spec page and API multiple_image_urls); 20 MB per image per ad spec page; organic UI details not confirmed"}
+  ],
+  "unverified": [
+    "hashtags_max: no official count; hashtags in description link to a feed (2017 newsroom), current weight unknown; topic tags up to 10 at creation",
+    "links_clickable_in_post refers to the Pin destination link; links inside description not confirmed; comments allow only Pinterest links",
+    "post_max_chars/caption_max_chars use the 800-char Pin description limit",
+    "organic video file size cap",
+    "business display name limit and board name/description limits",
+    "username limit 3-30 appears on profile page, applicability confirmed only by context",
+    "schedule window conflict: schedule-pins page says 30 days and max 10 queued; performance page says two weeks",
+    "Egypt-specific user numbers, Arabic search maturity, Egyptian payment methods",
+    "hashtag habits in Arabic",
+    "organic carousel creation UI limits",
+    "copyright policy repeat-infringer details"
+  ]
+}

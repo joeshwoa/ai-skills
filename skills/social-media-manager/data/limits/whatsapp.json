@@ -1,0 +1,137 @@
+{
+  "platform": "whatsapp",
+  "verified": "2026-10-19",
+  "sources": [
+    "https://developers.facebook.com/docs/whatsapp/pricing",
+    "https://developers.facebook.com/documentation/business-messaging/whatsapp/messaging-limits.md",
+    "https://developers.facebook.com/documentation/business-messaging/whatsapp/upcoming-messaging-limits-changes.md",
+    "https://developers.facebook.com/documentation/business-messaging/whatsapp/throughput",
+    "https://developers.facebook.com/documentation/business-messaging/whatsapp/templates/overview",
+    "https://developers.facebook.com/documentation/business-messaging/whatsapp/templates/components.md",
+    "https://developers.facebook.com/documentation/business-messaging/whatsapp/templates/template-categorization.md",
+    "https://developers.facebook.com/documentation/business-messaging/whatsapp/templates/template-quality.md",
+    "https://developers.facebook.com/documentation/business-messaging/whatsapp/templates/marketing-templates/per-user-limits.md",
+    "https://developers.facebook.com/documentation/business-messaging/whatsapp/getting-opt-in.md",
+    "https://developers.facebook.com/documentation/business-messaging/whatsapp/policy-enforcement",
+    "https://developers.facebook.com/documentation/business-messaging/whatsapp/business-phone-numbers/media",
+    "https://developers.facebook.com/documentation/business-messaging/whatsapp/business-scoped-user-ids",
+    "https://developers.facebook.com/documentation/business-messaging/whatsapp/groups.md",
+    "https://whatsappbusiness.com/policy/",
+    "https://www.whatsapp.com/legal/business-solution-terms",
+    "https://faq.whatsapp.com/861663048350950/?cms_platform=android",
+    "https://faq.whatsapp.com/265055289421317",
+    "https://faq.whatsapp.com/582420703681043",
+    "https://blog.whatsapp.com/introducing-whatsapp-channels-a-private-way-to-follow-what-matters"
+  ],
+  "text": {
+    "post_max_chars": null,
+    "caption_max_chars": null,
+    "title_max_chars": 60,
+    "bio_max_chars": null,
+    "comment_max_chars": null,
+    "hashtags_max": null,
+    "mentions_max": null,
+    "links_clickable_in_post": true
+  },
+  "formats": [
+    {
+      "name": "template_body_header_footer",
+      "ratio": null,
+      "recommended_px": null,
+      "min_len_s": null,
+      "max_len_s": null,
+      "max_file_mb": null,
+      "notes": "Body 1024 chars, text header 60 (title_max_chars), footer 60, up to 10 buttons, button label 25, URL up to 2000 chars. Template name up to 512."
+    },
+    {
+      "name": "image",
+      "ratio": null,
+      "recommended_px": null,
+      "min_len_s": null,
+      "max_len_s": null,
+      "max_file_mb": 5,
+      "notes": "JPEG or PNG, 8-bit RGB or RGBA."
+    },
+    {
+      "name": "video",
+      "ratio": null,
+      "recommended_px": null,
+      "min_len_s": null,
+      "max_len_s": null,
+      "max_file_mb": 16,
+      "notes": "MP4 or 3GP, H.264 video, AAC audio (single or no audio stream)."
+    },
+    {
+      "name": "audio",
+      "ratio": null,
+      "recommended_px": null,
+      "min_len_s": null,
+      "max_len_s": null,
+      "max_file_mb": 16,
+      "notes": "AAC, AMR, MP3, M4A, OGG (OPUS, mono)."
+    },
+    {
+      "name": "document",
+      "ratio": null,
+      "recommended_px": null,
+      "min_len_s": null,
+      "max_len_s": null,
+      "max_file_mb": 100,
+      "notes": "PDF, TXT, DOC(X), XLS(X), PPT(X)."
+    },
+    {
+      "name": "sticker_static",
+      "ratio": null,
+      "recommended_px": null,
+      "min_len_s": null,
+      "max_len_s": null,
+      "max_file_mb": 0.1,
+      "notes": "WebP, 100 KB static; animated stickers 500 KB."
+    },
+    {
+      "name": "broadcast_list_business_app",
+      "ratio": null,
+      "recommended_px": null,
+      "min_len_s": null,
+      "max_len_s": null,
+      "max_file_mb": null,
+      "notes": "256 contacts per list; recipients must have your number saved; not on desktop or web."
+    },
+    {
+      "name": "channel_update",
+      "ratio": null,
+      "recommended_px": null,
+      "min_len_s": null,
+      "max_len_s": null,
+      "max_file_mb": null,
+      "notes": "Text, image, video, sticker, link, audio, poll. One-way; followers react or vote only. Insights cover last 30 days."
+    },
+    {
+      "name": "cloud_api_group",
+      "ratio": null,
+      "recommended_px": null,
+      "min_len_s": null,
+      "max_len_s": null,
+      "max_file_mb": null,
+      "notes": "Up to 8 participants per group and 10,000 groups per number; Official Business Account required."
+    }
+  ],
+  "unverified": [
+    "text.post_max_chars: free-form message length (commonly cited 4096, not confirmed)",
+    "text.caption_max_chars: media caption length",
+    "text.bio_max_chars: Business profile About and description limits",
+    "Egypt per-message rates for marketing, utility, authentication, service (rate card login-gated; vendor figures unsourced)",
+    "pair rate limit number",
+    "video and audio maximum duration",
+    "interactive message (buttons, lists, catalog) per-type limits",
+    "Status: 24 h life and specs",
+    "Community member and group limits (page read says 2,000 members per community; re-check)",
+    "Business Broadcast availability in Egypt",
+    "Channels Guidelines text and Channel-specific rules",
+    "App Review and Advanced Access requirements for WhatsApp permissions",
+    "WhatsApp-specific giveaway and promotion rules",
+    "Arabic template review and RTL rendering behavior (vendor claim only)",
+    "Egypt payment, billing currency and verification document requirements (vendor claim only)",
+    "pricing details as summarized from the pricing page on 2026-10-19: re-check 1,000 free service messages and utility-in-window charging effective 2026-10-01 before quoting"
+  ]
+}

@@ -1,0 +1,1447 @@
+{
+ "generated_from": "data/limits/*.json",
+ "platforms": {
+  "facebook": {
+   "platform": "facebook",
+   "verified": "2026-10-19",
+   "sources": [
+    "https://developers.facebook.com/docs/video-api/guides/reels-publishing",
+    "https://developers.facebook.com/docs/page-stories-api/",
+    "https://developers.facebook.com/docs/graph-api/reference/page/feed/",
+    "https://developers.facebook.com/documentation/pages-api/posts",
+    "https://developers.facebook.com/docs/graph-api/overview/rate-limiting",
+    "https://developers.facebook.com/documentation/pages-api/platforminsights/page/deprecated-metrics.md",
+    "https://developers.facebook.com/documentation/business-messaging/messenger-platform/policy",
+    "https://creators.facebook.com/blog/combating-unoriginal-content",
+    "https://typecount.com/blog/facebook-post-character-limit-2026",
+    "https://datareportal.com/reports/digital-2026-egypt"
+   ],
+   "text": {
+    "post_max_chars": 63206,
+    "caption_max_chars": null,
+    "title_max_chars": null,
+    "bio_max_chars": null,
+    "comment_max_chars": 8000,
+    "hashtags_max": null,
+    "mentions_max": null,
+    "links_clickable_in_post": true
+   },
+   "formats": [
+    {
+     "name": "text_post",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": null,
+     "notes": "Needs message or link. Visible length before See more about 125 chars mobile (third-party)."
+    },
+    {
+     "name": "photo_post",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": null,
+     "notes": "Ratio and size not confirmed from a Meta source. API posts via /page-id/photos with public url."
+    },
+    {
+     "name": "link_post",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": null,
+     "notes": "Custom preview only if Page owns and verified the domain. Thumbnail jpg, jpeg, gif or png."
+    },
+    {
+     "name": "feed_video",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": null,
+     "notes": "API upload accepts video/mp4 only. Max length and size not confirmed."
+    },
+    {
+     "name": "reel",
+     "ratio": "9:16",
+     "recommended_px": "1080x1920",
+     "min_len_s": 3,
+     "max_len_s": 90,
+     "max_file_mb": null,
+     "notes": "Min 540x960. mp4, H.264 or H.265, 24-60 fps, AAC 48 kHz. Public only. 30 published per Page per 24 h via API."
+    },
+    {
+     "name": "story_photo",
+     "ratio": "9:16",
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": 10,
+     "notes": "JPEG, BMP, PNG, GIF, TIFF. Keep PNG under about 1 MB. Media already in a published post cannot be reused."
+    },
+    {
+     "name": "story_video",
+     "ratio": "9:16",
+     "recommended_px": "1080x1920",
+     "min_len_s": 3,
+     "max_len_s": 60,
+     "max_file_mb": null,
+     "notes": "Page story video cannot exceed 60 s. Min 540x960. 24-60 fps."
+    },
+    {
+     "name": "live_video",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": null,
+     "notes": "Needs publish_video permission for API. Limits not confirmed."
+    }
+   ],
+   "unverified": [
+    "text.post_max_chars 63206 (third-party only)",
+    "text.comment_max_chars 8000 (third-party only)",
+    "text.bio_max_chars and Page name and description limits (third-party figures inconsistent)",
+    "text.hashtags_max: no official cap; Meta creator guidance recommends at most 5",
+    "text.mentions_max",
+    "photo post ratio and file size",
+    "feed video max length and file size",
+    "live video limits",
+    "Facebook Groups API publishing status",
+    "Meta Business Suite scheduling lead time (API docs conflict: 29, 30 or 75 days)",
+    "Community Standards wording for spam, engagement bait, inauthentic behavior",
+    "Facebook promotions (giveaway) rules text",
+    "Partner Monetization policy details",
+    "Egypt billing, verification and influencer-regulation specifics"
+   ]
+  },
+  "google-business-profile": {
+   "platform": "google-business-profile",
+   "verified": "2026-10-19",
+   "sources": [
+    "https://support.google.com/business/answer/7662907",
+    "https://support.google.com/business/answer/6103862",
+    "https://support.google.com/business/answer/3038177",
+    "https://support.google.com/business/answer/3474050",
+    "https://support.google.com/contributionpolicy/answer/7400114",
+    "https://developers.google.com/my-business/content/prereqs",
+    "https://developers.google.com/my-business/content/limits",
+    "https://developers.google.com/my-business/content/latest-updates",
+    "https://developers.google.com/my-business/reference/performance/rest/v1/DailyMetric"
+   ],
+   "text": {
+    "post_max_chars": null,
+    "caption_max_chars": null,
+    "title_max_chars": null,
+    "bio_max_chars": null,
+    "comment_max_chars": null,
+    "hashtags_max": null,
+    "mentions_max": null,
+    "links_clickable_in_post": false
+   },
+   "formats": [
+    {
+     "name": "post_update_offer_event",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": null,
+     "notes": "Links only via action button (book, order, learn more, call now); posts older than 6 months archived unless date range set; Offer needs title+dates+times; Event needs title+start/end; hotels cannot post offers; phone numbers in text may be rejected"
+    },
+    {
+     "name": "photo",
+     "ratio": "1:1",
+     "recommended_px": "720x720",
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": 5,
+     "notes": "JPG or PNG, 10 KB to 5 MB, minimum 250x250 px; shows only after verification; ratio 1:1 is a practitioner convention, official page gives 720x720 recommended"
+    },
+    {
+     "name": "video",
+     "ratio": null,
+     "recommended_px": "720p or higher",
+     "min_len_s": null,
+     "max_len_s": 30,
+     "max_file_mb": 75,
+     "notes": "Up to 30 seconds, up to 75 MB, 720p or higher; shows only after verification"
+    }
+   ],
+   "unverified": [
+    "post description max chars (practitioner observation 1500, not on official pages read)",
+    "post title max chars for offer and event posts",
+    "business description max chars (practitioner observation 750)",
+    "review reply max chars (practitioner observation 4096)",
+    "post image aspect ratio",
+    "hashtag and mention support in posts",
+    "links_clickable_in_post false means plain links are not supported in post text; links go through action buttons",
+    "Q&A discontinuation date and AI Ask replacement (secondary source ppc.land only)",
+    "chat/messages removal date (secondary source only; BUSINESS_CONVERSATIONS marked deprecated officially)",
+    "API-side scheduled publish time for posts",
+    "Notifications API review notification types",
+    "Egypt-specific address, bilingual naming and payment details",
+    "Arabic review translation behaviour",
+    "Egypt Consumer Protection Law 181 of 2018 details"
+   ]
+  },
+  "instagram": {
+   "platform": "instagram",
+   "verified": "2026-10-19",
+   "sources": [
+    "https://developers.facebook.com/documentation/instagram-platform/content-publishing",
+    "https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media",
+    "https://developers.facebook.com/docs/instagram-platform/overview/",
+    "https://developers.facebook.com/documentation/instagram-platform/instagram-api-with-instagram-login/messaging-api",
+    "https://developers.facebook.com/documentation/instagram-platform/reference/instagram-media/insights",
+    "https://developers.facebook.com/documentation/business-messaging/messenger-platform/overview/rate-limiting",
+    "https://creators.instagram.com/blog/the-latest-with-instagram",
+    "https://about.instagram.com/blog/announcements/introducing-broadcast-channels/",
+    "https://www.socialmediatoday.com/news/instagram-implements-new-limits-on-hashtag-use/808309/",
+    "https://bitly.com/blog/instagram-character-limit/",
+    "https://datareportal.com/reports/digital-2026-egypt"
+   ],
+   "text": {
+    "post_max_chars": null,
+    "caption_max_chars": 2200,
+    "title_max_chars": null,
+    "bio_max_chars": 150,
+    "comment_max_chars": 2200,
+    "hashtags_max": 5,
+    "mentions_max": 20,
+    "links_clickable_in_post": false
+   },
+   "formats": [
+    {
+     "name": "feed_image",
+     "ratio": "4:5 to 1.91:1",
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": 8,
+     "notes": "JPEG only, sRGB, width 320-1440 px (API). Alt text up to 1000 chars."
+    },
+    {
+     "name": "carousel",
+     "ratio": "1:1 default (first item sets ratio)",
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": null,
+     "notes": "API max 10 items; app limit reported as 20 (third-party headline). Counts as one post for the API cap."
+    },
+    {
+     "name": "reel",
+     "ratio": "9:16",
+     "recommended_px": "1080x1920",
+     "min_len_s": 3,
+     "max_len_s": 900,
+     "max_file_mb": 300,
+     "notes": "API range 3 s to 15 min. App editor limit 3 min announced 2025-01-21 for US; other regions unverified. MOV or MP4, H.264/HEVC, 23-60 fps, max width 1920."
+    },
+    {
+     "name": "trial_reel",
+     "ratio": "9:16",
+     "recommended_px": "1080x1920",
+     "min_len_s": 3,
+     "max_len_s": 900,
+     "max_file_mb": 300,
+     "notes": "Shown to non-followers first; graduation MANUAL or SS_PERFORMANCE."
+    },
+    {
+     "name": "story_image",
+     "ratio": "9:16",
+     "recommended_px": "1080x1920",
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": 8,
+     "notes": "JPEG sRGB. 24 h life. API cannot add link, poll or location stickers."
+    },
+    {
+     "name": "story_video",
+     "ratio": "9:16",
+     "recommended_px": "1080x1920",
+     "min_len_s": 3,
+     "max_len_s": 60,
+     "max_file_mb": 100,
+     "notes": "MOV or MP4, 23-60 fps (API)."
+    },
+    {
+     "name": "broadcast_channel_message",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": null,
+     "notes": "One-way from creator: text, photo, video, voice note, polls. No member cap stated."
+    },
+    {
+     "name": "dm_media",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": 25,
+     "notes": "Image 8 MB, audio/video/pdf 25 MB. Text max 1000 bytes. 24 h window."
+    }
+   ],
+   "unverified": [
+    "text.hashtags_max: Instagram rolled out 5 per post from Dec 2025 (secondary reporting); API docs still say 30",
+    "text.bio_max_chars 150 and username 30 (third-party only)",
+    "text.comment_max_chars 2200 (third-party only)",
+    "text.links_clickable_in_post false (long-standing behavior, not re-verified from Meta)",
+    "display name limit",
+    "app Reels max length outside the US and any change after Jan 2025",
+    "whether Reels longer than 3 minutes are recommended",
+    "in-app carousel limit of 20 (headline from TechRadar only)",
+    "feed video spec separate from Reels",
+    "Live limits",
+    "Broadcast channel member cap and API support",
+    "Instagram promotion (giveaway) guidelines text",
+    "Terms wording on automation, fake engagement, impersonation",
+    "partnership ads eligibility page text",
+    "API publishing cap: docs state both 100 and 50 posts per 24 h",
+    "comment hide and delete endpoint details",
+    "Egypt billing, Meta Verified and influencer-licensing specifics"
+   ]
+  },
+  "linkedin": {
+   "platform": "linkedin",
+   "verified": "2026-10-19",
+   "sources": [
+    "https://learn.microsoft.com/en-us/linkedin/marketing/community-management/shares/posts-api?view=li-lms-2026-10",
+    "https://learn.microsoft.com/en-us/linkedin/marketing/community-management/shares/videos-api?view=li-lms-2026-10",
+    "https://learn.microsoft.com/en-us/linkedin/marketing/community-management/shares/documents-api?view=li-lms-2026-10",
+    "https://learn.microsoft.com/en-us/linkedin/marketing/community-management/shares/images-api?view=li-lms-2026-10",
+    "https://learn.microsoft.com/en-us/linkedin/marketing/community-management/shares/comments-api?view=li-lms-2026-10",
+    "https://learn.microsoft.com/en-us/linkedin/marketing/increasing-access?view=li-lms-2025-10",
+    "https://learn.microsoft.com/en-us/linkedin/consumer/integrations/live-video/",
+    "https://eden.so/blog/linkedin-character-limits/",
+    "https://contentin.io/blog/linkedin-post-specs/",
+    "https://datareportal.com/reports/digital-2026-egypt"
+   ],
+   "text": {
+    "post_max_chars": 3000,
+    "caption_max_chars": 3000,
+    "title_max_chars": null,
+    "bio_max_chars": null,
+    "comment_max_chars": null,
+    "hashtags_max": null,
+    "mentions_max": null,
+    "links_clickable_in_post": true
+   },
+   "formats": [
+    {
+     "name": "text_post",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": null,
+     "notes": "3000 chars (secondary sources); mobile feed truncates after ~140-210 chars"
+    },
+    {
+     "name": "single_image",
+     "ratio": "1:1 or 4:5",
+     "recommended_px": "1080x1350",
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": null,
+     "notes": "JPG/PNG/GIF; under 36,152,320 pixels; GIF up to 250 frames; no official MB cap found"
+    },
+    {
+     "name": "multi_image",
+     "ratio": "1:1 or 4:5",
+     "recommended_px": "1080x1350",
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": null,
+     "notes": "organic only; up to 20 images per secondary source"
+    },
+    {
+     "name": "document_carousel",
+     "ratio": "4:5 or 1:1",
+     "recommended_px": "1080x1350",
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": 100,
+     "notes": "PDF/PPT/PPTX/DOC/DOCX; max 300 pages (API doc)"
+    },
+    {
+     "name": "video",
+     "ratio": "9:16",
+     "recommended_px": "1080x1920",
+     "min_len_s": 3,
+     "max_len_s": 1800,
+     "max_file_mb": 500,
+     "notes": "MP4; API doc says 3s-30min, 75KB-500MB spec table (API field max 5GB); UI organic cap reported 10-15 min (secondary); captions one SRT English only via API"
+    },
+    {
+     "name": "link_post",
+     "ratio": "1.91:1",
+     "recommended_px": "1200x627",
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": null,
+     "notes": "API requires title, description, thumbnail; no URL scraping via API"
+    },
+    {
+     "name": "poll",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": null,
+     "notes": "organic only via Posts API; option limits not verified"
+    },
+    {
+     "name": "article_long_form",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": null,
+     "notes": "title ~150 chars, body ~110000 chars from a single secondary source; no publishing API found"
+    },
+    {
+     "name": "live",
+     "ratio": "16:9",
+     "recommended_px": "1920x1080",
+     "min_len_s": null,
+     "max_len_s": 14400,
+     "max_file_mb": null,
+     "notes": "application-based beta; H.264+AAC; max 30fps, 6 Mbps video, RTMP(S) ingest"
+    }
+   ],
+   "unverified": [
+    "text.comment_max_chars (secondary source says 1250)",
+    "text.bio_max_chars / headline 220 / About 2600 (single secondary source)",
+    "text.title_max_chars (article title 150, secondary only)",
+    "text.hashtags_max (no official cap found; 3-5 is marketing advice)",
+    "text.mentions_max",
+    "post_max_chars 3000 (confirmed only by secondary sources; LinkedIn Help blocked by robots)",
+    "image file-size cap and multi-image count of 20",
+    "organic video UI length cap (10 vs 15 min)",
+    "poll option and duration limits",
+    "Newsletter and Article publishing rules and API support",
+    "Page scheduled-post limits (how far ahead / how many)",
+    "Brand-partnership label eligibility",
+    "Giveaway/contest policy, engagement-pod policy wording, minimum age",
+    "Arabic/RTL rendering specifics and Arabic hashtag behaviour",
+    "Messaging/DM API availability",
+    "LinkedIn Ads payment and ID-verification options for Egyptian entities",
+    "Other Arab countries' member counts"
+   ]
+  },
+  "messaging-and-community-channels": {
+   "platform": "messaging-and-community-channels",
+   "verified": "2026-10-19",
+   "sources": [
+    "https://docs.discord.com/developers/topics/rate-limits",
+    "https://docs.discord.com/developers/resources/message",
+    "https://developers.facebook.com/docs/messenger-platform/policy/policy-overview",
+    "https://developers.facebook.com/docs/instagram-platform/instagram-api-with-instagram-login/messaging-api",
+    "https://developers.facebook.com/docs/graph-api/overview/rate-limiting",
+    "https://developers.facebook.com/docs/whatsapp/cloud-api/reference/messages",
+    "https://developers.facebook.com/docs/whatsapp/messaging-limits",
+    "https://developers.facebook.com/docs/whatsapp/pricing",
+    "https://whatsappbusiness.com/policy/",
+    "https://core.telegram.org/bots/api",
+    "https://core.telegram.org/bots/faq"
+   ],
+   "text": {
+    "post_max_chars": null,
+    "caption_max_chars": 1024,
+    "title_max_chars": null,
+    "bio_max_chars": null,
+    "comment_max_chars": null,
+    "hashtags_max": null,
+    "mentions_max": null,
+    "links_clickable_in_post": null
+   },
+   "formats": [
+    {
+     "name": "discord_message",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": null,
+     "notes": "content up to 2000 chars; up to 10 embeds, 6000 chars total across embed text fields; global API rate 50 req/s per bot"
+    },
+    {
+     "name": "messenger_message",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": null,
+     "notes": "24h standard window (7 days after click-to-message ad first message); Human Agent tag 7 days; up to 30 images per attachments array; automated bots must respond within 30 s; text length not confirmed"
+    },
+    {
+     "name": "instagram_dm",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": 25,
+     "notes": "text up to 1000 bytes UTF-8 (about 500 Arabic chars); image png/jpeg 8 MB, up to 10 per message; audio, video, pdf 25 MB; private reply once per commenter within 7 days"
+    },
+    {
+     "name": "whatsapp_text",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": null,
+     "notes": "body 4096 chars; interactive body 1024, footer 60, header text 60; 3 reply buttons of 20 chars; list 10 rows; template body 1024 chars with other components; 24h customer service window; new portfolio limit 250 unique users per 24h outside window, scaling to 2000"
+    },
+    {
+     "name": "telegram_message",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": 50,
+     "notes": "text 4096 chars; caption 1024; bots send files up to 50 MB, download up to 20 MB; about 1 msg/s per chat, 20/min per group, about 30/s bulk"
+    }
+   ],
+   "unverified": [
+    "Messenger text max length",
+    "Discord username/nickname/channel name limits and attachment upload limits",
+    "WhatsApp image, video, audio, document size limits",
+    "WhatsApp Channels and broadcast list limits (official FAQ pages not fetchable)",
+    "Instagram Send API text rate: 100 calls/s vs 300 calls/s conflict in one Meta document",
+    "Telegram channel description limit and username limits",
+    "Telegram paid broadcast Stars balance requirement text was truncated on the FAQ page",
+    "Discord, Telegram, Meta appeal paths",
+    "Business verification requirements in Egypt, WhatsApp Egyptian rate and payment methods",
+    "Egypt Personal Data Protection Law 151 of 2020 details",
+    "statistics about channel usage in Egypt",
+    "Discord Server Insights and Meta inbox metric definitions",
+    "caption_max_chars refers to Telegram media caption only"
+   ]
+  },
+  "pinterest": {
+   "platform": "pinterest",
+   "verified": "2026-10-19",
+   "sources": [
+    "https://help.pinterest.com/en/article/review-pin-specs",
+    "https://help.pinterest.com/en/business/article/pinterest-product-specs",
+    "https://help.pinterest.com/en/business/article/schedule-pins",
+    "https://help.pinterest.com/en/article/comment-on-a-pin",
+    "https://help.pinterest.com/en/article/edit-your-profile",
+    "https://developers.pinterest.com/docs/reference/rate-limits.md",
+    "https://developers.pinterest.com/docs/key-concepts/access-tiers/",
+    "https://raw.githubusercontent.com/pinterest/api-description/main/v5/openapi.yaml",
+    "https://policy.pinterest.com/en/community-guidelines",
+    "https://policy.pinterest.com/en/developer-guidelines"
+   ],
+   "text": {
+    "post_max_chars": 800,
+    "caption_max_chars": 800,
+    "title_max_chars": 100,
+    "bio_max_chars": 500,
+    "comment_max_chars": 500,
+    "hashtags_max": null,
+    "mentions_max": 5,
+    "links_clickable_in_post": true
+   },
+   "formats": [
+    {
+     "name": "image_pin",
+     "ratio": "2:3",
+     "recommended_px": "1000x1500",
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": 20,
+     "notes": "BMP/JPEG/PNG/TIFF/WEBP; 20 MB web upload; alt text 500; safe zone px top 270 left 65 right 195 bottom 790. Link (destination) 2048 chars via API."
+    },
+    {
+     "name": "video_pin",
+     "ratio": "9:16",
+     "recommended_px": "1080x1920",
+     "min_len_s": 4,
+     "max_len_s": 300,
+     "max_file_mb": null,
+     "notes": "MP4/M4V (web), MP4/MOV/M4V (apps), H.264 or H.265; 1:2, 2:3, 3:4, 4:5, 1:1 also accepted; 15-60 s recommended; needs cover image; organic file-size cap not confirmed"
+    },
+    {
+     "name": "carousel_pin",
+     "ratio": "1:1 or 2:3",
+     "recommended_px": "1000x1500",
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": 20,
+     "notes": "2-5 images (ad spec page and API multiple_image_urls); 20 MB per image per ad spec page; organic UI details not confirmed"
+    }
+   ],
+   "unverified": [
+    "hashtags_max: no official count; hashtags in description link to a feed (2017 newsroom), current weight unknown; topic tags up to 10 at creation",
+    "links_clickable_in_post refers to the Pin destination link; links inside description not confirmed; comments allow only Pinterest links",
+    "post_max_chars/caption_max_chars use the 800-char Pin description limit",
+    "organic video file size cap",
+    "business display name limit and board name/description limits",
+    "username limit 3-30 appears on profile page, applicability confirmed only by context",
+    "schedule window conflict: schedule-pins page says 30 days and max 10 queued; performance page says two weeks",
+    "Egypt-specific user numbers, Arabic search maturity, Egyptian payment methods",
+    "hashtag habits in Arabic",
+    "organic carousel creation UI limits",
+    "copyright policy repeat-infringer details"
+   ]
+  },
+  "reddit": {
+   "platform": "reddit",
+   "verified": "2026-10-19",
+   "sources": [
+    "https://support.reddithelp.com/hc/en-us/articles/16160319875092-Reddit-Data-API-Wiki",
+    "https://support.reddithelp.com/hc/en-us/articles/205926439-Reddiquette",
+    "https://support.reddithelp.com/hc/en-us/articles/360043504051",
+    "https://support.reddithelp.com/hc/en-us/articles/23972085214484-What-s-a-brand-affiliate-tag",
+    "https://ag.ny.gov/sites/default/files/social-media-policy-report/2025-q4-reddit-inc-policy.pdf",
+    "https://docs.n8n.io/integrations/builtin/credentials/reddit.md",
+    "https://typecount.com/blog/reddit-post-character-limit",
+    "https://docs.zernio.com/platforms/reddit",
+    "https://datareportal.com/reports/digital-2026-egypt"
+   ],
+   "text": {
+    "post_max_chars": 40000,
+    "caption_max_chars": null,
+    "title_max_chars": 300,
+    "bio_max_chars": null,
+    "comment_max_chars": 10000,
+    "hashtags_max": null,
+    "mentions_max": null,
+    "links_clickable_in_post": true
+   },
+   "formats": [
+    {
+     "name": "text_post",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": null,
+     "notes": "title 300 (not editable after posting), body 40000 chars; figures from third-party sources"
+    },
+    {
+     "name": "link_post",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": null,
+     "notes": "avoid link shorteners (Reddiquette)"
+    },
+    {
+     "name": "image",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": 20,
+     "notes": "JPEG/PNG/GIF up to 20 MB each per third-party API doc"
+    },
+    {
+     "name": "gallery",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": 20,
+     "notes": "2-20 images per third-party doc"
+    },
+    {
+     "name": "video",
+     "ratio": null,
+     "recommended_px": "1920x1080",
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": 1024,
+     "notes": "1 MP4 up to 1 GB, transcoded to max 1080p 30fps (third-party); duration cap unverified"
+    },
+    {
+     "name": "poll",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": null,
+     "notes": "in-app only; not creatable via API per third-party doc"
+    },
+    {
+     "name": "comment",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": null,
+     "notes": "10000 chars (third-party); edits show asterisk after 3 minutes (Reddiquette)"
+    }
+   ],
+   "unverified": [
+    "all character limits (title 300, body 40000, comment 10000) come from third-party sources, not Reddit docs",
+    "text.bio_max_chars, username and flair limits",
+    "text.hashtags_max (Reddit has no hashtag system; practitioner knowledge)",
+    "text.mentions_max",
+    "image/gallery/video size and duration caps (third-party API-wrapper docs)",
+    "video duration cap",
+    "commercial API pricing (about $0.24 per 1000 calls) and approval timeline (third-party)",
+    "Responsible Builder Policy full text and review SLA (read via community mirror)",
+    "Reddit Data API Terms and Reddit Rules full text (redditinc.com blocked)",
+    "Reddit Pro eligibility, price, scheduling features",
+    "Brand Affiliate tag obligations (official page says option; third party says required)",
+    "sitewide contest/giveaway rules, copyright, health/finance and age-gating details",
+    "native analytics metric definitions",
+    "Arabic/Egypt subreddit rules, RTL rendering and Egyptian billing for Reddit Ads"
+   ]
+  },
+  "snapchat": {
+   "platform": "snapchat",
+   "verified": "2026-10-19",
+   "sources": [
+    "https://developers.snap.com/api/marketing-api/Public-Profile-API/ProfileAssetManagement",
+    "https://developers.snap.com/api/marketing-api/Public-Profile-API/GetStarted",
+    "https://help.snapchat.com/hc/en-us/articles/14669003687444-About-Snapchat-s-Monetization-Program",
+    "https://values.snap.com/policy/content-guidelines-recommendation-eligibility/recommendation-eligibility/quality",
+    "https://snap.com/terms/commercial-content",
+    "https://help.snapchat.com/hc/en-us/articles/24892451593108-Viewing-and-Understanding-Analytics"
+   ],
+   "text": {
+    "post_max_chars": null,
+    "caption_max_chars": 160,
+    "title_max_chars": 45,
+    "bio_max_chars": null,
+    "comment_max_chars": null,
+    "hashtags_max": null,
+    "mentions_max": null,
+    "links_clickable_in_post": null
+   },
+   "formats": [
+    {
+     "name": "public_story_video",
+     "ratio": "9:16",
+     "recommended_px": "1080x1920",
+     "min_len_s": 5,
+     "max_len_s": 60,
+     "max_file_mb": 1024,
+     "notes": "API limits: mp4, min 540x960, media object must be used within 24h of creation; story visible up to 24h unless saved. Ratio not stated officially, 9:16 inferred from portrait minimum."
+    },
+    {
+     "name": "spotlight",
+     "ratio": "9:16",
+     "recommended_px": "1080x1920",
+     "min_len_s": 6,
+     "max_len_s": 60,
+     "max_file_mb": 1024,
+     "notes": "API limits: mp4, min 540x960, description max 160 chars incl hashtags. Needs 30s or longer to earn monetization revenue."
+    },
+    {
+     "name": "saved_story",
+     "ratio": "9:16",
+     "recommended_px": "1080x1920",
+     "min_len_s": null,
+     "max_len_s": 300,
+     "max_file_mb": null,
+     "notes": "API: combined snaps max 5 minutes, title max 45 chars."
+    }
+   ],
+   "unverified": [
+    "caption_max_chars is the Spotlight description limit from the API; in-app limit not confirmed",
+    "post_max_chars, bio_max_chars, display name and username limits",
+    "comment_max_chars",
+    "hashtags_max and mentions_max",
+    "links_clickable_in_post; in-app Story link behaviour",
+    "Story image specs",
+    "Live format for public profiles",
+    "native scheduling for Stories and Spotlight",
+    "API rate limits",
+    "Egypt eligibility for the Monetization Program and payout methods",
+    "Egypt-specific user numbers after January 2025",
+    "Arabic/RTL caption rendering"
+   ]
+  },
+  "telegram": {
+   "platform": "telegram",
+   "verified": "2026-10-19",
+   "sources": [
+    "https://core.telegram.org/bots/api",
+    "https://core.telegram.org/bots/api-changelog",
+    "https://core.telegram.org/bots/faq",
+    "https://core.telegram.org/bots/features",
+    "https://core.telegram.org/api/config",
+    "https://core.telegram.org/api/channel",
+    "https://core.telegram.org/api/scheduled-messages",
+    "https://telegram.org/faq",
+    "https://telegram.org/faq_channels",
+    "https://telegram.org/faq_spam",
+    "https://telegram.org/tos",
+    "https://telegram.org/tos/bot-developers",
+    "https://docs.aiogram.dev/en/latest/api/methods/send_message.html",
+    "https://docs.aiogram.dev/en/latest/api/methods/send_photo.html",
+    "https://docs.aiogram.dev/en/latest/api/methods/send_media_group.html",
+    "https://docs.aiogram.dev/en/latest/api/methods/send_poll.html",
+    "https://docs.aiogram.dev/en/latest/api/methods/post_story.html"
+   ],
+   "text": {
+    "post_max_chars": 4096,
+    "caption_max_chars": 1024,
+    "title_max_chars": null,
+    "bio_max_chars": 70,
+    "comment_max_chars": null,
+    "hashtags_max": null,
+    "mentions_max": null,
+    "links_clickable_in_post": true
+   },
+   "formats": [
+    {
+     "name": "text message",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": null,
+     "notes": "1-4096 chars after entities parsing; Bot API"
+    },
+    {
+     "name": "photo",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": 10,
+     "notes": "Bot API: width+height <= 10000, ratio <= 20; caption 1024"
+    },
+    {
+     "name": "album",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": null,
+     "notes": "2-10 items; documents/audio only grouped with same type"
+    },
+    {
+     "name": "video or file (Bot API upload)",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": 50,
+     "notes": "Bot API upload 50 MB, download 20 MB; local Bot API server upload 2000 MB; user clients 2 GB (4 GB Premium)"
+    },
+    {
+     "name": "poll",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": 5,
+     "max_len_s": 2628000,
+     "max_file_mb": null,
+     "notes": "question 1-300 chars, 1-12 options, open_period seconds"
+    },
+    {
+     "name": "story via Bot API (business account)",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": null,
+     "notes": "active_period 6/12/24/48 h; caption 0-2048; business account only"
+    },
+    {
+     "name": "channel story (client)",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": null,
+     "notes": "posted by Premium admin with post_stories right; needs channel boosts; story caption 200 free / 2048 Premium"
+    }
+   ],
+   "unverified": [
+    "title_max_chars (channel/group title)",
+    "channel/group description max chars (commonly cited 255)",
+    "comment_max_chars as a distinct rule",
+    "hashtags_max and mentions_max",
+    "recommended px and max duration for video/story",
+    "Telegram user count in Egypt",
+    "RTL rendering rules",
+    "Bot API scheduling parameter (none found)",
+    "bot-accessible channel analytics",
+    "maximum scheduled messages per chat and scheduling horizon",
+    "minimum subscriber threshold for channel statistics",
+    "paid-partnership label existence",
+    "Egypt Consumer Protection Law reference",
+    "bots cannot initiate conversations (not confirmed in pages fetched this run)"
+   ]
+  },
+  "threads": {
+   "platform": "threads",
+   "verified": "2026-10-19",
+   "sources": [
+    "https://developers.facebook.com/documentation/threads/overview",
+    "https://developers.facebook.com/documentation/threads/posts",
+    "https://developers.facebook.com/documentation/threads/create-posts/text-attachments.md",
+    "https://developers.facebook.com/documentation/threads/create-posts/polls.md",
+    "https://developers.facebook.com/documentation/threads/create-posts/ghost-posts.md",
+    "https://developers.facebook.com/documentation/threads/insights.md",
+    "https://developers.facebook.com/documentation/threads/keyword-search.md",
+    "https://developers.facebook.com/documentation/threads/webhooks.md",
+    "https://help.instagram.com/1356090605000312",
+    "https://about.fb.com/news/2025/10/introducing-disappearing-posts-on-threads/",
+    "https://datareportal.com/reports/digital-2026-egypt"
+   ],
+   "text": {
+    "post_max_chars": 500,
+    "caption_max_chars": 500,
+    "title_max_chars": null,
+    "bio_max_chars": null,
+    "comment_max_chars": null,
+    "hashtags_max": 1,
+    "mentions_max": null,
+    "links_clickable_in_post": true
+   },
+   "formats": [
+    {
+     "name": "text_post",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": null,
+     "notes": "500 chars; emojis count by UTF-8 bytes; up to 5 unique links; link attachment text-only posts"
+    },
+    {
+     "name": "text_attachment",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": null,
+     "notes": "up to 10000 chars plus one link; text-only posts, not with polls; styling bold/italic/highlight/underline/strikethrough"
+    },
+    {
+     "name": "image",
+     "ratio": "10:1 max",
+     "recommended_px": "1440 wide",
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": 8,
+     "notes": "JPEG/PNG, sRGB, width 320-1440"
+    },
+    {
+     "name": "video",
+     "ratio": "9:16",
+     "recommended_px": "1080x1920",
+     "min_len_s": null,
+     "max_len_s": 300,
+     "max_file_mb": 1024,
+     "notes": "MOV/MP4, H.264 or HEVC, AAC, 23-60 fps, max width 1920, ratio 0.01:1 to 10:1"
+    },
+    {
+     "name": "carousel",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": null,
+     "notes": "2 to 20 items, images and/or videos; counts as one post toward 250/24h API limit"
+    },
+    {
+     "name": "poll",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": null,
+     "notes": "text-only post; 2-4 options, 1-25 chars each; not shared to fediverse"
+    },
+    {
+     "name": "ghost_post",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": 86400,
+     "max_file_mb": null,
+     "notes": "text only via API; archived after 24 hours; replies go to messages; cannot be a reply"
+    }
+   ],
+   "unverified": [
+    "text.bio_max_chars and username limits",
+    "text.comment_max_chars (replies assumed same as posts)",
+    "text.mentions_max",
+    "Arabic/RTL and Arabic character counting behaviour",
+    "poll duration limits",
+    "native scheduling availability (announced as a test Aug 2024)",
+    "ranking signals (no official Meta statement read)",
+    "Threads-specific spam, giveaway, minimum-age, music, and branded-content rules",
+    "post edit endpoint/edit window",
+    "media container wait time before publish",
+    "fediverse sharing availability in Egypt and current status after June 2025",
+    "Meta Verified availability in Egypt"
+   ]
+  },
+  "tiktok": {
+   "platform": "tiktok",
+   "verified": "2026-10-19",
+   "sources": [
+    "https://developers.tiktok.com/doc/content-posting-api-reference-direct-post",
+    "https://developers.tiktok.com/doc/content-posting-api-reference-photo-post",
+    "https://developers.tiktok.com/doc/content-posting-api-reference-query-creator-info",
+    "https://developers.tiktok.com/doc/content-posting-api-media-transfer-guide",
+    "https://developers.tiktok.com/doc/content-sharing-guidelines",
+    "https://developers.tiktok.com/doc/display-api-overview",
+    "https://developers.tiktok.com/doc/tiktok-api-v2-rate-limit",
+    "https://www.tiktok.com/community-guidelines/en/integrity-authenticity",
+    "https://www.tiktok.com/community-guidelines/en/regulated-commercial-activities",
+    "https://www.tiktok.com/community-guidelines/en/youth-safety",
+    "https://www.tiktok.com/legal/page/global/bc-policy/en",
+    "https://support.tiktok.com/en/business-and-creator/creator-and-business-accounts/promoting-a-brand-product-or-service",
+    "https://ads.tiktok.com/business/tr/blog/audio-library-royalty-free-music",
+    "https://ads.tiktok.com/business/en-US/blog/introducing-video-scheduler-now-you-can-plan-tiktoks-in-advance",
+    "https://datareportal.com/reports/digital-2026-egypt"
+   ],
+   "text": {
+    "post_max_chars": null,
+    "caption_max_chars": 2200,
+    "title_max_chars": 90,
+    "bio_max_chars": null,
+    "comment_max_chars": null,
+    "hashtags_max": null,
+    "mentions_max": null,
+    "links_clickable_in_post": null
+   },
+   "formats": [
+    {
+     "name": "video",
+     "ratio": "9:16",
+     "recommended_px": "1080x1920",
+     "min_len_s": null,
+     "max_len_s": 600,
+     "max_file_mb": 4096,
+     "notes": "API limits: MP4/MOV/WebM, 23-60 fps, 360-4096 px per side, 10 min via Upload init, per-creator max_video_post_duration_sec; ratio and px are convention, not an official recommendation"
+    },
+    {
+     "name": "photo mode carousel",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": null,
+     "notes": "API: up to 35 images via PULL_FROM_URL; title 90, description 4000 UTF-16 runes"
+    },
+    {
+     "name": "scheduled video",
+     "ratio": "9:16",
+     "recommended_px": "1080x1920",
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": null,
+     "notes": "scheduler announcement: 15 minutes to 10 days ahead; cannot be edited after scheduling; newer limits unverified"
+    },
+    {
+     "name": "LIVE",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": null,
+     "notes": "eligibility and limits unverified"
+    }
+   ],
+   "unverified": [
+    "in-app caption limit (4000 reported; 2200 confirmed only for API video title)",
+    "bio, username, display name, comment length limits",
+    "hashtag and mention caps",
+    "links clickable in caption / link in bio eligibility",
+    "app video upload up to 60 minutes",
+    "official recommended resolution and aspect ratio",
+    "photo mode file size and format limits",
+    "LIVE eligibility (age, followers) and duration",
+    "Creator Rewards eligibility details and Egypt availability (secondary source only)",
+    "strike system counts and durations",
+    "TikTok Shop availability and rules in Egypt",
+    "Research API eligibility",
+    "Organic API / Business Messaging API approval requirements",
+    "analytics metric definitions",
+    "Egyptian consumer-law references",
+    "no scheduling parameter found in Content Posting API"
+   ]
+  },
+  "whatsapp": {
+   "platform": "whatsapp",
+   "verified": "2026-10-19",
+   "sources": [
+    "https://developers.facebook.com/docs/whatsapp/pricing",
+    "https://developers.facebook.com/documentation/business-messaging/whatsapp/messaging-limits.md",
+    "https://developers.facebook.com/documentation/business-messaging/whatsapp/upcoming-messaging-limits-changes.md",
+    "https://developers.facebook.com/documentation/business-messaging/whatsapp/throughput",
+    "https://developers.facebook.com/documentation/business-messaging/whatsapp/templates/overview",
+    "https://developers.facebook.com/documentation/business-messaging/whatsapp/templates/components.md",
+    "https://developers.facebook.com/documentation/business-messaging/whatsapp/templates/template-categorization.md",
+    "https://developers.facebook.com/documentation/business-messaging/whatsapp/templates/template-quality.md",
+    "https://developers.facebook.com/documentation/business-messaging/whatsapp/templates/marketing-templates/per-user-limits.md",
+    "https://developers.facebook.com/documentation/business-messaging/whatsapp/getting-opt-in.md",
+    "https://developers.facebook.com/documentation/business-messaging/whatsapp/policy-enforcement",
+    "https://developers.facebook.com/documentation/business-messaging/whatsapp/business-phone-numbers/media",
+    "https://developers.facebook.com/documentation/business-messaging/whatsapp/business-scoped-user-ids",
+    "https://developers.facebook.com/documentation/business-messaging/whatsapp/groups.md",
+    "https://whatsappbusiness.com/policy/",
+    "https://www.whatsapp.com/legal/business-solution-terms",
+    "https://faq.whatsapp.com/861663048350950/?cms_platform=android",
+    "https://faq.whatsapp.com/265055289421317",
+    "https://faq.whatsapp.com/582420703681043",
+    "https://blog.whatsapp.com/introducing-whatsapp-channels-a-private-way-to-follow-what-matters"
+   ],
+   "text": {
+    "post_max_chars": null,
+    "caption_max_chars": null,
+    "title_max_chars": 60,
+    "bio_max_chars": null,
+    "comment_max_chars": null,
+    "hashtags_max": null,
+    "mentions_max": null,
+    "links_clickable_in_post": true
+   },
+   "formats": [
+    {
+     "name": "template_body_header_footer",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": null,
+     "notes": "Body 1024 chars, text header 60 (title_max_chars), footer 60, up to 10 buttons, button label 25, URL up to 2000 chars. Template name up to 512."
+    },
+    {
+     "name": "image",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": 5,
+     "notes": "JPEG or PNG, 8-bit RGB or RGBA."
+    },
+    {
+     "name": "video",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": 16,
+     "notes": "MP4 or 3GP, H.264 video, AAC audio (single or no audio stream)."
+    },
+    {
+     "name": "audio",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": 16,
+     "notes": "AAC, AMR, MP3, M4A, OGG (OPUS, mono)."
+    },
+    {
+     "name": "document",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": 100,
+     "notes": "PDF, TXT, DOC(X), XLS(X), PPT(X)."
+    },
+    {
+     "name": "sticker_static",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": 0.1,
+     "notes": "WebP, 100 KB static; animated stickers 500 KB."
+    },
+    {
+     "name": "broadcast_list_business_app",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": null,
+     "notes": "256 contacts per list; recipients must have your number saved; not on desktop or web."
+    },
+    {
+     "name": "channel_update",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": null,
+     "notes": "Text, image, video, sticker, link, audio, poll. One-way; followers react or vote only. Insights cover last 30 days."
+    },
+    {
+     "name": "cloud_api_group",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": null,
+     "notes": "Up to 8 participants per group and 10,000 groups per number; Official Business Account required."
+    }
+   ],
+   "unverified": [
+    "text.post_max_chars: free-form message length (commonly cited 4096, not confirmed)",
+    "text.caption_max_chars: media caption length",
+    "text.bio_max_chars: Business profile About and description limits",
+    "Egypt per-message rates for marketing, utility, authentication, service (rate card login-gated; vendor figures unsourced)",
+    "pair rate limit number",
+    "video and audio maximum duration",
+    "interactive message (buttons, lists, catalog) per-type limits",
+    "Status: 24 h life and specs",
+    "Community member and group limits (page read says 2,000 members per community; re-check)",
+    "Business Broadcast availability in Egypt",
+    "Channels Guidelines text and Channel-specific rules",
+    "App Review and Advanced Access requirements for WhatsApp permissions",
+    "WhatsApp-specific giveaway and promotion rules",
+    "Arabic template review and RTL rendering behavior (vendor claim only)",
+    "Egypt payment, billing currency and verification document requirements (vendor claim only)",
+    "pricing details as summarized from the pricing page on 2026-10-19: re-check 1,000 free service messages and utility-in-window charging effective 2026-10-01 before quoting"
+   ]
+  },
+  "x-twitter": {
+   "platform": "x-twitter",
+   "verified": "2026-10-19",
+   "sources": [
+    "https://help.x.com/en/using-x/x-premium",
+    "https://help.x.com/en/using-x/x-videos",
+    "https://help.x.com/en/using-x/how-to-use-hashtags",
+    "https://help.x.com/en/managing-your-account/x-username-rules",
+    "https://help.x.com/en/using-x/communities",
+    "https://help.x.com/en/using-x/spaces",
+    "https://help.x.com/en/rules-and-policies/x-automation",
+    "https://help.x.com/en/rules-and-policies/platform-manipulation",
+    "https://help.twitter.com/rules-and-policies/paid-partnerships",
+    "https://docs.x.com/x-api/getting-started/pricing",
+    "https://docs.x.com/x-api/fundamentals/rate-limits",
+    "https://docs.x.com/x-api/posts/create-post",
+    "https://docs.x.com/x-api/media/quickstart/media-upload-chunked",
+    "https://docs.x.com/developer-guidelines.md",
+    "https://github.com/xai-org/x-algorithm"
+   ],
+   "text": {
+    "post_max_chars": 280,
+    "caption_max_chars": 280,
+    "title_max_chars": null,
+    "bio_max_chars": null,
+    "comment_max_chars": 280,
+    "hashtags_max": null,
+    "mentions_max": null,
+    "links_clickable_in_post": true
+   },
+   "formats": [
+    {
+     "name": "post_text_standard",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": null,
+     "notes": "280 chars standard; 25000 chars long post for Premium (official Premium help page)"
+    },
+    {
+     "name": "image",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": 5,
+     "notes": "up to 4 photos per post; 5 MB per image (API tweet_image)"
+    },
+    {
+     "name": "gif",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": 15,
+     "notes": "1 GIF per post; cannot combine with photos/video"
+    },
+    {
+     "name": "video_standard_account",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": 140,
+     "max_file_mb": 512,
+     "notes": "Help Center figures; docs.x.com API says default 20 min / 8 GB - conflict unresolved"
+    },
+    {
+     "name": "video_premium",
+     "ratio": null,
+     "recommended_px": "1920x1080",
+     "min_len_s": null,
+     "max_len_s": 14400,
+     "max_file_mb": 16384,
+     "notes": "Help Center: under 4 hours, 16 GB; API docs: 125 min / 16 GB; Premium page: ~3 h / 8 GB web and iOS only"
+    },
+    {
+     "name": "poll",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": 300,
+     "max_len_s": 604800,
+     "max_file_mb": null,
+     "notes": "API: 2-4 options, 1-25 chars each, duration 5 to 10080 minutes (values shown in seconds)"
+    },
+    {
+     "name": "article",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": null,
+     "notes": "Premium and Premium+ only; limits not stated"
+    },
+    {
+     "name": "space",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": null,
+     "notes": "start on iOS/Android only; up to 13 speakers including host and 2 co-hosts; duration cap not stated"
+    },
+    {
+     "name": "dm_video",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": 140,
+     "max_file_mb": 512,
+     "notes": "Premium: 10 min / 1 GB (API dm_video)"
+    }
+   ],
+   "unverified": [
+    "text.bio_max_chars (commonly cited 160, not confirmed)",
+    "text.hashtags_max (no hard cap; X recommends <=2 per post)",
+    "text.mentions_max",
+    "text.comment_max_chars (replies assumed to follow post limit)",
+    "post_max_chars 280 is implied by the Premium help page, not stated outright",
+    "video limits: Help Center vs docs.x.com conflict for standard accounts",
+    "image recommended ratios, supported formats, video aspect ratio and codecs",
+    "URL and emoji character counting rules",
+    "native scheduling availability and analytics definitions in the X app",
+    "legacy Basic/Pro deprecation dates (secondary source)",
+    "free API tier availability",
+    "API support for creating Spaces and managing Communities",
+    "Premium reach boost and link penalty (practitioner lore only)",
+    "impersonation/parody, copyright/music, election and synthetic-media policy details",
+    "Arabic character counting and RTL edge cases",
+    "payment and local-currency billing in Egypt"
+   ]
+  },
+  "youtube": {
+   "platform": "youtube",
+   "verified": "2026-10-19",
+   "sources": [
+    "https://developers.google.com/youtube/v3/determine_quota_cost",
+    "https://developers.google.com/youtube/v3/getting-started",
+    "https://developers.google.com/youtube/v3/revision_history",
+    "https://developers.google.com/youtube/v3/docs/videos",
+    "https://developers.google.com/youtube/v3/docs/channels",
+    "https://developers.google.com/youtube/v3/docs/comments/setModerationStatus",
+    "https://developers.google.com/youtube/terms/developer-policies",
+    "https://support.google.com/youtube/answer/72851",
+    "https://support.google.com/youtube/answer/72857",
+    "https://support.google.com/youtube/answer/71673",
+    "https://support.google.com/youtube/answer/1722171",
+    "https://support.google.com/youtube/answer/72431",
+    "https://support.google.com/youtube/answer/10059070",
+    "https://support.google.com/youtube/answer/2474026",
+    "https://support.google.com/youtube/answer/6390658",
+    "https://support.google.com/youtube/answer/11585688",
+    "https://support.google.com/youtube/answer/2802032",
+    "https://support.google.com/youtube/answer/2814000",
+    "https://support.google.com/youtube/answer/14328491",
+    "https://support.google.com/youtube/answer/154235",
+    "https://support.google.com/youtube/answer/9527654",
+    "https://datareportal.com/reports/digital-2026-egypt"
+   ],
+   "text": {
+    "post_max_chars": null,
+    "caption_max_chars": 5000,
+    "title_max_chars": 100,
+    "bio_max_chars": 1000,
+    "comment_max_chars": null,
+    "hashtags_max": 60,
+    "mentions_max": null,
+    "links_clickable_in_post": null
+   },
+   "formats": [
+    {
+     "name": "long-form video",
+     "ratio": "16:9",
+     "recommended_px": "1920x1080",
+     "min_len_s": null,
+     "max_len_s": 43200,
+     "max_file_mb": 262144,
+     "notes": "unverified accounts limited to 15 min (900 s); 256 GB or 12 h whichever is less; 9:16 and 1:1 also accepted; MP4 H.264 AAC recommended"
+    },
+    {
+     "name": "short",
+     "ratio": "9:16",
+     "recommended_px": "1080x1920",
+     "min_len_s": null,
+     "max_len_s": 180,
+     "max_file_mb": null,
+     "notes": "vertical, up to 3 minutes, uploads up to 1080p; px is convention"
+    },
+    {
+     "name": "thumbnail (video)",
+     "ratio": "16:9",
+     "recommended_px": "3840x2160",
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": 50,
+     "notes": "min 640 px wide; JPG or PNG; desktop 50 MB, mobile 2 MB; verified account required"
+    },
+    {
+     "name": "thumbnail (short)",
+     "ratio": "9:16",
+     "recommended_px": "2160x3840",
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": 50,
+     "notes": "min 640 px high; Studio on computer only"
+    },
+    {
+     "name": "live stream",
+     "ratio": null,
+     "recommended_px": null,
+     "min_len_s": null,
+     "max_len_s": null,
+     "max_file_mb": null,
+     "notes": "verified channel, no live restriction in 90 days, age 16+"
+    }
+   ],
+   "unverified": [
+    "caption_max_chars=5000 is a limit in BYTES (UTF-8) per the API; Arabic letters take about 2 bytes, so ~2500 Arabic characters; Studio UI unit not confirmed",
+    "bio_max_chars=1000 is the API brandingSettings.channel.description; channel name is 30 chars per API, Studio may differ",
+    "hashtags_max=60 means more than 60 hashtags makes all hashtags ignored; only 3 display above title",
+    "comment_max_chars",
+    "mentions_max",
+    "links clickable in description and link restrictions for new channels",
+    "Posts (community) formats, limits, eligibility and API support",
+    "playlist item max and playlist title/description limits",
+    "live stream length cap and mobile live subscriber minimum",
+    "YPP country list including Egypt",
+    "contest and giveaway policy",
+    "political, finance and elections policies",
+    "definitions of watch time, average view duration, unique viewers",
+    "Analytics/Reporting API scopes and latency",
+    "unverified API project upload privacy behavior (docs conflict)",
+    "made-for-kids via API (help page says unsupported; API has selfDeclaredMadeForKids)",
+    "Egyptian consumer-law references"
+   ]
+  }
+ }
+}

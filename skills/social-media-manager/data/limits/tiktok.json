@@ -1,0 +1,55 @@
+{
+  "platform": "tiktok",
+  "verified": "2026-10-19",
+  "sources": [
+    "https://developers.tiktok.com/doc/content-posting-api-reference-direct-post",
+    "https://developers.tiktok.com/doc/content-posting-api-reference-photo-post",
+    "https://developers.tiktok.com/doc/content-posting-api-reference-query-creator-info",
+    "https://developers.tiktok.com/doc/content-posting-api-media-transfer-guide",
+    "https://developers.tiktok.com/doc/content-sharing-guidelines",
+    "https://developers.tiktok.com/doc/display-api-overview",
+    "https://developers.tiktok.com/doc/tiktok-api-v2-rate-limit",
+    "https://www.tiktok.com/community-guidelines/en/integrity-authenticity",
+    "https://www.tiktok.com/community-guidelines/en/regulated-commercial-activities",
+    "https://www.tiktok.com/community-guidelines/en/youth-safety",
+    "https://www.tiktok.com/legal/page/global/bc-policy/en",
+    "https://support.tiktok.com/en/business-and-creator/creator-and-business-accounts/promoting-a-brand-product-or-service",
+    "https://ads.tiktok.com/business/tr/blog/audio-library-royalty-free-music",
+    "https://ads.tiktok.com/business/en-US/blog/introducing-video-scheduler-now-you-can-plan-tiktoks-in-advance",
+    "https://datareportal.com/reports/digital-2026-egypt"
+  ],
+  "text": {
+    "post_max_chars": null,
+    "caption_max_chars": 2200,
+    "title_max_chars": 90,
+    "bio_max_chars": null,
+    "comment_max_chars": null,
+    "hashtags_max": null,
+    "mentions_max": null,
+    "links_clickable_in_post": null
+  },
+  "formats": [
+    {"name": "video", "ratio": "9:16", "recommended_px": "1080x1920", "min_len_s": null, "max_len_s": 600, "max_file_mb": 4096, "notes": "API limits: MP4/MOV/WebM, 23-60 fps, 360-4096 px per side, 10 min via Upload init, per-creator max_video_post_duration_sec; ratio and px are convention, not an official recommendation"},
+    {"name": "photo mode carousel", "ratio": null, "recommended_px": null, "min_len_s": null, "max_len_s": null, "max_file_mb": null, "notes": "API: up to 35 images via PULL_FROM_URL; title 90, description 4000 UTF-16 runes"},
+    {"name": "scheduled video", "ratio": "9:16", "recommended_px": "1080x1920", "min_len_s": null, "max_len_s": null, "max_file_mb": null, "notes": "scheduler announcement: 15 minutes to 10 days ahead; cannot be edited after scheduling; newer limits unverified"},
+    {"name": "LIVE", "ratio": null, "recommended_px": null, "min_len_s": null, "max_len_s": null, "max_file_mb": null, "notes": "eligibility and limits unverified"}
+  ],
+  "unverified": [
+    "in-app caption limit (4000 reported; 2200 confirmed only for API video title)",
+    "bio, username, display name, comment length limits",
+    "hashtag and mention caps",
+    "links clickable in caption / link in bio eligibility",
+    "app video upload up to 60 minutes",
+    "official recommended resolution and aspect ratio",
+    "photo mode file size and format limits",
+    "LIVE eligibility (age, followers) and duration",
+    "Creator Rewards eligibility details and Egypt availability (secondary source only)",
+    "strike system counts and durations",
+    "TikTok Shop availability and rules in Egypt",
+    "Research API eligibility",
+    "Organic API / Business Messaging API approval requirements",
+    "analytics metric definitions",
+    "Egyptian consumer-law references",
+    "no scheduling parameter found in Content Posting API"
+  ]
+}

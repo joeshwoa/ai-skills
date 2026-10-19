@@ -1,6 +1,6 @@
 {
   "generated_by": "skills/skill-router/scripts/build_manifest.py",
-  "skill_count": 20,
+  "skill_count": 23,
   "skills": [
     {
       "name": "automation-studio",
@@ -34,6 +34,20 @@
       "name": "flow-studio-director",
       "path": "skills/flow-studio-director",
       "description": "Full AI film crew that takes a client's script (or just an idea) to a finished, delivered video in Google Flow (Veo 3.1 + Omni Flash + Nano Banana), right the first time — script breakdown and analysis, characters and voices built and approved before any shot, storyboard animatic for sign- off, per-shot routing and credit pricing, dense cinematic prompts, native in-clip dialogue, planned transitions, automatic QC of every take, editing and montage (trims, fixes, J/L cuts, captions from the script, logo, loudness), revisions and delivery. Can drive Flow itself in Chrome (Kapture) in four autonomy modes. Use whenever the user wants to make, plan, script, analyse, prompt, fix, check, edit, cut, extend or finish an AI video, ad, reel, short film, explainer or animated series — in Google Flow or when no platform is named — or asks which Flow model to use or what it will cost.",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "marketing-studio",
+      "path": "skills/marketing-studio",
+      "description": "Marketing strategy and planning for businesses and creators - audience and market research, positioning and messaging, offers and pricing angles, funnel and channel selection, content and SEO plans, email and WhatsApp marketing, launch plans, brand voice, competitor analysis, measurement frameworks and marketing OKRs, with Egypt and Arabic-market context. Produces one-page strategies, 30/60/90-day plans, messaging houses, content pillars, launch timelines and KPI trees, then hands execution to social-media-manager (organic), media-buying (paid), reels-studio (video scripts), creative-studio (visuals) and automation-studio or n8n-agent-studio (workflows). Use for \"عايز خطة تسويق\", marketing strategy, positioning, go-to-market, launch plan, brand voice, content strategy, SEO plan, email or WhatsApp campaign plan, competitor analysis.",
+      "has_scripts": false,
+      "has_references": true
+    },
+    {
+      "name": "media-buying",
+      "path": "skills/media-buying",
+      "description": "Plans, launches, optimizes and reports paid media on Meta (Facebook/Instagram/WhatsApp), Google Ads (Search, Performance Max, Demand Gen), YouTube, TikTok, Snapchat, LinkedIn, X, Pinterest and Telegram Ads, with sourced per-platform rules, creative specs, policies, tracking and API facts, plus Egypt/MENA realities (payment, WhatsApp-first leads, cash-on-delivery, Ramadan and White Friday). Includes funnel and objective selection, budget and test sizing, creative testing, attribution and conversion tracking setup, optimization decision rules, account-health and ad-rejection recovery, and scripts for CPA/ROAS/break-even/COD math, A/B significance, scaling steps, UTM and naming. Use for any ads question, media plan, budget split, \"ليه الإعلان مش بيصرف\", rejected ad, disabled ad account, ROAS drop, scaling, reporting.",
       "has_scripts": true,
       "has_references": true
     },
@@ -125,6 +139,13 @@
       "name": "skill-router",
       "path": "skills/skill-router",
       "description": "Read this FIRST, before any other skill, for any non-trivial request — it is the dispatcher for every skill in this repo. Checks skills/manifest.json and auto-selects a matching installed skill with no need to ask the user which one to use. If nothing installed matches, searches for or builds a new skill and installs it into this repo automatically (clone/build for the user's own MCP repos, or build from scratch via the skill-creator methodology), then tells the user what was added. Also covers keeping skills/manifest.json in sync as skills are added or changed.",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "social-media-manager",
+      "path": "skills/social-media-manager",
+      "description": "Runs the work of a social media manager across every major platform (Facebook, Instagram, WhatsApp, Telegram, TikTok, YouTube, LinkedIn, X, Threads, Reddit, Snapchat, Pinterest, Google Business Profile, Discord) with sourced per-platform rules, limits, formats, policy hot spots, API and automation facts, and Egypt/Arabic notes. Plans calendars and daily multi-platform rotations, writes and checks posts against real limits, handles community replies, crises, giveaways, takedowns and account restrictions, reports results, and builds automations (n8n, Make) with approval gates. Use for any request about social content, scheduling, community management, platform rules, \"what can I post on X\", \"اعمل خطة سوشيال\", \"كابشن\", \"جدول بوستات\", \"الحساب اتقيد\", \"automate my posting\".",
       "has_scripts": true,
       "has_references": true
     },

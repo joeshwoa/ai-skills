@@ -1,0 +1,9 @@
+---
+description: Runs the work of a social media manager across every major platform (Facebook, Instagram, WhatsApp, Telegram, TikTok, YouTube, LinkedIn, X, Threads, Reddit, Snapchat, Pinterest, Google Business Profile, Discord) with sourced per-platform rules, limits, formats, policy hot spots, API and automation facts, and Egypt/Arabic notes. Plans calendars and daily multi-platform rotations, writes and checks posts against real limits, handles community replies, crises, giveaways, takedowns and account restrictions, reports results, and builds automations (n8n, Make) with approval gates. Use for any request about social content, scheduling, community management, platform rules, "what can I post on X", "اعمل خطة سوشيال", "كابشن", "جدول بوستات", "الحساب اتقيد", "automate my posting".
+globs:
+alwaysApply: false
+---
+# Social Media Manager
+
+Read `skills/social-media-manager/SKILL.md` in full first, then any `references/` file it points to for the task at hand.
+Run scripts from `skills/social-media-manager/scripts/` as the skill describes.

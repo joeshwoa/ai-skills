@@ -155,6 +155,22 @@ below for what that feeds.
   EtherChannel, inter-VLAN routing, OSPF/EIGRP/RIP/static, DHCP, NAT/PAT,
   ACLs, port security, SSH, HSRP, ASA), host IPs, ping/PDU verification,
   troubleshooting and the .pkt file.
+- **social-media-manager** (`skills/social-media-manager/SKILL.md`) — Runs the work of a social media manager across every major platform
+  (Facebook, Instagram, WhatsApp, Telegram, TikTok, YouTube, LinkedIn, X,
+  Threads, Reddit, Snapchat, Pinterest, Google Business Profile, Discord) with
+  sourced per-platform rules, limits, formats, policy hot spots, API and
+  automation facts, and Egypt/Arabic notes.
+- **media-buying** (`skills/media-buying/SKILL.md`) — Plans, launches, optimizes and reports paid media on Meta
+  (Facebook/Instagram/WhatsApp), Google Ads (Search, Performance Max, Demand
+  Gen), YouTube, TikTok, Snapchat, LinkedIn, X, Pinterest and Telegram Ads,
+  with sourced per-platform rules, creative specs, policies, tracking and API
+  facts, plus Egypt/MENA realities (payment, WhatsApp-first leads, cash-on-
+  delivery, Ramadan and White Friday).
+- **marketing-studio** (`skills/marketing-studio/SKILL.md`) — Marketing strategy and planning for businesses and creators - audience and
+  market research, positioning and messaging, offers and pricing angles,
+  funnel and channel selection, content and SEO plans, email and WhatsApp
+  marketing, launch plans, brand voice, competitor analysis, measurement
+  frameworks and marketing OKRs, with Egypt and Arabic-market context.
 
 This file follows the emerging `AGENTS.md` convention several agentic tools
 (Cursor, GitHub Copilot, OpenAI Codex CLI, and others) read automatically

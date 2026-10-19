@@ -1,0 +1,9 @@
+---
+description: Plans, launches, optimizes and reports paid media on Meta (Facebook/Instagram/WhatsApp), Google Ads (Search, Performance Max, Demand Gen), YouTube, TikTok, Snapchat, LinkedIn, X, Pinterest and Telegram Ads, with sourced per-platform rules, creative specs, policies, tracking and API facts, plus Egypt/MENA realities (payment, WhatsApp-first leads, cash-on-delivery, Ramadan and White Friday). Includes funnel and objective selection, budget and test sizing, creative testing, attribution and conversion tracking setup, optimization decision rules, account-health and ad-rejection recovery, and scripts for CPA/ROAS/break-even/COD math, A/B significance, scaling steps, UTM and naming. Use for any ads question, media plan, budget split, "ليه الإعلان مش بيصرف", rejected ad, disabled ad account, ROAS drop, scaling, reporting.
+globs:
+alwaysApply: false
+---
+# Media Buying
+
+Read `skills/media-buying/SKILL.md` in full first, then any `references/` file it points to for the task at hand.
+Run scripts from `skills/media-buying/scripts/` as the skill describes.

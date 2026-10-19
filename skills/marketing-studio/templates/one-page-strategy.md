@@ -1,0 +1,16 @@
+# One-page strategy: [business / project]
+Date: [YYYY-MM-DD]   Owner: [name]   Review dates: [30 / 60 / 90 days]
+
+1. **Business goal** (number + date): [e.g. delivered revenue EGP X by DATE]
+2. **Primary segment and job**: [who] / When [situation], they want [outcome]
+3. **Positioning statement**: For [segment] who [need], [brand] is a [category] that [benefit], because [reason to believe]. Unlike [alternative], we [difference].
+4. **Offer**: Core: [what, price, terms] | Entry: [low-risk first step] | Guarantee/risk reversal (only if real): [terms]
+5. **Message pillars (3)**: [1] [2] [3]   Proof: [assets]
+6. **Channels IN** (max 3): [channel: role, owner]   **Channels NOT NOW**: [channel: reason, revisit date]
+7. **Budget**: money [amount, reserve %] | hours/week [n] | tools [list]
+8. **OKRs**: O1 [objective] KR1 [metric: baseline -> target] KR2 [...] | Guardrail: [metric, limit]
+9. **90-day milestones**: Day 30 [..] Day 60 [..] Day 90 [..]
+10. **Top 3 risks**: [risk -> trigger -> action]
+11. **Decision dates** (continue / change / stop): [date: metric threshold]
+12. **Assumptions to verify**: [assumption: how, by when]
+13. **Hand-offs**: social-media-manager [brief], media-buying [brief], reels-studio [brief], creative-studio [brief], automation [brief]

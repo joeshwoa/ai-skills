@@ -1,0 +1,41 @@
+{
+  "platform": "snapchat",
+  "verified": "2026-10-19",
+  "sources": [
+    "https://developers.snap.com/api/marketing-api/Public-Profile-API/ProfileAssetManagement",
+    "https://developers.snap.com/api/marketing-api/Public-Profile-API/GetStarted",
+    "https://help.snapchat.com/hc/en-us/articles/14669003687444-About-Snapchat-s-Monetization-Program",
+    "https://values.snap.com/policy/content-guidelines-recommendation-eligibility/recommendation-eligibility/quality",
+    "https://snap.com/terms/commercial-content",
+    "https://help.snapchat.com/hc/en-us/articles/24892451593108-Viewing-and-Understanding-Analytics"
+  ],
+  "text": {
+    "post_max_chars": null,
+    "caption_max_chars": 160,
+    "title_max_chars": 45,
+    "bio_max_chars": null,
+    "comment_max_chars": null,
+    "hashtags_max": null,
+    "mentions_max": null,
+    "links_clickable_in_post": null
+  },
+  "formats": [
+    {"name": "public_story_video", "ratio": "9:16", "recommended_px": "1080x1920", "min_len_s": 5, "max_len_s": 60, "max_file_mb": 1024, "notes": "API limits: mp4, min 540x960, media object must be used within 24h of creation; story visible up to 24h unless saved. Ratio not stated officially, 9:16 inferred from portrait minimum."},
+    {"name": "spotlight", "ratio": "9:16", "recommended_px": "1080x1920", "min_len_s": 6, "max_len_s": 60, "max_file_mb": 1024, "notes": "API limits: mp4, min 540x960, description max 160 chars incl hashtags. Needs 30s or longer to earn monetization revenue."},
+    {"name": "saved_story", "ratio": "9:16", "recommended_px": "1080x1920", "min_len_s": null, "max_len_s": 300, "max_file_mb": null, "notes": "API: combined snaps max 5 minutes, title max 45 chars."}
+  ],
+  "unverified": [
+    "caption_max_chars is the Spotlight description limit from the API; in-app limit not confirmed",
+    "post_max_chars, bio_max_chars, display name and username limits",
+    "comment_max_chars",
+    "hashtags_max and mentions_max",
+    "links_clickable_in_post; in-app Story link behaviour",
+    "Story image specs",
+    "Live format for public profiles",
+    "native scheduling for Stories and Spotlight",
+    "API rate limits",
+    "Egypt eligibility for the Monetization Program and payout methods",
+    "Egypt-specific user numbers after January 2025",
+    "Arabic/RTL caption rendering"
+  ]
+}

@@ -1,0 +1,120 @@
+{
+  "platform": "instagram",
+  "verified": "2026-10-19",
+  "sources": [
+    "https://developers.facebook.com/documentation/instagram-platform/content-publishing",
+    "https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media",
+    "https://developers.facebook.com/docs/instagram-platform/overview/",
+    "https://developers.facebook.com/documentation/instagram-platform/instagram-api-with-instagram-login/messaging-api",
+    "https://developers.facebook.com/documentation/instagram-platform/reference/instagram-media/insights",
+    "https://developers.facebook.com/documentation/business-messaging/messenger-platform/overview/rate-limiting",
+    "https://creators.instagram.com/blog/the-latest-with-instagram",
+    "https://about.instagram.com/blog/announcements/introducing-broadcast-channels/",
+    "https://www.socialmediatoday.com/news/instagram-implements-new-limits-on-hashtag-use/808309/",
+    "https://bitly.com/blog/instagram-character-limit/",
+    "https://datareportal.com/reports/digital-2026-egypt"
+  ],
+  "text": {
+    "post_max_chars": null,
+    "caption_max_chars": 2200,
+    "title_max_chars": null,
+    "bio_max_chars": 150,
+    "comment_max_chars": 2200,
+    "hashtags_max": 5,
+    "mentions_max": 20,
+    "links_clickable_in_post": false
+  },
+  "formats": [
+    {
+      "name": "feed_image",
+      "ratio": "4:5 to 1.91:1",
+      "recommended_px": null,
+      "min_len_s": null,
+      "max_len_s": null,
+      "max_file_mb": 8,
+      "notes": "JPEG only, sRGB, width 320-1440 px (API). Alt text up to 1000 chars."
+    },
+    {
+      "name": "carousel",
+      "ratio": "1:1 default (first item sets ratio)",
+      "recommended_px": null,
+      "min_len_s": null,
+      "max_len_s": null,
+      "max_file_mb": null,
+      "notes": "API max 10 items; app limit reported as 20 (third-party headline). Counts as one post for the API cap."
+    },
+    {
+      "name": "reel",
+      "ratio": "9:16",
+      "recommended_px": "1080x1920",
+      "min_len_s": 3,
+      "max_len_s": 900,
+      "max_file_mb": 300,
+      "notes": "API range 3 s to 15 min. App editor limit 3 min announced 2025-01-21 for US; other regions unverified. MOV or MP4, H.264/HEVC, 23-60 fps, max width 1920."
+    },
+    {
+      "name": "trial_reel",
+      "ratio": "9:16",
+      "recommended_px": "1080x1920",
+      "min_len_s": 3,
+      "max_len_s": 900,
+      "max_file_mb": 300,
+      "notes": "Shown to non-followers first; graduation MANUAL or SS_PERFORMANCE."
+    },
+    {
+      "name": "story_image",
+      "ratio": "9:16",
+      "recommended_px": "1080x1920",
+      "min_len_s": null,
+      "max_len_s": null,
+      "max_file_mb": 8,
+      "notes": "JPEG sRGB. 24 h life. API cannot add link, poll or location stickers."
+    },
+    {
+      "name": "story_video",
+      "ratio": "9:16",
+      "recommended_px": "1080x1920",
+      "min_len_s": 3,
+      "max_len_s": 60,
+      "max_file_mb": 100,
+      "notes": "MOV or MP4, 23-60 fps (API)."
+    },
+    {
+      "name": "broadcast_channel_message",
+      "ratio": null,
+      "recommended_px": null,
+      "min_len_s": null,
+      "max_len_s": null,
+      "max_file_mb": null,
+      "notes": "One-way from creator: text, photo, video, voice note, polls. No member cap stated."
+    },
+    {
+      "name": "dm_media",
+      "ratio": null,
+      "recommended_px": null,
+      "min_len_s": null,
+      "max_len_s": null,
+      "max_file_mb": 25,
+      "notes": "Image 8 MB, audio/video/pdf 25 MB. Text max 1000 bytes. 24 h window."
+    }
+  ],
+  "unverified": [
+    "text.hashtags_max: Instagram rolled out 5 per post from Dec 2025 (secondary reporting); API docs still say 30",
+    "text.bio_max_chars 150 and username 30 (third-party only)",
+    "text.comment_max_chars 2200 (third-party only)",
+    "text.links_clickable_in_post false (long-standing behavior, not re-verified from Meta)",
+    "display name limit",
+    "app Reels max length outside the US and any change after Jan 2025",
+    "whether Reels longer than 3 minutes are recommended",
+    "in-app carousel limit of 20 (headline from TechRadar only)",
+    "feed video spec separate from Reels",
+    "Live limits",
+    "Broadcast channel member cap and API support",
+    "Instagram promotion (giveaway) guidelines text",
+    "Terms wording on automation, fake engagement, impersonation",
+    "partnership ads eligibility page text",
+    "API publishing cap: docs state both 100 and 50 posts per 24 h",
+    "comment hide and delete endpoint details",
+    "Egypt billing, Meta Verified and influencer-licensing specifics"
+  ]
+}

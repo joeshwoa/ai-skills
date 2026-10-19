@@ -1,0 +1,46 @@
+{
+  "platform": "google-business-profile",
+  "verified": "2026-10-19",
+  "sources": [
+    "https://support.google.com/business/answer/7662907",
+    "https://support.google.com/business/answer/6103862",
+    "https://support.google.com/business/answer/3038177",
+    "https://support.google.com/business/answer/3474050",
+    "https://support.google.com/contributionpolicy/answer/7400114",
+    "https://developers.google.com/my-business/content/prereqs",
+    "https://developers.google.com/my-business/content/limits",
+    "https://developers.google.com/my-business/content/latest-updates",
+    "https://developers.google.com/my-business/reference/performance/rest/v1/DailyMetric"
+  ],
+  "text": {
+    "post_max_chars": null,
+    "caption_max_chars": null,
+    "title_max_chars": null,
+    "bio_max_chars": null,
+    "comment_max_chars": null,
+    "hashtags_max": null,
+    "mentions_max": null,
+    "links_clickable_in_post": false
+  },
+  "formats": [
+    {"name": "post_update_offer_event", "ratio": null, "recommended_px": null, "min_len_s": null, "max_len_s": null, "max_file_mb": null, "notes": "Links only via action button (book, order, learn more, call now); posts older than 6 months archived unless date range set; Offer needs title+dates+times; Event needs title+start/end; hotels cannot post offers; phone numbers in text may be rejected"},
+    {"name": "photo", "ratio": "1:1", "recommended_px": "720x720", "min_len_s": null, "max_len_s": null, "max_file_mb": 5, "notes": "JPG or PNG, 10 KB to 5 MB, minimum 250x250 px; shows only after verification; ratio 1:1 is a practitioner convention, official page gives 720x720 recommended"},
+    {"name": "video", "ratio": null, "recommended_px": "720p or higher", "min_len_s": null, "max_len_s": 30, "max_file_mb": 75, "notes": "Up to 30 seconds, up to 75 MB, 720p or higher; shows only after verification"}
+  ],
+  "unverified": [
+    "post description max chars (practitioner observation 1500, not on official pages read)",
+    "post title max chars for offer and event posts",
+    "business description max chars (practitioner observation 750)",
+    "review reply max chars (practitioner observation 4096)",
+    "post image aspect ratio",
+    "hashtag and mention support in posts",
+    "links_clickable_in_post false means plain links are not supported in post text; links go through action buttons",
+    "Q&A discontinuation date and AI Ask replacement (secondary source ppc.land only)",
+    "chat/messages removal date (secondary source only; BUSINESS_CONVERSATIONS marked deprecated officially)",
+    "API-side scheduled publish time for posts",
+    "Notifications API review notification types",
+    "Egypt-specific address, bilingual naming and payment details",
+    "Arabic review translation behaviour",
+    "Egypt Consumer Protection Law 181 of 2018 details"
+  ]
+}

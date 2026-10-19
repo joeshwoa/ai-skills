@@ -1,0 +1,60 @@
+{
+  "platform": "x-twitter",
+  "verified": "2026-10-19",
+  "sources": [
+    "https://help.x.com/en/using-x/x-premium",
+    "https://help.x.com/en/using-x/x-videos",
+    "https://help.x.com/en/using-x/how-to-use-hashtags",
+    "https://help.x.com/en/managing-your-account/x-username-rules",
+    "https://help.x.com/en/using-x/communities",
+    "https://help.x.com/en/using-x/spaces",
+    "https://help.x.com/en/rules-and-policies/x-automation",
+    "https://help.x.com/en/rules-and-policies/platform-manipulation",
+    "https://help.twitter.com/rules-and-policies/paid-partnerships",
+    "https://docs.x.com/x-api/getting-started/pricing",
+    "https://docs.x.com/x-api/fundamentals/rate-limits",
+    "https://docs.x.com/x-api/posts/create-post",
+    "https://docs.x.com/x-api/media/quickstart/media-upload-chunked",
+    "https://docs.x.com/developer-guidelines.md",
+    "https://github.com/xai-org/x-algorithm"
+  ],
+  "text": {
+    "post_max_chars": 280,
+    "caption_max_chars": 280,
+    "title_max_chars": null,
+    "bio_max_chars": null,
+    "comment_max_chars": 280,
+    "hashtags_max": null,
+    "mentions_max": null,
+    "links_clickable_in_post": true
+  },
+  "formats": [
+    {"name": "post_text_standard", "ratio": null, "recommended_px": null, "min_len_s": null, "max_len_s": null, "max_file_mb": null, "notes": "280 chars standard; 25000 chars long post for Premium (official Premium help page)"},
+    {"name": "image", "ratio": null, "recommended_px": null, "min_len_s": null, "max_len_s": null, "max_file_mb": 5, "notes": "up to 4 photos per post; 5 MB per image (API tweet_image)"},
+    {"name": "gif", "ratio": null, "recommended_px": null, "min_len_s": null, "max_len_s": null, "max_file_mb": 15, "notes": "1 GIF per post; cannot combine with photos/video"},
+    {"name": "video_standard_account", "ratio": null, "recommended_px": null, "min_len_s": null, "max_len_s": 140, "max_file_mb": 512, "notes": "Help Center figures; docs.x.com API says default 20 min / 8 GB - conflict unresolved"},
+    {"name": "video_premium", "ratio": null, "recommended_px": "1920x1080", "min_len_s": null, "max_len_s": 14400, "max_file_mb": 16384, "notes": "Help Center: under 4 hours, 16 GB; API docs: 125 min / 16 GB; Premium page: ~3 h / 8 GB web and iOS only"},
+    {"name": "poll", "ratio": null, "recommended_px": null, "min_len_s": 300, "max_len_s": 604800, "max_file_mb": null, "notes": "API: 2-4 options, 1-25 chars each, duration 5 to 10080 minutes (values shown in seconds)"},
+    {"name": "article", "ratio": null, "recommended_px": null, "min_len_s": null, "max_len_s": null, "max_file_mb": null, "notes": "Premium and Premium+ only; limits not stated"},
+    {"name": "space", "ratio": null, "recommended_px": null, "min_len_s": null, "max_len_s": null, "max_file_mb": null, "notes": "start on iOS/Android only; up to 13 speakers including host and 2 co-hosts; duration cap not stated"},
+    {"name": "dm_video", "ratio": null, "recommended_px": null, "min_len_s": null, "max_len_s": 140, "max_file_mb": 512, "notes": "Premium: 10 min / 1 GB (API dm_video)"}
+  ],
+  "unverified": [
+    "text.bio_max_chars (commonly cited 160, not confirmed)",
+    "text.hashtags_max (no hard cap; X recommends <=2 per post)",
+    "text.mentions_max",
+    "text.comment_max_chars (replies assumed to follow post limit)",
+    "post_max_chars 280 is implied by the Premium help page, not stated outright",
+    "video limits: Help Center vs docs.x.com conflict for standard accounts",
+    "image recommended ratios, supported formats, video aspect ratio and codecs",
+    "URL and emoji character counting rules",
+    "native scheduling availability and analytics definitions in the X app",
+    "legacy Basic/Pro deprecation dates (secondary source)",
+    "free API tier availability",
+    "API support for creating Spaces and managing Communities",
+    "Premium reach boost and link penalty (practitioner lore only)",
+    "impersonation/parody, copyright/music, election and synthetic-media policy details",
+    "Arabic character counting and RTL edge cases",
+    "payment and local-currency billing in Egypt"
+  ]
+}

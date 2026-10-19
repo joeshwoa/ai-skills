@@ -1,0 +1,49 @@
+{
+  "platform": "messaging-and-community-channels",
+  "verified": "2026-10-19",
+  "sources": [
+    "https://docs.discord.com/developers/topics/rate-limits",
+    "https://docs.discord.com/developers/resources/message",
+    "https://developers.facebook.com/docs/messenger-platform/policy/policy-overview",
+    "https://developers.facebook.com/docs/instagram-platform/instagram-api-with-instagram-login/messaging-api",
+    "https://developers.facebook.com/docs/graph-api/overview/rate-limiting",
+    "https://developers.facebook.com/docs/whatsapp/cloud-api/reference/messages",
+    "https://developers.facebook.com/docs/whatsapp/messaging-limits",
+    "https://developers.facebook.com/docs/whatsapp/pricing",
+    "https://whatsappbusiness.com/policy/",
+    "https://core.telegram.org/bots/api",
+    "https://core.telegram.org/bots/faq"
+  ],
+  "text": {
+    "post_max_chars": null,
+    "caption_max_chars": 1024,
+    "title_max_chars": null,
+    "bio_max_chars": null,
+    "comment_max_chars": null,
+    "hashtags_max": null,
+    "mentions_max": null,
+    "links_clickable_in_post": null
+  },
+  "formats": [
+    {"name": "discord_message", "ratio": null, "recommended_px": null, "min_len_s": null, "max_len_s": null, "max_file_mb": null, "notes": "content up to 2000 chars; up to 10 embeds, 6000 chars total across embed text fields; global API rate 50 req/s per bot"},
+    {"name": "messenger_message", "ratio": null, "recommended_px": null, "min_len_s": null, "max_len_s": null, "max_file_mb": null, "notes": "24h standard window (7 days after click-to-message ad first message); Human Agent tag 7 days; up to 30 images per attachments array; automated bots must respond within 30 s; text length not confirmed"},
+    {"name": "instagram_dm", "ratio": null, "recommended_px": null, "min_len_s": null, "max_len_s": null, "max_file_mb": 25, "notes": "text up to 1000 bytes UTF-8 (about 500 Arabic chars); image png/jpeg 8 MB, up to 10 per message; audio, video, pdf 25 MB; private reply once per commenter within 7 days"},
+    {"name": "whatsapp_text", "ratio": null, "recommended_px": null, "min_len_s": null, "max_len_s": null, "max_file_mb": null, "notes": "body 4096 chars; interactive body 1024, footer 60, header text 60; 3 reply buttons of 20 chars; list 10 rows; template body 1024 chars with other components; 24h customer service window; new portfolio limit 250 unique users per 24h outside window, scaling to 2000"},
+    {"name": "telegram_message", "ratio": null, "recommended_px": null, "min_len_s": null, "max_len_s": null, "max_file_mb": 50, "notes": "text 4096 chars; caption 1024; bots send files up to 50 MB, download up to 20 MB; about 1 msg/s per chat, 20/min per group, about 30/s bulk"}
+  ],
+  "unverified": [
+    "Messenger text max length",
+    "Discord username/nickname/channel name limits and attachment upload limits",
+    "WhatsApp image, video, audio, document size limits",
+    "WhatsApp Channels and broadcast list limits (official FAQ pages not fetchable)",
+    "Instagram Send API text rate: 100 calls/s vs 300 calls/s conflict in one Meta document",
+    "Telegram channel description limit and username limits",
+    "Telegram paid broadcast Stars balance requirement text was truncated on the FAQ page",
+    "Discord, Telegram, Meta appeal paths",
+    "Business verification requirements in Egypt, WhatsApp Egyptian rate and payment methods",
+    "Egypt Personal Data Protection Law 151 of 2020 details",
+    "statistics about channel usage in Egypt",
+    "Discord Server Insights and Meta inbox metric definitions",
+    "caption_max_chars refers to Telegram media caption only"
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "platform": "threads",
+  "verified": "2026-10-19",
+  "sources": [
+    "https://developers.facebook.com/documentation/threads/overview",
+    "https://developers.facebook.com/documentation/threads/posts",
+    "https://developers.facebook.com/documentation/threads/create-posts/text-attachments.md",
+    "https://developers.facebook.com/documentation/threads/create-posts/polls.md",
+    "https://developers.facebook.com/documentation/threads/create-posts/ghost-posts.md",
+    "https://developers.facebook.com/documentation/threads/insights.md",
+    "https://developers.facebook.com/documentation/threads/keyword-search.md",
+    "https://developers.facebook.com/documentation/threads/webhooks.md",
+    "https://help.instagram.com/1356090605000312",
+    "https://about.fb.com/news/2025/10/introducing-disappearing-posts-on-threads/",
+    "https://datareportal.com/reports/digital-2026-egypt"
+  ],
+  "text": {
+    "post_max_chars": 500,
+    "caption_max_chars": 500,
+    "title_max_chars": null,
+    "bio_max_chars": null,
+    "comment_max_chars": null,
+    "hashtags_max": 1,
+    "mentions_max": null,
+    "links_clickable_in_post": true
+  },
+  "formats": [
+    {"name": "text_post", "ratio": null, "recommended_px": null, "min_len_s": null, "max_len_s": null, "max_file_mb": null, "notes": "500 chars; emojis count by UTF-8 bytes; up to 5 unique links; link attachment text-only posts"},
+    {"name": "text_attachment", "ratio": null, "recommended_px": null, "min_len_s": null, "max_len_s": null, "max_file_mb": null, "notes": "up to 10000 chars plus one link; text-only posts, not with polls; styling bold/italic/highlight/underline/strikethrough"},
+    {"name": "image", "ratio": "10:1 max", "recommended_px": "1440 wide", "min_len_s": null, "max_len_s": null, "max_file_mb": 8, "notes": "JPEG/PNG, sRGB, width 320-1440"},
+    {"name": "video", "ratio": "9:16", "recommended_px": "1080x1920", "min_len_s": null, "max_len_s": 300, "max_file_mb": 1024, "notes": "MOV/MP4, H.264 or HEVC, AAC, 23-60 fps, max width 1920, ratio 0.01:1 to 10:1"},
+    {"name": "carousel", "ratio": null, "recommended_px": null, "min_len_s": null, "max_len_s": null, "max_file_mb": null, "notes": "2 to 20 items, images and/or videos; counts as one post toward 250/24h API limit"},
+    {"name": "poll", "ratio": null, "recommended_px": null, "min_len_s": null, "max_len_s": null, "max_file_mb": null, "notes": "text-only post; 2-4 options, 1-25 chars each; not shared to fediverse"},
+    {"name": "ghost_post", "ratio": null, "recommended_px": null, "min_len_s": null, "max_len_s": 86400, "max_file_mb": null, "notes": "text only via API; archived after 24 hours; replies go to messages; cannot be a reply"}
+  ],
+  "unverified": [
+    "text.bio_max_chars and username limits",
+    "text.comment_max_chars (replies assumed same as posts)",
+    "text.mentions_max",
+    "Arabic/RTL and Arabic character counting behaviour",
+    "poll duration limits",
+    "native scheduling availability (announced as a test Aug 2024)",
+    "ranking signals (no official Meta statement read)",
+    "Threads-specific spam, giveaway, minimum-age, music, and branded-content rules",
+    "post edit endpoint/edit window",
+    "media container wait time before publish",
+    "fediverse sharing availability in Egypt and current status after June 2025",
+    "Meta Verified availability in Egypt"
+  ]
+}

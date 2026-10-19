@@ -1,0 +1,85 @@
+# Launch plan
+
+Purpose: run a launch from T-60 days to T+30 days with clear phases, owners, deliverables, a pre-mortem, a launch-day runbook and a post-launch review.
+Last updated: 2026-10-19
+
+Fill `templates/launch-timeline.md`. The phase lengths below are heuristics for a small team; compress or stretch by the lead times of your slowest dependency (production, approvals, stock, app store review, venue).
+
+## 1. Principles
+- A launch is a concentrated period of attention that must land on a ready product, a clear offer and a capture mechanism (list, WhatsApp, page). Do not buy attention before the destination works.
+- One launch goal with a number and a date (for example confirmed orders, waitlist-to-paid conversions, ticket sales, installs with activation, shop visits). Everything else is secondary.
+- Decide the "minimum lovable launch": the smallest version that tests the promise. Add scale after the signal.
+- Capacity first: stock, support hours, courier capacity, server load, staff. Never create demand you cannot serve.
+- No deception: real scarcity only, real dates, real stock; honest testimonials; disclose paid partnerships.
+
+## 2. Timeline T-60 to T+30
+T = launch day. Owner roles: Strategy (S), Content (C), Creative (D), Media (M), Operations (O), Sales/Support (CS), Partnerships/PR (P), Analytics (A).
+| Phase | Window | Deliverables | Owner |
+|---|---|---|---|
+| 1 Foundation | T-60 to T-45 | Goal, segment, positioning, offer, price, launch date; budget; risks; tracking plan; page and WhatsApp flow brief | S |
+| 2 Build | T-45 to T-30 | Landing page / product page, checkout, waitlist, email and WhatsApp opt-in forms, brand assets, product photos/video, FAQ, terms and policies | D, C, O |
+| 3 Teaser and waitlist | T-30 to T-14 | Teaser content, waitlist open, behind-the-scenes, early access to a small group, creator seeding, partner kits | C, P |
+| 4 Proof and pre-heat | T-14 to T-3 | Testimonials or early reviews, demo video, launch FAQ, press note, influencer posts scheduled, paid retargeting prep, support scripts, stock check | C, P, CS |
+| 5 Final checks | T-3 to T-1 | Dry run of the purchase path on real devices, payment test, tracking test, link and UTM check, inbox rota, crisis contacts, countdown content | O, A |
+| 6 Launch | T to T+3 | Go-live, announcements across owned channels, creator posts, paid go-live per `media-buying` rules, live support, hourly checks | All |
+| 7 Sustain | T+4 to T+14 | Social proof posts, customer stories, retargeting, FAQ updates, restock or last-call messages (true), partner follow-ups | C, M, CS |
+| 8 Review and retain | T+15 to T+30 | Post-launch review, cohort check (delivered and repeat), retention flows, learnings into strategy | A, S |
+
+## 3. Waitlist, teaser, launch, post-launch
+- **Waitlist**: a single clear promise, one field (WhatsApp number or email) with explicit opt-in text, confirmation message, and a reason to share. Keep early-access terms honest; do not promise a position you cannot honour.
+- **Teaser**: reveal in stages (problem, process, product, price); each piece has a CTA to the waitlist; avoid fake countdowns that reset.
+- **Launch**: first message to the waitlist before the public; give early supporters a real, stated benefit; open to everyone at a set time; keep one primary link.
+- **Post-launch**: thank-you and next-step messages, review request, referral prompt, support check-ins, and a transparent update about stock or delays.
+Consent for waitlist messaging follows `email-and-whatsapp.md`.
+
+## 4. Press, influencer and partner outreach basics
+- **Press**: build a short list (outlets and journalists that cover your category and region); send a short pitch with a real news angle (new, local, data, human story), a one-page fact sheet, assets and an embargo only if agreed. Follow up once. No spam, no pay-for-coverage disguised as editorial.
+- **Influencers/creators**: pick for audience fit and proof, not follower count; vet audience country split, engagement quality and past brand work (see `../../media-buying/references/mena-and-egypt-notes.md`, section 9); sign a simple brief (deliverables, dates, approval, usage rights, disclosure, payment). Disclose paid or gifted partnerships clearly in Arabic and English; use platform partnership tools where available; check local licensing for KSA/UAE creators (`unverified` in detail). Do not buy followers or fake engagement.
+- **Partners**: complementary businesses, communities, venues; offer a clear mutual benefit and trackable code or link.
+- **Tracking**: unique link or code per outlet/creator; WhatsApp source prefix; do not double count with paid.
+Hand off: creator production briefs to `reels-studio`, visual kits to `creative-studio`, platform rules to `social-media-manager`.
+
+## 5. Pre-mortem
+Hold it at T-30 with the whole team. Prompt: "It is T+14 and the launch failed. Why?" Write 10 reasons, vote the top 5, assign an owner, an early signal and a mitigation each.
+Common failure reasons: tracking broken; payment or checkout failure; page slow on mobile; creator posts late; stock/capacity; support overwhelmed; unclear offer; wrong audience; message not matching the landing page; policy rejection of ads; app store review delay; holiday collision; team member absent. Add the trigger and the decision: "if X by date, do Y".
+
+## 6. Launch-day runbook
+| Time | Action | Owner | Check |
+|---|---|---|---|
+| T-1 evening | Freeze changes; final backup; confirm stock, courier and staff | O | Checklist signed |
+| Launch minus 2 hours | Test full purchase and WhatsApp path from two phones; verify tracking events | A | Test order seen in reports |
+| Launch | Publish page; send waitlist message; post across channels; start approved ads | S, C, M | Links resolve with UTM |
+| +1 hour | First numbers: visits, chats, orders; check errors; reply to every comment/DM | A, CS | No broken path |
+| Midday | Creator/partner posts; fix issues; adjust copy if a message confuses | C, P | Reply time within SLA |
+| Evening | Peak support; stock update; thank-you post | CS, C | Orders confirmed |
+| End of day | Snapshot metrics; list problems and decisions for tomorrow | S | Written log |
+Rules: one decision-maker; changes logged with time and reason; no ad budget or tracking changes during the first learning window unless broken; escalation to the crisis steps in `../../social-media-manager` (crisis playbook) if there is a public problem.
+
+## 7. Post-launch review (at T+7 and T+30)
+Questions: Did we hit the goal number? Where did the funnel leak? Which channel, message and offer produced delivered revenue? Which promise caused refunds or complaints? What did customers ask that the page did not answer? What did we learn that changes the strategy?
+Output: one page: results vs targets, 3 wins and why, 3 misses and why, decisions (continue/change/stop), next 30-day plan, updated assumptions, and handoffs. Add cohort follow-up at day 30 and day 60 for repeat purchase and delivery/refund outcomes.
+
+## 8. Variants
+| Launch type | Adjust |
+|---|---|
+| Product (physical/e-commerce) | Stock and logistics first; sample seeding; COD confirmation flow; delivered-order reporting; reserve for returns |
+| Event (conference, workshop, webinar) | Ticketing and capacity; speaker/partner promotion; reminders at T-7, T-1, same day; attendance rate and show-up follow-up; recordings and post-event nurture |
+| Course | Waitlist, free lesson or webinar, cohort start date, true deadline, refund policy, student proof; consider small beta cohort for testimonials; support during enrollment |
+| Local shop/clinic opening | Google Business Profile verified before opening (verification can take time: methods are chosen by Google), signage, opening offer, neighbourhood outreach, WhatsApp booking, reviews from real first customers, flyers with QR |
+| App | Store listing assets, beta testers, review/approval lead time, deep links, onboarding and activation metrics, first-week retention, crash monitoring, support channel; consider soft launch in one market first |
+| Ramadan/seasonal campaign | Use the timeline in `../../media-buying/references/mena-and-egypt-notes.md`, section 7 (lock offer 8 to 10 weeks out; launch awareness 3 to 4 weeks out) |
+
+## 9. Quality checklist before go-live
+- One goal, one primary CTA, one tracked link.
+- Offer, price and terms identical on page, ad, chat and invoice.
+- Mobile speed and checkout tested on a mid-range Android phone and iPhone.
+- Consent text and opt-out in place.
+- Support rota and canned replies ready (Arabic and English).
+- Claims and testimonials documented.
+- Creator and press assets approved; disclosures included.
+- Rollback and pause plan if something breaks.
+
+## Sources
+- Timeline and runbook are standard project practice presented as heuristics.
+- Egypt/MENA seasonal timeline and creator vetting: `../../media-buying/references/mena-and-egypt-notes.md` (sections 7 and 9; its own sources listed there).
+- GBP verification: `../../social-media-manager/references/platforms/google-business-profile.md`.

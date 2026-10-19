@@ -1,0 +1,56 @@
+{
+  "platform": "linkedin",
+  "verified": "2026-10-19",
+  "sources": [
+    "https://learn.microsoft.com/en-us/linkedin/marketing/community-management/shares/posts-api?view=li-lms-2026-10",
+    "https://learn.microsoft.com/en-us/linkedin/marketing/community-management/shares/videos-api?view=li-lms-2026-10",
+    "https://learn.microsoft.com/en-us/linkedin/marketing/community-management/shares/documents-api?view=li-lms-2026-10",
+    "https://learn.microsoft.com/en-us/linkedin/marketing/community-management/shares/images-api?view=li-lms-2026-10",
+    "https://learn.microsoft.com/en-us/linkedin/marketing/community-management/shares/comments-api?view=li-lms-2026-10",
+    "https://learn.microsoft.com/en-us/linkedin/marketing/increasing-access?view=li-lms-2025-10",
+    "https://learn.microsoft.com/en-us/linkedin/consumer/integrations/live-video/",
+    "https://eden.so/blog/linkedin-character-limits/",
+    "https://contentin.io/blog/linkedin-post-specs/",
+    "https://datareportal.com/reports/digital-2026-egypt"
+  ],
+  "text": {
+    "post_max_chars": 3000,
+    "caption_max_chars": 3000,
+    "title_max_chars": null,
+    "bio_max_chars": null,
+    "comment_max_chars": null,
+    "hashtags_max": null,
+    "mentions_max": null,
+    "links_clickable_in_post": true
+  },
+  "formats": [
+    {"name": "text_post", "ratio": null, "recommended_px": null, "min_len_s": null, "max_len_s": null, "max_file_mb": null, "notes": "3000 chars (secondary sources); mobile feed truncates after ~140-210 chars"},
+    {"name": "single_image", "ratio": "1:1 or 4:5", "recommended_px": "1080x1350", "min_len_s": null, "max_len_s": null, "max_file_mb": null, "notes": "JPG/PNG/GIF; under 36,152,320 pixels; GIF up to 250 frames; no official MB cap found"},
+    {"name": "multi_image", "ratio": "1:1 or 4:5", "recommended_px": "1080x1350", "min_len_s": null, "max_len_s": null, "max_file_mb": null, "notes": "organic only; up to 20 images per secondary source"},
+    {"name": "document_carousel", "ratio": "4:5 or 1:1", "recommended_px": "1080x1350", "min_len_s": null, "max_len_s": null, "max_file_mb": 100, "notes": "PDF/PPT/PPTX/DOC/DOCX; max 300 pages (API doc)"},
+    {"name": "video", "ratio": "9:16", "recommended_px": "1080x1920", "min_len_s": 3, "max_len_s": 1800, "max_file_mb": 500, "notes": "MP4; API doc says 3s-30min, 75KB-500MB spec table (API field max 5GB); UI organic cap reported 10-15 min (secondary); captions one SRT English only via API"},
+    {"name": "link_post", "ratio": "1.91:1", "recommended_px": "1200x627", "min_len_s": null, "max_len_s": null, "max_file_mb": null, "notes": "API requires title, description, thumbnail; no URL scraping via API"},
+    {"name": "poll", "ratio": null, "recommended_px": null, "min_len_s": null, "max_len_s": null, "max_file_mb": null, "notes": "organic only via Posts API; option limits not verified"},
+    {"name": "article_long_form", "ratio": null, "recommended_px": null, "min_len_s": null, "max_len_s": null, "max_file_mb": null, "notes": "title ~150 chars, body ~110000 chars from a single secondary source; no publishing API found"},
+    {"name": "live", "ratio": "16:9", "recommended_px": "1920x1080", "min_len_s": null, "max_len_s": 14400, "max_file_mb": null, "notes": "application-based beta; H.264+AAC; max 30fps, 6 Mbps video, RTMP(S) ingest"}
+  ],
+  "unverified": [
+    "text.comment_max_chars (secondary source says 1250)",
+    "text.bio_max_chars / headline 220 / About 2600 (single secondary source)",
+    "text.title_max_chars (article title 150, secondary only)",
+    "text.hashtags_max (no official cap found; 3-5 is marketing advice)",
+    "text.mentions_max",
+    "post_max_chars 3000 (confirmed only by secondary sources; LinkedIn Help blocked by robots)",
+    "image file-size cap and multi-image count of 20",
+    "organic video UI length cap (10 vs 15 min)",
+    "poll option and duration limits",
+    "Newsletter and Article publishing rules and API support",
+    "Page scheduled-post limits (how far ahead / how many)",
+    "Brand-partnership label eligibility",
+    "Giveaway/contest policy, engagement-pod policy wording, minimum age",
+    "Arabic/RTL rendering specifics and Arabic hashtag behaviour",
+    "Messaging/DM API availability",
+    "LinkedIn Ads payment and ID-verification options for Egyptian entities",
+    "Other Arab countries' member counts"
+  ]
+}
